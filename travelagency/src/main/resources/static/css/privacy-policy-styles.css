@@ -1,0 +1,64 @@
+h1 {
+    width: 100%;
+    padding-bottom: 0.5em;
+    font-family: 'Lobster';
+    font-weight: 300;
+    font-size: 30px;
+    text-align: center;
+}
+
+main h1::after {
+    display: block;
+    content: '';
+    background-color: #0A67AA;
+    width: 15%;
+    height: 2px;
+    position: absolute;
+    left: 42.5%;
+}
+
+main {
+    padding: 1.5em 8em 2em 8em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+}
+
+main article {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding-top: 1em;
+}
+
+main article .article-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+main article .article-main ol {
+    padding-left: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+main article .article-main ol > li::marker {
+    font-weight: 600;
+}
+
+main article .article-main ol > li > p,
+main article .article-main ol > li:last-of-type > ul {
+    margin-left: -1em;
+}
+
+main article .article-main ol li:not(:last-of-type) ul {
+    list-style-type: disc;
+    padding-left: 1em;
+}
+
+main article .article-main ol li p span {
+    font-weight: 600;
+}

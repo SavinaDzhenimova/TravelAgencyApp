@@ -1,0 +1,178 @@
+header {
+    width: 100%;
+    color: #fff;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 1em;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+header nav .logo-container {
+    max-width: 100%;
+    padding: 1em 8em;
+    display: flex;
+    justify-content: space-between;
+    color: #000;
+    padding-bottom: 1em;
+    position: relative;
+}
+
+header nav .logo-container img {
+    width: 150px;
+    height: 130px;
+}
+
+header nav .logo-container > .navbar {
+    width: 82%;
+    padding-top: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 2em;
+}
+
+header nav .logo-container .navbar .contacts {
+    display: flex;
+    align-items: center;
+    gap: 3em;
+}
+
+header nav .logo-container .navbar .contacts li {
+    font-size: 18px;
+    font-weight: 500;
+    color: #0A67AA;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+header nav .logo-container .navbar .menu {
+    width: 100%;
+    padding-top: 0.5em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5em;
+    position: relative;
+}
+
+header nav .logo-container .navbar > .menu::before {
+    display: block;
+    content: '';
+    background-color: #ccc;
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    top: -1em;
+    left: 0;
+}
+
+header nav .logo-container .navbar > .menu > li {
+    width: calc(100% / 6);
+    font-size: 18px;
+    color: #000;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+header nav .logo-container .navbar ul > li:hover {
+    color: #0A67AA;
+    font-weight: 500;
+    position: relative;
+    border-radius: 0.5em;
+}
+
+header nav .logo-container .navbar > ul > li:hover > a::after, 
+header nav .logo-container .navbar > ul > li:hover > a::before {
+    display: block;
+    content: '';
+    background-color: #0A67AA;
+    height: 1.5px;
+    position: absolute;
+    bottom: 2px;
+    border-radius: 0.5em;
+    animation: expandHeader 0.5s ease-out forwards;
+}
+
+header nav .logo-container .navbar > ul > li:hover > a::after {
+    left: 80px;
+    transform: translateX(-5%);
+}
+
+header nav .navbar > ul > li:hover > a::before {
+    right: 80px;
+    transform: translateX(5%);
+}
+
+@keyframes expandHeader {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 50%;
+    }
+}
+
+#destinations .hidden,
+#excursions .hidden {
+    display: none;
+    z-index: 1;
+    background-color: #fff;
+    color: #000;
+    width: 1200px;
+    padding: 1em;
+    position: absolute;
+    top: 2em;
+    left: -20em;
+    text-transform: none;
+}
+
+#excursions .hidden {
+    left: -30em;
+}
+
+#destinations h4,
+#excursions h4 {
+    border-bottom: 2px solid #0A67AA;
+    font-size: 16px;
+    text-align: left;
+    position: relative;
+}
+
+#destinations ul,
+#excursions ul {
+    display: flex;
+    flex-wrap: wrap;
+    word-break: break-all;
+    font-weight: 400;
+}
+
+#destinations ul li,
+#excursions ul li {
+    font-size: 15px;
+    margin-right: 1.5em;
+    text-align: left;
+    position: relative;
+}
+
+#destinations ul li:hover,
+#excursions ul li:hover {
+    color: #0A67AA;
+}
+
+#destinations ul li:hover a::after,
+#excursions ul li:hover a::after {
+    display: block;
+    content: '';
+    background-color: #0A67AA;
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}

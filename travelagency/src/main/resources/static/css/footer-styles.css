@@ -1,0 +1,89 @@
+footer {
+    padding: 2em 8em 1em 8em;
+    font-size: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2em;
+    position: relative;
+    background-color: #0A67AA;
+    color: #ddd;
+}
+
+footer > div > h3 {
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    padding: 1em 0;
+    font-weight: 400;
+}
+
+footer .resources ul li:hover {
+    color: #fff;
+}
+
+footer .resources ul li a {
+    position: relative;
+}
+
+footer .resources ul li:hover a::after {
+    display: block;
+    content: '';
+    height: 1px;
+    background-color: #fff;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    transform: translateX(0);
+    animation: expandFooter 0.5s ease-out forwards;
+}
+
+@keyframes expandFooter {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+footer .mobile-apps ul {
+    font-size: 22px;
+    color: #0A67AA;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+}
+
+footer .mobile-apps ul li {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+footer > p:first-of-type {
+    padding: 1em 2em;
+    text-align: center;
+    width: 100%;
+}
+
+footer .copyright {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer > p::before {
+    display: block;
+    content: '';
+    background-color: #ddd;
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    bottom: 4em;
+    left: 0;
+}

@@ -1,0 +1,391 @@
+h2 {
+    width: 100%;
+    padding-bottom: 0.5em;
+    font-family: 'Lobster';
+    font-weight: 300;
+    font-size: 30px;
+    text-align: center;
+}
+
+.carousel {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+    border: 2px solid #ddd;
+}
+
+.carousel-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 650px;
+    display: block;
+}
+
+.caption {
+    width: 70%;
+    position: absolute;
+    bottom: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 1em;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Roboto';
+}
+
+button.prev, button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 1.5em;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+button.prev {
+    left: 10px;
+}
+
+button.next {
+    right: 10px;
+}
+
+button.prev:hover, button.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+main .statistics {
+    padding: 3em 8em 4em 8em;
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5em;
+}
+
+main .statistics .item {
+    width: calc(100% / 4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+main .statistics .item > .number {
+    color: #0A67AA;
+    font-weight: 700;
+    font-size: 50px;
+}
+
+main .statistics .item > h4 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+main .statistics .item > p:last-of-type {
+    font-size: 14px;
+}
+
+main .destinations,
+main .excursions {
+    width: 100%;
+    padding: 3em 8em 4em 8em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #0A67AA;
+}
+
+main .excursions {
+    background-color: #fff;
+}
+
+main .destinations h2,
+main .excursions h2 {
+    color: #fff;
+    position: relative;
+}
+
+.section-title {
+    opacity: 0;
+    transition: opacity 1s, transform 0.5s;
+}
+  
+.section-title.visible {
+    opacity: 1;
+}
+  
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+main .excursions h2 {
+    color: #000;
+}
+
+main .destinations h2::after,
+main .excursions h2::after {
+    display: block;
+    content: '';
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+    left: 45%;
+}
+
+main .destinations h2::before,
+main .excursions h2::before {
+    display: block;
+    content: '';
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+    bottom: 13px;
+    right: 45%;
+}
+
+main .destinations h2::after,
+main .excursions h2::after,
+main .faq > h2::after,
+main .subscribe h2::after {
+    transform-origin: right;
+    transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+.section-title.visible::after {
+    transform: translateX(-49%) scaleX(1);
+    width: 10%;
+}
+
+main .destinations h2::before,
+main .excursions h2::before,
+main .faq > h2::before,
+main .subscribe h2::before {
+    transform-origin: left;
+    transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+.section-title.visible::before {
+    transform: translateX(49%) scaleX(1);
+    width: 10%;
+}
+
+main .excursions h2::after,
+main .excursions h2::before {
+    background-color: #0A67AA;
+}
+
+main .destinations .destination-article,
+main .excursions .excursion-article {
+    background-color: #fff;
+    width: 25%;
+    border-radius: 0.5em;
+    margin-top: 1.5em;
+}
+
+main .excursions .excursion-article {
+    background-color: #0A67AA;
+    color: #fff;
+}
+
+main .destinations .destination-article .image-container img,
+main .excursions .excursion-article .image-container img {
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+main .destination-article .article-content,
+main .excursion-article .article-content {
+    padding: 0.5em 1.2em 1.2em 1.2em;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+main .destination-article .article-content h3,
+main .excursion-article .article-content h3 {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+main .destination-article .article-content button,
+main .excursion-article .article-content button {
+    width: 40%;
+    padding: 0.5em;
+    border: none;
+    border-radius: 0.5em;
+    background-color: #0A67AA;
+    color: #fff;
+}
+
+main .excursion-article .article-content button {
+    background-color: #fff;
+    color: #000;
+}
+
+main .faq {
+    background-color: #0A67AA;
+    padding: 3em 8em;
+}
+
+main .faq > h2 {
+    color: #fff;
+    position: relative;
+}
+
+main .faq > h2::after,
+main .faq > h2::before {
+    display: block;
+    content: '';
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+}
+
+main .faq > h2::after {
+    left: 45%;
+}
+
+main .faq > h2::before {
+    bottom: 13px;
+    right: 45%;
+}
+
+main .faq .list-box {
+    padding: 2em 0 1em 22em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+main .faq details {
+    color: #fff;
+}
+
+main .faq details summary {
+    list-style-type: none;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+main .faq details summary::before {
+    content: '▶';
+    display: inline-block;
+    margin-right: 0.5em;
+    transition: transform 0.3s ease;
+}
+
+main .faq details[open] summary::before {
+    transform: rotate(90deg);
+}
+
+main .faq details ul,
+main .faq details p {
+    padding-left: 2em;
+}
+
+main .faq details .tick li::before {
+    display: inline-block;
+    content: '✅';
+    padding-right: 0.3em;
+}
+
+main .faq details .cross li::before {
+    display: inline-block;
+    content: '❌';
+    padding-right: 0.3em;
+}
+
+main .subscribe {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 3em 8em 4em 8em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5em;
+}
+
+main .subscribe h2 {
+    width: 100%;
+    position: relative;
+}
+
+main .subscribe h2::after,
+main .subscribe h2::before {
+    display: block;
+    content: '';
+    background-color: #0A67AA;
+    height: 2px;
+    position: absolute;
+}
+
+main .subscribe h2::after {
+    left: 45%;
+}
+
+main .subscribe h2::before {
+    bottom: 13px;
+    right: 45%;
+}
+
+main .form-subscribe {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+main .subscribe input {
+    border: none;
+    outline: none;
+    border-radius: 0.5em;
+    padding: 1em;
+}
+
+main .subscribe input[type="email"] {
+    background-color: #0A67AA;
+    flex-basis: 65%;
+    color: #fff;
+}
+
+main .subscribe input[type="email"]::placeholder {
+    color: #fff;
+    font-style: italic;
+    font-size: 16px;
+}
+
+main .subscribe input[type="submit"] {
+    flex-basis: 30%;
+    font-size: 16px;
+    background-color: #0A67AA;
+    color: #fff;
+}
