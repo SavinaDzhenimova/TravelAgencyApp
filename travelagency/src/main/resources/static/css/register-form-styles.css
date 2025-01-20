@@ -1,0 +1,102 @@
+h1 {
+    width: 100%;
+    padding-bottom: 0.5em;
+    font-family: 'Lobster';
+    font-weight: 300;
+    font-size: 30px;
+    text-align: center;
+}
+
+main h1::after {
+    display: block;
+    content: '';
+    background-color: #0A67AA;
+    width: 15%;
+    height: 2px;
+    position: absolute;
+    left: 42%;
+}
+
+main {
+    padding: 1.5em 8em 2em 8em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+main .introduction {
+    padding: 0.5em 0;
+    width: 80%;
+    text-align: center;
+}
+
+main .introduction a {
+    color: #0A67AA;
+    text-decoration: underline;
+    font-style: oblique;
+}
+
+main .sign-up-form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    background-color: #0A67AA;
+    color: #fff;
+    padding: 1em 2em;
+    margin-top: 1em;
+    border-radius: 0.5em;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 4px 12px 4px;
+}
+
+main .sign-up-form form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+main .sign-up-form form .personal-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+main .sign-up-form form .personal-info .field {
+    width: 50%;
+}
+
+main .sign-up-form form input {
+    padding: 0.3em;
+    border: 1px solid #fff;
+    border-radius: 0.3em;
+}
+
+main .sign-up-form form input:focus {
+    outline: none;
+}
+
+main .sign-up-form form .personal-info .field,
+main .sign-up-form form .field {
+    display: flex;
+    flex-direction: column;
+}
+
+main .sign-up-form form > p {
+    font-size: 14px;
+    font-style: oblique;
+}
+
+main .sign-up-form form button {
+    margin-top: 1em;
+    padding: 0.3em;
+    font: inherit;
+    background-color: #fff;
+    color: #000;
+    width: 40%;
+    border: none;
+    align-self: center;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
