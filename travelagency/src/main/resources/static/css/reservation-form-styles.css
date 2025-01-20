@@ -73,6 +73,7 @@ main .reservation-form form .field input:disabled {
 main .reservation-form form .field input,
 main .reservation-form form .field select,
 main .reservation-form form .field textarea {
+    padding: 0 0.3em;
     height: 30px;
     width: 300px;
     border: 1px solid #ccc;
