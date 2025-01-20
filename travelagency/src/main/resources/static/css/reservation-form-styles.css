@@ -58,7 +58,7 @@ main .reservation-form form .field:not(:last-of-type)::after {
     bottom: -0.5em;
 }
 
-main .reservation-form form .field:last-of-type {
+main .reservation-form form .textarea {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
