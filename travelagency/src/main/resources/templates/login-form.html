@@ -248,21 +248,19 @@
             <p>Все още не си част от екипа ни? <a href="register-form.html">Кандидатствай</a> тук.</p>
         </div>
 
-        <div class="login-form">
-            <form action="" method="">                
-                <div class="field">
-                    <label for="username">Потребителско име</label>
-                    <input type="text" id="username" name="username">
-                </div>
-
-                <div class="field">
-                    <label for="password">Парола</label>
-                    <input type="password" id="password" name="password">
-                </div>
-
-                <button type="submit">Вход</button>
-            </form>
-        </div>
+        <form class="login-form">    
+            <div class="field">
+                <input type="email" name="email" id="email" placeholder="Имейл" required>
+                <label for="email">Имейл</label>
+            </div>
+    
+            <div class="field">
+                <input type="password" name="password" id="password" placeholder="Парола" required>
+                <label for="password">Парола</label>
+            </div>
+    
+            <input type="submit" value="Вход">
+        </form>
     </main>
 
     <footer>
