@@ -38,65 +38,121 @@ main .introduction a {
     font-style: oblique;
 }
 
-main .sign-up-form {
+.register-form {
+    background-color: #fff;
     width: 50%;
+    margin: 2em auto;
+    padding: 2em 3em;
     display: flex;
     flex-direction: column;
-    background-color: #0A67AA;
-    color: #fff;
-    padding: 1em 2em;
-    margin-top: 1em;
-    border-radius: 0.5em;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 4px 12px 4px;
+    gap: 1.5em;
+    border-radius: 0.3em;
+    box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2);
 }
 
-main .sign-up-form form {
+fieldset {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    border: 2px solid #0A67AA;
+    border-radius: 0.3em;
+    padding: 0.5em 2em 3em 2em;
     gap: 1em;
 }
 
-main .sign-up-form form .personal-info {
+.register-form fieldset .personal-info {
     display: flex;
     justify-content: space-between;
-    gap: 2em;
 }
 
-main .sign-up-form form .personal-info .field {
-    width: 50%;
+.register-form fieldset .personal-info .field {
+    width: 45%;
 }
 
-main .sign-up-form form input {
-    padding: 0.3em;
-    border: 1px solid #fff;
-    border-radius: 0.3em;
+.register-form fieldset legend {
+    color: #0A67AA;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 0.5em;
 }
 
-main .sign-up-form form input:focus {
-    outline: none;
+.register-form input {
+    display: block;
+    width: 100%;
 }
 
-main .sign-up-form form .personal-info .field,
-main .sign-up-form form .field {
+.register-form .field {
     display: flex;
     flex-direction: column;
+    color: #0A67AA;
+    opacity: 0.7;
+    padding-top: 1em;
+    position: relative;
 }
 
-main .sign-up-form form > p {
-    font-size: 14px;
-    font-style: oblique;
+.register-form .field label {
+    order: -1;
+    position: absolute;
+    top: 1.5em;
+    left: 0;
+    line-height: 1em;
+    transition: transform 0.3s ease-in-out;
 }
 
-main .sign-up-form form button {
-    margin-top: 1em;
-    padding: 0.3em;
-    font: inherit;
-    background-color: #fff;
-    color: #000;
-    width: 40%;
+.register-form .field input {
     border: none;
+    outline: none;
+    border-bottom: 2px solid #0A67AA;
+    opacity: 0.7;
+    padding: 0.5em 0;
+}
+
+.register-form .field input::placeholder {
+    color: transparent;
+}
+
+.register-form .field input:not(:placeholder-shown) ~ label {
+    transform: translateY(-2em);
+    opacity: 1;
+}
+
+.register-form .field input:focus {
+    border-color: #0A67AA;
+}
+
+.register-form .field input:focus ~ label {
+    color: #0A67AA;
+    font-weight: 600;
+}
+
+.register-form .field input:required ~ label::after {
+    display: inline-block;
+    content: '*';
+    color: #C00;
+    padding-left: 0.3em;
+}
+
+.register-form .additional-info p {
+    font-style: oblique;
+    color: #0A67AA;
+    opacity: 0.7;
+}
+
+.register-form .additional-info p:first-of-type::before {
+    display: inline-block;
+    content: '*';
+    color: #C00;
+    padding-right: 0.3em;
+}
+
+.register-form input[type="submit"] {
+    width: 70%;
+    background-color: #0A67AA;
+    color: #fff;
+    padding: 1em 0;
     align-self: center;
-    border-radius: 0.5em;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 0.3em;
     cursor: pointer;
 }

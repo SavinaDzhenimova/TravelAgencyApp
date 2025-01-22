@@ -248,16 +248,22 @@
             <p>Все още не си част от екипа ни? <a href="register-form.html">Кандидатствай</a> тук.</p>
         </div>
 
-        <form class="login-form">    
-            <div class="field">
-                <input type="email" name="email" id="email" placeholder="Имейл" required>
-                <label for="email">Имейл</label>
-            </div>
-    
-            <div class="field">
-                <input type="password" name="password" id="password" placeholder="Парола" required>
-                <label for="password">Парола</label>
-            </div>
+        <form class="login-form">
+            <fieldset>
+                <legend>Данни за вход</legend>
+
+                <div class="field">
+                    <input type="text" name="username" id="username" placeholder="Потребителско име" required>
+                    <label for="username">Потребителско име</label>
+                </div>
+        
+                <div class="field">
+                    <input type="password" name="password" id="password" placeholder="Парола" required>
+                    <label for="password">Парола</label>
+                </div>
+            </fieldset>
+
+            <span>Тези полета са задължителни</span>
     
             <input type="submit" value="Вход">
         </form>
