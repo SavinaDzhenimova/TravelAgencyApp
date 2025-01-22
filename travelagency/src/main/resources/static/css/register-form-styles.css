@@ -11,7 +11,7 @@ main h1::after {
     display: block;
     content: '';
     background-color: #0A67AA;
-    width: 15%;
+    width: 16.5%;
     height: 2px;
     position: absolute;
     left: 42%;
