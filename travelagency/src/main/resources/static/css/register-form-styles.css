@@ -40,7 +40,7 @@ main .introduction a {
 
 .register-form {
     background-color: #fff;
-    width: 50%;
+    width: 55%;
     margin: 2em auto;
     padding: 2em 3em;
     display: flex;
@@ -65,7 +65,7 @@ fieldset {
 }
 
 .register-form fieldset .personal-info .field {
-    width: 45%;
+    width: 47%;
 }
 
 .register-form fieldset legend {
@@ -140,8 +140,24 @@ fieldset {
 .register-form .additional-info p:first-of-type::before {
     display: inline-block;
     content: '*';
+    font-weight: 900;
     color: #C00;
     padding-right: 0.3em;
+}
+
+.register-form .additional-info p:nth-of-type(2)::before,
+.register-form .additional-info p:nth-of-type(3)::before {
+    display: inline-block;
+    content: 'Важно!!!';
+    font-weight: 500;
+    color: #C00;
+    padding-right: 0.3em;
+}
+
+.register-form span {
+    color: #666;
+    font-size: 12px;
+    font-style: oblique;
 }
 
 .register-form input[type="submit"] {
