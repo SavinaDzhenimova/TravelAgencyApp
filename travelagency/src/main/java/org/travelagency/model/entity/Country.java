@@ -11,10 +11,6 @@ public class Country extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private CountryName countryName;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "continent_id", referencedColumnName = "id")
-    private Continent continent;
-
     @Column(nullable = false)
     private String capital;
 
@@ -24,7 +20,11 @@ public class Country extends BaseEntity {
     @Column(nullable = false, name = "time_difference")
     private String timeDifference;
 
-    @OneToOne(mappedBy = "country", cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "continent_id", referencedColumnName = "id")
+    private Continent continent;
+
+    @OneToOne(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Destination destination;
 
     public CountryName getCountryName() {
