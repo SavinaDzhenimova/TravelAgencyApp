@@ -5,17 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="737daafd-1dde-4737-8e86-b60ca1c6a9b0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_smallrye_jandex_3_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_inject_jakarta_inject_api_2_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_2_0_1_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_7_0_3_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_orm_hibernate_core_6_6_4_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_11_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_5_14_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jpa_3_4_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ExcursionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ExcursionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ProgramServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ProgramServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ContinentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ContinentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/CountryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/CountryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/DayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/DayService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/DestinationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/DestinationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/EmbassyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/EmbassyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ExcursionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ExcursionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ProgramService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ProgramService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Continent.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Continent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Country.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Day.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Day.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Destination.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Destination.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Embassy.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Embassy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Excursion.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Excursion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Program.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/about-us.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/about-us.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +39,7 @@
         <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -54,11 +66,12 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/TravelAgencyApp&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
 }</component>
   <component name="RecentsManager">

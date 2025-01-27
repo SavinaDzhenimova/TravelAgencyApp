@@ -23,6 +23,9 @@ public class Program extends BaseEntity {
         return endurance;
     }
 
+    public Program() {
+    }
+
     public void setEndurance(int endurance) {
         this.endurance = endurance;
     }

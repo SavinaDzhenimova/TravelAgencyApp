@@ -1,9 +1,9 @@
 package org.travelagency.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import org.travelagency.model.enums.TransportType;
 
-import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 
 @Entity
@@ -34,6 +34,9 @@ public class Excursion extends BaseEntity {
     @OneToOne(optional = false)
     @JoinColumn(name = "program_id", referencedColumnName = "id")
     private Program program;
+
+    public Excursion() {
+    }
 
     public String getName() {
         return name;

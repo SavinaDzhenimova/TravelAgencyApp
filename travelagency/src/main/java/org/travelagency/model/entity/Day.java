@@ -23,6 +23,9 @@ public class Day extends BaseEntity {
         return dayNumber;
     }
 
+    public Day() {
+    }
+
     public void setDayNumber(int dayNumber) {
         this.dayNumber = dayNumber;
     }

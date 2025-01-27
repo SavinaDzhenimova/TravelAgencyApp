@@ -27,6 +27,9 @@ public class Embassy extends BaseEntity {
     @OneToOne(mappedBy = "embassy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Destination destination;
 
+    public Embassy() {
+    }
+
     public String getAddress() {
         return address;
     }

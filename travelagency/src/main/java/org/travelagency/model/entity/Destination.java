@@ -31,6 +31,9 @@ public class Destination extends BaseEntity {
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
     private List<Excursion> excursions;
 
+    public Destination() {
+    }
+
     public String getName() {
         return name;
     }

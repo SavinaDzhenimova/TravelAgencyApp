@@ -19,6 +19,9 @@ public class Continent extends BaseEntity {
     @OneToMany(mappedBy = "continent", fetch = FetchType.LAZY)
     private List<Country> countries;
 
+    public Continent() {
+    }
+
     public ContinentName getContinentName() {
         return continentName;
     }

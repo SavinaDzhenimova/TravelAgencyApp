@@ -27,6 +27,9 @@ public class Country extends BaseEntity {
     @OneToOne(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Destination destination;
 
+    public Country() {
+    }
+
     public CountryName getCountryName() {
         return countryName;
     }

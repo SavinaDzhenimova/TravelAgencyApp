@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/header-styles.css">
+    <link rel="stylesheet" href="/css/footer-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Sunrise Travel</title>
+</head>
+
+<body>
+    <header>
+      <nav>
+        <div class="logo-container">
+          <img alt="logo" src="/images/logo.jpg">
+
+          <div class="navbar">
+            <ul class="contacts">
+              <li>
+                <i class="fa-solid fa-phone-volume"></i>
+                <p>+359 888 232 555</p>
+              </li>
+              <li>
+                <i class="fa-solid fa-envelope-open"></i>
+                <p>sunrise_travel@gmail.com</p>
+              </li>
+              <li>
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-tiktok"></i>
+              </li>
+            </ul>
+
+            <ul class="menu">
+              <li><a th:href="@{/}">Начало</a></li>
+              <li id="destinations">
+                <a href="">Дестинации</a>
+                <div class="hidden hidden-destinations">
+                  <div class="hidden-section">
+                    <h4>Европа</h4>
+
+                    <ul>
+                      <li><a href="destinations.html">Австрия</a></li>
+                      <li><a href="">Албания</a></li>
+                      <li><a href="">Англия</a></li>
+                      <li><a href="">Белгия</a></li>
+                      <li><a href="">Босна и Херцеговина</a></li>
+                      <li><a href="">Великобритания</a></li>
+                      <li><a href="">Германия</a></li>
+                      <li><a href="">Гърция</a></li>
+                      <li><a href="">Дания</a></li>
+                      <li><a href="">Ирландия</a></li>
+                      <li><a href="">Исландия</a></li>
+                      <li><a href="">Испания</a></li>
+                      <li><a href="">Италия</a></li>
+                      <li><a href="">Кипър</a></li>
+                      <li><a href="">Македония</a></li>
+                      <li><a href="">Норвегия</a></li>
+                      <li><a href="">Румъния</a></li>
+                      <li><a href="">Словакия</a></li>
+                      <li><a href="">Словения</a></li>
+                      <li><a href="">Сърбия</a></li>
+                      <li><a href="">Турция</a></li>
+                      <li><a href="">Унгария</a></li>
+                      <li><a href="">Франция</a></li>
+                      <li><a href="">Холандия-Нидерландия</a></li>
+                      <li><a href="">Хърватия</a></li>
+                      <li><a href="">Черна Гора</a></li>
+                      <li><a href="">Чехия</a></li>
+                      <li><a href="">Швейцария</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="hidden-section">
+                    <h4>Азия</h4>
+
+                    <ul>
+                      <li><a href="">Виетнам</a></li>
+                      <li><a href="">Дубай-ОАЕ</a></li>
+                      <li><a href="">Индия</a></li>
+                      <li><a href="">Индонезия</a></li>
+                      <li><a href="">Иран</a></li>
+                      <li><a href="">Китай</a></li>
+                      <li><a href="">Малдиви</a></li>
+                      <li><a href="">Тайланд</a></li>
+                      <li><a href="">Шри Ланка</a></li>
+                      <li><a href="">Япония</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="hidden-section">
+                    <h4>Африка</h4>
+
+                    <ul>
+                      <li><a href="">Египет</a></li>
+                      <li><a href="">Мавриций</a></li>
+                      <li><a href="">Сейшели</a></li>
+                      <li><a href="">Тунис</a></li>
+                      <li><a href="">ЮАР / Южна Африка</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="hidden-section">
+                    <h4>Северна Америка</h4>
+
+                    <ul>
+                      <li><a href="">Доминикана</a></li>
+                      <li><a href="">Канада</a></li>
+                      <li><a href="">САЩ</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="hidden-section">
+                    <h4>Южна Америка</h4>
+
+                    <ul>
+                      <li><a href="">Аржентина</a></li>
+                      <li><a href="">Бразилия</a></li>
+                      <li><a href="">Еквадор и Галапагоски острови</a></li>
+                      <li><a href="">Колумбия</a></li>
+                      <li><a href="">Куба</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="hidden-section">
+                    <h4>Австралия</h4>
+
+                    <ul>
+                      <li><a href="">Австралия</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li id="excursions">
+                <a href="">Екскурзии</a>
+                <div class="hidden hidden-excursions">
+                  <div class="hidden-section">
+                    <h4>Европа</h4>
+
+                    <ul>
+                      <li><a href="excursions.html">Австрия</a></li>
+                      <li><a href="">Албания</a></li>
+                      <li><a href="">Англия</a></li>
+                      <li><a href="">Белгия</a></li>
+                      <li><a href="">Босна и Херцеговина</a></li>
+                      <li><a href="">Великобритания</a></li>
+                      <li><a href="">Германия</a></li>
+                      <li><a href="">Гърция</a></li>
+                      <li><a href="">Дания</a></li>
+                      <li><a href="">Ирландия</a></li>
+                      <li><a href="">Исландия</a></li>
+                      <li><a href="">Испания</a></li>
+                      <li><a href="">Италия</a></li>
+                      <li><a href="">Кипър</a></li>
+                      <li><a href="">Македония</a></li>
+                      <li><a href="">Норвегия</a></li>
+                      <li><a href="">Румъния</a></li>
+                      <li><a href="">Словакия</a></li>
+                      <li><a href="">Словения</a></li>
+                      <li><a href="">Сърбия</a></li>
+                      <li><a href="">Турция</a></li>
+                      <li><a href="">Унгария</a></li>
+                      <li><a href="">Франция</a></li>
+                      <li><a href="">Холандия-Нидерландия</a></li>
+                      <li><a href="">Хърватия</a></li>
+                      <li><a href="">Черна Гора</a></li>
+                      <li><a href="">Чехия</a></li>
+                      <li><a href="">Швейцария</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="hidden-section">
+                    <h4>Азия</h4>
+
+                    <ul>
+                      <li><a href="">Виетнам</a></li>
+                      <li><a href="">Дубай-ОАЕ</a></li>
+                      <li><a href="">Индия</a></li>
+                      <li><a href="">Индонезия</a></li>
+                      <li><a href="">Иран</a></li>
+                      <li><a href="">Китай</a></li>
+                      <li><a href="">Малдиви</a></li>
+                      <li><a href="">Тайланд</a></li>
+                      <li><a href="">Шри Ланка</a></li>
+                      <li><a href="">Япония</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="hidden-section">
+                    <h4>Африка</h4>
+
+                    <ul>
+                      <li><a href="">Египет</a></li>
+                      <li><a href="">Мавриций</a></li>
+                      <li><a href="">Сейшели</a></li>
+                      <li><a href="">Тунис</a></li>
+                      <li><a href="">ЮАР / Южна Африка</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="hidden-section">
+                    <h4>Северна Америка</h4>
+
+                    <ul>
+                      <li><a href="">Доминикана</a></li>
+                      <li><a href="">Канада</a></li>
+                      <li><a href="">САЩ</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="hidden-section">
+                    <h4>Южна Америка</h4>
+
+                    <ul>
+                      <li><a href="">Аржентина</a></li>
+                      <li><a href="">Бразилия</a></li>
+                      <li><a href="">Еквадор и Галапагоски острови</a></li>
+                      <li><a href="">Колумбия</a></li>
+                      <li><a href="">Куба</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="hidden-section">
+                    <h4>Австралия</h4>
+
+                    <ul>
+                      <li><a href="">Австралия</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li><a href="about-us.html">За нас</a></li>
+              <li><a href="contacts.html">Контакти</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <footer>
+      <div class="address">
+        <h3>Адрес</h3>
+        <ul>
+          <li>п.к. 4600, град Велинград,</li>
+          <li>бул.Съединение №83</li>
+        </ul>
+      </div>
+
+      <div class="contacts">
+        <h3>Контакти</h3>
+        <ul>
+          <li>+359 888 232 555</li>
+          <li>sunrise_travel@gmail.com</li>
+        </ul>
+      </div>
+
+      <div class="resources">
+        <h3>Полезно</h3>
+        <ul>
+          <li><a href="about-us.html">За нас</a></li>
+          <li><a href="privacy-policy.html">Политика за поверителност</a></li>
+          <li><a href="general-conditions.html">Общи условия</a></li>
+          <li><a href="register-form.html">Стани част от екипа</a></li>
+        </ul>
+      </div>
+
+      <div class="mobile-apps">
+        <h3>Споделете</h3>
+        <ul>
+          <li><a href=""><i class="fa-brands fa-facebook-f"></i></a></li>
+          <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+          <li><a href=""><i class="fa-brands fa-tiktok"></i></a></li>
+        </ul>
+      </div>
+
+      <p>Този сайт, е с информационна и рекламна цел и е възможно поради динамиката на ценообразуване да има промяна
+        в офертите преди датата на пътуване. Информация съгласно чл. 80 от Закона за Туризма може да получите в
+        нашите офиси или оторизираните агенти.</p>
+
+      <div class="copyright">
+        <p>&copy 2025 Sunrise Travel Team. Всички права запазени.</p>
+
+        <p>Програмиране: инж. Савина Дженимова</p>
+      </div>
+    </footer>
+</body>
+</html>
