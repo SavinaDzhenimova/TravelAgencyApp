@@ -16,7 +16,7 @@ public class Continent extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "continent", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "continent", fetch = FetchType.LAZY)
     private List<Country> countries;
 
     public ContinentName getContinentName() {

@@ -24,7 +24,7 @@ public class Embassy extends BaseEntity {
     @Column(nullable = false)
     private String webpage;
 
-    @OneToOne(mappedBy = "embassy", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "embassy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Destination destination;
 
     public String getAddress() {
