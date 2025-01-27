@@ -5,7 +5,6 @@ public enum CountryName {
     ENGLAND,
     BELGIUM,
     BOSNIA_AND_HERZEGOVINA,
-    UNITED_KINGDOM,
     GERMANY,
     GREECE,
     DENMARK,

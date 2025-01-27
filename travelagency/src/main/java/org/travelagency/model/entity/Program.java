@@ -3,6 +3,7 @@ package org.travelagency.model.entity;
 import jakarta.persistence.*;
 
 import javax.validation.constraints.Positive;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,11 +20,12 @@ public class Program extends BaseEntity {
     @OneToOne(mappedBy = "program", cascade = CascadeType.ALL)
     private Excursion excursion;
 
-    public int getEndurance() {
-        return endurance;
+    public Program() {
+        this.days = new ArrayList<>();
     }
 
-    public Program() {
+    public int getEndurance() {
+        return endurance;
     }
 
     public void setEndurance(int endurance) {

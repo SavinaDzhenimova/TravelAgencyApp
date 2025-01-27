@@ -2,6 +2,7 @@ package org.travelagency.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,6 +33,7 @@ public class Destination extends BaseEntity {
     private List<Excursion> excursions;
 
     public Destination() {
+        this.excursions = new ArrayList<>();
     }
 
     public String getName() {

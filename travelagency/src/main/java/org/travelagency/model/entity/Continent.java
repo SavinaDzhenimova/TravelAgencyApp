@@ -3,6 +3,7 @@ package org.travelagency.model.entity;
 import jakarta.persistence.*;
 import org.travelagency.model.enums.ContinentName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,7 @@ public class Continent extends BaseEntity {
     private List<Country> countries;
 
     public Continent() {
+        this.countries = new ArrayList<>();
     }
 
     public ContinentName getContinentName() {
