@@ -24,4 +24,23 @@ public class HomeController {
 
         return new ModelAndView("contacts");
     }
+
+    @GetMapping("/faq")
+    public ModelAndView faq() {
+
+        return new ModelAndView("faq");
+    }
+
+    @GetMapping("/privacy-policy")
+    public ModelAndView privacyPolicy() {
+
+        return new ModelAndView("privacy-policy");
+    }
+
+    @GetMapping("/general-conditions")
+    public ModelAndView generalConditions() {
+
+        return new ModelAndView("general-conditions");
+    }
+
 }

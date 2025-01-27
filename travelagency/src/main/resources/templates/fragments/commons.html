@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/css/header-styles.css">
     <link rel="stylesheet" href="/css/footer-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <title>Sunrise Travel</title>
 </head>
 
 <body>
@@ -233,9 +232,9 @@
                   </div>
                 </div>
               </li>
-              <li><a href="about-us.html">За нас</a></li>
-              <li><a href="contacts.html">Контакти</a></li>
-              <li><a href="faq.html">FAQ</a></li>
+              <li><a th:href="@{/about-us}">За нас</a></li>
+              <li><a th:href="@{/contacts}">Контакти</a></li>
+              <li><a th:href="@{/faq}">FAQ</a></li>
             </ul>
           </div>
         </div>
@@ -262,9 +261,9 @@
       <div class="resources">
         <h3>Полезно</h3>
         <ul>
-          <li><a href="about-us.html">За нас</a></li>
-          <li><a href="privacy-policy.html">Политика за поверителност</a></li>
-          <li><a href="general-conditions.html">Общи условия</a></li>
+          <li><a th:href="@{/about-us}">За нас</a></li>
+          <li><a th:href="@{/privacy-policy}">Политика за поверителност</a></li>
+          <li><a th:href="@{/general-conditions}">Общи условия</a></li>
           <li><a href="register-form.html">Стани част от екипа</a></li>
         </ul>
       </div>

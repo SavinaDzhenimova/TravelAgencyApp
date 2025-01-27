@@ -1,51 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="\static\css\reset.css">
-    <link rel="stylesheet" href="\static\css\header-styles.css">
-    <link rel="stylesheet" href="\static\css\general-conditions-styles.css">
-    <link rel="stylesheet" href="\static\css\footer-styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <th:block th:replace="~{fragments/commons::head}"></th:block>
+    <link rel="stylesheet" href="/css/general-conditions-styles.css">
     <title>Общи условия</title>
 </head>
+
 <body>
     
-    <header>
-        <nav>
-            <div class="logo-container">
-                <img alt="logo" src="\static\images\logo.jpg">
-
-                <div class="navbar">
-                    <ul class="contacts">
-                        <li>
-                            <i class="fa-solid fa-phone-volume"></i>
-                            <p>+359 888 232 555</p>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-envelope-open"></i>
-                            <p>sunrise_travel@gmail.com</p>
-                        </li>
-                        <li>
-                            <i class="fa-brands fa-facebook"></i>
-                            <i class="fa-brands fa-instagram"></i>
-                            <i class="fa-brands fa-tiktok"></i>
-                        </li>
-                    </ul>
-    
-                    <ul class="menu">
-                        <li><a href="index.html">Начало</a></li>
-                        <li><a href="">Дестинации</a></li>
-                        <li><a href="">Екскурзии</a></li>
-                        <li><a href="about-us.html">За нас</a></li>
-                        <li><a href="contacts.html">Контакти</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                    </ul>
-                </div>
-            </div>  
-        </nav>
-    </header>
+    <header th:replace="~{fragments/commons::header}"></header>
 
     <main>
         <h1>Общи условия</h1>
@@ -240,51 +204,9 @@
         </article>
     </main>
 
-    <footer>
-        <div class="address">
-            <h3>Адрес</h3>
-            <ul>
-                <li>п.к. 4600, град Велинград,</li> 
-                <li>бул.Съединение №83</li>
-            </ul>
-        </div>
+    <footer th:replace="~{fragments/commons::footer}"></footer>
 
-        <div class="contacts">
-            <h3>Контакти</h3>
-            <ul>
-                <li>+359 888 232 555</li> 
-                <li>sunrise_travel@gmail.com</li> 
-            </ul>
-        </div>
-
-        <div class="resources">
-            <h3>Полезно</h3>
-            <ul>
-                <li><a href="about-us.html">За нас</a></li>
-                <li><a href="privacy-policy.html">Политика за поверителност</a></li>
-                <li><a href="general-conditions.html">Общи условия</a></li>
-            </ul>
-        </div>
-
-        <div class="mobile-apps">
-            <h3>Споделете</h3>
-            <ul>
-                <li><a href=""><i class="fa-brands fa-facebook-f"></i></a></li>
-                <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
-                <li><a href=""><i class="fa-brands fa-tiktok"></i></a></li>
-            </ul>                
-        </div>
-
-        <p>Този сайт, е с информационна и рекламна цел и е възможно поради динамиката на ценообразуване да има промяна 
-            в офертите преди датата на пътуване. Информация съгласно чл. 80 от Закона за Туризма може да получите в 
-            нашите офиси или оторизираните агенти.</p>
-
-        <div class="copyright">
-            <p>&copy 2025 Sunrise Travel Team. Всички права запазени.</p>
-
-            <p>Програмиране: инж. Савина Дженимова</p>
-        </div>
-    </footer>
+    <script src="\js\show-menu.js"></script>
 
 </body>
 </html>
