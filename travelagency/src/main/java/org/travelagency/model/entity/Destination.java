@@ -22,10 +22,6 @@ public class Destination extends BaseEntity {
     private String goodToKnow;
 
     @OneToOne
-    @JoinColumn(name = "embassy_id", referencedColumnName = "id")
-    private Embassy embassy;
-
-    @OneToOne
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     private Country country;
 
@@ -58,14 +54,6 @@ public class Destination extends BaseEntity {
 
     public void setVisaRequirements(String visaRequirements) {
         this.visaRequirements = visaRequirements;
-    }
-
-    public Embassy getEmbassy() {
-        return embassy;
-    }
-
-    public void setEmbassy(Embassy embassy) {
-        this.embassy = embassy;
     }
 
     public String getTimeToVisit() {

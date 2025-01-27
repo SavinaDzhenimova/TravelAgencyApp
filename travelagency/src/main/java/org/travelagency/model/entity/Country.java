@@ -3,6 +3,9 @@ package org.travelagency.model.entity;
 import jakarta.persistence.*;
 import org.travelagency.model.enums.CountryName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "countries")
 public class Country extends BaseEntity {
@@ -24,10 +27,14 @@ public class Country extends BaseEntity {
     @JoinColumn(name = "continent_id", referencedColumnName = "id")
     private Continent continent;
 
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+    private List<Embassy> embassies;
+
     @OneToOne(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Destination destination;
 
     public Country() {
+        this.embassies = new ArrayList<>();
     }
 
     public CountryName getCountryName() {
@@ -68,6 +75,14 @@ public class Country extends BaseEntity {
 
     public void setTimeDifference(String timeDifference) {
         this.timeDifference = timeDifference;
+    }
+
+    public List<Embassy> getEmbassies() {
+        return embassies;
+    }
+
+    public void setEmbassies(List<Embassy> embassies) {
+        this.embassies = embassies;
     }
 
     public Destination getDestination() {

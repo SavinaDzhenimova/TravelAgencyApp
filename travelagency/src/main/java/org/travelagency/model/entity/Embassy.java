@@ -24,8 +24,9 @@ public class Embassy extends BaseEntity {
     @Column(nullable = false)
     private String webpage;
 
-    @OneToOne(mappedBy = "embassy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Destination destination;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "country_id", referencedColumnName = "id")
+    private Country country;
 
     public Embassy() {
     }
@@ -78,11 +79,11 @@ public class Embassy extends BaseEntity {
         this.webpage = webpage;
     }
 
-    public Destination getDestination() {
-        return destination;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setDestination(Destination destination) {
-        this.destination = destination;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 }
