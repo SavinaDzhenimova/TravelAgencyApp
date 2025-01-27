@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="737daafd-1dde-4737-8e86-b60ca1c6a9b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/about-us.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/about-us.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/contacts.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/contacts.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/faq.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/faq.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/fragments/commons.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/fragments/commons.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/general-conditions.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/general-conditions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/privacy-policy.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/privacy-policy.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/annotations/ValidEmail.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/annotations/ValidEmail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/validation/EmailConstraintValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/validation/EmailConstraintValidator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +19,9 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
