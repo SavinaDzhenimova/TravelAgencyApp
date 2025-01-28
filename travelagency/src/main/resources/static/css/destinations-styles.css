@@ -40,7 +40,6 @@ main article .article-header {
 }
 
 main article .article-header .image-container img {
-    padding: 1em;
     object-fit: contain;
     width: 400px;
     height: 100%;
@@ -57,14 +56,6 @@ main article .article-header .info-container span {
     font-style: oblique;
 }
 
-main article .article-header .info-container ul {
-    font-weight: 500;
-}
-
-main article .article-header .info-container ul span {
-    font-weight: 400;
-}
-
 main article .article-main {
     display: flex;
     flex-direction: column;
@@ -77,11 +68,6 @@ main article .article-main .article-main-section ul {
     font-style: oblique;
 }
 
-main article .article-main .article-main-section .info {
+ul li > span {
     font-weight: 700;
-}
-
-main article .article-main .article-main-section .info li span {
-    font-style: normal;
-    font-weight: 400;
 }

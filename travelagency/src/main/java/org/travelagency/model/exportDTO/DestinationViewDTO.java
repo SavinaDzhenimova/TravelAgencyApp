@@ -24,10 +24,6 @@ public class DestinationViewDTO {
 
     private String timeDifference;
 
-    private ContinentName continentName;
-
-    private String continent;
-
     public DestinationViewDTO() {
     }
 
@@ -109,21 +105,5 @@ public class DestinationViewDTO {
 
     public void setTimeDifference(String timeDifference) {
         this.timeDifference = timeDifference;
-    }
-
-    public ContinentName getContinentName() {
-        return continentName;
-    }
-
-    public void setContinentName(ContinentName continentName) {
-        this.continentName = continentName;
-    }
-
-    public String getContinent() {
-        return continent;
-    }
-
-    public void setContinent(String continent) {
-        this.continent = continent;
     }
 }

@@ -48,6 +48,7 @@ public class CountryServiceImpl implements CountryService {
         List<CountryMenuDTO> countryMenuDTO = countries.stream()
                 .map(country -> {
                     CountryMenuDTO dto = this.modelMapper.map(country, CountryMenuDTO.class);
+                    dto.setId(country.getDestination().getId());
                     dto.setName(country.getDestination().getName());
                     dto.setContinentName(country.getContinent().getContinentName());
 

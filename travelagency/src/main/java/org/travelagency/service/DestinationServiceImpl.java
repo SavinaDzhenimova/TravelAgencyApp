@@ -3,12 +3,11 @@ package org.travelagency.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.Destination;
-import org.travelagency.model.enums.ContinentName;
 import org.travelagency.model.exportDTO.DestinationViewDTO;
 import org.travelagency.repository.DestinationRepository;
 import org.travelagency.service.interfaces.DestinationService;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DestinationServiceImpl implements DestinationService {
@@ -22,21 +21,28 @@ public class DestinationServiceImpl implements DestinationService {
     }
 
     @Override
-    public List<DestinationViewDTO> getAllDestinationsByContinent(ContinentName continentName) {
-        List<Destination> destinations = this.destinationRepository.findAll();
+    public DestinationViewDTO getDestinationByCountryName(String countryName) {
+        Optional<Destination> optionalDestination = this.destinationRepository.findByName(countryName);
 
-        return destinations.stream()
-                .map(destination -> {
-                    DestinationViewDTO dto = this.modelMapper.map(destination, DestinationViewDTO.class);
-                    dto.setCapital(destination.getCountry().getCapital());
-                    dto.setCurrency(destination.getCountry().getCurrency());
-                    dto.setTimeDifference(destination.getCountry().getTimeDifference());
-                    dto.setContinentName(destination.getCountry().getContinent().getContinentName());
-                    dto.setContinent(destination.getCountry().getContinent().getName());
+        if (optionalDestination.isEmpty()) {
+            return null;
+        }
 
-                    return dto;
-                })
-                .filter(destinationViewDTO -> destinationViewDTO.getContinentName().equals(continentName))
-                .toList();
+        Destination destination = optionalDestination.get();
+
+        DestinationViewDTO dto = this.modelMapper.map(destination, DestinationViewDTO.class);
+
+        dto.setId(destination.getId());
+        dto.setName(destination.getName());
+        dto.setDescription(destination.getDescription());
+        dto.setImageUrl(destination.getImageUrl());
+        dto.setVisaRequirements(destination.getVisaRequirements());
+        dto.setGoodToKnow(destination.getGoodToKnow());
+        dto.setTimeToVisit(destination.getTimeToVisit());
+        dto.setCapital(destination.getCountry().getCapital());
+        dto.setCurrency(destination.getCountry().getCurrency());
+        dto.setTimeDifference(destination.getCountry().getTimeDifference());
+
+        return dto;
     }
 }
