@@ -27,10 +27,10 @@ public class Country extends BaseEntity {
     @JoinColumn(name = "continent_id", referencedColumnName = "id")
     private Continent continent;
 
-    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Embassy> embassies;
 
-    @OneToOne(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Destination destination;
 
     public Country() {

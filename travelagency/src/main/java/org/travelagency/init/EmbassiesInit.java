@@ -489,9 +489,11 @@ public class EmbassiesInit implements CommandLineRunner {
                                     embassy.setCountry(country);
                                     break;
                             }
-                        }
 
-                        this.embassyRepository.saveAndFlush(embassy);
+                            this.embassyRepository.saveAndFlush(embassy);
+                            country.getEmbassies().add(embassy);
+                            this.countryRepository.saveAndFlush(country);
+                        }
                     });
         }
     }
