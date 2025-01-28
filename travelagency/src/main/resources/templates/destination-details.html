@@ -12,16 +12,16 @@
     <header th:replace="~{fragments/commons::header}"></header>
 
     <main>
-        <h1 th:text="${destination.getName()}">Австрия</h1>
+        <h1 th:text="${destination.getDestination().getName()}">Австрия</h1>
 
         <article>
             <div class="article-header">
                 <div class="image-container">
-                    <img th:src="${destination.getImageUrl()}">
+                    <img th:src="${destination.getDestination().getImageUrl()}">
                 </div>
     
                 <div class="info-container">
-                    <p th:text="${destination.getDescription()}">Дания е най-малката страна в Скандинавия, която сърдечно отваря вратите към своя вълшебен свят и неслучайно
+                    <p th:text="${destination.getDestination().getDescription()}">Дания е най-малката страна в Скандинавия, която сърдечно отваря вратите към своя вълшебен свят и неслучайно
                         привлича толкова много туристи. Страна, която ще бъде интересна както за възрастни, така и за деца. Страна, 
                         която можете да посетите както през зимата, така и през лятото. Страна, която перфектно съчетава исторически 
                         забележителности и красотата на непокътнатата природа. Дания абсолютно заслужено е наричана перлата на 
@@ -31,9 +31,9 @@
                         страна има всичко, за да ви накара да се влюбите в нея и да искате да се връщате тук отново и отново!</p>
 
                     <ul>
-                        <li>Столица: <span th:text="${destination.getCapital()}">Копенхаген</span></li>
-                        <li>Валута: <span th:text="${destination.getCurrency()}">Евро</span></li>
-                        <li>Часова разлика: <span th:text="${destination.getTimeDifference()}">един час назад</span></li>
+                        <li>Столица: <span th:text="${destination.getCountry().getCapital()}">Копенхаген</span></li>
+                        <li>Валута: <span th:text="${destination.getCountry().getCurrency()}">Евро</span></li>
+                        <li>Часова разлика: <span th:text="${destination.getCountry().getTimeDifference()}">един час назад</span></li>
                     </ul>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 <div class="article-main-section">
                     <h4>Визов режим</h4>
 
-                    <p th:text="${destination.getVisaRequirements()}">Като част от Шенгенското пространство Дания прилага общите правила по отношение на движението на хора.
+                    <p th:text="${destination.getDestination().getVisaRequirements()}">Като част от Шенгенското пространство Дания прилага общите правила по отношение на движението на хора.
                         Изискването към българските граждани, като граждани на ЕС, при влизане и пребиваване в Дания е да 
                         притежават валиден документ за пътуване (лична карта или паспорт) за срока на престоя си в страната.
                         Българските граждани могат да влизат и пребивават свободно в Дания за период от три месеца. 
@@ -59,22 +59,22 @@
                 </div>
 
                 <div class="article-main-section">
-                    <h4 th:text="'Посолство на Република България в ' + ${destination.getName()}">Заглавие</h4>
+                    <h4 th:text="'Посолство на Република България в ' + ${destination.getDestination().getName()}">Заглавие</h4>
 
                     <ul class="info">
-                        <li><span>Адрес:</span> Gamlehave Alle 7, 2920 Charlottenlund, Copenhagen, Kingdom of Denmark</li>
-                        <li><span>Телефон:</span> +45 39 64 24 84; +45 39 63 38 72</li>
-                        <li><span>Факс:</span> +45 39 63 49 23</li>
-                        <li><span>Дежурен телефон при спешни случаи в извънработно време:</span> +45 41 276251</li>
-                        <li><span>Ел. адрес:</span> Embassy.Copenhagen@mfa.bg</li>
-                        <li><span>Интернет:</span> www.mfa.bg/embassies/denmark</li>
+                        <li><span>Адрес:</span> <span th:text="${destination.getEmbassy().getAddress()}"></span></li>
+                        <li><span>Телефон:</span> <span th:text="${destination.getEmbassy().getPhoneNumber()}"></span></li>
+                        <li><span>Факс:</span> <span th:text="${destination.getEmbassy().getFax()}"></span></li>
+                        <li><span>Дежурен телефон при спешни случаи в извънработно време:</span> <span th:text="${destination.getEmbassy().getDutyPhone()}"></span></li>
+                        <li><span>Ел. адрес:</span> <span th:text="${destination.getEmbassy().getEmail()}"></span></li>
+                        <li><span>Интернет:</span> <span th:text="${destination.getEmbassy().getWebpage()}"></span></li>
                     </ul>
                 </div>
 
                 <div class="article-main-section">
                     <h4>Подходящо време за посещение</h4>
 
-                    <p th:text="${destination.getTimeToVisit()}">Кога е най-добре да отидете в Дания е един от най-популярните въпроси сред туристите, но отговорът
+                    <p th:text="${destination.getDestination().getTimeToVisit()}">Кога е най-добре да отидете в Дания е един от най-популярните въпроси сред туристите, но отговорът
                         зависи от целта на пътуването. Ясно е, че ако мечтаете за плажна почивка, трябва да изберете летните 
                         месеци. Най-общо казано, всеки сезон в Дания има своите характеристики и предимства:</p>
                 </div>
@@ -82,7 +82,7 @@
                 <div class="article-main-section">
                     <h4>Добре е да знаете</h4>
 
-                    <p th:text="${destination.getGoodToKnow()}">Дания е една от страните, в които националната култура и традиции са особено ценени. Местните жители
+                    <p th:text="${destination.getDestination().getGoodToKnow()}">Дания е една от страните, в които националната култура и традиции са особено ценени. Местните жители
                         обичат страната си, познават нейната история и се гордеят с миналото си. Затова основният съвет към 
                         туристите е да не говорят за Дания по негативен начин. Туристите трябва да вземат предвид и други 
                         характеристики на местните жители:</p>

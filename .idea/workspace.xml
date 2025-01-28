@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="737daafd-1dde-4737-8e86-b60ca1c6a9b0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/australia.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/australia.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/canada.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/canada.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/cuba.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/cuba.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/hungary.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/hungary.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/indonesia.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/indonesia.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/japan.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/japan.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/maldives.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/maldives.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/norway.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/norway.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/turkey.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/turkey.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/init/DestinationsInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/init/DestinationsInit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/exportDTO/DestinationViewDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/exportDTO/DestinationViewDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/DestinationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/DestinationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/DestinationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/DestinationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/DestinationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/DestinationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/destinations-styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/destinations-styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/destination-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/destination-details.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

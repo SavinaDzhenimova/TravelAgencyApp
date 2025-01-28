@@ -51,11 +51,6 @@ main article .article-header .info-container {
     gap: 1em;
 }
 
-main article .article-header .info-container span {
-    font-weight: 700;
-    font-style: oblique;
-}
-
 main article .article-main {
     display: flex;
     flex-direction: column;
@@ -68,6 +63,7 @@ main article .article-main .article-main-section ul {
     font-style: oblique;
 }
 
-ul li > span {
+ul li > span:first-of-type {
     font-weight: 700;
+    font-style: oblique;
 }

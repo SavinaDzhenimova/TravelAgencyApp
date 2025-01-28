@@ -1,7 +1,5 @@
 package org.travelagency.model.exportDTO;
 
-import org.travelagency.model.enums.ContinentName;
-
 public class DestinationViewDTO {
 
     private Long id;
@@ -17,12 +15,6 @@ public class DestinationViewDTO {
     private String timeToVisit;
 
     private String goodToKnow;
-
-    private String capital;
-
-    private String currency;
-
-    private String timeDifference;
 
     public DestinationViewDTO() {
     }
@@ -81,29 +73,5 @@ public class DestinationViewDTO {
 
     public void setGoodToKnow(String goodToKnow) {
         this.goodToKnow = goodToKnow;
-    }
-
-    public String getCapital() {
-        return capital;
-    }
-
-    public void setCapital(String capital) {
-        this.capital = capital;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public String getTimeDifference() {
-        return timeDifference;
-    }
-
-    public void setTimeDifference(String timeDifference) {
-        this.timeDifference = timeDifference;
     }
 }
