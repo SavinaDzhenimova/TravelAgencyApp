@@ -25,7 +25,7 @@ public class EmbassiesInit implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         if (this.embassyRepository.count() == 0) {
 

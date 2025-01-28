@@ -12,6 +12,12 @@ public class Destination extends BaseEntity {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String description;
+
+    @Column(nullable = false, name = "image_url")
+    private String imageUrl;
+
     @Column(nullable = false, name = "visa_requirements", columnDefinition = "TEXT")
     private String visaRequirements;
 
@@ -38,6 +44,22 @@ public class Destination extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Country getCountry() {
