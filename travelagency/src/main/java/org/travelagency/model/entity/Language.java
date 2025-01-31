@@ -1,17 +1,28 @@
 package org.travelagency.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.travelagency.model.enums.LanguageName;
 
 @Table
 @Entity(name = "languages")
 public class Language extends BaseEntity {
 
     @Column(nullable = false, unique = true)
+    @Enumerated(EnumType.STRING)
+    private LanguageName languageName;
+
+    @Column(nullable = false, unique = true)
     private String name;
 
     public Language() {
+    }
+
+    public LanguageName getLanguageName() {
+        return languageName;
+    }
+
+    public void setLanguageName(LanguageName languageName) {
+        this.languageName = languageName;
     }
 
     public String getName() {
