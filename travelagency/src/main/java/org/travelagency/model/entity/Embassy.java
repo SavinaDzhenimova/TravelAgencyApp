@@ -24,7 +24,7 @@ public class Embassy extends BaseEntity {
     @Column(nullable = false)
     private String webpage;
 
-    @ManyToOne(optional = false)
+    @OneToOne(optional = false)
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     private Country country;
 

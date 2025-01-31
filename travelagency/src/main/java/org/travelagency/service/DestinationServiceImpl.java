@@ -72,12 +72,12 @@ public class DestinationServiceImpl implements DestinationService {
 
         EmbassyViewDTO embassyViewDTO = this.modelMapper.map(destination, EmbassyViewDTO.class);
 
-        embassyViewDTO.setAddress(destination.getCountry().getEmbassies().get(0).getAddress());
-        embassyViewDTO.setPhoneNumber(destination.getCountry().getEmbassies().get(0).getPhoneNumber());
-        embassyViewDTO.setFax(destination.getCountry().getEmbassies().get(0).getFax());
-        embassyViewDTO.setDutyPhone(destination.getCountry().getEmbassies().get(0).getDutyPhone());
-        embassyViewDTO.setEmail(destination.getCountry().getEmbassies().get(0).getEmail());
-        embassyViewDTO.setWebpage(destination.getCountry().getEmbassies().get(0).getWebpage());
+        embassyViewDTO.setAddress(destination.getCountry().getEmbassy().getAddress());
+        embassyViewDTO.setPhoneNumber(destination.getCountry().getEmbassy().getPhoneNumber());
+        embassyViewDTO.setFax(destination.getCountry().getEmbassy().getFax());
+        embassyViewDTO.setDutyPhone(destination.getCountry().getEmbassy().getDutyPhone());
+        embassyViewDTO.setEmail(destination.getCountry().getEmbassy().getEmail());
+        embassyViewDTO.setWebpage(destination.getCountry().getEmbassy().getWebpage());
 
         return embassyViewDTO;
     }
