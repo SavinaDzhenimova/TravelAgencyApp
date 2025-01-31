@@ -5,12 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class RegisterController {
+public class LoginController {
 
-    @GetMapping("/register")
-    public ModelAndView register() {
+    @GetMapping("/login")
+    public ModelAndView login() {
 
-        return new ModelAndView("register-form");
+        return new ModelAndView("login-form");
     }
-
 }
