@@ -19,17 +19,18 @@ public class SecurityConfig {
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/", "/about-us", "/contacts", "/faq", "/privacy-policy",
                                 "/general-conditions", "/login", "/register").permitAll()
+                        .requestMatchers("/destinations/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
-                        .loginPage("/users/login").permitAll()
+                        .loginPage("/login").permitAll()
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/home", true)
                         .failureUrl("/users/login-error")
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/users/logout")
+                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .invalidateHttpSession(true)
                 )
