@@ -51,6 +51,10 @@ header nav .logo-container .navbar .contacts li {
     gap: 0.5em;
 }
 
+header nav .logo-container .navbar .contacts li a {
+    text-decoration: none;
+}
+
 header nav .logo-container .navbar .menu {
     width: 100%;
     padding-top: 0.5em;
@@ -80,15 +84,15 @@ header nav .logo-container .navbar > .menu > li {
     text-transform: uppercase;
 }
 
-header nav .logo-container .navbar ul > li:hover {
+header nav .logo-container .navbar .menu > li:hover {
     color: #0A67AA;
     font-weight: 500;
     position: relative;
     border-radius: 0.5em;
 }
 
-header nav .logo-container .navbar > ul > li:hover > a::after, 
-header nav .logo-container .navbar > ul > li:hover > a::before {
+header nav .logo-container .navbar > .menu > li:hover > a::after,
+header nav .logo-container .navbar > .menu > li:hover > a::before {
     display: block;
     content: '';
     background-color: #0A67AA;
@@ -99,12 +103,12 @@ header nav .logo-container .navbar > ul > li:hover > a::before {
     animation: expandHeader 0.5s ease-out forwards;
 }
 
-header nav .logo-container .navbar > ul > li:hover > a::after {
+header nav .logo-container .navbar > .menu > li:hover > a::after {
     left: 80px;
     transform: translateX(-5%);
 }
 
-header nav .navbar > ul > li:hover > a::before {
+header nav .logo-container .navbar > .menu > li:hover > a::before {
     right: 80px;
     transform: translateX(5%);
 }
