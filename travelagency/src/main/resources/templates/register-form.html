@@ -60,15 +60,24 @@
                 </div>
 
                 <div class="field">
-                    <input type="text" id="education" name="education" placeholder="Степен на образование" required>
-                    <label for="education">Степен на образование</label>
-                    <span>Напр. Основно/Средно/Висше (Ако посочите Висше моля напишете и специалността, която сте завършили)</span>
+                    <select name="education-level" id="education-level">
+                        <option value="">-- Изберете степен на образование --</option>
+                        <option value="PRIMARY">Основно</option>
+                        <option value="SECONDARY">Средно</option>
+                        <option value="UNIVERSITY_DEGREE">Висше</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <input type="text" id="education" name="education" placeholder="Степен на образование">
+                    <label for="education">Изучавана специалност</label>
+                    <span>(Ако сте посочили степен на образование Висше)</span>
                 </div>
 
                 <div class="field">
                     <input type="text" id="languages" name="languages" placeholder="Езици и ниво на владеене" required>
-                    <label for="languages">Езици и ниво на владеене</label>
-                    <span>Напр. Английски - Fluent, Немски - Advanced и т.н.</span>
+                    <label for="languages">Езици, които говорите свободно</label>
+                    <span>Напр. английски, немски и т.н.</span>
                 </div>
             </fieldset>
         

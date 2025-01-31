@@ -172,3 +172,22 @@ fieldset {
     border-radius: 0.3em;
     cursor: pointer;
 }
+
+main .register-form .field #education-level {
+    padding: 0 0.3em;
+    color: #0A67AA;
+    height: 30px;
+    border: 1px solid #0A67AA;
+    border-radius: 0.3em;
+}
+
+main .register-form .field #education-level:focus {
+    border-color: #0A67AA;
+    outline: none;
+    font-weight: 600;
+}
+
+main .register-form .field #education-level option {
+    color: #0A67AA;
+    opacity: 0.8;
+}

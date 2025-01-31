@@ -1,6 +1,6 @@
 package org.travelagency.model.enums;
 
-public enum Education {
+public enum EducationLevel {
 
     PRIMARY, SECONDARY, UNIVERSITY_DEGREE
 }

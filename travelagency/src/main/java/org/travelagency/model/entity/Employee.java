@@ -3,7 +3,7 @@ package org.travelagency.model.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import org.travelagency.model.annotations.ValidEmail;
-import org.travelagency.model.enums.Education;
+import org.travelagency.model.enums.EducationLevel;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,7 +30,7 @@ public class Employee extends BaseEntity {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Education education;
+    private EducationLevel education;
 
     @Column
     @Size(min = 10, max = 80)
@@ -86,11 +86,11 @@ public class Employee extends BaseEntity {
         this.address = address;
     }
 
-    public Education getEducation() {
+    public EducationLevel getEducation() {
         return education;
     }
 
-    public void setEducation(Education education) {
+    public void setEducation(EducationLevel education) {
         this.education = education;
     }
 
