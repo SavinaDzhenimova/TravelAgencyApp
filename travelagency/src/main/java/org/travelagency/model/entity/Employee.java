@@ -14,12 +14,6 @@ public class Employee extends BaseInfo {
     @Size(min = 5, max = 40)
     private String fullName;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "employees_languages",
-            joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "language_id", referencedColumnName = "id"))
-    private Set<Language> languages;
-
     @Column(nullable = false, unique = true)
     @Size(min = 3, max = 20)
     private String username;
@@ -27,6 +21,12 @@ public class Employee extends BaseInfo {
     @Column(nullable = false)
     @Size(min = 8)
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "employees_languages",
+            joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "language_id", referencedColumnName = "id"))
+    private Set<Language> languages;
 
     public Employee() {
         this.languages = new HashSet<>();
@@ -38,14 +38,6 @@ public class Employee extends BaseInfo {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-    }
-
-    public Set<Language> getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(Set<Language> languages) {
-        this.languages = languages;
     }
 
     public String getUsername() {
@@ -62,5 +54,13 @@ public class Employee extends BaseInfo {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Language> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(Set<Language> languages) {
+        this.languages = languages;
     }
 }
