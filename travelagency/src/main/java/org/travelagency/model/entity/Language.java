@@ -3,6 +3,8 @@ package org.travelagency.model.entity;
 import jakarta.persistence.*;
 import org.travelagency.model.enums.LanguageName;
 
+import java.util.Objects;
+
 @Table
 @Entity(name = "languages")
 public class Language extends BaseEntity {
@@ -31,5 +33,18 @@ public class Language extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Language language = (Language) o;
+        return name != null && name.equalsIgnoreCase(language.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.toLowerCase().hashCode() : 0;
     }
 }

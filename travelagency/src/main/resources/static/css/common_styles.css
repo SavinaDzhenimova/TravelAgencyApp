@@ -1,0 +1,22 @@
+.alert {
+    width: 55%;
+    color: white;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    border: none;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #4CAF50;
+}
+
+.alert-failure {
+    background-color: #e74c3c;
+}
+
+.text-danger {
+    color: #C00;
+    font-style: oblique;
+    font-size: 12px;
+}

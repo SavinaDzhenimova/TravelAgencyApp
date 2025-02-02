@@ -21,31 +21,62 @@
             <p>Вече си част от екипа ни? <a th:href="@{/login}">Влез</a> в своя профил.</p>
         </div>
 
-        <form class="register-form"> 
+        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+            <p class="success" th:text="${successMessage}"></p>
+        </div>
+
+        <div th:if="${failureMessage}" class="alert alert-failure" role="alert">
+            <p th:text="${failureMessage}"></p>
+        </div>
+
+        <form class="register-form"
+              th:method="POST"
+              th:action="@{/register}"
+              th:object="${addCandidateDTO}">
             <fieldset>
                 <legend>Данни за контакт</legend>
 
                 <div class="personal-info">
                     <div class="field">
-                        <input type="text" id="firstName" name="firstName" placeholder="Име" required>
-                        <label for="firstName">Име</label>
+                        <input th:field="*{firstName}"
+                               th:errorclass="is-invalid"
+                               type="text" id="firstName" name="firstName" placeholder="Име" required>
+                        <label th:for="firstName">Име</label>
+                        <small th:if="${#fields.hasErrors('firstName')}"
+                               th:errors="*{firstName}"
+                               class="text-danger">Dish name error message</small>
                     </div>
     
                     <div class="field">
-                        <input type="text" id="lastName" name="lastName" placeholder="Фамилия" required>
-                        <label for="lastName">Фамилия</label>
+                        <input th:field="*{lastName}"
+                               th:errorclass="is-invalid"
+                               type="text" id="lastName" name="lastName" placeholder="Фамилия" required>
+                        <label th:for="lastName">Фамилия</label>
+                        <small th:if="${#fields.hasErrors('lastName')}"
+                               th:errors="*{lastName}"
+                               class="text-danger">Dish name error message</small>
                     </div>
                 </div>
                 
                 <div class="personal-info">
                     <div class="field">
-                        <input type="email" name="email" id="email" placeholder="Имейл" required>
-                        <label for="email">Имейл</label>
+                        <input th:field="*{email}"
+                               th:errorclass="is-invalid"
+                               type="email" name="email" id="email" placeholder="Имейл" required>
+                        <label th:for="email">Имейл</label>
+                        <small th:if="${#fields.hasErrors('email')}"
+                               th:errors="*{email}"
+                               class="text-danger">Dish name error message</small>
                     </div>
             
                     <div class="field">
-                        <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Телефон" required>
-                        <label for="phoneNumber">Телефон</label>
+                        <input th:field="*{phoneNumber}"
+                               th:errorclass="is-invalid"
+                               type="text" name="phoneNumber" id="phoneNumber" placeholder="Телефон" required>
+                        <label th:for="phoneNumber">Телефон</label>
+                        <small th:if="${#fields.hasErrors('phoneNumber')}"
+                               th:errors="*{phoneNumber}"
+                               class="text-danger">Dish name error message</small>
                     </div>
                 </div>
             </fieldset>
@@ -54,30 +85,51 @@
                 <legend>Допълнителна информация</legend>
 
                 <div class="field">
-                    <input type="text" id="address" name="address" placeholder="Местожителство" required>
-                    <label for="address">Местожителство</label>
+                    <input th:field="*{address}"
+                           th:errorclass="is-invalid"
+                           type="text" id="address" name="address" placeholder="Местожителство" required>
+                    <label th:for="address">Местожителство</label>
                     <span>Напр. Мадан 4900, Смолян, България</span>
+                    <small th:if="${#fields.hasErrors('address')}"
+                           th:errors="*{address}"
+                           class="text-danger">Dish name error message</small>
                 </div>
 
-                <div class="field">
-                    <select name="education-level" id="education-level">
+                <div class="field field-education">
+                    <label th:for="education-level">Степен на образование</label>
+                    <select th:field="*{education}"
+                            th:errorclass="is-invalid"
+                            name="education-level" id="education-level">
                         <option value="">-- Изберете степен на образование --</option>
                         <option value="PRIMARY">Основно</option>
                         <option value="SECONDARY">Средно</option>
                         <option value="UNIVERSITY_DEGREE">Висше</option>
                     </select>
+                    <small th:if="${#fields.hasErrors('education')}"
+                           th:errors="*{education}"
+                           class="text-danger">Dish name error message</small>
                 </div>
 
                 <div class="field">
-                    <input type="text" id="education" name="education" placeholder="Степен на образование">
-                    <label for="education">Изучавана специалност</label>
+                    <input th:field="*{specialty}"
+                           th:errorclass="is-invalid"
+                           type="text" id="specialty" name="specialty" placeholder="Изучавана специалност">
+                    <label th:for="specialty">Изучавана специалност</label>
                     <span>(Ако сте посочили степен на образование Висше)</span>
+                    <small th:if="${#fields.hasErrors('specialty')}"
+                           th:errors="*{specialty}"
+                           class="text-danger">Dish name error message</small>
                 </div>
 
                 <div class="field">
-                    <input type="text" id="languages" name="languages" placeholder="Езици и ниво на владеене" required>
-                    <label for="languages">Езици, които говорите свободно</label>
+                    <input th:field="*{languages}"
+                           th:errorclass="is-invalid"
+                           type="text" id="languages" name="languages" placeholder="Езици и ниво на владеене" required>
+                    <label th:for="languages">Езици, които говорите свободно</label>
                     <span>Напр. английски, немски и т.н.</span>
+                    <small th:if="${#fields.hasErrors('languages')}"
+                           th:errors="*{languages}"
+                           class="text-danger">Dish name error message</small>
                 </div>
             </fieldset>
         

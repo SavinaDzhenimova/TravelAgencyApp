@@ -4,26 +4,32 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.travelagency.model.annotations.ValidEmail;
+import org.travelagency.model.annotations.ValidSizeOrNull;
 import org.travelagency.model.enums.EducationLevel;
 
 @MappedSuperclass
 public class BaseInfo extends BaseEntity {
 
+    @NotNull
     @ValidEmail
     private String email;
 
+    @NotNull
     @Size(min = 7, max = 15)
     private String phoneNumber;
 
+    @NotNull
     @Size(min = 3, max = 70)
     private String address;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private EducationLevel education;
 
-    @Size(min = 10, max = 80)
+    @ValidSizeOrNull
     private String specialty;
 
     public String getEmail() {
