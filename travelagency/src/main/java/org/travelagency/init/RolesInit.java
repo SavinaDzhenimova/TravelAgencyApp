@@ -8,7 +8,6 @@ import org.travelagency.model.entity.Employee;
 import org.travelagency.model.entity.Language;
 import org.travelagency.model.entity.Role;
 import org.travelagency.model.enums.EducationLevel;
-import org.travelagency.model.enums.LanguageName;
 import org.travelagency.model.enums.RoleName;
 import org.travelagency.repository.EmployeeRepository;
 import org.travelagency.repository.LanguageRepository;
@@ -41,13 +40,19 @@ public class RolesInit implements CommandLineRunner {
             Arrays.stream(RoleName.values())
                     .forEach(roleName -> {
                         Role role = new Role();
-                        role.setName(roleName);
+                        role.setRoleName(roleName);
+
+                        String name = switch (roleName) {
+                            case MANAGER -> "Мениджър";
+                            case EMPLOYEE -> "Служител";
+                        };
 
                         String description = switch (roleName) {
                             case MANAGER -> "Мениджърът може да разглежда кандидатури, да ги одобрява, да добавя дестинации и екскурзии и има достъп до информация за всички работници като може да ги повишава в мениджъри.";
                             case EMPLOYEE -> "Работникът може да вижда информация за себе си в своя профил както и информация за всички дестинации, екскурзии и своите колеги.";
                         };
 
+                        role.setName(name);
                         role.setDescription(description);
                         this.roleRepository.saveAndFlush(role);
                     });
@@ -56,7 +61,7 @@ public class RolesInit implements CommandLineRunner {
         if (this.employeeRepository.count() == 0) {
 
             Employee employee = new Employee();
-            Optional<Role> optionalRole = this.roleRepository.findByName(RoleName.MANAGER);
+            Optional<Role> optionalRole = this.roleRepository.findByRoleName(RoleName.MANAGER);
             Optional<Language> optionalLanguage = this.languageRepository.findByNameIgnoreCase("английски");
 
             optionalRole.ifPresent(employee::setRole);

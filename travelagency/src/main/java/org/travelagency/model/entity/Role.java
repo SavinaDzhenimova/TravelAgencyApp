@@ -10,7 +10,11 @@ public class Role extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     @Enumerated(EnumType.STRING)
-    private RoleName name;
+    private RoleName roleName;
+
+    @Column(nullable = false, unique = true)
+    @Size(min = 3, max = 20)
+    private String name;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     @Size(min = 3, max = 300)
@@ -19,11 +23,19 @@ public class Role extends BaseEntity {
     public Role() {
     }
 
-    public RoleName getName() {
+    public RoleName getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(RoleName roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public void setName(RoleName name) {
+    public void setName(String name) {
         this.name = name;
     }
 

@@ -12,16 +12,29 @@
     <header th:replace="~{fragments/commons::header}"></header>
 
     <main>
-        <p>Присъедини се към нашия екип и открий нови възможности! При нас ще намериш вдъхновяваща работна среда, екип от
-            подкрепящи и мотивирани колеги, както и  конкурентно възнаграждение и ясни перспективи за растеж. Не чакай повече
-            – попълни формуляра по-долу, и ние ще се свържем с теб, за да обсъдим възможностите и да разберем дали сме
-            точния екип за теб!</p>
-        <p>Вече си част от екипа ни? <a th:href="@{/login}">Влез</a> в своя профил.</p>
+        <h1>Вашият профил</h1>
+
+        <p th:text="'Добре дошли, ' + ${employee.getFullName()}"></p>
+
+        <section class="profile-info">
+            <ul>
+                <li><span>Потребителско име: </span><span th:text="${employee.getUsername()}"></span></li>
+                <li><span>E-mail: </span><span th:text="${employee.getEmail()}"></span></li>
+                <li><span>Телефонен номер: </span><span th:text="${employee.getPhoneNumber()}"></span></li>
+                <li><span>Адрес: </span><span th:text="${employee.getAddress()}"></span></li>
+                <li><span>Степен на образование: </span><span th:text="${employee.getEducation()}"></span></li>
+                <li th:if="${employee.specialty != null && employee.specialty != ''}">
+                    <span>Специалност: </span><span th:text="${employee.getSpecialty()}"></span>
+                </li>
+                <li><span>Работна квалификация: </span><span th:text="${employee.getRole()}"></span></li>
+                <li><span>Говорими езици: </span><span th:text="${employee.getLanguages()}"></span></li>
+            </ul>
+        </section>
     </main>
 
     <footer th:replace="~{fragments/commons::footer}"></footer>
 
-    <script src="\js\show-menu.js"></script>
+    <script src="\js\show-menu-profile.js"></script>
 
 </body>
 

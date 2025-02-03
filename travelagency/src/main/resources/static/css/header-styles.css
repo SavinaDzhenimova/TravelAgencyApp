@@ -151,7 +151,8 @@ header nav .logo-container .navbar > .menu > li:hover > a::before {
 }
 
 #profile .hidden {
-    width: 200px;
+    width: 300px;
+    left: 0;
 }
 
 #destinations h4,

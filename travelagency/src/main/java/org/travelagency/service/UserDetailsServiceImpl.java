@@ -51,6 +51,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     private static Collection<? extends GrantedAuthority> mapAuthorities(Role role) {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
     }
 }

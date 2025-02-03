@@ -13,12 +13,6 @@ public class HomeController {
         return new ModelAndView("index");
     }
 
-    @GetMapping("/employees/profile")
-    public ModelAndView profile() {
-
-        return new ModelAndView("profile");
-    }
-
     @GetMapping("/about-us")
     public ModelAndView about() {
 

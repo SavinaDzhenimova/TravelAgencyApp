@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class UserDetailsDTO extends User {
 
-    private Long id;
+    private static Long id;
 
     private String fullName;
 
@@ -48,7 +48,7 @@ public class UserDetailsDTO extends User {
         this.languages = languages;
     }
 
-    public Long getId() {
+    public static Long getId() {
         return id;
     }
 
