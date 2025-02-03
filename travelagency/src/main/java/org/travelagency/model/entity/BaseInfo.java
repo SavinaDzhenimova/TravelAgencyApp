@@ -17,7 +17,7 @@ public class BaseInfo extends BaseEntity {
     @ValidEmail
     private String email;
 
-    @NotNull
+    @Column(nullable = false, unique = true)
     @Size(min = 7, max = 15)
     private String phoneNumber;
 

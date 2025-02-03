@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.travelagency.model.entity.Result;
 import org.travelagency.model.importDTO.AddCandidateDTO;
 import org.travelagency.service.interfaces.CandidateService;
 
@@ -43,18 +44,12 @@ public class CandidateController {
             return new ModelAndView("register-form");
         }
 
-        boolean isAdded = this.candidateService.addCandidate(addCandidateDTO);
+        Result result = this.candidateService.addCandidate(addCandidateDTO);
 
-        if (isAdded) {
-            redirectAttributes.addFlashAttribute("successMessage",
-                    "Кандидатурата Ви беше изпратена успешно!" +
-                            "Моля изчакайте търпеливо да бъде разгледана и наш служител ще се свърже с Вас!");
-
+        if (result.isSuccess()) {
+            redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
         } else {
-            redirectAttributes.addFlashAttribute("failureMessage",
-                    "Нещо се обърка! Моля проверете дали сте попълнили всички необходими полета " +
-                            "и опитайте да изпратите кандидатурата си отново!");
-
+            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
         }
 
         return new ModelAndView("redirect:/register");

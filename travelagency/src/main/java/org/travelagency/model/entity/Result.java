@@ -2,7 +2,6 @@ package org.travelagency.model.entity;
 
 import jakarta.persistence.Entity;
 
-@Entity
 public class Result {
 
     private boolean success;
