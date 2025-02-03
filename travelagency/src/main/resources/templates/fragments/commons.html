@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
 
 <head>
     <meta charset="UTF-8">
@@ -35,7 +36,7 @@
               </li>
             </ul>
 
-            <ul class="menu">
+            <ul class="menu" sec:authorize="!isAuthenticated()">
               <li><a th:href="@{/}">Начало</a></li>
               <li id="destinations">
                 <a href="">Дестинации</a>
@@ -180,6 +181,25 @@
               <li><a th:href="@{/about-us}">За нас</a></li>
               <li><a th:href="@{/contacts}">Контакти</a></li>
               <li><a th:href="@{/faq}">FAQ</a></li>
+            </ul>
+
+            <ul class="menu" sec:authorize="isAuthenticated()">
+              <li><a th:href="@{/}">Начало</a></li>
+              <li><a th:href="@{/profile}">Профил</a></li>
+              <li>
+                <a href="">Добави</a>
+                <div class="hidden">
+                    <div class="hidden-section">
+                      <ul>
+                        <li><a th:href="@{/add-destination}">Дестинация</a></li>
+                        <li><a th:href="@{/add-excursion}">Екскурзия</a></li>
+                      </ul>
+                    </div>
+                </div>
+              </li>
+              <li><a th:href="@{/candidates}">Кандидати</a></li>
+              <li><a th:href="@{/employees}">Служители</a></li>
+              <li><a th:href="@{/logout}">Изход</a></li>
             </ul>
           </div>
         </div>
