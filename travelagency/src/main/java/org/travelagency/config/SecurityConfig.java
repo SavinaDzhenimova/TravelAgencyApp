@@ -16,12 +16,11 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 
         return httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/", "/about-us", "/contacts", "/faq", "/privacy-policy",
                                 "/general-conditions").permitAll()
-                        .requestMatchers("/login", "/register").permitAll()
+                        .requestMatchers("/login", "/register").anonymous()
                         .requestMatchers("/destinations/**", "/excursions/**").permitAll()
                         .anyRequest().authenticated()
                 )
