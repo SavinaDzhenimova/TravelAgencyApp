@@ -11,11 +11,11 @@ import java.util.Set;
 public class Employee extends BaseInfo {
 
     @Column(nullable = false)
-    @Size(min = 5, max = 40)
+    @Size(min = 5, max = 50)
     private String fullName;
 
     @Column(nullable = false, unique = true)
-    @Size(min = 3, max = 20)
+    @Size(min = 3, max = 30)
     private String username;
 
     @Column(nullable = false)
@@ -27,6 +27,10 @@ public class Employee extends BaseInfo {
             joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "language_id", referencedColumnName = "id"))
     private Set<Language> languages;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role role;
 
     public Employee() {
         this.languages = new HashSet<>();
@@ -62,5 +66,13 @@ public class Employee extends BaseInfo {
 
     public void setLanguages(Set<Language> languages) {
         this.languages = languages;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
