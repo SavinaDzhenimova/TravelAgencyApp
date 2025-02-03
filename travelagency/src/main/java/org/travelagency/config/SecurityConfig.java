@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfig {
@@ -16,24 +18,27 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 
         return httpSecurity
+                .csrf(csrf -> csrf
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/", "/about-us", "/contacts", "/faq", "/privacy-policy",
                                 "/general-conditions").permitAll()
-                        .requestMatchers("/login", "/register").anonymous()
+                        .requestMatchers("/employees/login", "/register").anonymous()
+                        .requestMatchers("/employees/profile").authenticated()
                         .requestMatchers("/destinations/**", "/excursions/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
-                        .loginPage("/login").permitAll()
+                        .loginPage("/employees/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/home", true)
-                        .failureUrl("/users/login-error")
+                        .defaultSuccessUrl("/employees/profile", true)
+                        .failureUrl("/employees/login-error")
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
+                        .logoutUrl("/employees/logout")
+                        .logoutSuccessUrl("/employees/login")
                         .invalidateHttpSession(true)
                 )
                 .build();

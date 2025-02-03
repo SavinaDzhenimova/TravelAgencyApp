@@ -17,7 +17,17 @@
             <p>Все още не си част от екипа ни? <a th:href="@{/register}">Кандидатствай</a> тук.</p>
         </div>
 
-        <form class="login-form">
+        <div th:if="${failureMessage}" class="alert alert-failure" role="alert">
+            <p th:text="${failureMessage}"></p>
+        </div>
+
+        <form class="login-form"
+              th:action="@{/employees/login}"
+              th:method="POST">
+
+            <!-- CSRF токен -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
             <fieldset>
                 <legend>Данни за вход</legend>
 

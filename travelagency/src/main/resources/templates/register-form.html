@@ -18,7 +18,7 @@
                 подкрепящи и мотивирани колеги, както и  конкурентно възнаграждение и ясни перспективи за растеж. Не чакай повече 
                 – попълни формуляра по-долу, и ние ще се свържем с теб, за да обсъдим възможностите и да разберем дали сме 
                 точния екип за теб!</p>
-            <p>Вече си част от екипа ни? <a th:href="@{/login}">Влез</a> в своя профил.</p>
+            <p>Вече си част от екипа ни? <a th:href="@{/employees/login}">Влез</a> в своя профил.</p>
         </div>
 
         <div th:if="${successMessage}" class="alert alert-success" role="alert">
@@ -33,6 +33,10 @@
               th:method="POST"
               th:action="@{/register}"
               th:object="${addCandidateDTO}">
+
+            <!-- CSRF токен -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
             <fieldset>
                 <legend>Данни за контакт</legend>
 
