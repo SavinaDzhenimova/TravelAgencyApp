@@ -11,6 +11,7 @@ import org.travelagency.service.interfaces.CandidateService;
 import org.travelagency.service.interfaces.LanguageService;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -29,6 +30,12 @@ public class CandidateServiceImpl implements CandidateService {
     @Override
     public boolean addCandidate(AddCandidateDTO addCandidateDTO) {
         if (addCandidateDTO == null) {
+            return false;
+        }
+
+        Optional<Candidate> optionalCandidate = this.candidateRepository.findByEmail(addCandidateDTO.getEmail());
+
+        if (optionalCandidate.isPresent()) {
             return false;
         }
 

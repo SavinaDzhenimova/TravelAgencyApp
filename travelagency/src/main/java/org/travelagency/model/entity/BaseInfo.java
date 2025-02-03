@@ -13,7 +13,7 @@ import org.travelagency.model.enums.EducationLevel;
 @MappedSuperclass
 public class BaseInfo extends BaseEntity {
 
-    @NotNull
+    @Column(nullable = false, unique = true)
     @ValidEmail
     private String email;
 
