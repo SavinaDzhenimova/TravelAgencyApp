@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{fragments/commons::head}"></th:block>
+    <link rel="stylesheet" href="/css/candidates-styles.css">
+    <title>Кандидати</title>
+</head>
+<body>
+
+    <header th:replace="~{fragments/commons::header}"></header>
+
+    <main>
+        <h1>Кандидати</h1>
+
+        <div class="candidates-info">
+            <table class="candidates-info-table">
+                <tbody>
+                    <tr>
+                        <td class="firstName">Име</td>
+                        <td class="lastName">Фамилия</td>
+                        <td class="email">E-mail</td>
+                        <td class="phoneNumber">Телефон</td>
+                        <td class="address">Адрес</td>
+                        <td class="education">Образование</td>
+                        <td class="specialty">Специалност</td>
+                        <td class="languages">Говорими езици</td>
+                        <td class="add-candidate">Добави</td>
+                        <td class="delete-candidate">Отхвърли</td>
+                    </tr>
+                    <tr th:each="candidate : ${candidates.getCandidates()}">
+                        <td th:text="${candidate.getFirstName()}" class="firstName">Име</td>
+                        <td th:text="${candidate.getLastName()}" class="lastName">Фамилия</td>
+                        <td th:text="${candidate.getEmail()}" class="email">E-mail</td>
+                        <td th:text="${candidate.getPhoneNumber()}" class="phoneNumber">Телефон</td>
+                        <td th:text="${candidate.getAddress()}" class="address">Адрес</td>
+                        <td th:text="${candidate.getEducation()}" class="education">Степен на образование</td>
+                        <td th:text="${candidate.getSpecialty()}" class="specialty">Специалност</td>
+                        <td th:text="${candidate.getLanguages()}" class="languages">Говорими езици</td>
+                        <td class="add-candidate">
+                            <form th:action="@{/candidates/add-candidate/{id}(id=${candidate.id})}" th:method="POST">
+                                <!-- CSRF токен -->
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                <button class="button-add" type="submit">Наеми</button>
+                            </form>
+                        </td>
+                        <td class="delete-candidate">
+                            <form th:action="@{/candidates/delete-candidate/{id}(id=${candidate.id})}" th:method="DELETE">
+                                <!-- CSRF токен -->
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                <button class="button-delete" type="submit">Отхвърли</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer th:replace="~{fragments/commons::footer}"></footer>
+
+    <script src="\js\show-menu-profile.js"></script>
+
+</body>
+</html>

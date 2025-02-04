@@ -20,3 +20,17 @@
     font-style: oblique;
     font-size: 12px;
 }
+
+.button-add,
+.button-delete {
+    padding: 0.5em 1em;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 0.3em;
+    cursor: pointer;
+}
+
+.button-delete {
+    background-color: #e74c3c;
+}

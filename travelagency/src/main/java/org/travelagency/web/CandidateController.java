@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.travelagency.model.entity.Result;
+import org.travelagency.model.exportDTO.CandidatesViewInfo;
 import org.travelagency.model.importDTO.AddCandidateDTO;
 import org.travelagency.service.interfaces.CandidateService;
 
@@ -20,6 +21,18 @@ public class CandidateController {
 
     public CandidateController(CandidateService candidateService) {
         this.candidateService = candidateService;
+    }
+
+    @GetMapping("/candidates")
+    public ModelAndView candidates() {
+
+        ModelAndView modelAndView = new ModelAndView("candidates");
+
+        CandidatesViewInfo candidatesViewInfo = this.candidateService.getAllCandidates();
+
+        modelAndView.addObject("candidates", candidatesViewInfo);
+
+        return modelAndView;
     }
 
     @GetMapping("/register")

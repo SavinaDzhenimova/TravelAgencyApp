@@ -1,0 +1,73 @@
+h1 {
+    width: 100%;
+    padding-bottom: 0.5em;
+    font-family: 'Lobster';
+    font-weight: 300;
+    font-size: 30px;
+    text-align: center;
+}
+
+main h1::after {
+    display: block;
+    content: '';
+    background-color: #0A67AA;
+    width: 12%;
+    height: 2px;
+    position: absolute;
+    left: 44%;
+}
+
+main {
+    padding: 1.5em 6em 2em 6em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+}
+
+main .candidates-info {
+    width: 100%;
+    margin: 2em 0;
+}
+
+main .candidates-info-table {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5em;
+    border-collapse: collapse;
+    box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2);
+}
+
+main .candidates-info-table tbody tr:first-child td:first-child {
+    border-top-left-radius: 0.5em;
+}
+
+main .candidates-info-table tbody tr:first-child td:last-child {
+    border-top-right-radius: 0.5em;
+}
+
+main .candidates-info-table tbody tr:first-child td {
+    background-color: #0A67AA;
+    color: #fff;
+    border-left: 1px solid #fff;
+}
+
+main .candidates-info-table tbody tr:not(:first-child):not(:last-child) {
+    border-bottom: 1px solid #0A67AA;
+    border-top: 1px solid #0A67AA;
+}
+
+main .candidates-info-table tbody tr td {
+    padding: 0.5em;
+    text-align: left;
+}
+
+main .candidates-info-table tbody tr .specialty {
+    width: 20%;
+}
+
+main .candidates-info-table tbody tr .address,
+main .candidates-info-table tbody tr .languages {
+    width: 15%;
+}

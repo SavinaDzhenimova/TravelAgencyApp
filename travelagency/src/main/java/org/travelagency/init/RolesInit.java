@@ -69,7 +69,7 @@ public class RolesInit implements CommandLineRunner {
 
             employee.setUsername("Sunrise_Travel_Manager");
             employee.setFullName("Sunrise Travel Мениджър");
-            employee.setPhoneNumber("111222333");
+            employee.setPhoneNumber("0888232555");
             employee.setEmail("sunrisetravelagencybulgaria@gmail.com");
             employee.setAddress("бул.Съединение №83, 4600 Велинград, България");
             employee.setPassword(this.passwordEncoder.encode("Admin1234"));

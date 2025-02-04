@@ -6,14 +6,18 @@ import org.travelagency.model.entity.Candidate;
 import org.travelagency.model.entity.Language;
 import org.travelagency.model.entity.Result;
 import org.travelagency.model.enums.EducationLevel;
+import org.travelagency.model.exportDTO.CandidateDTO;
+import org.travelagency.model.exportDTO.CandidatesViewInfo;
 import org.travelagency.model.importDTO.AddCandidateDTO;
 import org.travelagency.repository.CandidateRepository;
 import org.travelagency.service.interfaces.CandidateService;
 import org.travelagency.service.interfaces.LanguageService;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class CandidateServiceImpl implements CandidateService {
@@ -73,6 +77,45 @@ public class CandidateServiceImpl implements CandidateService {
 
         return new Result(true, "Кандидатурата Ви беше изпратена успешно! " +
                 "Моля изчакайте търпеливо да бъде разгледана и наш служител ще се свърже с Вас!");
+    }
+
+    @Override
+    public CandidatesViewInfo getAllCandidates() {
+        List<Candidate> candidates = this.candidateRepository.findAll();
+
+        List<CandidateDTO> candidateDTOList = candidates.stream()
+                .map(candidate -> {
+                    CandidateDTO candidateDTO = this.modelMapper.map(candidate, CandidateDTO.class);
+
+                    String education = this.mapEducationLevel(candidate.getEducation());
+                    candidateDTO.setEducation(education);
+
+                    String languages = this.mapLanguagesToStringFormat(candidate.getLanguages());
+                    candidateDTO.setLanguages(languages);
+
+                    return candidateDTO;
+                })
+                .toList();
+
+        return new CandidatesViewInfo(candidateDTOList);
+    }
+
+    private String mapLanguagesToStringFormat(Set<Language> languages) {
+        return languages.stream()
+                .map(Language::getName)
+                .collect(Collectors.joining(", "));
+    }
+
+    private String mapEducationLevel(EducationLevel educationLevel) {
+        if (educationLevel.equals(EducationLevel.UNIVERSITY_DEGREE)) {
+            return "Висше";
+        } else if (educationLevel.equals(EducationLevel.SECONDARY)) {
+            return "Средно";
+        } else if (educationLevel.equals(EducationLevel.PRIMARY)) {
+            return "Основно";
+        }
+
+        return "";
     }
 
     private boolean isEducationLevelValid(EducationLevel educationLevel) {

@@ -10,6 +10,7 @@ import org.travelagency.repository.EmployeeRepository;
 import org.travelagency.service.interfaces.EmployeeService;
 
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,12 +41,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeProfileDTO.setEducation(education);
         employeeProfileDTO.setRole(employee.getRole().getName());
-        employeeProfileDTO.setLanguages(
-                employee.getLanguages().stream()
-                .map(Language::getName)
-                .collect(Collectors.joining(", ")));
+
+        String languages = this.mapLanguagesToStringFormat(employee.getLanguages());
+        employeeProfileDTO.setLanguages(languages);
 
         return employeeProfileDTO;
+    }
+
+    private String mapLanguagesToStringFormat(Set<Language> languages) {
+        return languages.stream()
+                .map(Language::getName)
+                .collect(Collectors.joining(", "));
     }
 
     private String mapEducationLevel(EducationLevel educationLevel) {
