@@ -98,6 +98,10 @@ public class EmployeeServiceImpl implements EmployeeService {
             return new Result(false, "Ролята, в която искате да повишите служителя, не съществува!");
         }
 
+        if (employee.getRole().getRoleName().equals(RoleName.MANAGER)) {
+            return new Result(false, "Този служител вече е мениджър и не можете да го повишите отново!");
+        }
+
         Role role = optionalRole.get();
         employee.setRole(role);
 
