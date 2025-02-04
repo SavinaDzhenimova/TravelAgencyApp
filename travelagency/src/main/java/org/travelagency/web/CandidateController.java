@@ -4,9 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.travelagency.model.entity.Result;
@@ -33,6 +31,34 @@ public class CandidateController {
         modelAndView.addObject("candidates", candidatesViewInfo);
 
         return modelAndView;
+    }
+
+    @PostMapping("/candidates/add-employee/{id}")
+    public ModelAndView addEmployee(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        Result result = this.candidateService.getCandidateById(id);
+
+        if (result.isSuccess()) {
+            redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
+        } else {
+            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
+        }
+
+        return new ModelAndView("redirect:/candidates");
+    }
+
+    @DeleteMapping("/candidates/delete-candidate/{id}")
+    public ModelAndView deleteEmployee(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        boolean isCandidateDeleted = this.candidateService.deleteCandidateById(id);
+
+        if (isCandidateDeleted) {
+            redirectAttributes.addFlashAttribute("successMessage",
+                    "Успешно отхвърлихте този кандидат!");
+        } else {
+            redirectAttributes.addFlashAttribute("failureMessage",
+                    "Нещо се обърка! Кандидатът не беше отхвърлен!");
+        }
+
+        return new ModelAndView("redirect:/candidates");
     }
 
     @GetMapping("/register")

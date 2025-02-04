@@ -48,6 +48,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeProfileDTO;
     }
 
+    @Override
+    public void saveAndFlushEmployee(Employee employee) {
+        this.employeeRepository.saveAndFlush(employee);
+    }
+
     private String mapLanguagesToStringFormat(Set<Language> languages) {
         return languages.stream()
                 .map(Language::getName)

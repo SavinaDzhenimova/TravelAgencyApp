@@ -13,6 +13,14 @@
     <main>
         <h1>Кандидати</h1>
 
+        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+            <p class="success" th:text="${successMessage}"></p>
+        </div>
+
+        <div th:if="${failureMessage}" class="alert alert-failure" role="alert">
+            <p th:text="${failureMessage}"></p>
+        </div>
+
         <div class="candidates-info">
             <table class="candidates-info-table">
                 <tbody>
@@ -25,7 +33,7 @@
                         <td class="education">Образование</td>
                         <td class="specialty">Специалност</td>
                         <td class="languages">Говорими езици</td>
-                        <td class="add-candidate">Добави</td>
+                        <td class="add-employee">Добави</td>
                         <td class="delete-candidate">Отхвърли</td>
                     </tr>
                     <tr th:each="candidate : ${candidates.getCandidates()}">
@@ -37,8 +45,8 @@
                         <td th:text="${candidate.getEducation()}" class="education">Степен на образование</td>
                         <td th:text="${candidate.getSpecialty()}" class="specialty">Специалност</td>
                         <td th:text="${candidate.getLanguages()}" class="languages">Говорими езици</td>
-                        <td class="add-candidate">
-                            <form th:action="@{/candidates/add-candidate/{id}(id=${candidate.id})}" th:method="POST">
+                        <td class="add-employee">
+                            <form th:action="@{/candidates/add-employee/{id}(id=${candidate.id})}" th:method="POST">
                                 <!-- CSRF токен -->
                                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                 <button class="button-add" type="submit">Наеми</button>
@@ -55,6 +63,8 @@
                 </tbody>
             </table>
         </div>
+
+        <p th:if="${candidates.getCandidates().size() == 0}">Все още нямате кандидатури за разглеждане!</p>
     </main>
 
     <footer th:replace="~{fragments/commons::footer}"></footer>

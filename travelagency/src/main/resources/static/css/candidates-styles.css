@@ -59,6 +59,7 @@ main .candidates-info-table tbody tr:not(:first-child):not(:last-child) {
 }
 
 main .candidates-info-table tbody tr td {
+    width: 8%;
     padding: 0.5em;
     text-align: left;
 }
@@ -69,5 +70,12 @@ main .candidates-info-table tbody tr .specialty {
 
 main .candidates-info-table tbody tr .address,
 main .candidates-info-table tbody tr .languages {
-    width: 15%;
+    width: 12%;
+}
+
+main p {
+    text-align: center;
+    font-style: oblique;
+    font-weight: 500;
+    color: #aaa;
 }

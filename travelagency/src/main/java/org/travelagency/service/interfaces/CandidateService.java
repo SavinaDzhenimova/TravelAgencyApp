@@ -9,4 +9,8 @@ public interface CandidateService {
     Result addCandidate(AddCandidateDTO addCandidateDTO);
 
     CandidatesViewInfo getAllCandidates();
+
+    Result getCandidateById(Long id);
+
+    boolean deleteCandidateById(Long id);
 }
