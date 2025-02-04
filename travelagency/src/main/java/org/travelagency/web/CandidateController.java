@@ -47,7 +47,7 @@ public class CandidateController {
     }
 
     @DeleteMapping("/candidates/delete-candidate/{id}")
-    public ModelAndView deleteEmployee(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+    public ModelAndView deleteCandidate(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
         boolean isCandidateDeleted = this.candidateService.deleteCandidateById(id);
 
         if (isCandidateDeleted) {

@@ -204,8 +204,15 @@
                     </div>
                 </div>
               </li>
-              <li><a th:href="@{/candidates}">Кандидати</a></li>
-              <li><a th:href="@{/employees}">Служители</a></li>
+              <li sec:authorize="hasRole('MANAGER')">
+                <a th:href="@{/candidates}">Кандидати</a>
+              </li>
+              <li sec:authorize="hasRole('EMPLOYEE')">
+                <a th:href="@{/candidates}">Изход</a>
+              </li>
+              <li>
+                <a th:href="@{/employees}">Служители</a>
+              </li>
               <li><a th:href="@{/logout}">Изход</a></li>
             </ul>
           </div>

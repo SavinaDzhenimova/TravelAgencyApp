@@ -25,7 +25,9 @@ public class SecurityConfig {
                         .requestMatchers("/", "/about-us", "/contacts", "/faq", "/privacy-policy",
                                 "/general-conditions").permitAll()
                         .requestMatchers("/employees/login", "/register").anonymous()
-                        .requestMatchers("/employees/profile", "/candidates").authenticated()
+                        .requestMatchers("/employees/profile", "/employees").authenticated()
+                        .requestMatchers("/candidates", "/candidates/add-employee", "/candidates/delete-candidate",
+                                "/employees/promote-employee", "/employees/delete-employee").hasRole("MANAGER")
                         .requestMatchers("/destinations/**", "/excursions/**").permitAll()
                         .anyRequest().authenticated()
                 )
