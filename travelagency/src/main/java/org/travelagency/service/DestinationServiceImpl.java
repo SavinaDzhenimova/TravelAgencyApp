@@ -76,7 +76,7 @@ public class DestinationServiceImpl implements DestinationService {
         destination.setTimeToVisit(addDestinationDTO.getTimeToVisit());
         destination.setGoodToKnow(addDestinationDTO.getGoodToKnow());
         destination.setCountry(country);
-        
+
         this.destinationRepository.saveAndFlush(destination);
 
         return new Result(true, "Новата дестинация беше успешно създадена! " +

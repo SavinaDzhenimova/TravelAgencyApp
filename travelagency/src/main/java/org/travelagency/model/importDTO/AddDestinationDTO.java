@@ -1,40 +1,58 @@
 package org.travelagency.model.importDTO;
 
+import jakarta.validation.constraints.NotNull;
+
 public class AddDestinationDTO {
 
     // Country info
+    @NotNull
     private String countryName;
 
+    @NotNull
     private String capital;
 
+    @NotNull
     private String currency;
 
+    @NotNull
     private String timeDifference;
 
+    @NotNull
     private String continent;
 
     // Embassy info
+    @NotNull
     private String address;
 
+    @NotNull
     private String phoneNumber;
 
+    @NotNull
     private String fax;
 
+    @NotNull
     private String dutyPhone;
 
+    @NotNull
     private String email;
 
+    @NotNull
     private String webpage;
 
     // Destination info
+    @NotNull
     private String description;
 
+    @NotNull
     private String imageUrl;
 
+    @NotNull
     private String visaRequirements;
 
+    @NotNull
     private String timeToVisit;
 
+    @NotNull
     private String goodToKnow;
 
     public AddDestinationDTO() {
