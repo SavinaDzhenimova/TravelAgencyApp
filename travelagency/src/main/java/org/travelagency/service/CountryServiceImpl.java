@@ -59,4 +59,9 @@ public class CountryServiceImpl implements CountryService {
 
         return countryMenuDTO;
     }
+
+    @Override
+    public void saveAndFlushCountry(Country country) {
+        this.countryRepository.saveAndFlush(country);
+    }
 }

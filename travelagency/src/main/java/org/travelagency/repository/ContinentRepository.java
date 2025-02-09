@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface ContinentRepository  extends JpaRepository<Continent, Long> {
 
     Optional<Continent> findByContinentName(ContinentName continentName);
+
+    Optional<Continent> findByName(String name);
 }

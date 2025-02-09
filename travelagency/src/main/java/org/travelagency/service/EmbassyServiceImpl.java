@@ -1,6 +1,7 @@
 package org.travelagency.service;
 
 import org.springframework.stereotype.Service;
+import org.travelagency.model.entity.Embassy;
 import org.travelagency.repository.EmbassyRepository;
 import org.travelagency.service.interfaces.EmbassyService;
 
@@ -11,5 +12,10 @@ public class EmbassyServiceImpl implements EmbassyService {
 
     public EmbassyServiceImpl(EmbassyRepository embassyRepository) {
         this.embassyRepository = embassyRepository;
+    }
+
+    @Override
+    public void saveAndFlushEmbassy(Embassy embassy) {
+        this.embassyRepository.saveAndFlush(embassy);
     }
 }

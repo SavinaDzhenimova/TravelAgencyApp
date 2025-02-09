@@ -1,11 +1,13 @@
 package org.travelagency.web;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.travelagency.model.entity.Result;
 import org.travelagency.model.exportDTO.DestinationViewDTO;
 import org.travelagency.model.exportDTO.DestinationViewInfo;
 import org.travelagency.model.importDTO.AddCandidateDTO;
@@ -41,5 +43,28 @@ public class DestinationController {
         }
 
         return new ModelAndView("add-destination");
+    }
+
+    @PostMapping("/add-destination")
+    public ModelAndView addDestination(@Valid @ModelAttribute("addDestinationDTO") AddDestinationDTO addDestinationDTO,
+                                          BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("addDestinationDTO", addDestinationDTO)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.addDestinationDTO",
+                            bindingResult);
+
+            return new ModelAndView("add-destination");
+        }
+
+        Result result = this.destinationService.addDestination(addDestinationDTO);
+
+        if (result.isSuccess()) {
+            redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
+        } else {
+            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
+        }
+
+        return new ModelAndView("redirect:/add-destination");
     }
 }
