@@ -7,7 +7,7 @@ import org.travelagency.model.enums.CountryName;
 @Table(name = "countries")
 public class Country extends BaseEntity {
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     @Enumerated(EnumType.STRING)
     private CountryName countryName;
 
