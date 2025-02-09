@@ -64,6 +64,18 @@ header nav .logo-container .navbar .contacts li form .button-exit {
     cursor: pointer;
 }
 
+header nav .logo-container .navbar .contacts li .button-login,
+header nav .logo-container .navbar .contacts li .button-register {
+    padding: 0.1em 1em;
+    background-color: #0A67AA;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    border: none;
+    border-radius: 0.3em;
+    cursor: pointer;
+}
+
 header nav .logo-container .navbar .menu {
     width: 100%;
     padding-top: 0.5em;
