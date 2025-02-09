@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{fragments/commons::head}"></th:block>
+    <link rel="stylesheet" href="/css/add-destination-styles.css">
+    <title>Добавете дестинация</title>
+</head>
+
+<body>
+
+    <header th:replace="~{fragments/commons::header}"></header>
+
+    <main>
+        <h1>Добави дестинация</h1>
+
+        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+            <p class="success" th:text="${successMessage}"></p>
+        </div>
+
+        <div th:if="${failureMessage}" class="alert alert-failure" role="alert">
+            <p th:text="${failureMessage}"></p>
+        </div>
+
+        <form class="add-destination-form"
+              th:method="POST"
+              th:action="@{/destinations/add-destination}"
+              th:object="${addDestinationDTO}">
+
+            <!-- CSRF токен -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+            <fieldset>
+                <legend>Информация за държавата</legend>
+
+                <div class="country-info">
+                    <div class="field">
+                        <input th:field="*{countryName}"
+                               th:errorclass="is-invalid"
+                               type="text" id="countryName" name="countryName" placeholder="Име на държавата" required>
+                        <label th:for="countryName">Име на държавата</label>
+                        <small th:if="${#fields.hasErrors('countryName')}"
+                               th:errors="*{countryName}"
+                               class="text-danger">Dish name error message</small>
+                    </div>
+
+                    <div class="field">
+                        <input th:field="*{capital}"
+                               th:errorclass="is-invalid"
+                               type="text" id="capital" name="capital" placeholder="Столица" required>
+                        <label th:for="capital">Столица</label>
+                        <small th:if="${#fields.hasErrors('capital')}"
+                               th:errors="*{capital}"
+                               class="text-danger">Dish name error message</small>
+                    </div>
+                </div>
+
+                <div class="country-info">
+                    <div class="field">
+                        <input th:field="*{currency}"
+                               th:errorclass="is-invalid"
+                               type="text" name="currency" id="currency" placeholder="Валута" required>
+                        <label th:for="currency">Валута</label>
+                        <small th:if="${#fields.hasErrors('currency')}"
+                               th:errors="*{currency}"
+                               class="text-danger">Dish name error message</small>
+                    </div>
+
+                    <div class="field">
+                        <input th:field="*{timeDifference}"
+                               th:errorclass="is-invalid"
+                               type="text" name="timeDifference" id="timeDifference"
+                               placeholder="Часова разлика" required>
+                        <label th:for="timeDifference">Часова разлика</label>
+                        <small th:if="${#fields.hasErrors('timeDifference')}"
+                               th:errors="*{timeDifference}"
+                               class="text-danger">Dish name error message</small>
+                    </div>
+                </div>
+
+                <div class="field field-continent">
+                    <label th:for="continent">Континент, в който се намира държавата</label>
+                    <select th:field="*{continent}"
+                            th:errorclass="is-invalid"
+                            name="continent" id="continent" required>
+                        <option value="">-- Изберете континент, в който се намира държавата --</option>
+                        <option value="EUROPE">Европа</option>
+                        <option value="AFRICA">Африка</option>
+                        <option value="ASIA">Азия</option>
+                        <option value="SOUTH_AMERICA">Южна Америка</option>
+                        <option value="NORTH_AMERICA">Северна Америка</option>
+                        <option value="AUSTRALIA">Австралия</option>
+                    </select>
+                    <small th:if="${#fields.hasErrors('continent')}"
+                           th:errors="*{continent}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Информация за посолството на България в държавата</legend>
+
+                <div class="field">
+                    <input th:field="*{address}"
+                           th:errorclass="is-invalid"
+                           type="text" id="address" name="address" placeholder="Адрес" required>
+                    <label th:for="address">Адрес</label>
+                    <small th:if="${#fields.hasErrors('address')}"
+                           th:errors="*{address}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <input th:field="*{phoneNumber}"
+                           th:errorclass="is-invalid"
+                           type="text" id="phoneNumber" name="phoneNumber" placeholder="Телефон" required>
+                    <label th:for="phoneNumber">Телефон</label>
+                    <small th:if="${#fields.hasErrors('phoneNumber')}"
+                           th:errors="*{phoneNumber}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <input th:field="*{fax}"
+                           th:errorclass="is-invalid"
+                           type="text" id="fax" name="fax" placeholder="Факс" required>
+                    <label th:for="fax">Факс</label>
+                    <small th:if="${#fields.hasErrors('fax')}"
+                           th:errors="*{fax}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <input th:field="*{dutyPhone}"
+                           th:errorclass="is-invalid"
+                           type="text" id="dutyPhone" name="dutyPhone" placeholder="Дежурен телефон" required>
+                    <label th:for="dutyPhone">Дежурен телефон</label>
+                    <small th:if="${#fields.hasErrors('dutyPhone')}"
+                           th:errors="*{dutyPhone}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <input th:field="*{email}"
+                           th:errorclass="is-invalid"
+                           type="email" id="email" name="email" placeholder="Ел. адрес" required>
+                    <label th:for="email">Ел. адрес</label>
+                    <small th:if="${#fields.hasErrors('email')}"
+                           th:errors="*{email}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <input th:field="*{webpage}"
+                           th:errorclass="is-invalid"
+                           type="text" id="webpage" name="webpage" placeholder="Интернет страница" required>
+                    <label th:for="webpage">Интернет страница</label>
+                    <small th:if="${#fields.hasErrors('webpage')}"
+                           th:errors="*{webpage}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+            </fieldset>
+
+            <fieldset class="destination-info">
+                <legend>Информация за дестинацията</legend>
+
+                <div class="field">
+                    <input th:field="*{imageUrl}"
+                           th:errorclass="is-invalid"
+                           type="text" id="imageUrl" name="imageUrl" placeholder="URL адрес" required>
+                    <label th:for="imageUrl">URL адрес</label>
+                    <small th:if="${#fields.hasErrors('imageUrl')}"
+                           th:errors="*{imageUrl}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <label th:for="description">Описание на дестинацията</label>
+                    <textarea th:field="*{description}"
+                           th:errorclass="is-invalid"
+                              id="description" name="description" required>Въведете описанието тук...</textarea>
+                    <small th:if="${#fields.hasErrors('description')}"
+                           th:errors="*{description}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <label th:for="visaRequirements">Визов режим</label>
+                    <textarea th:field="*{visaRequirements}"
+                              th:errorclass="is-invalid"
+                              id="visaRequirements" name="visaRequirements" required>Опишете визовия режим тук...</textarea>
+                    <small th:if="${#fields.hasErrors('visaRequirements')}"
+                           th:errors="*{visaRequirements}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <label th:for="timeToVisit">Подходящо време за посещение</label>
+                    <textarea th:field="*{timeToVisit}"
+                              th:errorclass="is-invalid"
+                              id="timeToVisit" name="visaRequirements" required>
+                        Опишете подходящото време за посещение тук...</textarea>
+                    <small th:if="${#fields.hasErrors('timeToVisit')}"
+                           th:errors="*{timeToVisit}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <label th:for="goodToKnow">Добре е да знаете</label>
+                    <textarea th:field="*{goodToKnow}"
+                              th:errorclass="is-invalid"
+                              id="goodToKnow" name="goodToKnow" required>
+                        Опишете какво е добре да се знае за дестинацията преди да я посетите тук...</textarea>
+                    <small th:if="${#fields.hasErrors('goodToKnow')}"
+                           th:errors="*{goodToKnow}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+            </fieldset>
+
+            <input type="submit" value="Добави дестинация">
+        </form>
+    </main>
+
+    <footer th:replace="~{fragments/commons::footer}"></footer>
+
+    <script src="\js\show-menu-profile.js"></script>
+</body>
+</html>
