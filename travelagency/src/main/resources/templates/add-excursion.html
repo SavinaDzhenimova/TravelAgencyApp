@@ -55,10 +55,10 @@
                 </div>
 
                 <div class="field">
+                    <label th:for="date">Начална дата</label>
                     <input th:field="*{date}"
                            th:errorclass="is-invalid"
                            type="date" id="date" name="date" placeholder="Начална дата" required>
-                    <label th:for="date">Начална дата</label>
                     <small th:if="${#fields.hasErrors('date')}"
                            th:errors="*{date}"
                            class="text-danger">Dish name error message</small>

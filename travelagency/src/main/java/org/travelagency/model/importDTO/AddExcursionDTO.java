@@ -1,25 +1,40 @@
 package org.travelagency.model.importDTO;
 
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import org.travelagency.model.enums.TransportType;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.List;
 
 public class AddExcursionDTO {
 
+    @NotNull(message = "Въведете име на екскурзията!")
     private String name;
 
+    @NotNull(message = "Въведете цена за един човек!")
+    @Positive(message = "Цената не може да бъде по-малка или равна на 0 лв.")
     private BigDecimal price;
 
+    @NotNull(message = "Изберете тип транспорт!")
     private TransportType transportType;
 
+    @NotNull(message = "Изберете дестинация!")
     private String destination;
 
-    private LocalDateTime date;
+    @NotNull(message = "Посочете дата на тръгване!")
+    @FutureOrPresent(message = "Датата трябва да бъде в бъдеще!")
+    private LocalDate date;
 
+    @NotNull(message = "Посочете продължителност на екскурзията!")
+    @Positive(message = "Продължителността на екскурзията не може да бъде по-малко от 1 ден!")
     private int endurance;
 
-    private String day;
+    @NotEmpty(message = "Трябва да добавите поне един ден от програмата!")
+    private List<@NotNull String> days;
 
     public AddExcursionDTO() {
         this.endurance = 1;
@@ -57,11 +72,11 @@ public class AddExcursionDTO {
         this.destination = destination;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -73,11 +88,11 @@ public class AddExcursionDTO {
         this.endurance = endurance;
     }
 
-    public String getDay() {
-        return day;
+    public List<String> getDays() {
+        return days;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public void setDays(List<String> days) {
+        this.days = days;
     }
 }

@@ -26,7 +26,7 @@ public class ExcursionController {
     }
 
     @GetMapping("/add-excursion")
-    public ModelAndView addDestination(Model model) {
+    public ModelAndView addExcursion(Model model) {
 
         if (!model.containsAttribute("addExcursionDTO")) {
             model.addAttribute("addExcursionDTO", new AddExcursionDTO());
@@ -35,18 +35,18 @@ public class ExcursionController {
         return new ModelAndView("add-excursion");
     }
 
-//    @PostMapping("/add-destination")
-//    public ModelAndView addDestination(@Valid @ModelAttribute("addExcursionDTO") AddExcursionDTO addExcursionDTO,
-//                                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-//
-//        if (bindingResult.hasErrors()) {
-//            redirectAttributes.addFlashAttribute("addExcursionDTO", addExcursionDTO)
-//                    .addFlashAttribute("org.springframework.validation.BindingResult.addExcursionDTO",
-//                            bindingResult);
-//
-//            return new ModelAndView("add-excursion");
-//        }
-//
+    @PostMapping("/add-excursion")
+    public ModelAndView addExcursion(@Valid @ModelAttribute("addExcursionDTO") AddExcursionDTO addExcursionDTO,
+                                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("addExcursionDTO", addExcursionDTO)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.addExcursionDTO",
+                            bindingResult);
+
+            return new ModelAndView("add-excursion");
+        }
+
 //        Result result = this.excursionService.addExcursion(addExcursionDTO);
 //
 //        if (result.isSuccess()) {
@@ -54,7 +54,7 @@ public class ExcursionController {
 //        } else {
 //            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
 //        }
-//
-//        return new ModelAndView("redirect:/excursions/add-excursion");
-//    }
+
+        return new ModelAndView("redirect:/excursions/add-excursion");
+    }
 }

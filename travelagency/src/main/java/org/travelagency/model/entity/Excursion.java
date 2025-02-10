@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Positive;
 import org.travelagency.model.enums.TransportType;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "excursions")
@@ -19,7 +19,7 @@ public class Excursion extends BaseEntity {
     private BigDecimal price;
 
     @Column(nullable = false)
-    private LocalDateTime date;
+    private LocalDate date;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -55,11 +55,11 @@ public class Excursion extends BaseEntity {
         this.price = price;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

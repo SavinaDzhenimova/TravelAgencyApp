@@ -153,6 +153,7 @@ fieldset {
 .add-excursion-form .field-transport-type select,
 .add-excursion-form .field-destination label,
 .add-excursion-form .field-destination select,
+.add-excursion-form .field label[for="date"],
 .add-excursion-form #daysContainer label,
 .add-excursion-form #daysContainer textarea {
     position: static;
