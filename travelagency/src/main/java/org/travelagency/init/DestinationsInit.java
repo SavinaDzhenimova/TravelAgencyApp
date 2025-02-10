@@ -332,7 +332,7 @@ public class DestinationsInit implements CommandLineRunner {
     }
 
     private void createDestination(String name, String description, String imageUrl, String visaRequirements, String goodToKnow, String timeToVisit) {
-        Optional<Country> optionalCountry = countryRepository.findByName(name);
+        Optional<Country> optionalCountry = this.countryRepository.findByName(name);
 
         if (optionalCountry.isPresent()) {
             Country country = optionalCountry.get();

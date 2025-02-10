@@ -42,7 +42,7 @@ public class LanguagesInit implements CommandLineRunner {
                             case PORTUGUESE -> "Португалски";
                             case TURKISH -> "Турски";
                             case GREEK -> "Гръцки";
-                            case DUTCH -> "Хидерландски";
+                            case DUTCH -> "Нидерландски";
                             case POLISH -> "Полски";
                             case HINDI -> "Хинди";
                         };

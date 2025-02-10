@@ -9,7 +9,6 @@ import org.travelagency.model.enums.ContinentName;
 import org.travelagency.repository.ContinentRepository;
 import org.travelagency.repository.CountryRepository;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 @Component
@@ -94,7 +93,7 @@ public class CountriesInit implements CommandLineRunner {
     }
 
     private void createCountry(String name, String capital, Continent continent, String currency, String timeDiff) {
-        Optional<Country> existingCountry = countryRepository.findByName(name);
+        Optional<Country> existingCountry = this.countryRepository.findByName(name);
 
         if (existingCountry.isEmpty()) {
             Country country = new Country();
@@ -104,7 +103,7 @@ public class CountriesInit implements CommandLineRunner {
             country.setCurrency(currency);
             country.setTimeDifference(timeDiff);
 
-            countryRepository.saveAndFlush(country);
+            this.countryRepository.saveAndFlush(country);
         }
     }
 }

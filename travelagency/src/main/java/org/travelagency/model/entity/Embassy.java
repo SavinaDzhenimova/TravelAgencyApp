@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 @Table(name = "embassies")
 public class Embassy extends BaseEntity {
 
+    @Column(nullable = false, unique = true)
+    private String name;
+
     @Column(nullable = false)
     private String address;
 
@@ -29,6 +32,14 @@ public class Embassy extends BaseEntity {
     private Country country;
 
     public Embassy() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {
