@@ -191,6 +191,25 @@ public class DestinationServiceImpl implements DestinationService {
         return new DestinationViewInfo(destination, country, embassy);
     }
 
+    @Override
+    public DestinationMenuInfo getAllDestinations() {
+        List<Destination> destinations = this.destinationRepository.findAll();
+
+        List<DestinationMenuDTO> destinationMenuList = destinations.stream()
+                .map(destination -> {
+                    DestinationMenuDTO dto = this.modelMapper.map(destination, DestinationMenuDTO.class);
+
+                    dto.setId(destination.getId());
+                    dto.setName(destination.getName());
+
+                    return dto;
+                })
+                .sorted(Comparator.comparing(DestinationMenuDTO::getName))
+                .toList();
+
+        return new DestinationMenuInfo(destinationMenuList);
+    }
+
     private Destination getDestinationByName(String countryName) {
         Optional<Destination> optionalDestination = this.destinationRepository.findByName(countryName);
 

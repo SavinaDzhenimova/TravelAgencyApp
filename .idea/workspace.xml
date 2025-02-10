@@ -6,29 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="737daafd-1dde-4737-8e86-b60ca1c6a9b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Excursion.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Excursion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/DestinationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/DestinationServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/DestinationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/DestinationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/index-styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/index-styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/albania.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/albania.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/argentina.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/argentina.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/australia.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/australia.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/austria.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/austria.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/canada.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/canada.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/ecuador.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/ecuador.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/egypt.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/egypt.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/england.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/england.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/germany.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/germany.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/greece.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/greece.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/india.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/india.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/japan.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/japan.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/maldives.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/maldives.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/romania.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/romania.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/serbia.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/serbia.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/seychelles.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/seychelles.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/spain.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/spain.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/tunisia.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/flags/tunisia.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/GlobalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/GlobalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/fragments/commons.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/fragments/commons.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
 import org.travelagency.model.enums.TransportType;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,7 +16,7 @@ public class Excursion extends BaseEntity {
 
     @Column(nullable = false)
     @Positive
-    private double price;
+    private BigDecimal price;
 
     @Column(nullable = false)
     private LocalDateTime date;
@@ -46,11 +47,11 @@ public class Excursion extends BaseEntity {
         this.name = name;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

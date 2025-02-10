@@ -1,0 +1,205 @@
+h1 {
+    width: 100%;
+    padding-bottom: 0.5em;
+    font-family: 'Lobster';
+    font-weight: 300;
+    font-size: 30px;
+    text-align: center;
+}
+
+main h1::after {
+    display: block;
+    content: '';
+    background-color: #0A67AA;
+    width: 15%;
+    height: 2px;
+    position: absolute;
+    left: 42.5%;
+}
+
+main {
+    padding: 1.5em 8em 2em 8em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+.add-excursion-form {
+    background-color: #fff;
+    width: 55%;
+    margin: 2em auto;
+    padding: 2em 3em;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    border-radius: 0.3em;
+    box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2);
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #0A67AA;
+    border-radius: 0.3em;
+    padding: 0.5em 2em 3em 2em;
+    gap: 1em;
+}
+
+.add-excursion-form fieldset legend {
+    color: #0A67AA;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 0.5em;
+}
+
+.add-excursion-form input {
+    display: block;
+    width: 100%;
+}
+
+.add-excursion-form .field {
+    display: flex;
+    flex-direction: column;
+    color: #0A67AA;
+    opacity: 0.7;
+    padding-top: 1em;
+    position: relative;
+}
+
+.add-excursion-form .field label {
+    order: -1;
+    position: absolute;
+    top: 1.5em;
+    left: 0;
+    line-height: 1em;
+    transition: transform 0.3s ease-in-out;
+}
+
+.add-excursion-form .field input {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #0A67AA;
+    opacity: 0.7;
+    padding: 0.5em 0;
+}
+
+.add-excursion-form .field input::placeholder {
+    color: transparent;
+}
+
+.add-excursion-form .field input:not(:placeholder-shown) ~ label {
+    transform: translateY(-2em);
+    opacity: 1;
+}
+
+.add-excursion-form .field input:focus {
+    border-color: #0A67AA;
+}
+
+.add-excursion-form .field input:focus ~ label {
+    color: #0A67AA;
+    font-weight: 600;
+}
+
+.add-excursion-form .field input:required ~ label::after,
+.add-excursion-form .field label::after {
+    display: inline-block;
+    content: '*';
+    color: #C00;
+    padding-left: 0.3em;
+}
+
+.add-excursion-form .additional-info p {
+    font-style: oblique;
+    color: #0A67AA;
+    opacity: 0.7;
+}
+
+.add-excursion-form .additional-info p:first-of-type::before {
+    display: inline-block;
+    content: '*';
+    font-weight: 900;
+    color: #C00;
+    padding-right: 0.3em;
+}
+
+.add-excursion-form span {
+    color: #666;
+    font-size: 12px;
+    font-style: oblique;
+}
+
+.add-excursion-form input[type="submit"] {
+    width: 70%;
+    background-color: #0A67AA;
+    color: #fff;
+    padding: 1em 0;
+    align-self: center;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 0.3em;
+    cursor: pointer;
+}
+
+.add-excursion-form .field-transport-type,
+.add-excursion-form .field-destination {
+    gap: 0.3em;
+}
+
+.add-excursion-form .field-transport-type label,
+.add-excursion-form .field-transport-type select,
+.add-excursion-form .field-destination label,
+.add-excursion-form .field-destination select,
+.add-excursion-form #daysContainer label,
+.add-excursion-form #daysContainer textarea {
+    position: static;
+}
+
+.add-excursion-form .field #transportType,
+.add-excursion-form .field #destination {
+    padding: 0 0.3em;
+    color: #0A67AA;
+    height: 30px;
+    border: 1px solid #0A67AA;
+    border-radius: 0.3em;
+}
+
+.add-excursion-form .field #transportType:focus,
+.add-excursion-form .field #destination:focus {
+    border-color: #0A67AA;
+    outline: none;
+    font-weight: 600;
+}
+
+.add-excursion-form .field #transportType option,
+.add-excursion-form .field #destination option {
+    color: #0A67AA;
+    opacity: 0.8;
+}
+
+.add-excursion-form .field {
+    gap: 0.3em;
+}
+
+.add-excursion-form #daysContainer label {
+    font-weight: 400;
+}
+
+.add-excursion-form #daysContainer textarea {
+    width: 100%;
+    height: 70px;
+    padding: 0.3em 0.5em;
+    border: 1px solid #0A67AA;
+    border-radius: 0.3em;
+}
+
+.add-excursion-form #daysContainer textarea:focus {
+    outline: none;
+}
+
+.add-excursion-form #daysContainer:focus-within label {
+    font-weight: 600;
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{fragments/commons::head}"></th:block>
+    <link rel="stylesheet" href="/css/add-excursion-styles.css">
+    <title>Добавете екскурзия</title>
+</head>
+
+<body>
+
+    <header th:replace="~{fragments/commons::header}"></header>
+
+    <main>
+        <h1>Добави екскурзия</h1>
+
+        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+            <p class="success" th:text="${successMessage}"></p>
+        </div>
+
+        <div th:if="${failureMessage}" class="alert alert-failure" role="alert">
+            <p th:text="${failureMessage}"></p>
+        </div>
+
+        <form class="add-excursion-form"
+              th:method="POST"
+              th:action="@{/excursions/add-excursion}"
+              th:object="${addExcursionDTO}">
+
+            <!-- CSRF токен -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+            <fieldset>
+                <legend>Информация за екскурзията</legend>
+
+                <div class="field">
+                    <input th:field="*{name}"
+                           th:errorclass="is-invalid"
+                           type="text" id="name" name="name" placeholder="Име на екскурзията" required>
+                    <label th:for="name">Име на екскурзията</label>
+                    <small th:if="${#fields.hasErrors('name')}"
+                           th:errors="*{name}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <input th:field="*{price}"
+                           th:errorclass="is-invalid"
+                           type="number" name="price" id="price"
+                           placeholder="Цена (за 1 човек)" required>
+                    <label th:for="price">Цена (за 1 човек)</label>
+                    <small th:if="${#fields.hasErrors('price')}"
+                           th:errors="*{price}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <input th:field="*{date}"
+                           th:errorclass="is-invalid"
+                           type="date" id="date" name="date" placeholder="Начална дата" required>
+                    <label th:for="date">Начална дата</label>
+                    <small th:if="${#fields.hasErrors('date')}"
+                           th:errors="*{date}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field field-transport-type">
+                    <label th:for="transportType">Тип транспорт</label>
+                    <select th:field="*{transportType}"
+                            th:errorclass="is-invalid"
+                            name="transportType" id="transportType" required>
+                      <option value="">-- Изберете транспорт, с който ще се пътува --</option>
+                      <option value="BUS">Автобус</option>
+                      <option value="PLANE">Самолет</option>
+                      <option value="CRUISE">Круиз</option>
+                    </select>
+                    <small th:if="${#fields.hasErrors('transportType')}"
+                           th:errors="*{transportType}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field field-destination">
+                    <label th:for="destination">Дестинация</label>
+                    <select th:field="*{destination}"
+                            th:errorclass="is-invalid"
+                            name="destination" id="destination" required>
+                        <option value="">-- Изберете дестинация --</option>
+                        <option th:each="destination : ${destinations.getDestinations()}"
+                                th:value="${destination.getName()}"
+                                th:text="${destination.getName()}"></option>
+                    </select>
+                    <small th:if="${#fields.hasErrors('destination')}"
+                           th:errors="*{destination}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Информация за програмата на екскурзията</legend>
+
+                <div class="field">
+                    <input th:field="*{endurance}"
+                           th:errorclass="is-invalid"
+                           type="number" name="endurance" id="endurance"
+                           placeholder="Продължителност" required>
+                    <label th:for="price">Продължителност</label>
+                    <small th:if="${#fields.hasErrors('endurance')}"
+                           th:errors="*{endurance}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Информация за програмата по дни</legend>
+
+                <div id="daysContainer" class="field">
+                    <label for="day1">Програма за ден 1</label>
+                    <textarea id="day1" name="days" required></textarea>
+                    <small class="text-danger"></small>
+                </div>
+            </fieldset>
+
+            <div class="additional-info">
+                <p>Тези полета са задължителни!</p>
+            </div>
+
+            <input type="submit" value="Добави екскурзия">
+        </form>
+    </main>
+
+    <footer th:replace="~{fragments/commons::footer}"></footer>
+
+    <script src="\js\show-menu-profile.js"></script>
+    <script src="\js\endurance-input-fields.js"></script>
+
+</body>
+</html>

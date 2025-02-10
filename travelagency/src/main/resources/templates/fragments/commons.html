@@ -181,7 +181,7 @@
                     <h4>Австралия</h4>
 
                     <ul>
-                      <li  th:each="country : ${countries.getAustraliaCountries()}">
+                      <li th:each="country : ${countries.getAustraliaCountries()}">
                         <a th:text="${country.getName()}"
                            th:href="@{/destinations/{countryName}(countryName=${country.name})}">Име на държава</a>
                       </li>
