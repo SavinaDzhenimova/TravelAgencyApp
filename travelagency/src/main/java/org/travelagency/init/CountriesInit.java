@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import org.travelagency.model.entity.Continent;
 import org.travelagency.model.entity.Country;
 import org.travelagency.model.enums.ContinentName;
-import org.travelagency.model.enums.CountryName;
 import org.travelagency.repository.ContinentRepository;
 import org.travelagency.repository.CountryRepository;
 
@@ -40,317 +39,72 @@ public class CountriesInit implements CommandLineRunner {
             if (europe.isPresent() && asia.isPresent() && africa.isPresent() && australia.isPresent()
                     && southAmerica.isPresent() && northAmerica.isPresent()) {
 
-                Arrays.stream(CountryName.values())
-                        .forEach(countryName -> {
-                            Country country = new Country();
-                            country.setCountryName(countryName);
-
-                            switch (countryName) {
-                                case ALBANIA -> {
-                                    country.setCapital("Тирана");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Албански лек");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case ENGLAND -> {
-                                    country.setCapital("Лондон");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Британска лира");
-                                    country.setTimeDifference("2 часа назад");
-                                }
-                                case BELGIUM -> {
-                                    country.setCapital("Брюксел");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Белгийски франк");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case BOSNIA_AND_HERZEGOVINA -> {
-                                    country.setCapital("Сараево");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Босненска конвертируема марка");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case GERMANY -> {
-                                    country.setCapital("Берлин");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Германска марка");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case GREECE -> {
-                                    country.setCapital("Атина");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Евро");
-                                    country.setTimeDifference("няма");
-                                }
-                                case DENMARK -> {
-                                    country.setCapital("Копенхаген");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Датска крона");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case IRELAND -> {
-                                    country.setCapital("Дъблин");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Ирландска лира");
-                                    country.setTimeDifference("2 часа назад");
-                                }
-                                case ICELAND -> {
-                                    country.setCapital("Рейкявик");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Исландска крона");
-                                    country.setTimeDifference("2 часа назад");
-                                }
-                                case SPAIN -> {
-                                    country.setCapital("Мадрид");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Евро");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case ITALY -> {
-                                    country.setCapital("Рим");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Италианска лира");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case CYPRUS -> {
-                                    country.setCapital("Никозия");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Кипърска лира");
-                                    country.setTimeDifference("няма");
-                                }
-                                case NORTH_MACEDONIA -> {
-                                    country.setCapital("Скопие");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Македонски динар");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case NORWAY -> {
-                                    country.setCapital("Осло");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Норвежка крона");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case ROMANIA -> {
-                                    country.setCapital("Букурещ");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Румънска лея");
-                                    country.setTimeDifference("няма");
-                                }
-                                case SLOVAKIA -> {
-                                    country.setCapital("Братислава");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Словашка крона");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case SLOVENIA -> {
-                                    country.setCapital("Любляна");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Евро");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case SERBIA -> {
-                                    country.setCapital("Белград");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Сръбски динар");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case TURKEY -> {
-                                    country.setCapital("Анкара");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Турска лира");
-                                    country.setTimeDifference("2 часа назад");
-                                }
-                                case HUNGARY -> {
-                                    country.setCapital("Будапеща");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Унгарски форинт");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case FRANCE -> {
-                                    country.setCapital("Париж");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Френски франк");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case NETHERLANDS -> {
-                                    country.setCapital("Амстердам");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Евро");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case CROATIA -> {
-                                    country.setCapital("Загреб");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Хърватска куна");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case MONTENEGRO -> {
-                                    country.setCapital("Подгорица");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Евро");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case CZECH_REPUBLIC -> {
-                                    country.setCapital("Прага");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Чешка крона");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case SWITZERLAND -> {
-                                    country.setCapital("Берн");
-                                    country.setContinent(europe.get());
-                                    country.setCurrency("Швейцарски франк");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case VIETNAM -> {
-                                    country.setCapital("Ханой");
-                                    country.setContinent(asia.get());
-                                    country.setCurrency("Виетнамски донг");
-                                    country.setTimeDifference("4 часа напред");
-                                }
-                                case UNITED_ARAB_EMIRATES -> {
-                                    country.setCapital("Абу Даби");
-                                    country.setContinent(asia.get());
-                                    country.setCurrency("Дирхам");
-                                    country.setTimeDifference("1 час напред");
-                                }
-                                case INDIA -> {
-                                    country.setCapital("Ню Делхи");
-                                    country.setContinent(asia.get());
-                                    country.setCurrency("Индиска рупия");
-                                    country.setTimeDifference("3 часа и половина напред");
-                                }
-                                case INDONESIA -> {
-                                    country.setCapital("Нусантара");
-                                    country.setContinent(asia.get());
-                                    country.setCurrency("Индонезийска рупия");
-                                    country.setTimeDifference("5 часа напред");
-                                }
-                                case IRAN -> {
-                                    country.setCapital("Техеран");
-                                    country.setContinent(asia.get());
-                                    country.setCurrency("Ирански риал");
-                                    country.setTimeDifference("1 час и половина напред");
-                                }
-                                case CHINA -> {
-                                    country.setCapital("Пекин");
-                                    country.setContinent(asia.get());
-                                    country.setCurrency("Китайски юан");
-                                    country.setTimeDifference("6 часа напред");
-                                }
-                                case MALDIVES -> {
-                                    country.setCapital("Мале");
-                                    country.setContinent(asia.get());
-                                    country.setCurrency("Малдивска руфия");
-                                    country.setTimeDifference("3 часа напред");
-                                }
-                                case THAILAND -> {
-                                    country.setCapital("Банкок");
-                                    country.setContinent(asia.get());
-                                    country.setCurrency("Тайландският бат");
-                                    country.setTimeDifference("5 часа напред");
-                                }
-                                case SRI_LANKA -> {
-                                    country.setCapital("Шри Джаяварданапура Коте");
-                                    country.setContinent(asia.get());
-                                    country.setCurrency("Шриланкска рупия");
-                                    country.setTimeDifference("3 часа и половина напред");
-                                }
-                                case JAPAN -> {
-                                    country.setCapital("Токио");
-                                    country.setContinent(asia.get());
-                                    country.setCurrency("Японски йени");
-                                    country.setTimeDifference("7 часа напред");
-                                }
-                                case EGYPT -> {
-                                    country.setCapital("Кайро");
-                                    country.setContinent(africa.get());
-                                    country.setCurrency("Египетска лира");
-                                    country.setTimeDifference("няма");
-                                }
-                                case MAURITIUS -> {
-                                    country.setCapital("Порт Луи");
-                                    country.setContinent(africa.get());
-                                    country.setCurrency("Маврицийска рупия");
-                                    country.setTimeDifference("2 часа напред");
-                                }
-                                case SEYCHELLES -> {
-                                    country.setCapital("Виктория");
-                                    country.setContinent(africa.get());
-                                    country.setCurrency("Сейшелски рупии");
-                                    country.setTimeDifference("2 часа напред");
-                                }
-                                case TUNISIA -> {
-                                    country.setCapital("Тунис");
-                                    country.setContinent(africa.get());
-                                    country.setCurrency("Тунизийски динар");
-                                    country.setTimeDifference("1 час назад");
-                                }
-                                case SOUTH_AFRICA -> {
-                                    country.setCapital("Кейптаун");
-                                    country.setContinent(africa.get());
-                                    country.setCurrency("Южноафрикански ранд");
-                                    country.setTimeDifference("няма");
-                                }
-                                case DOMINICAN_REPUBLIC -> {
-                                    country.setCapital("Санто Доминго");
-                                    country.setContinent(northAmerica.get());
-                                    country.setCurrency("Доминиканско песо");
-                                    country.setTimeDifference("7 часа назад");
-                                }
-                                case CANADA -> {
-                                    country.setCapital("Отава");
-                                    country.setContinent(northAmerica.get());
-                                    country.setCurrency("Канадски долар");
-                                    country.setTimeDifference("8 часа назад");
-                                }
-                                case USA -> {
-                                    country.setCapital("Вашингтон");
-                                    country.setContinent(northAmerica.get());
-                                    country.setCurrency("Щатски долар");
-                                    country.setTimeDifference("8 часа назад");
-                                }
-                                case ARGENTINA -> {
-                                    country.setCapital("Буенос Айрес");
-                                    country.setContinent(southAmerica.get());
-                                    country.setCurrency("Аржентинско песо");
-                                    country.setTimeDifference("6 часа назад");
-                                }
-                                case BRAZIL -> {
-                                    country.setCapital("Бразилия");
-                                    country.setContinent(southAmerica.get());
-                                    country.setCurrency("Бразилски реал");
-                                    country.setTimeDifference("6 часа назад");
-                                }
-                                case ECUADOR_AND_GALAPAGOS_ISLANDS -> {
-                                    country.setCapital("Кито");
-                                    country.setContinent(southAmerica.get());
-                                    country.setCurrency("Щатски долар");
-                                    country.setTimeDifference("9 часа назад");
-                                }
-                                case COLOMBIA -> {
-                                    country.setCapital("Богота");
-                                    country.setContinent(southAmerica.get());
-                                    country.setCurrency("Колумбийско песо");
-                                    country.setTimeDifference("7 часа назад");
-                                }
-                                case CUBA -> {
-                                    country.setCapital("Хавана");
-                                    country.setContinent(southAmerica.get());
-                                    country.setCurrency("Кубинско песо");
-                                    country.setTimeDifference("7 часа назад");
-                                }
-                                case AUSTRALIA -> {
-                                    country.setCapital("Канбера");
-                                    country.setContinent(australia.get());
-                                    country.setCurrency("Австралийски долар");
-                                    country.setTimeDifference("7 часа и половина назад");
-                                }
-                            }
-
-                            this.countryRepository.saveAndFlush(country);
-                        });
+                createCountry("Албания", "Тирана", europe.get(), "Албански лек", "1 час назад");
+                createCountry("Англия", "Лондон", europe.get(), "Британска лира", "2 часа назад");
+                createCountry("Белгия", "Брюксел", europe.get(), "Белгийски франк", "1 час назад");
+                createCountry("Босна и Херцеговина", "Сараево", europe.get(), "Босненска конвертируема марка", "1 час назад");
+                createCountry("Германия", "Берлин", europe.get(), "Германска марка", "1 час назад");
+                createCountry("Гърция", "Атина", europe.get(),"Евро", "няма" );
+                createCountry("Дания", "Копенхаген", europe.get(), "Датска крона", "1 час назад");
+                createCountry("Ирландия", "Дъблин", europe.get(), "Ирландска лира", "2 часа назад");
+                createCountry("Исландия", "Рейкявик", europe.get(), "Исландска лира", "2 часа назад");
+                createCountry("Испания", "Мадрид", europe.get(), "Евро", "1 час назад");
+                createCountry("Италия", "Рим", europe.get(), "Италианска лира", "1 час назад");
+                createCountry("Кипър", "Никозия", europe.get(), "Кипърска лира", "няма");
+                createCountry("Северна Македония", "Скопие", europe.get(), "Македонски динар", "1 час назад");
+                createCountry("Норвегия", "Осло", europe.get(), "Норвежка крона", "1 час назад");
+                createCountry("Румъния", "Букурещ", europe.get(), "Румънска лея", "няма");
+                createCountry("Словакия", "Братислава", europe.get(), "Словашка крона", "1 час назад");
+                createCountry("Словения", "Любляна", europe.get(), "Евро", "1 час назад");
+                createCountry("Сърбия", "Белград", europe.get(), "Сръбски динар", "1 час назад");
+                createCountry("Турция", "Анкара", europe.get(), "Турска лира", "няма");
+                createCountry("Унгария", "Будапеща", europe.get(), "Унгарски форинт", "1 час назад");
+                createCountry("Франция", "Париж", europe.get(), "Френски франк", "1 час назад");
+                createCountry("Нидерландия", "Амстердам", europe.get(), "Евро", "1 час назад");
+                createCountry("Хърватия", "Загреб", europe.get(), "Хърватска куна", "1 час назад");
+                createCountry("Черна гора", "Подгорица", europe.get(), "Евро", "1 час назад");
+                createCountry("Чехия", "Прага", europe.get(), "Чешка крона", "1 час назад");
+                createCountry("Швейцария", "Берн", europe.get(), "Швейцарски франк", "1 час назад");
+                createCountry("Виетнам", "Ханой", asia.get(), "Виетнамски донг", "4 часа напред");
+                createCountry("Дубай - ОАЕ", "Абу Даби", asia.get(), "Дирхам", "1 час напред");
+                createCountry("Индия", "Ню Делхи", asia.get(), "Индиска рупия", "3 часа и половина напред");
+                createCountry("Индонезия", "Нусантара", asia.get(), "Индонезийска рупия", "5 часа напред");
+                createCountry("Иран", "Техеран", asia.get(), "Ирански риал", "1 час и половина напред");
+                createCountry("Китай", "Пекин", asia.get(), "Китайски юан", "6 часа напред");
+                createCountry("Малдиви", "Мале", asia.get(), "Малдивска рупия", "3 часа напред");
+                createCountry("Тайланд", "Банкок", asia.get(), "Тайландският бат", "5 часа напред");
+                createCountry("Шри Ланка", "Шри Джаяварданапура Коте", asia.get(), "Шриланкска рупия", "3 часа и половина напред");
+                createCountry("Япония", "Токио", asia.get(), "Японска йена", "7 часа напред");
+                createCountry("Египет", "Кайро", africa.get(), "Египетска лира", "няма");
+                createCountry("Мавриций", "Порт Луи", africa.get(), "Маврицийска рупия", "2 часа напред");
+                createCountry("Сейшели", "Виктория", africa.get(), "Сейшелска рупия", "2 часа напред");
+                createCountry("Тунис", "Тунис", africa.get(), "Тунизийски динар", "1 час назад");
+                createCountry("Южна Африка", "Кейптаун", africa.get(), "Южноафрикански ранд", "няма");
+                createCountry("Доминиканска република", "Санто Доминго", northAmerica.get(), "Доминиканско песо", "7 часа назад");
+                createCountry("Канада", "Отава", northAmerica.get(), "Канадски долар", "8 часа назад");
+                createCountry("САЩ", "Вашингтон", northAmerica.get(), "Щатски долар", "8 часа назад");
+                createCountry("Аржентина", "Буенос Айрес", southAmerica.get(), "Аржентинско песо", "6 часа назад");
+                createCountry("Бразилия", "Бразилия", southAmerica.get(), "Бразилски реал", "6 часа назад");
+                createCountry("Еквадор и Галапагоските острови", "Кито", southAmerica.get(), "Щатски долар", "9 часа назад");
+                createCountry("Колумбия", "Богота", southAmerica.get(), "Колумбийско песо", "7 часа назад");
+                createCountry("Куба", "Хавана", southAmerica.get(), "Кубинско песо", "7 часа назад");
+                createCountry("Австралия", "Канбера", australia.get(), "Австралийски долар", "7 часа и половина назад");
             }
+        }
+    }
+
+    private void createCountry(String name, String capital, Continent continent, String currency, String timeDiff) {
+        Optional<Country> existingCountry = countryRepository.findByName(name);
+
+        if (existingCountry.isEmpty()) {
+            Country country = new Country();
+            country.setName(name);
+            country.setCapital(capital);
+            country.setContinent(continent);
+            country.setCurrency(currency);
+            country.setTimeDifference(timeDiff);
+
+            countryRepository.saveAndFlush(country);
         }
     }
 }

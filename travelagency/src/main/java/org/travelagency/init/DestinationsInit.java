@@ -5,7 +5,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.travelagency.model.entity.Country;
 import org.travelagency.model.entity.Destination;
-import org.travelagency.model.enums.CountryName;
 import org.travelagency.repository.CountryRepository;
 import org.travelagency.repository.DestinationRepository;
 

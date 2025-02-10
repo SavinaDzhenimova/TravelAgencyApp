@@ -1,15 +1,13 @@
 package org.travelagency.model.entity;
 
 import jakarta.persistence.*;
-import org.travelagency.model.enums.CountryName;
 
 @Entity
 @Table(name = "countries")
 public class Country extends BaseEntity {
 
-    @Column(unique = true)
-    @Enumerated(EnumType.STRING)
-    private CountryName countryName;
+    @Column(nullable = false, unique = true)
+    private String name;
 
     @Column(nullable = false)
     private String capital;
@@ -33,12 +31,12 @@ public class Country extends BaseEntity {
     public Country() {
     }
 
-    public CountryName getCountryName() {
-        return countryName;
+    public String getName() {
+        return name;
     }
 
-    public void setCountryName(CountryName countryName) {
-        this.countryName = countryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Continent getContinent() {
