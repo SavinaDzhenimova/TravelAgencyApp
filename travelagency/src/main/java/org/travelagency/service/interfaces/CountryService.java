@@ -6,6 +6,7 @@ import org.travelagency.model.exportDTO.CountryMenuDTO;
 import org.travelagency.model.exportDTO.CountryMenuInfo;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CountryService {
     CountryMenuInfo getAllCountries();
@@ -13,4 +14,6 @@ public interface CountryService {
     List<CountryMenuDTO> getAllCountriesByContinentName(ContinentName continentName);
 
     void saveAndFlushCountry(Country country);
+
+    Optional<Country> findCountryByName(String name);
 }

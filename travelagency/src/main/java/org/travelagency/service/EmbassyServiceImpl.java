@@ -5,6 +5,8 @@ import org.travelagency.model.entity.Embassy;
 import org.travelagency.repository.EmbassyRepository;
 import org.travelagency.service.interfaces.EmbassyService;
 
+import java.util.Optional;
+
 @Service
 public class EmbassyServiceImpl implements EmbassyService {
 
@@ -17,5 +19,10 @@ public class EmbassyServiceImpl implements EmbassyService {
     @Override
     public void saveAndFlushEmbassy(Embassy embassy) {
         this.embassyRepository.saveAndFlush(embassy);
+    }
+
+    @Override
+    public Optional<Embassy> findEmbassyByName(String name) {
+        return this.embassyRepository.findByName(name);
     }
 }

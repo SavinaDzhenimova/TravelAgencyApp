@@ -40,13 +40,28 @@ public class DestinationServiceImpl implements DestinationService {
             return new Result(false, "Дестинацията не съществува!");
         }
 
-        Optional<Continent> optionalContinent = this.continentService.findContinentByName(addDestinationDTO.getContinent());
+        Optional<Destination> optionalDestination = this.destinationRepository.findByName(addDestinationDTO.getCountryName());
+        if (optionalDestination.isPresent()) {
+            return new Result(false, "Дестинация с това име вече съществува!");
+        }
 
+        Optional<Country> optionalCountry = this.countryService.findCountryByName(addDestinationDTO.getCountryName());
+        if (optionalCountry.isPresent()) {
+            return new Result(false, "Държава с това име вече съществува!");
+        }
+
+        Optional<Embassy> optionalEmbassy = this.embassyService.findEmbassyByName(addDestinationDTO.getCountryName());
+        if (optionalEmbassy.isPresent()) {
+            return new Result(false, "Посолство с това име вече съществува!");
+        }
+
+        Optional<Continent> optionalContinent = this.continentService.findContinentByName(addDestinationDTO.getContinent());
         if (optionalContinent.isEmpty()) {
-            return new Result(false, "Невалиден континент!");
+            return new Result(false, "Континент с това име не съществува!");
         }
 
         Country country = new Country();
+        country.setName(addDestinationDTO.getCountryName());
         country.setCapital(addDestinationDTO.getCapital());
         country.setCurrency(addDestinationDTO.getCurrency());
         country.setTimeDifference(addDestinationDTO.getTimeDifference());
@@ -55,6 +70,7 @@ public class DestinationServiceImpl implements DestinationService {
         this.countryService.saveAndFlushCountry(country);
 
         Embassy embassy = new Embassy();
+        embassy.setName(addDestinationDTO.getCountryName());
         embassy.setAddress(addDestinationDTO.getAddress());
         embassy.setPhoneNumber(addDestinationDTO.getPhoneNumber());
         embassy.setFax(addDestinationDTO.getFax());

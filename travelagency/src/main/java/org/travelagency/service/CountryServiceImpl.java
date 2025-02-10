@@ -10,6 +10,7 @@ import org.travelagency.repository.CountryRepository;
 import org.travelagency.service.interfaces.CountryService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CountryServiceImpl implements CountryService {
@@ -49,7 +50,7 @@ public class CountryServiceImpl implements CountryService {
                 .map(country -> {
                     CountryMenuDTO dto = this.modelMapper.map(country, CountryMenuDTO.class);
                     dto.setId(country.getDestination().getId());
-                    dto.setName(country.getDestination().getName());
+                    dto.setName(country.getName());
                     dto.setContinentName(country.getContinent().getContinentName());
 
                     return dto;
@@ -63,5 +64,10 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public void saveAndFlushCountry(Country country) {
         this.countryRepository.saveAndFlush(country);
+    }
+
+    @Override
+    public Optional<Country> findCountryByName(String name) {
+        return this.countryRepository.findByName(name);
     }
 }

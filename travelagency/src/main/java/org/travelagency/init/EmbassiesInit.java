@@ -387,6 +387,7 @@ public class EmbassiesInit implements CommandLineRunner {
 
             if (existingEmbassy.isEmpty()) {
                 Embassy embassy = new Embassy();
+                embassy.setName(name);
                 embassy.setAddress(address);
                 embassy.setPhoneNumber(phoneNumber);
                 embassy.setFax(fax);
