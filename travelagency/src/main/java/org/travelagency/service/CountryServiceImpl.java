@@ -3,7 +3,6 @@ package org.travelagency.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.Country;
-import org.travelagency.model.enums.ContinentName;
 import org.travelagency.model.exportDTO.CountryMenuDTO;
 import org.travelagency.model.exportDTO.CountryMenuInfo;
 import org.travelagency.repository.CountryRepository;
@@ -26,32 +25,33 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public CountryMenuInfo getAllCountries() {
 
-        List<CountryMenuDTO> europeCountries = this.getAllCountriesByContinentName(ContinentName.EUROPE);
+        List<CountryMenuDTO> europeCountries = this.getAllCountriesByContinentName("Европа");
 
-        List<CountryMenuDTO> africaCountries = this.getAllCountriesByContinentName(ContinentName.AFRICA);
+        List<CountryMenuDTO> africaCountries = this.getAllCountriesByContinentName("Африка");
 
-        List<CountryMenuDTO> asiaCountries = this.getAllCountriesByContinentName(ContinentName.ASIA);
+        List<CountryMenuDTO> asiaCountries = this.getAllCountriesByContinentName("Азия");
 
-        List<CountryMenuDTO> southAmericaCountries = this.getAllCountriesByContinentName(ContinentName.SOUTH_AMERICA);
+        List<CountryMenuDTO> southAmericaCountries = this.getAllCountriesByContinentName("Северна Америка");
 
-        List<CountryMenuDTO> northAmericaCountries = this.getAllCountriesByContinentName(ContinentName.NORTH_AMERICA);
+        List<CountryMenuDTO> northAmericaCountries = this.getAllCountriesByContinentName("Южна Америка");
 
-        List<CountryMenuDTO> australiaCountries = this.getAllCountriesByContinentName(ContinentName.AUSTRALIA);
+        List<CountryMenuDTO> australiaCountries = this.getAllCountriesByContinentName("Австралия");
 
         return new CountryMenuInfo(europeCountries, africaCountries, asiaCountries,
                 southAmericaCountries, northAmericaCountries, australiaCountries);
     }
 
     @Override
-    public List<CountryMenuDTO> getAllCountriesByContinentName(ContinentName continentName) {
+    public List<CountryMenuDTO> getAllCountriesByContinentName(String continentName) {
         List<Country> countries = this.countryRepository.findAll();
 
         List<CountryMenuDTO> countryMenuDTO = countries.stream()
                 .map(country -> {
                     CountryMenuDTO dto = this.modelMapper.map(country, CountryMenuDTO.class);
-                    dto.setId(country.getDestination().getId());
+
+                    dto.setId(country.getId());
                     dto.setName(country.getName());
-                    dto.setContinentName(country.getContinent().getContinentName());
+                    dto.setContinentName(country.getContinent().getName());
 
                     return dto;
                 })

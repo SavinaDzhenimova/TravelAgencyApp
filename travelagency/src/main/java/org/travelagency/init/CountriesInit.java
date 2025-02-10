@@ -5,7 +5,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.travelagency.model.entity.Continent;
 import org.travelagency.model.entity.Country;
-import org.travelagency.model.enums.ContinentName;
 import org.travelagency.repository.ContinentRepository;
 import org.travelagency.repository.CountryRepository;
 
@@ -28,12 +27,12 @@ public class CountriesInit implements CommandLineRunner {
 
         if (this.countryRepository.count() == 0 && this.continentRepository.count() > 0) {
 
-            Optional<Continent> europe = this.continentRepository.findByContinentName(ContinentName.EUROPE);
-            Optional<Continent> asia = this.continentRepository.findByContinentName(ContinentName.ASIA);
-            Optional<Continent> africa = this.continentRepository.findByContinentName(ContinentName.AFRICA);
-            Optional<Continent> southAmerica = this.continentRepository.findByContinentName(ContinentName.SOUTH_AMERICA);
-            Optional<Continent> northAmerica = this.continentRepository.findByContinentName(ContinentName.NORTH_AMERICA);
-            Optional<Continent> australia = this.continentRepository.findByContinentName(ContinentName.AUSTRALIA);
+            Optional<Continent> europe = this.continentRepository.findByName("Европа");
+            Optional<Continent> asia = this.continentRepository.findByName("Азия");
+            Optional<Continent> africa = this.continentRepository.findByName("Африка");
+            Optional<Continent> southAmerica = this.continentRepository.findByName("Северна Америка");
+            Optional<Continent> northAmerica = this.continentRepository.findByName("Южна Америка");
+            Optional<Continent> australia = this.continentRepository.findByName("Австралия");
 
             if (europe.isPresent() && asia.isPresent() && africa.isPresent() && australia.isPresent()
                     && southAmerica.isPresent() && northAmerica.isPresent()) {

@@ -55,7 +55,7 @@ public class DestinationServiceImpl implements DestinationService {
             return new Result(false, "Посолство с това име вече съществува!");
         }
 
-        Optional<Continent> optionalContinent = this.continentService.findContinentByName(addDestinationDTO.getContinent());
+        Optional<Continent> optionalContinent = this.continentService.findContinentByName(addDestinationDTO.getContinentName());
         if (optionalContinent.isEmpty()) {
             return new Result(false, "Континент с това име не съществува!");
         }

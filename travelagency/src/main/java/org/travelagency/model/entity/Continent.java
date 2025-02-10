@@ -1,7 +1,6 @@
 package org.travelagency.model.entity;
 
 import jakarta.persistence.*;
-import org.travelagency.model.enums.ContinentName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +10,6 @@ import java.util.List;
 public class Continent extends BaseEntity {
 
     @Column(nullable = false, unique = true)
-    @Enumerated(EnumType.STRING)
-    private ContinentName continentName;
-
-    @Column(nullable = false, unique = true)
     private String name;
 
     @OneToMany(mappedBy = "continent", fetch = FetchType.LAZY)
@@ -22,14 +17,6 @@ public class Continent extends BaseEntity {
 
     public Continent() {
         this.countries = new ArrayList<>();
-    }
-
-    public ContinentName getContinentName() {
-        return continentName;
-    }
-
-    public void setContinentName(ContinentName continentName) {
-        this.continentName = continentName;
     }
 
     public String getName() {

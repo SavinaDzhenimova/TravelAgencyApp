@@ -18,7 +18,7 @@ public class AddDestinationDTO {
     private String timeDifference;
 
     @NotNull
-    private String continent;
+    private String continentName;
 
     // Embassy info
     @NotNull
@@ -90,12 +90,12 @@ public class AddDestinationDTO {
         this.timeDifference = timeDifference;
     }
 
-    public String getContinent() {
-        return continent;
+    public String getContinentName() {
+        return continentName;
     }
 
-    public void setContinent(String continent) {
-        this.continent = continent;
+    public void setContinentName(String continentName) {
+        this.continentName = continentName;
     }
 
     public String getAddress() {

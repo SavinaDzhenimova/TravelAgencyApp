@@ -1,14 +1,12 @@
 package org.travelagency.model.exportDTO;
 
-import org.travelagency.model.enums.ContinentName;
-
 public class CountryMenuDTO {
 
     private Long id;
 
     private String name;
 
-    private ContinentName continentName;
+    private String continentName;
 
     public CountryMenuDTO() {
     }
@@ -29,11 +27,11 @@ public class CountryMenuDTO {
         this.name = name;
     }
 
-    public ContinentName getContinentName() {
+    public String getContinentName() {
         return continentName;
     }
 
-    public void setContinentName(ContinentName continentName) {
+    public void setContinentName(String continentName) {
         this.continentName = continentName;
     }
 }
