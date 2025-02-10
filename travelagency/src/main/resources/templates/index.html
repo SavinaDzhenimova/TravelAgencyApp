@@ -86,17 +86,21 @@
         <div class="destinations">
             <h2 class="section-title">Дестинации</h2>
 
-            <article class="destination-article">
+            <article class="destination-article" th:each="destination : ${destinations.getDestinations()}">
                 <div class="image-container">
-                    <img alt="article image" src="/images/index-carousel/autumn.png">
+                    <img alt="article image" th:src="${destination.getImageUrl()}">
                 </div>
 
                 <div class="article-content">
-                    <h3>Име на дестинацията</h3>
+                    <h3 th:text="${destination.getName()}">Име на дестинацията</h3>
 
-                    <p>Описание към статията на дестинацията</p>
+                    <div class="content">
+                        <p th:text="'Континент: ' + ${destination.getContinentName()}">Континент</p>
+                        <p th:text="'Столица: ' + ${destination.getCapital()}">Столица</p>
+                        <p th:text="'Часова разлика: ' + ${destination.getTimeDifference()}">Часова разлика</p>
+                    </div>
 
-                    <button>Виж повече</button>
+                    <a class="button-see-more" th:href="@{/destinations/{name}(name=${destination.getName()})}">Виж повече</a>
                 </div>
             </article>
         </div>
@@ -114,7 +118,7 @@
 
                     <p>Описание към статията за екскурзията</p>
 
-                    <button>Виж повече</button>
+                    <a class="button-see-more">Виж повече</a>
                 </div>
             </article>
         </div>

@@ -3,10 +3,7 @@ package org.travelagency.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.*;
-import org.travelagency.model.exportDTO.CountryViewDTO;
-import org.travelagency.model.exportDTO.DestinationViewDTO;
-import org.travelagency.model.exportDTO.DestinationViewInfo;
-import org.travelagency.model.exportDTO.EmbassyViewDTO;
+import org.travelagency.model.exportDTO.*;
 import org.travelagency.model.importDTO.AddDestinationDTO;
 import org.travelagency.repository.DestinationRepository;
 import org.travelagency.service.interfaces.ContinentService;
@@ -14,6 +11,8 @@ import org.travelagency.service.interfaces.CountryService;
 import org.travelagency.service.interfaces.DestinationService;
 import org.travelagency.service.interfaces.EmbassyService;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -97,6 +96,29 @@ public class DestinationServiceImpl implements DestinationService {
 
         return new Result(true, "Новата дестинация беше успешно създадена! " +
                 "Можете да я намерите на страницата с всички дестинации!");
+    }
+
+    @Override
+    public DestinationsExportListDTO getDestinationsForIndexPage() {
+        List<Destination> destinations = this.destinationRepository.findAll();
+
+        List<DestinationExportDTO> destinationExportList = destinations.stream()
+                .sorted(Comparator.comparing(Destination::getId).reversed())
+                .map(destination -> {
+                    DestinationExportDTO dto = this.modelMapper.map(destination, DestinationExportDTO.class);
+
+                    dto.setName(destination.getName());
+                    dto.setCapital(destination.getCountry().getCapital());
+                    dto.setContinentName(destination.getCountry().getContinent().getName());
+                    dto.setImageUrl(destination.getImageUrl());
+                    dto.setTimeDifference(destination.getCountry().getTimeDifference());
+
+                    return dto;
+                })
+                .limit(3)
+                .toList();
+
+        return new DestinationsExportListDTO(destinationExportList);
     }
 
     @Override

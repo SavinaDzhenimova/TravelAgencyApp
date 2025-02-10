@@ -3,14 +3,28 @@ package org.travelagency.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.travelagency.model.exportDTO.DestinationsExportListDTO;
+import org.travelagency.service.interfaces.DestinationService;
 
 @Controller
 public class HomeController {
 
+    private final DestinationService destinationService;
+
+    public HomeController(DestinationService destinationService) {
+        this.destinationService = destinationService;
+    }
+
     @GetMapping("/")
     public ModelAndView index() {
 
-        return new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("index");
+
+        DestinationsExportListDTO destinationsExportListDTO = this.destinationService.getDestinationsForIndexPage();
+
+        modelAndView.addObject("destinations", destinationsExportListDTO);
+
+        return modelAndView;
     }
 
     @GetMapping("/about-us")

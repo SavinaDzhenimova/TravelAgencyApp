@@ -201,12 +201,22 @@ main .excursions .excursion-article {
     background-color: #fff;
     width: 25%;
     border-radius: 0.5em;
-    margin-top: 1.5em;
+    margin: 1.5em 1em 0 1em;
 }
 
 main .excursions .excursion-article {
     background-color: #0A67AA;
     color: #fff;
+}
+
+main .destinations .destination-article .image-container,
+main .excursions .excursion-article .image-container {
+    max-width: 100%;
+    height: 250px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 main .destinations .destination-article .image-container img,
@@ -231,20 +241,31 @@ main .excursion-article .article-content {
 main .destination-article .article-content h3,
 main .excursion-article .article-content h3 {
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 600;
 }
 
-main .destination-article .article-content button,
-main .excursion-article .article-content button {
+main .destination-article .article-content .content,
+main .excursion-article .article-content .content {
+    width: 100%;
+    padding: 0 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    text-align: left;
+}
+
+main .destination-article .article-content > .button-see-more,
+main .excursion-article .article-content > .button-see-more {
     width: 40%;
     padding: 0.5em;
     border: none;
     border-radius: 0.5em;
     background-color: #0A67AA;
     color: #fff;
+    align-self: center;
 }
 
-main .excursion-article .article-content button {
+main .excursion-article .article-content .button-see-more {
     background-color: #fff;
     color: #000;
 }
