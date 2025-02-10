@@ -80,7 +80,7 @@ public class CountriesInit implements CommandLineRunner {
                 createCountry("Сейшели", "Виктория", africa.get(), "Сейшелска рупия", "2 часа напред");
                 createCountry("Тунис", "Тунис", africa.get(), "Тунизийски динар", "1 час назад");
                 createCountry("Южна Африка", "Кейптаун", africa.get(), "Южноафрикански ранд", "няма");
-                createCountry("Доминиканска република", "Санто Доминго", northAmerica.get(), "Доминиканско песо", "7 часа назад");
+                createCountry("Доминикана", "Санто Доминго", northAmerica.get(), "Доминиканско песо", "7 часа назад");
                 createCountry("Канада", "Отава", northAmerica.get(), "Канадски долар", "8 часа назад");
                 createCountry("САЩ", "Вашингтон", northAmerica.get(), "Щатски долар", "8 часа назад");
                 createCountry("Аржентина", "Буенос Айрес", southAmerica.get(), "Аржентинско песо", "6 часа назад");

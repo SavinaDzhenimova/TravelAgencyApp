@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "destinations")
 public class Destination extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false, columnDefinition = "TEXT")
