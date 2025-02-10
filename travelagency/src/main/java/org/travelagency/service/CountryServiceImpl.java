@@ -8,6 +8,7 @@ import org.travelagency.model.exportDTO.CountryMenuInfo;
 import org.travelagency.repository.CountryRepository;
 import org.travelagency.service.interfaces.CountryService;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +57,7 @@ public class CountryServiceImpl implements CountryService {
                     return dto;
                 })
                 .filter(dto -> dto.getContinentName().equals(continentName))
+                .sorted(Comparator.comparing(CountryMenuDTO::getName))
                 .toList();
 
         return countryMenuDTO;

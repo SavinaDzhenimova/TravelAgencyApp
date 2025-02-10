@@ -113,7 +113,7 @@ fieldset {
 }
 
 .add-destination-form .field input:required ~ label::after,
-.add-destination-form .field label[for="continent"]::after,
+.add-destination-form .field label[for="continentName"]::after,
 .add-destination-form .destination-info .field label::after {
     display: inline-block;
     content: '*';
@@ -174,7 +174,7 @@ fieldset {
     position: static;
 }
 
-.add-destination-form .field #continent {
+.add-destination-form .field #continentName {
     padding: 0 0.3em;
     color: #0A67AA;
     height: 30px;
@@ -182,13 +182,13 @@ fieldset {
     border-radius: 0.3em;
 }
 
-.add-destination-form .field #continent:focus {
+.add-destination-form .field #continentName:focus {
     border-color: #0A67AA;
     outline: none;
     font-weight: 600;
 }
 
-.add-destination-form .field #continent option {
+.add-destination-form .field #continentName option {
     color: #0A67AA;
     opacity: 0.8;
 }

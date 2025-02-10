@@ -79,20 +79,20 @@
                 </div>
 
                 <div class="field field-continent">
-                    <label th:for="continent">Континент, в който се намира държавата</label>
-                    <select th:field="*{continent}"
+                    <label th:for="continentName">Континент, в който се намира държавата</label>
+                    <select th:field="*{continentName}"
                             th:errorclass="is-invalid"
-                            name="continent" id="continent" required>
+                            name="continentName" id="continentName" required>
                         <option value="">-- Изберете континент, в който се намира държавата --</option>
-                        <option value="EUROPE">Европа</option>
-                        <option value="AFRICA">Африка</option>
-                        <option value="ASIA">Азия</option>
-                        <option value="SOUTH_AMERICA">Южна Америка</option>
-                        <option value="NORTH_AMERICA">Северна Америка</option>
-                        <option value="AUSTRALIA">Австралия</option>
+                        <option value="Европа">Европа</option>
+                        <option value="Африка">Африка</option>
+                        <option value="Азия">Азия</option>
+                        <option value="Южна Америка">Южна Америка</option>
+                        <option value="Северна Америка">Северна Америка</option>
+                        <option value="Австралия">Австралия</option>
                     </select>
-                    <small th:if="${#fields.hasErrors('continent')}"
-                           th:errors="*{continent}"
+                    <small th:if="${#fields.hasErrors('continentName')}"
+                           th:errors="*{continentName}"
                            class="text-danger">Dish name error message</small>
                 </div>
             </fieldset>

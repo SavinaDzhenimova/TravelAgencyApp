@@ -65,6 +65,6 @@ public class DestinationController {
             redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
         }
 
-        return new ModelAndView("redirect:/add-destination");
+        return new ModelAndView("redirect:/destinations/add-destination");
     }
 }
