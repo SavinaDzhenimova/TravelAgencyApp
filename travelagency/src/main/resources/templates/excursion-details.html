@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{fragments/commons::head}"></th:block>
+    <link rel="stylesheet" href="/css/excursion-details-styles.css">
+    <title>Sunrise Travel</title>
+</head>
+
+<body>
+
+    <header th:replace="~{fragments/commons::header}"></header>
+
+    <main>
+        <h1 th:text="${excursion.getName()}">Австрия</h1>
+
+        <article>
+            <div class="article-header">
+                <div class="carousel">
+                    <div class="carousel-container">
+                        <div class="carousel-item" th:each="imageUrl : ${excursion.getImages()}">
+                            <img th:src="${imageUrl}" th:alt="${excursion.getName()}">
+                        </div>
+                    </div>
+                    <button class="prev">❮</button>
+                    <button class="next">❯</button>
+                </div>
+
+                <div class="info-container">
+                    <h3>Обща информация за екскурзията</h3>
+
+                    <ul>
+                        <li>Дата: <span th:text="${excursion.getDate()}"></span></li>
+                        <li>Цена: <span th:text="${excursion.getPrice()} + ' лв.'"></span></li>
+                        <li>Продължителност: <span th:text="${excursion.getEndurance()} + ' дни'"></span></li>
+                        <li>Транспорт: <span th:text="${excursion.getTransport()}"></span></li>
+                        <li>Дестинация: <span th:text="${excursion.getDestination()}"></span></li>
+                    </ul>
+
+                    <a th:href="@{/excursions/reserve/{id}(id=${excursion.getId()})}">Резервирай</a>
+                </div>
+            </div>
+
+            <div class="article-main">
+                <h3>Програма за екскурзията по дни</h3>
+
+                <ul>
+                    <li th:each="day, iterStat : ${excursion.getDays()}">
+                        <h4>Ден <span th:text="${iterStat.index + 1}"></span></h4>
+                        <p th:text="${day}">Описание</p>
+                    </li>
+                </ul>
+            </div>
+        </article>
+    </main>
+
+    <footer th:replace="~{fragments/commons::footer}"></footer>
+
+    <script src="\js\carousel.js"></script>
+    <script src="\js\animation.js"></script>
+    <script src="\js\show-menu.js"></script>
+    <script src="\js\show-menu-profile.js"></script>
+
+</body>
+</html>

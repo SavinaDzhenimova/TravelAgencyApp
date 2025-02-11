@@ -3,6 +3,7 @@ package org.travelagency.service;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.*;
 import org.travelagency.model.enums.TransportType;
+import org.travelagency.model.exportDTO.ExcursionExportDTO;
 import org.travelagency.model.exportDTO.ExcursionViewDTO;
 import org.travelagency.model.exportDTO.ExcursionViewInfo;
 import org.travelagency.model.importDTO.AddExcursionDTO;
@@ -102,6 +103,33 @@ public class ExcursionServiceImpl implements ExcursionService {
         }
 
         return "";
+    }
+
+    @Override
+    public ExcursionExportDTO getExcursionByName(String excursionName) {
+
+        Optional<Excursion> optionalExcursion = this.excursionRepository.findByName(excursionName);
+
+        if (optionalExcursion.isEmpty()) {
+            return null;
+        }
+
+        Excursion excursion = optionalExcursion.get();
+
+        ExcursionExportDTO excursionExportDTO = new ExcursionExportDTO();
+
+        excursionExportDTO.setId(excursion.getId());
+        excursionExportDTO.setName(excursion.getName());
+        excursionExportDTO.setPrice(excursion.getPrice());
+        excursionExportDTO.setDate(excursion.getDate());
+        excursionExportDTO.setDestination(excursion.getDestination().getName());
+        excursionExportDTO.setEndurance(excursion.getProgram().getEndurance());
+
+        excursionExportDTO.setTransport(this.mapTransportType(excursion.getTransportType()));
+        excursionExportDTO.setImages(excursion.getImages().stream().map(Image::getImageUrl).toList());
+        excursionExportDTO.setDays(excursion.getProgram().getDays().stream().map(Day::getDescription).toList());
+
+        return excursionExportDTO;
     }
 
     @Override

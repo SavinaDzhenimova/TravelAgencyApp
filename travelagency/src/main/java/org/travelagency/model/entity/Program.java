@@ -14,7 +14,7 @@ public class Program extends BaseEntity {
     @Positive
     private int endurance;
 
-    @OneToMany(mappedBy = "program", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "program", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Day> days;
 
     @OneToOne(mappedBy = "program", cascade = CascadeType.ALL)

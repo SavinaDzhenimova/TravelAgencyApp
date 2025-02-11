@@ -19,7 +19,7 @@
         <div class="excursions">
             <a class="excursion-article"
                th:each="excursion : ${excursions}"
-               th:href="@{/excursions/excursion-details/}">
+               th:href="@{/excursions/excursion-details/{excursionName}(excursionName=${excursion.name})}">
                 <div class="image-container">
                     <img alt="article image" th:src="${excursion.getImageUrl()}">
                 </div>

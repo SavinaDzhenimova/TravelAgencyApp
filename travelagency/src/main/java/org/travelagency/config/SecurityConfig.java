@@ -23,7 +23,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/", "/about-us", "/contacts", "/faq", "/privacy-policy",
-                                "/general-conditions", "/destinations/**", "/excursions/**").permitAll()
+                                "/general-conditions", "/destinations/**", "/excursions/**",
+                                "/excursions/excursion-details/**").permitAll()
                         .requestMatchers("/employees/login", "/register").anonymous()
                         .requestMatchers("/employees/profile", "/employees", "/excursions").authenticated()
                         .requestMatchers("/candidates", "/candidates/add-employee", "/candidates/delete-candidate",
