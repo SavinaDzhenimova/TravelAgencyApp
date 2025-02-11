@@ -47,13 +47,13 @@ public class ExcursionController {
             return new ModelAndView("add-excursion");
         }
 
-//        Result result = this.excursionService.addExcursion(addExcursionDTO);
-//
-//        if (result.isSuccess()) {
-//            redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
-//        } else {
-//            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
-//        }
+        Result result = this.excursionService.addExcursion(addExcursionDTO);
+
+        if (result.isSuccess()) {
+            redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
+        } else {
+            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
+        }
 
         return new ModelAndView("redirect:/excursions/add-excursion");
     }

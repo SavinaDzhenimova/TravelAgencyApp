@@ -28,7 +28,7 @@ public class SecurityConfig {
                         .requestMatchers("/employees/profile", "/employees").authenticated()
                         .requestMatchers("/candidates", "/candidates/add-employee", "/candidates/delete-candidate",
                                 "/employees/promote-employee", "/employees/delete-employee",
-                                "/destinations/add-destination").hasRole("MANAGER")
+                                "/destinations/add-destination", "/excursions/add-excursion").hasRole("MANAGER")
                         .requestMatchers("/destinations/**", "/excursions/**").permitAll()
                         .anyRequest().authenticated()
                 )

@@ -210,6 +210,11 @@ public class DestinationServiceImpl implements DestinationService {
         return new DestinationMenuInfo(destinationMenuList);
     }
 
+    @Override
+    public Optional<Destination> findDestinationByDestinationName(String destinationName) {
+        return this.destinationRepository.findByName(destinationName);
+    }
+
     private Destination getDestinationByName(String countryName) {
         Optional<Destination> optionalDestination = this.destinationRepository.findByName(countryName);
 

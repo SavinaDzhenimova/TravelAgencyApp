@@ -6,6 +6,7 @@ import org.travelagency.model.exportDTO.*;
 import org.travelagency.model.importDTO.AddDestinationDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DestinationService {
 
@@ -22,4 +23,6 @@ public interface DestinationService {
     DestinationsExportListDTO getDestinationsForIndexPage();
 
     DestinationMenuInfo getAllDestinations();
+
+    Optional<Destination> findDestinationByDestinationName(String destinationName);
 }
