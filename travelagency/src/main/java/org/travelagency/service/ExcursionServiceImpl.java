@@ -176,6 +176,16 @@ public class ExcursionServiceImpl implements ExcursionService {
                 "Може да я видите на страницата с всички екскурзии!");
     }
 
+    @Override
+    public Optional<Excursion> findExcursionByExcursionName(String excursionName) {
+        return this.excursionRepository.findByName(excursionName);
+    }
+
+    @Override
+    public void saveAndFlushExcursion(Excursion excursion) {
+        this.excursionRepository.saveAndFlush(excursion);
+    }
+
     private Program mapDtoToProgram(AddExcursionDTO addExcursionDTO) {
         Program program = new Program();
 
@@ -196,6 +206,7 @@ public class ExcursionServiceImpl implements ExcursionService {
         excursion.setTransportType(addExcursionDTO.getTransportType());
         excursion.setDestination(destination);
         excursion.setProgram(program);
+        excursion.setReservations(new ArrayList<>());
 
         try {
             List<String> imageUrls = this.imageService.saveImages(addExcursionDTO.getImages());

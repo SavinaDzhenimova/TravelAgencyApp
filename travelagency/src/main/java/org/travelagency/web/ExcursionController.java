@@ -31,7 +31,7 @@ public class ExcursionController {
         ModelAndView modelAndView = new ModelAndView("excursions");
 
         if (excursionViewInfo == null || excursionViewInfo.getExcursions().isEmpty()) {
-            modelAndView.addObject("failureMessage", "Все още няма добавени екскурзии за разглеждане!");
+            modelAndView.addObject("warningMessage", "Все още няма добавени екскурзии за разглеждане!");
         } else {
             modelAndView.addObject("excursions", excursionViewInfo.getExcursions());
         }

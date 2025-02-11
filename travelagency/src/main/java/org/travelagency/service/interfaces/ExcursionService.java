@@ -1,9 +1,12 @@
 package org.travelagency.service.interfaces;
 
+import org.travelagency.model.entity.Excursion;
 import org.travelagency.model.entity.Result;
 import org.travelagency.model.exportDTO.ExcursionExportDTO;
 import org.travelagency.model.exportDTO.ExcursionViewInfo;
 import org.travelagency.model.importDTO.AddExcursionDTO;
+
+import java.util.Optional;
 
 public interface ExcursionService {
 
@@ -14,4 +17,8 @@ public interface ExcursionService {
     ExcursionViewInfo getExcursionsByDestinationName(String destinationName);
 
     ExcursionExportDTO getExcursionByName(String excursionName);
+
+    Optional<Excursion> findExcursionByExcursionName(String excursionName);
+
+    void saveAndFlushExcursion(Excursion excursion);
 }

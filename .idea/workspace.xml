@@ -5,10 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="737daafd-1dde-4737-8e86-b60ca1c6a9b0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/exportDTO/ExcursionExportDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/exportDTO/ExcursionExportDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Excursion.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Excursion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ExcursionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ExcursionServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ExcursionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ExcursionService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/ExcursionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/ExcursionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/excursions-styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/excursions-styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739276964368_BIG_albaniya-stranata-na-orlite-ekskurziya-s-avtobus-1_172128750959.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739276964394_BIG_albaniya-stranata-na-orlite-ekskurziya-s-avtobus-2_172128750959.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739276964411_BIG_albaniya-stranata-na-orlite-ekskurziya-s-avtobus-3_172128750959.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739276964426_BIG_albaniya-stranata-na-orlite-ekskurziya-s-avtobus-4_172128750959.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739276964443_BIG_albaniya-stranata-na-orlite-ekskurziya-s-avtobus-5_172128750959.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739278146575_BIG_ekskurziya-v-albaniya-rivierata-na-saranda-s-avtobus-1_172128751761.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739278146598_BIG_ekskurziya-v-albaniya-rivierata-na-saranda-s-avtobus-3_172128751761.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739278146621_BIG_ekskurziya-v-albaniya-rivierata-na-saranda-s-avtobus-4_172128751761.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739278146638_BIG_ekskurziya-v-albaniya-rivierata-na-saranda-s-avtobus-5_172128751761.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739278146656_BIG_ekskurziya-v-albaniya-rivierata-na-saranda-s-avtobus-6_172128751761.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739278146686_BIG_ekskurziya-v-albaniya-rivierata-na-saranda-s-avtobus-9_172128751761.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739284519498_BIG_viber_изображение_2025-01-10_16-47-47-344_1736521409384.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739284519519_BIG_viber_изображение_2025-01-10_16-47-49-023_1736520962384.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739284519535_BIG_viber_изображение_2025-01-10_16-47-49-318_1736521409384.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/images/excursions/1739284519548_BIG_viber_изображение_2025-01-10_16-47-50-028_1736520962384.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/excursion-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/excursion-details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/excursions.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/excursions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/reservation-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/reservation-form.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,10 +39,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="AnnotationType" />
-        <option value="Interface" />
         <option value="HTML File" />
+        <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>

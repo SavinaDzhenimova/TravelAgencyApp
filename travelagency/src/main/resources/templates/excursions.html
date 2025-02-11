@@ -14,7 +14,15 @@
         <h1 th:if="${destinationName != null}" th:text="'Екскурзии до ' + ${destinationName}">Екскурзии до Австрия</h1>
         <h1 th:unless="${destinationName != null}" th:text="'Всички екскурзии'">Всички екскурзии</h1>
 
-        <p th:if="${failureMessage}" th:text="${failureMessage}"></p>
+        <p th:if="${warningMessage}" th:text="${failureMessage}"></p>
+
+        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+            <p class="success" th:text="${successMessage}"></p>
+        </div>
+
+        <div th:if="${failureMessage}" class="alert alert-failure" role="alert">
+            <p th:text="${failureMessage}"></p>
+        </div>
 
         <div class="excursions">
             <a class="excursion-article"
@@ -28,7 +36,9 @@
                     <h3 th:text="${excursion.getName()}">Име на екскурзията</h3>
 
                     <ul>
-                        <li>Дата: <span th:text="${excursion.getDate()}">22.10.2024</span></li>
+                        <li>Дата:
+                            <span th:text="${#temporals.format(excursion.getDate(), 'dd.MM.yyyy г.')}">22.10.2024</span>
+                        </li>
                         <li>Продължителност: <span th:text="${excursion.getEndurance()} + ' дни'"></span></li>
                         <li>Дестинация: <span th:text="${excursion.getDestination()}"></span></li>
                         <li>Транспорт: <span th:text="${excursion.getTransport()}"></span></li>

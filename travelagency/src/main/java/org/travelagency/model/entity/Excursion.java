@@ -7,6 +7,7 @@ import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,7 +39,12 @@ public class Excursion extends BaseEntity {
     @JoinColumn(name = "program_id", referencedColumnName = "id")
     private Program program;
 
+    @OneToMany(mappedBy = "excursion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Reservation> reservations;
+
     public Excursion() {
+        this.images = new ArrayList<>();
+        this.reservations = new ArrayList<>();
     }
 
     public String getName() {
@@ -95,5 +101,13 @@ public class Excursion extends BaseEntity {
 
     public void setProgram(Program program) {
         this.program = program;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

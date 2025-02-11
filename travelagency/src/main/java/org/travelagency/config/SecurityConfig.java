@@ -24,7 +24,7 @@ public class SecurityConfig {
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/", "/about-us", "/contacts", "/faq", "/privacy-policy",
                                 "/general-conditions", "/destinations/**", "/excursions/**",
-                                "/excursions/excursion-details/**").permitAll()
+                                "/excursions/excursion-details/**", "/excursions/reserve/**").permitAll()
                         .requestMatchers("/employees/login", "/register").anonymous()
                         .requestMatchers("/employees/profile", "/employees", "/excursions").authenticated()
                         .requestMatchers("/candidates", "/candidates/add-employee", "/candidates/delete-candidate",

@@ -30,14 +30,14 @@
                     <h3>Обща информация за екскурзията</h3>
 
                     <ul>
-                        <li>Дата: <span th:text="${excursion.getDate()}"></span></li>
+                        <li>Дата: <span th:text="${#temporals.format(excursion.getDate(), 'dd.MM.yyyy г.')}"></span></li>
                         <li>Цена: <span th:text="${excursion.getPrice()} + ' лв.'"></span></li>
                         <li>Продължителност: <span th:text="${excursion.getEndurance()} + ' дни'"></span></li>
                         <li>Транспорт: <span th:text="${excursion.getTransport()}"></span></li>
                         <li>Дестинация: <span th:text="${excursion.getDestination()}"></span></li>
                     </ul>
 
-                    <a th:href="@{/excursions/reserve/{id}(id=${excursion.getId()})}">Резервирай</a>
+                    <a th:href="@{/excursions/reserve/{excursionName}(excursionName=${excursion.name})}">Резервирай</a>
                 </div>
             </div>
 
