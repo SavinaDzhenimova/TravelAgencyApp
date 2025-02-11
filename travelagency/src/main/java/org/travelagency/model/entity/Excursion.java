@@ -3,9 +3,11 @@ package org.travelagency.model.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
 import org.travelagency.model.enums.TransportType;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "excursions")
@@ -29,8 +31,7 @@ public class Excursion extends BaseEntity {
     @JoinColumn(name = "destination_id", referencedColumnName = "id")
     private Destination destination;
 
-    @Column(nullable = false)
-    private String imageUrl;
+    private List<String> imageUrl;
 
     @OneToOne(optional = false)
     @JoinColumn(name = "program_id", referencedColumnName = "id")
@@ -79,11 +80,11 @@ public class Excursion extends BaseEntity {
         this.destination = destination;
     }
 
-    public String getImageUrl() {
+    public List<String> getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public void setImageUrl(List<String> imageUrl) {
         this.imageUrl = imageUrl;
     }
 

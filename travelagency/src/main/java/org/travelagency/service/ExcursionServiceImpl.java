@@ -1,6 +1,5 @@
 package org.travelagency.service;
 
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.*;
 import org.travelagency.model.enums.TransportType;
@@ -33,7 +32,6 @@ public class ExcursionServiceImpl implements ExcursionService {
     }
 
     @Override
-    @Transactional
     public Result addExcursion(AddExcursionDTO addExcursionDTO) {
         if (addExcursionDTO == null) {
             return new Result(false, "Екскурзията не съществува!");
@@ -84,7 +82,7 @@ public class ExcursionServiceImpl implements ExcursionService {
         excursion.setTransportType(addExcursionDTO.getTransportType());
         excursion.setDestination(destination);
         excursion.setProgram(program);
-        excursion.setImageUrl("imageUrl");
+        excursion.setImageUrl(new ArrayList<>());
 
         this.excursionRepository.saveAndFlush(excursion);
 
