@@ -154,6 +154,7 @@ fieldset {
 .add-excursion-form .field-destination label,
 .add-excursion-form .field-destination select,
 .add-excursion-form .field label[for="date"],
+.add-excursion-form .field label[for="images"],
 .add-excursion-form #daysContainer label,
 .add-excursion-form #daysContainer textarea {
     position: static;
@@ -203,4 +204,8 @@ fieldset {
 
 .add-excursion-form #daysContainer:focus-within label {
     font-weight: 600;
+}
+
+.add-excursion-form .field input[id="images"] {
+    border-bottom: none;
 }

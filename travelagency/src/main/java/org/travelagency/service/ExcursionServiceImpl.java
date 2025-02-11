@@ -5,11 +5,9 @@ import org.travelagency.model.entity.*;
 import org.travelagency.model.enums.TransportType;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.repository.ExcursionRepository;
-import org.travelagency.service.interfaces.DayService;
-import org.travelagency.service.interfaces.DestinationService;
-import org.travelagency.service.interfaces.ExcursionService;
-import org.travelagency.service.interfaces.ProgramService;
+import org.travelagency.service.interfaces.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,13 +20,15 @@ public class ExcursionServiceImpl implements ExcursionService {
     private final ProgramService programService;
     private final DayService dayService;
     private final DestinationService destinationService;
+    private final ImageService imageService;
 
     public ExcursionServiceImpl(ExcursionRepository excursionRepository, ProgramService programService,
-                                DayService dayService, DestinationService destinationService) {
+                                DayService dayService, DestinationService destinationService, ImageService imageService) {
         this.excursionRepository = excursionRepository;
         this.programService = programService;
         this.dayService = dayService;
         this.destinationService = destinationService;
+        this.imageService = imageService;
     }
 
     @Override
@@ -82,7 +82,21 @@ public class ExcursionServiceImpl implements ExcursionService {
         excursion.setTransportType(addExcursionDTO.getTransportType());
         excursion.setDestination(destination);
         excursion.setProgram(program);
-        excursion.setImageUrl(new ArrayList<>());
+
+        try {
+            List<String> imageUrls = this.imageService.saveImages(addExcursionDTO.getImages());
+
+            List<Image> images = new ArrayList<>();
+            for (String imageUrl : imageUrls) {
+                Image image = new Image();
+                image.setImageUrl(imageUrl);
+                image.setExcursion(excursion);
+                images.add(image);
+            }
+            excursion.setImages(images);
+        } catch (IOException e) {
+            return null;
+        }
 
         this.excursionRepository.saveAndFlush(excursion);
 

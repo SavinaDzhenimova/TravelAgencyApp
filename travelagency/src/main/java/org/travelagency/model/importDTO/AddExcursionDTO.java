@@ -4,10 +4,12 @@ import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.springframework.web.multipart.MultipartFile;
 import org.travelagency.model.enums.TransportType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddExcursionDTO {
@@ -36,8 +38,13 @@ public class AddExcursionDTO {
     @NotEmpty(message = "Трябва да добавите поне един ден от програмата!")
     private List<@NotNull String> days;
 
+    @NotEmpty(message = "Трябва да добавите поне една снимка свързана с екскурзията!")
+    private List<MultipartFile> images;
+
     public AddExcursionDTO() {
         this.endurance = 1;
+        this.days = new ArrayList<>();
+        this.images = new ArrayList<>();
     }
 
     public String getName() {
@@ -94,5 +101,13 @@ public class AddExcursionDTO {
 
     public void setDays(List<String> days) {
         this.days = days;
+    }
+
+    public List<MultipartFile> getImages() {
+        return images;
+    }
+
+    public void setImages(List<MultipartFile> images) {
+        this.images = images;
     }
 }

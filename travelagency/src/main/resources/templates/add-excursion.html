@@ -25,6 +25,7 @@
         <form class="add-excursion-form"
               th:method="POST"
               th:action="@{/excursions/add-excursion}"
+              enctype="multipart/form-data"
               th:object="${addExcursionDTO}">
 
             <!-- CSRF токен -->
@@ -93,6 +94,16 @@
                            th:errors="*{destination}"
                            class="text-danger">Dish name error message</small>
                 </div>
+
+                <div class="field">
+                    <label for="images">Качи снимки</label>
+                    <input th:field="*{images}"
+                           th:errorclass="is-invalid"
+                            type="file" name="images" id="images" accept="image/*" multiple="multiple">
+                </div>
+                <small th:if="${#fields.hasErrors('images')}"
+                       th:errors="*{images}"
+                       class="text-danger">Dish name error message</small>
             </fieldset>
 
             <fieldset>

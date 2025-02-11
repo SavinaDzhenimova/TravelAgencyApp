@@ -31,7 +31,8 @@ public class Excursion extends BaseEntity {
     @JoinColumn(name = "destination_id", referencedColumnName = "id")
     private Destination destination;
 
-    private List<String> imageUrl;
+    @OneToMany(mappedBy = "excursion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Image> images;
 
     @OneToOne(optional = false)
     @JoinColumn(name = "program_id", referencedColumnName = "id")
@@ -80,12 +81,12 @@ public class Excursion extends BaseEntity {
         this.destination = destination;
     }
 
-    public List<String> getImageUrl() {
-        return imageUrl;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setImageUrl(List<String> imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     public Program getProgram() {
