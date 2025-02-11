@@ -3,6 +3,8 @@ package org.travelagency.service;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.*;
 import org.travelagency.model.enums.TransportType;
+import org.travelagency.model.exportDTO.ExcursionViewDTO;
+import org.travelagency.model.exportDTO.ExcursionViewInfo;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.repository.ExcursionRepository;
 import org.travelagency.service.interfaces.*;
@@ -29,6 +31,77 @@ public class ExcursionServiceImpl implements ExcursionService {
         this.dayService = dayService;
         this.destinationService = destinationService;
         this.imageService = imageService;
+    }
+
+    @Override
+    public ExcursionViewInfo getAllExcursions() {
+        List<Excursion> excursions = this.excursionRepository.findAll();
+
+        if (excursions.isEmpty()) {
+            return null;
+        }
+
+        List<ExcursionViewDTO> excursionViewDTOList = this.mapExcursionsToDto(excursions);
+
+        return new ExcursionViewInfo(excursionViewDTOList);
+    }
+
+    @Override
+    public ExcursionViewInfo getExcursionsByDestinationName(String destinationName) {
+        Optional<Destination> optionalDestination = this.destinationService.findDestinationByDestinationName(destinationName);
+
+        if (optionalDestination.isEmpty()) {
+            return null;
+        }
+
+        Destination destination = optionalDestination.get();
+
+        List<Excursion> excursions = destination.getExcursions();
+
+        if (excursions.isEmpty()) {
+            return null;
+        }
+
+        List<ExcursionViewDTO> excursionViewDTOList = this.mapExcursionsToDto(excursions);
+
+        return new ExcursionViewInfo(excursionViewDTOList);
+    }
+
+    private List<ExcursionViewDTO> mapExcursionsToDto(List<Excursion> excursions) {
+        return excursions.stream()
+                .map(excursion -> {
+                    ExcursionViewDTO dto = new ExcursionViewDTO();
+
+                    dto.setName(excursion.getName());
+                    dto.setPrice(excursion.getPrice());
+                    dto.setDate(excursion.getDate());
+                    dto.setDestination(excursion.getDestination().getName());
+                    dto.setEndurance(excursion.getProgram().getEndurance());
+
+                    if (excursion.getImages().isEmpty()) {
+                        dto.setImageUrl("");
+                    } else {
+                        dto.setImageUrl(excursion.getImages().get(0).getImageUrl());
+                    }
+
+                    String transport = this.mapTransportType(excursion.getTransportType());
+                    dto.setTransport(transport);
+
+                    return dto;
+                })
+                .toList();
+    }
+
+    private String mapTransportType(TransportType transportType) {
+        if (transportType.equals(TransportType.BUS)) {
+            return "Автобус";
+        } else if (transportType.equals(TransportType.PLANE)) {
+            return "Самолет";
+        } else if (transportType.equals(TransportType.CRUISE)) {
+            return "Круиз";
+        }
+
+        return "";
     }
 
     @Override

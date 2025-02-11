@@ -31,7 +31,7 @@ public class Destination extends BaseEntity {
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     private Country country;
 
-    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Excursion> excursions;
 
     public Destination() {

@@ -23,13 +23,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/", "/about-us", "/contacts", "/faq", "/privacy-policy",
-                                "/general-conditions").permitAll()
+                                "/general-conditions", "/destinations/**", "/excursions/**").permitAll()
                         .requestMatchers("/employees/login", "/register").anonymous()
-                        .requestMatchers("/employees/profile", "/employees").authenticated()
+                        .requestMatchers("/employees/profile", "/employees", "/excursions").authenticated()
                         .requestMatchers("/candidates", "/candidates/add-employee", "/candidates/delete-candidate",
                                 "/employees/promote-employee", "/employees/delete-employee",
                                 "/destinations/add-destination", "/excursions/add-excursion").hasRole("MANAGER")
-                        .requestMatchers("/destinations/**", "/excursions/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin

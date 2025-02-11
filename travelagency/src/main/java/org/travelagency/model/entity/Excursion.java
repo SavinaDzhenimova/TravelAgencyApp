@@ -31,7 +31,7 @@ public class Excursion extends BaseEntity {
     @JoinColumn(name = "destination_id", referencedColumnName = "id")
     private Destination destination;
 
-    @OneToMany(mappedBy = "excursion", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "excursion", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Image> images;
 
     @OneToOne(optional = false)

@@ -25,6 +25,13 @@ main {
     font-size: 16px;
 }
 
+main > p {
+    text-align: center;
+    font-style: oblique;
+    font-weight: 500;
+    color: #aaa;
+}
+
 main .excursions {
     display: flex;
     flex-wrap: wrap;
@@ -69,14 +76,14 @@ main .excursions .excursion-article .article-content h3 {
     font-weight: 700;
 }
 
-main .excursions .excursion-article .article-content ul {
-    font-size: 16px;
-    font-weight: 600;
+main .excursions .excursion-article .article-content ul li {
+    font-size: 15px;
+    font-weight: 400;
+    opacity: 0.6;
 }
 
 main .excursions .excursion-article .article-content ul li span {
-    opacity: 0.7;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 main .excursions .excursion-article .article-content p {

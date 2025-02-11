@@ -4,13 +4,11 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.travelagency.model.entity.Result;
+import org.travelagency.model.exportDTO.ExcursionViewInfo;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.service.interfaces.ExcursionService;
 
@@ -22,6 +20,40 @@ public class ExcursionController {
 
     public ExcursionController(ExcursionService excursionService) {
         this.excursionService = excursionService;
+    }
+
+    @GetMapping
+    public ModelAndView excursions() {
+
+        ExcursionViewInfo excursionViewInfo = this.excursionService.getAllExcursions();
+
+        ModelAndView modelAndView = new ModelAndView("excursions");
+
+        if (excursionViewInfo == null || excursionViewInfo.getExcursions().isEmpty()) {
+            modelAndView.addObject("failureMessage", "Все още няма добавени екскурзии за разглеждане!");
+        } else {
+            modelAndView.addObject("excursions", excursionViewInfo.getExcursions());
+        }
+
+        return modelAndView;
+    }
+
+    @GetMapping("/{destinationName}")
+    public ModelAndView getExcursions(@PathVariable("destinationName") String destinationName) {
+
+        ExcursionViewInfo excursionViewInfo = this.excursionService.getExcursionsByDestinationName(destinationName);
+
+        ModelAndView modelAndView = new ModelAndView("excursions");
+
+        modelAndView.addObject("destinationName", destinationName);
+
+        if (excursionViewInfo == null || excursionViewInfo.getExcursions().isEmpty()) {
+            modelAndView.addObject("failureMessage", "Все още няма добавени екскурзии за разглеждане!");
+        } else {
+            modelAndView.addObject("excursions", excursionViewInfo.getExcursions());
+        }
+
+        return modelAndView;
     }
 
     @GetMapping("/add-excursion")

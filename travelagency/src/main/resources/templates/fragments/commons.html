@@ -120,7 +120,7 @@
                 </div>
               </li>
               <li id="excursions">
-                <a href="">Екскурзии</a>
+                <a th:href="@{/excursions}">Екскурзии</a>
                 <div class="hidden hidden-excursions">
                   <div class="hidden-section">
                     <h4>Европа</h4>
@@ -128,7 +128,7 @@
                     <ul>
                       <li th:each="country : ${countries.getEuropeCountries()}">
                         <a th:text="${country.getName()}"
-                           th:href="@{/destinations/{countryName}(countryName=${country.name})}">Име на държава</a>
+                           th:href="@{/excursions/{destinationName}(destinationName=${country.name})}">Име на държава</a>
                       </li>
                     </ul>
                   </div>
@@ -139,7 +139,7 @@
                     <ul>
                       <li th:each="country : ${countries.getAsiaCountries()}">
                         <a th:text="${country.getName()}"
-                           th:href="@{/destinations/{countryName}(countryName=${country.name})}">Име на държава</a>
+                           th:href="@{/excursions/{destinationName}(destinationName=${country.name})}">Име на държава</a>
                       </li>
                     </ul>
                   </div>
@@ -150,7 +150,7 @@
                     <ul>
                       <li th:each="country : ${countries.getAfricaCountries()}">
                         <a th:text="${country.getName()}"
-                           th:href="@{/destinations/{countryName}(countryName=${country.name})}">Име на държава</a>
+                           th:href="@{/excursions/{destinationName}(destinationName=${country.name})}">Име на държава</a>
                       </li>
                     </ul>
                   </div>
@@ -161,7 +161,7 @@
                     <ul>
                       <li th:each="country : ${countries.getNorthAmericaCountries()}">
                         <a th:text="${country.getName()}"
-                           th:href="@{/destinations/{countryName}(countryName=${country.name})}">Име на държава</a>
+                           th:href="@{/excursions/{destinationName}(destinationName=${country.name})}">Име на държава</a>
                       </li>
                     </ul>
                   </div>
@@ -172,7 +172,7 @@
                     <ul>
                       <li th:each="country : ${countries.getSouthAmericaCountries()}">
                         <a th:text="${country.getName()}"
-                           th:href="@{/destinations/{countryName}(countryName=${country.name})}">Име на държава</a>
+                           th:href="@{/excursions/{destinationName}(destinationName=${country.name})}">Име на държава</a>
                       </li>
                     </ul>
                   </div>
@@ -183,7 +183,7 @@
                     <ul>
                       <li th:each="country : ${countries.getAustraliaCountries()}">
                         <a th:text="${country.getName()}"
-                           th:href="@{/destinations/{countryName}(countryName=${country.name})}">Име на държава</a>
+                           th:href="@{/excursions/{destinationName}(destinationName=${country.name})}">Име на държава</a>
                       </li>
                     </ul>
                   </div>
@@ -208,6 +208,7 @@
                     </div>
                 </div>
               </li>
+              <li><a th:href="@{/excursions}">Екскурзии</a></li>
               <li sec:authorize="hasRole('MANAGER')">
                 <a th:href="@{/candidates}">Кандидати</a>
               </li>
@@ -217,7 +218,6 @@
               <li>
                 <a th:href="@{/employees}">Служители</a>
               </li>
-              <li><a th:href="@{/logout}">Изход</a></li>
             </ul>
           </div>
         </div>

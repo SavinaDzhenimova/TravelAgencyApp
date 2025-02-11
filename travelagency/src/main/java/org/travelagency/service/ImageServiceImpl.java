@@ -28,7 +28,7 @@ public class ImageServiceImpl implements ImageService {
                 Files.createDirectories(path.getParent());
                 Files.write(path, file.getBytes());
 
-                imageUrls.add("/images/" + fileName);
+                imageUrls.add("/images/excursions/" + fileName);
             }
         }
 
