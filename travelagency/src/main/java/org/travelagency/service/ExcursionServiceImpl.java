@@ -3,6 +3,7 @@ package org.travelagency.service;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.*;
 import org.travelagency.model.enums.TransportType;
+import org.travelagency.model.exportDTO.DayExportDTO;
 import org.travelagency.model.exportDTO.ExcursionExportDTO;
 import org.travelagency.model.exportDTO.ExcursionViewDTO;
 import org.travelagency.model.exportDTO.ExcursionViewInfo;
@@ -127,7 +128,19 @@ public class ExcursionServiceImpl implements ExcursionService {
 
         excursionExportDTO.setTransport(this.mapTransportType(excursion.getTransportType()));
         excursionExportDTO.setImages(excursion.getImages().stream().map(Image::getImageUrl).toList());
-        excursionExportDTO.setDays(excursion.getProgram().getDays().stream().map(Day::getDescription).toList());
+
+        List<DayExportDTO> dayExportDTOList = excursion.getProgram().getDays().stream()
+                .map(day -> {
+                    DayExportDTO dayExportDTO = new DayExportDTO();
+
+                    dayExportDTO.setDayNumber(day.getDayNumber());
+                    dayExportDTO.setDescription(day.getDescription());
+
+                    return dayExportDTO;
+                })
+                .toList();
+
+        excursionExportDTO.setDays(dayExportDTOList);
 
         return excursionExportDTO;
     }

@@ -22,7 +22,7 @@ public class ExcursionExportDTO {
 
     private int endurance;
 
-    private List<String> days;
+    private List<DayExportDTO> days;
 
     public ExcursionExportDTO() {
     }
@@ -91,11 +91,11 @@ public class ExcursionExportDTO {
         this.endurance = endurance;
     }
 
-    public List<String> getDays() {
+    public List<DayExportDTO> getDays() {
         return days;
     }
 
-    public void setDays(List<String> days) {
+    public void setDays(List<DayExportDTO> days) {
         this.days = days;
     }
 }

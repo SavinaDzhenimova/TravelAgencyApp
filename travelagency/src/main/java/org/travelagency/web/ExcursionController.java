@@ -65,6 +65,7 @@ public class ExcursionController {
         ModelAndView modelAndView = new ModelAndView("excursion-details");
 
         modelAndView.addObject("excursion", excursionExportDTO);
+        modelAndView.addObject("days", excursionExportDTO.getDays());
 
         return modelAndView;
     }

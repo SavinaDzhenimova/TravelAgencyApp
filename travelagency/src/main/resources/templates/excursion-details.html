@@ -45,9 +45,9 @@
                 <h3>Програма за екскурзията по дни</h3>
 
                 <ul>
-                    <li th:each="day, iterStat : ${excursion.getDays()}">
-                        <h4>Ден <span th:text="${iterStat.index + 1}"></span></h4>
-                        <p th:text="${day}">Описание</p>
+                    <li th:each="day : ${days}">
+                        <h4>Ден <span th:text="${day.getDayNumber()}"></span></h4>
+                        <p th:text="${day.getDescription()}">Описание</p>
                     </li>
                 </ul>
             </div>
