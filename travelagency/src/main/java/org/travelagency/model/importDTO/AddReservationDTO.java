@@ -36,6 +36,7 @@ public class AddReservationDTO {
     private String comments;
 
     public AddReservationDTO() {
+        this.touristsCount = 1;
     }
 
     public String getExcursionName() {

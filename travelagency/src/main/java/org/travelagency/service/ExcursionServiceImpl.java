@@ -12,10 +12,7 @@ import org.travelagency.repository.ExcursionRepository;
 import org.travelagency.service.interfaces.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ExcursionServiceImpl implements ExcursionService {
@@ -43,13 +40,17 @@ public class ExcursionServiceImpl implements ExcursionService {
             return null;
         }
 
-        List<ExcursionViewDTO> excursionViewDTOList = this.mapExcursionsToDto(excursions);
+        List<Excursion> sortedExcursionsByDate = excursions.stream()
+                .sorted(Comparator.comparing(Excursion::getDate))
+                .toList();
+
+        List<ExcursionViewDTO> excursionViewDTOList = this.mapExcursionsToExcursionViewDTOList(sortedExcursionsByDate);
 
         return new ExcursionViewInfo(excursionViewDTOList);
     }
 
     @Override
-    public ExcursionViewInfo getExcursionsByDestinationName(String destinationName) {
+    public ExcursionViewInfo getAllExcursionsByDestinationName(String destinationName) {
         Optional<Destination> optionalDestination = this.destinationService.findDestinationByDestinationName(destinationName);
 
         if (optionalDestination.isEmpty()) {
@@ -58,18 +59,20 @@ public class ExcursionServiceImpl implements ExcursionService {
 
         Destination destination = optionalDestination.get();
 
-        List<Excursion> excursions = destination.getExcursions();
+        List<Excursion> excursions = destination.getExcursions().stream()
+                .sorted(Comparator.comparing(Excursion::getDate))
+                .toList();
 
         if (excursions.isEmpty()) {
             return null;
         }
 
-        List<ExcursionViewDTO> excursionViewDTOList = this.mapExcursionsToDto(excursions);
+        List<ExcursionViewDTO> excursionViewDTOList = this.mapExcursionsToExcursionViewDTOList(excursions);
 
         return new ExcursionViewInfo(excursionViewDTOList);
     }
 
-    private List<ExcursionViewDTO> mapExcursionsToDto(List<Excursion> excursions) {
+    private List<ExcursionViewDTO> mapExcursionsToExcursionViewDTOList(List<Excursion> excursions) {
         return excursions.stream()
                 .map(excursion -> {
                     ExcursionViewDTO dto = new ExcursionViewDTO();
@@ -86,7 +89,7 @@ public class ExcursionServiceImpl implements ExcursionService {
                         dto.setImageUrl(excursion.getImages().get(0).getImageUrl());
                     }
 
-                    String transport = this.mapTransportType(excursion.getTransportType());
+                    String transport = this.mapTransportTypeToString(excursion.getTransportType());
                     dto.setTransport(transport);
 
                     return dto;
@@ -94,7 +97,7 @@ public class ExcursionServiceImpl implements ExcursionService {
                 .toList();
     }
 
-    private String mapTransportType(TransportType transportType) {
+    private String mapTransportTypeToString(TransportType transportType) {
         if (transportType.equals(TransportType.BUS)) {
             return "Автобус";
         } else if (transportType.equals(TransportType.PLANE)) {
@@ -107,7 +110,7 @@ public class ExcursionServiceImpl implements ExcursionService {
     }
 
     @Override
-    public ExcursionExportDTO getExcursionByName(String excursionName) {
+    public ExcursionExportDTO getExcursionDetailsByName(String excursionName) {
 
         Optional<Excursion> optionalExcursion = this.excursionRepository.findByName(excursionName);
 
@@ -119,14 +122,19 @@ public class ExcursionServiceImpl implements ExcursionService {
 
         ExcursionExportDTO excursionExportDTO = new ExcursionExportDTO();
 
-        excursionExportDTO.setId(excursion.getId());
         excursionExportDTO.setName(excursion.getName());
         excursionExportDTO.setPrice(excursion.getPrice());
         excursionExportDTO.setDate(excursion.getDate());
         excursionExportDTO.setDestination(excursion.getDestination().getName());
         excursionExportDTO.setEndurance(excursion.getProgram().getEndurance());
 
-        excursionExportDTO.setTransport(this.mapTransportType(excursion.getTransportType()));
+        int reservationsCount = Optional.ofNullable(excursion.getReservations())
+                .orElse(Collections.emptyList()).stream()
+                .mapToInt(Reservation::getTouristsCount)
+                .sum();
+
+        excursionExportDTO.setReservations(reservationsCount);
+        excursionExportDTO.setTransport(this.mapTransportTypeToString(excursion.getTransportType()));
         excursionExportDTO.setImages(excursion.getImages().stream().map(Image::getImageUrl).toList());
 
         List<DayExportDTO> dayExportDTOList = excursion.getProgram().getDays().stream()
@@ -164,16 +172,15 @@ public class ExcursionServiceImpl implements ExcursionService {
             return new Result(false, "Избраната дестинация не съществува!");
         }
 
-        Program program = this.mapDtoToProgram(addExcursionDTO);
-        Excursion excursion = this.mapDtoToExcursion(addExcursionDTO, program, optionalDestination.get());
-        List<Day> dayList = this.mapDtoToDay(addExcursionDTO.getDays(), program);
+        Program program = this.mapAddExcursionDTOToProgram(addExcursionDTO);
+        Excursion excursion = this.mapAddExcursionDTOToExcursion(addExcursionDTO, program, optionalDestination.get());
+        List<Day> dayList = this.mapStringListToDayList(addExcursionDTO.getDays(), program);
 
         program.setDays(dayList);
         program.setExcursion(excursion);
         this.programService.saveAndFlushProgram(program);
 
-        return new Result(true, "Успешно добавихте нова екскурзия! " +
-                "Може да я видите на страницата с всички екскурзии!");
+        return new Result(true, "Успешно добавихте нова екскурзия!");
     }
 
     @Override
@@ -186,7 +193,7 @@ public class ExcursionServiceImpl implements ExcursionService {
         this.excursionRepository.saveAndFlush(excursion);
     }
 
-    private Program mapDtoToProgram(AddExcursionDTO addExcursionDTO) {
+    private Program mapAddExcursionDTOToProgram(AddExcursionDTO addExcursionDTO) {
         Program program = new Program();
 
         program.setEndurance(addExcursionDTO.getEndurance());
@@ -197,7 +204,7 @@ public class ExcursionServiceImpl implements ExcursionService {
         return program;
     }
 
-    private Excursion mapDtoToExcursion(AddExcursionDTO addExcursionDTO, Program program, Destination destination) {
+    private Excursion mapAddExcursionDTOToExcursion(AddExcursionDTO addExcursionDTO, Program program, Destination destination) {
         Excursion excursion = new Excursion();
 
         excursion.setName(addExcursionDTO.getName());
@@ -228,7 +235,7 @@ public class ExcursionServiceImpl implements ExcursionService {
         return excursion;
     }
 
-    private List<Day> mapDtoToDay(List<String> days, Program program) {
+    private List<Day> mapStringListToDayList(List<String> days, Program program) {
         List<Day> daysList = new ArrayList<>();
 
         for (int i = 0; i < days.size(); i++) {

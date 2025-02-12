@@ -35,6 +35,7 @@
                         <li>Продължителност: <span th:text="${excursion.getEndurance()} + ' дни'"></span></li>
                         <li>Транспорт: <span th:text="${excursion.getTransport()}"></span></li>
                         <li>Дестинация: <span th:text="${excursion.getDestination()}"></span></li>
+                        <li>Направени резервации до момента: <span th:text="${excursion.getReservations()}"></span></li>
                     </ul>
 
                     <a th:href="@{/excursions/reserve/{excursionName}(excursionName=${excursion.name})}">Резервирай</a>

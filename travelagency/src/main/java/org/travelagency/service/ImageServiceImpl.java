@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class ImageServiceImpl implements ImageService {
 
-    private static final String UPLOAD_DIR = "travelagency/src/main/resources/static/images/excursions/";
+    private static final String UPLOAD_DIR = "uploads/excursions/";
 
     @Override
     public List<String> saveImages(List<MultipartFile> files) throws IOException {
@@ -28,7 +28,7 @@ public class ImageServiceImpl implements ImageService {
                 Files.createDirectories(path.getParent());
                 Files.write(path, file.getBytes());
 
-                imageUrls.add("/images/excursions/" + fileName);
+                imageUrls.add("/uploads/excursions/" + fileName);
             }
         }
 

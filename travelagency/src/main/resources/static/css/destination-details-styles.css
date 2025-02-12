@@ -29,6 +29,9 @@ main {
 }
 
 main article {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
     padding-top: 1em;
     font-size: 14px;
 }

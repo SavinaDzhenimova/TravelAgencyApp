@@ -28,7 +28,7 @@ public class ReservationController {
     @GetMapping("/reserve/{excursionName}")
     public ModelAndView reserve(@PathVariable("excursionName") String excursionName, Model model) {
 
-        ExcursionExportDTO excursionExportDTO = this.excursionService.getExcursionByName(excursionName);
+        ExcursionExportDTO excursionExportDTO = this.excursionService.getExcursionDetailsByName(excursionName);
 
         ModelAndView modelAndView = new ModelAndView("reservation-form");
 

@@ -20,28 +20,34 @@
                     th:object="${addReservationDTO}">
 
                 <div class="field">
-                    <label for="name">Екскурзия: </label>
-                    <input type="text" id="name" name="name" th:value="${excursionName}" disabled>
+                    <label for="excursionName">Екскурзия: </label>
+                    <input type="hidden" name="excursionName" th:value="${excursionName}">
+                    <input th:value="${excursionName}"
+                           type="text" id="excursionName" disabled>
                 </div>
 
                 <div class="field">
                     <label for="destination">Дестинация: </label>
-                    <input type="text" id="destination" name="destination" th:value="${excursionDestination}" disabled>
+                    <input th:value="${excursionDestination}"
+                            type="text" id="destination" name="destination" disabled>
                 </div>
 
                 <div class="field">
                     <label for="date">Дата на отпътуване: </label>
-                    <input type="date" id="date" name="date" th:value="${excursionDate}" disabled>
+                    <input th:value="${excursionDate}"
+                            type="date" id="date" name="date" disabled>
                 </div>
 
                 <div class="field">
                     <label for="transport">Вид транспорт: </label>
-                    <input type="text" id="transport" name="transport" th:value="${excursionTransport}" disabled>
+                    <input th:value="${excursionTransport}"
+                           type="text" id="transport" name="transport" disabled>
                 </div>
 
                 <div class="field">
                     <label for="endurance">Брой нощувки: </label>
-                    <input type="number" step="1" id="endurance" name="endurance" th:value="${excursionEndurance}" disabled>
+                    <input th:value="${excursionEndurance}"
+                           type="number" step="1" id="endurance" name="endurance" disabled>
                 </div>
 
                 <div class="field">

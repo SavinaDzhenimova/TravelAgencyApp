@@ -14,7 +14,7 @@
         <h1 th:if="${destinationName != null}" th:text="'Екскурзии до ' + ${destinationName}">Екскурзии до Австрия</h1>
         <h1 th:unless="${destinationName != null}" th:text="'Всички екскурзии'">Всички екскурзии</h1>
 
-        <p th:if="${warningMessage}" th:text="${failureMessage}"></p>
+        <p th:if="${warningMessage}" th:text="${warningMessage}"></p>
 
         <div th:if="${successMessage}" class="alert alert-success" role="alert">
             <p class="success" th:text="${successMessage}"></p>

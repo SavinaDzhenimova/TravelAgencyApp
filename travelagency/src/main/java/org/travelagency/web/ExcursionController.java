@@ -40,16 +40,16 @@ public class ExcursionController {
     }
 
     @GetMapping("/{destinationName}")
-    public ModelAndView getExcursions(@PathVariable("destinationName") String destinationName) {
+    public ModelAndView getAllExcursionsByDestination(@PathVariable("destinationName") String destinationName) {
 
-        ExcursionViewInfo excursionViewInfo = this.excursionService.getExcursionsByDestinationName(destinationName);
+        ExcursionViewInfo excursionViewInfo = this.excursionService.getAllExcursionsByDestinationName(destinationName);
 
         ModelAndView modelAndView = new ModelAndView("excursions");
 
         modelAndView.addObject("destinationName", destinationName);
 
         if (excursionViewInfo == null || excursionViewInfo.getExcursions().isEmpty()) {
-            modelAndView.addObject("failureMessage", "Все още няма добавени екскурзии за разглеждане!");
+            modelAndView.addObject("warningMessage", "Все още няма добавени екскурзии за разглеждане!");
         } else {
             modelAndView.addObject("excursions", excursionViewInfo.getExcursions());
         }
@@ -58,9 +58,9 @@ public class ExcursionController {
     }
 
     @GetMapping("/excursion-details/{excursionName}")
-    public ModelAndView getExcursion(@PathVariable("excursionName") String excursionName) {
+    public ModelAndView getExcursionDetails(@PathVariable("excursionName") String excursionName) {
 
-        ExcursionExportDTO excursionExportDTO = this.excursionService.getExcursionByName(excursionName);
+        ExcursionExportDTO excursionExportDTO = this.excursionService.getExcursionDetailsByName(excursionName);
 
         ModelAndView modelAndView = new ModelAndView("excursion-details");
 
@@ -96,10 +96,10 @@ public class ExcursionController {
 
         if (result.isSuccess()) {
             redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
-        } else {
-            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
+            return new ModelAndView("redirect:/excursions");
         }
 
+        redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
         return new ModelAndView("redirect:/excursions/add-excursion");
     }
 }

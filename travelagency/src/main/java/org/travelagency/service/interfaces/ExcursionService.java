@@ -14,9 +14,9 @@ public interface ExcursionService {
 
     ExcursionViewInfo getAllExcursions();
 
-    ExcursionViewInfo getExcursionsByDestinationName(String destinationName);
+    ExcursionViewInfo getAllExcursionsByDestinationName(String destinationName);
 
-    ExcursionExportDTO getExcursionByName(String excursionName);
+    ExcursionExportDTO getExcursionDetailsByName(String excursionName);
 
     Optional<Excursion> findExcursionByExcursionName(String excursionName);
 
