@@ -23,14 +23,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/uploads/**").permitAll()
+                        .requestMatchers("/destinations/add-destination",
+                                "/excursions/add-excursion").hasRole("MANAGER")
                         .requestMatchers("/", "/about-us", "/contacts", "/faq", "/privacy-policy",
                                 "/general-conditions", "/destinations/**", "/excursions/**",
                                 "/excursions/excursion-details/**", "/excursions/reserve/**").permitAll()
                         .requestMatchers("/employees/login", "/register").anonymous()
                         .requestMatchers("/employees/profile", "/employees", "/excursions").authenticated()
                         .requestMatchers("/candidates", "/candidates/add-employee", "/candidates/delete-candidate",
-                                "/employees/promote-employee", "/employees/delete-employee",
-                                "/destinations/add-destination", "/excursions/add-excursion").hasRole("MANAGER")
+                                "/employees/promote-employee", "/employees/delete-employee").hasRole("MANAGER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
