@@ -22,13 +22,15 @@ public class SecurityConfig {
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/uploads/**").permitAll()
-                        .requestMatchers("/destinations/add-destination", "/excursions/add-excursion").hasRole("MANAGER")
+                        .requestMatchers("/uploads/**", "/", "/about-us", "/contacts", "/faq", "/privacy-policy",
+                                "/general-conditions").permitAll()
+                        .requestMatchers("/destinations/add-destination",
+                                "/excursions/add-excursion").hasRole("MANAGER")
                         .requestMatchers("/employees/login", "/register", "/excursions/reserve/**").anonymous()
-                        .requestMatchers("/", "/about-us", "/contacts", "/faq", "/privacy-policy",
-                                "/general-conditions", "/destinations/**", "/excursions/**",
+                        .requestMatchers("/employees/profile", "/employees",
+                                "/excursions/reservations").authenticated()
+                        .requestMatchers("/destinations/**", "/excursions", "/excursions/**",
                                 "/excursions/excursion-details/**").permitAll()
-                        .requestMatchers("/employees/profile", "/employees", "/excursions").authenticated()
                         .requestMatchers("/candidates", "/candidates/add-employee", "/candidates/delete-candidate",
                                 "/employees/promote-employee", "/employees/delete-employee").hasRole("MANAGER")
                         .anyRequest().authenticated()

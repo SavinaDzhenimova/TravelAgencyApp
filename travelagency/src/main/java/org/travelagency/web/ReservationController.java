@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.travelagency.model.entity.Result;
 import org.travelagency.model.exportDTO.ExcursionExportDTO;
+import org.travelagency.model.exportDTO.ReservationViewInfo;
 import org.travelagency.model.importDTO.AddReservationDTO;
 import org.travelagency.service.interfaces.ExcursionService;
 import org.travelagency.service.interfaces.ReservationService;
@@ -23,6 +24,18 @@ public class ReservationController {
     public ReservationController(ReservationService reservationService, ExcursionService excursionService) {
         this.reservationService = reservationService;
         this.excursionService = excursionService;
+    }
+
+    @GetMapping("/reservations")
+    public ModelAndView getAllReservations(Model model) {
+
+        ModelAndView modelAndView = new ModelAndView("reservations");
+
+        ReservationViewInfo reservationViewInfo = this.reservationService.getAllReservations();
+
+        modelAndView.addObject("reservations", reservationViewInfo.getReservations());
+
+        return modelAndView;
     }
 
     @GetMapping("/reserve/{excursionName}")

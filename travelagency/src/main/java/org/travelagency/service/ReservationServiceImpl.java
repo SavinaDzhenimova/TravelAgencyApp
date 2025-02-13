@@ -1,9 +1,14 @@
 package org.travelagency.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.Excursion;
+import org.travelagency.model.entity.Language;
 import org.travelagency.model.entity.Reservation;
 import org.travelagency.model.entity.Result;
+import org.travelagency.model.enums.PaymentModel;
+import org.travelagency.model.exportDTO.ReservationViewDTO;
+import org.travelagency.model.exportDTO.ReservationViewInfo;
 import org.travelagency.model.importDTO.AddReservationDTO;
 import org.travelagency.repository.ReservationRepository;
 import org.travelagency.service.interfaces.ExcursionService;
@@ -20,10 +25,56 @@ public class ReservationServiceImpl implements ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final ExcursionService excursionService;
+    private final ModelMapper modelMapper;
 
-    public ReservationServiceImpl(ReservationRepository reservationRepository, ExcursionService excursionService) {
+    public ReservationServiceImpl(ReservationRepository reservationRepository, ExcursionService excursionService,
+                                  ModelMapper modelMapper) {
         this.reservationRepository = reservationRepository;
         this.excursionService = excursionService;
+        this.modelMapper = modelMapper;
+    }
+
+    @Override
+    public ReservationViewInfo getAllReservations() {
+        List<Reservation> reservations = this.reservationRepository.findAll();
+
+        if (reservations.isEmpty()) {
+            return null;
+        }
+
+        List<ReservationViewDTO> reservationViewDTOList = reservations.stream()
+                .map(reservation -> {
+                    ReservationViewDTO dto = this.modelMapper.map(reservation, ReservationViewDTO.class);
+
+                    dto.setExcursionName(reservation.getExcursion().getName());
+
+                    String payment = this.mapPaymentModelToString(reservation.getPaymentModel());
+                    dto.setPayment(payment);
+
+                    String touristNames = this.mapTouristsListToString(reservation.getTouristNames());
+                    dto.setTouristNames(touristNames);
+
+                    return dto;
+                })
+                .toList();
+
+        return new ReservationViewInfo(reservationViewDTOList);
+    }
+
+    private String mapPaymentModelToString(PaymentModel paymentModel) {
+        if (paymentModel.equals(PaymentModel.IN_CASH)) {
+            return "В брой";
+        } else if (paymentModel.equals(PaymentModel.BANK_PAYMENT)) {
+            return "Банков превод";
+        } else if (paymentModel.equals((PaymentModel.CREDIT_CARD))) {
+            return "Кредитна карта";
+        }
+
+        return "";
+    }
+
+    private String mapTouristsListToString(List<String> touristNames) {
+        return String.join(", ", touristNames);
     }
 
     @Override
