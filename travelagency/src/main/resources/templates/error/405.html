@@ -2,9 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <th:block th:replace="~{fragments/commons::head}"></th:block>
-    <link rel="stylesheet" href="/css/error-styles.css">
-    <title>Грешка 403</title>
+  <th:block th:replace="~{fragments/commons::head}"></th:block>
+  <link rel="stylesheet" href="/css/error-styles.css">
+  <title>Грешка 405</title>
 </head>
 
 <body>
@@ -12,15 +12,15 @@
     <header th:replace="~{fragments/commons::header}"></header>
 
     <main>
-        <h1>Грешка 403!</h1>
+        <h1>Грешка 405!</h1>
 
         <div class="error-info">
-            <p class="error-description">Поради някаква причина нямате право да виждате това съдържание!</p>
+            <p class="error-description">Заявката за достъп до ресурса се извършва с неразрешен метод!</p>
             <p>Съжаляваме! Моля върнете се към <a th:href="@{/}">началната страница</a>...</p>
         </div>
 
-        <div>
-            <img th:src="@{/images/error/403-error.png}" class="center" style="width: 300px; height: 300px"/>
+        <div class="error-image">
+            <img th:src="@{/images/error/405-error.png}"/>
         </div>
     </main>
 

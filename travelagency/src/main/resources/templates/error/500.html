@@ -4,7 +4,7 @@
 <head>
     <th:block th:replace="~{fragments/commons::head}"></th:block>
     <link rel="stylesheet" href="/css/error-styles.css">
-    <title>Грешка 403</title>
+    <title>Грешка 500</title>
 </head>
 
 <body>
@@ -12,15 +12,15 @@
     <header th:replace="~{fragments/commons::header}"></header>
 
     <main>
-        <h1>Грешка 403!</h1>
+        <h1>Грешка 500!</h1>
 
         <div class="error-info">
-            <p class="error-description">Поради някаква причина нямате право да виждате това съдържание!</p>
+            <p class="error-description">Сървърът срещна неочаквано условие, което му попречи да изпълни заявката Ви!</p>
             <p>Съжаляваме! Моля върнете се към <a th:href="@{/}">началната страница</a>...</p>
         </div>
 
-        <div>
-            <img th:src="@{/images/error/403-error.png}" class="center" style="width: 300px; height: 300px"/>
+        <div class="error-image">
+            <img th:src="@{/images/error/500-error.png}"/>
         </div>
     </main>
 
