@@ -3,7 +3,7 @@ package org.travelagency.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.travelagency.model.exportDTO.DestinationsExportListDTO;
+import org.travelagency.model.exportDTO.destination.DestinationsExportListDTO;
 import org.travelagency.service.interfaces.DestinationService;
 
 @Controller

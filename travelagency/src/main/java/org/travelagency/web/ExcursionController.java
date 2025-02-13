@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.travelagency.model.entity.Result;
-import org.travelagency.model.exportDTO.ExcursionExportDTO;
-import org.travelagency.model.exportDTO.ExcursionViewInfo;
+import org.travelagency.model.exportDTO.excursion.ExcursionExportDTO;
+import org.travelagency.model.exportDTO.excursion.ExcursionViewInfo;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.service.interfaces.ExcursionService;
+
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 @Controller
 @RequestMapping("/excursions")

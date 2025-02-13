@@ -1,9 +1,13 @@
-package org.travelagency.model.exportDTO;
+package org.travelagency.model.exportDTO.excursion;
+
+import org.travelagency.model.exportDTO.day.DayExportDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ExcursionViewDTO {
+public class ExcursionExportDTO {
 
     private String name;
 
@@ -15,11 +19,16 @@ public class ExcursionViewDTO {
 
     private String destination;
 
-    private String imageUrl;
+    private List<String> images;
 
     private int endurance;
 
-    public ExcursionViewDTO() {
+    private int reservations;
+
+    private List<DayExportDTO> days;
+
+    public ExcursionExportDTO() {
+        this.days = new ArrayList<>();
     }
 
     public String getName() {
@@ -62,12 +71,12 @@ public class ExcursionViewDTO {
         this.destination = destination;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public List<String> getImages() {
+        return images;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 
     public int getEndurance() {
@@ -76,5 +85,21 @@ public class ExcursionViewDTO {
 
     public void setEndurance(int endurance) {
         this.endurance = endurance;
+    }
+
+    public int getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(int reservations) {
+        this.reservations = reservations;
+    }
+
+    public List<DayExportDTO> getDays() {
+        return days;
+    }
+
+    public void setDays(List<DayExportDTO> days) {
+        this.days = days;
     }
 }

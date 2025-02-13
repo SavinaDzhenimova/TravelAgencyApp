@@ -56,17 +56,19 @@ header nav .logo-container .navbar .contacts li a {
 }
 
 header nav .logo-container .navbar .contacts li form .button-exit {
-    padding: 0.5em 1em;
+    padding: 0.5em 1em 0.4em 1em;
     background-color: #0A67AA;
     color: #fff;
+    font-size: 14px;
     border: none;
     border-radius: 0.3em;
     cursor: pointer;
 }
 
 header nav .logo-container .navbar .contacts li .button-login,
-header nav .logo-container .navbar .contacts li .button-register {
-    padding: 0.1em 1em;
+header nav .logo-container .navbar .contacts li .button-register,
+header nav .logo-container .navbar .contacts li .button-profile {
+    padding: 0 1em;
     background-color: #0A67AA;
     color: #fff;
     font-size: 14px;

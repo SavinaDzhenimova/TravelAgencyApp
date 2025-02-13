@@ -2,8 +2,8 @@ package org.travelagency.web;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.travelagency.model.exportDTO.CountryMenuInfo;
-import org.travelagency.model.exportDTO.DestinationMenuInfo;
+import org.travelagency.model.exportDTO.country.CountryMenuInfo;
+import org.travelagency.model.exportDTO.destination.DestinationMenuInfo;
 import org.travelagency.service.interfaces.CountryService;
 import org.travelagency.service.interfaces.DestinationService;
 

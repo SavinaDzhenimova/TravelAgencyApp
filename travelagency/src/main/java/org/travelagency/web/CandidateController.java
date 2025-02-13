@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.travelagency.model.entity.Result;
-import org.travelagency.model.exportDTO.CandidatesViewInfo;
+import org.travelagency.model.exportDTO.candidate.CandidatesViewInfo;
 import org.travelagency.model.importDTO.AddCandidateDTO;
 import org.travelagency.service.interfaces.CandidateService;
 

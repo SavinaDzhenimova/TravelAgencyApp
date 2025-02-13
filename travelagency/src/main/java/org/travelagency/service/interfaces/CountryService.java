@@ -1,8 +1,8 @@
 package org.travelagency.service.interfaces;
 
 import org.travelagency.model.entity.Country;
-import org.travelagency.model.exportDTO.CountryMenuDTO;
-import org.travelagency.model.exportDTO.CountryMenuInfo;
+import org.travelagency.model.exportDTO.country.CountryMenuDTO;
+import org.travelagency.model.exportDTO.country.CountryMenuInfo;
 
 import java.util.List;
 import java.util.Optional;

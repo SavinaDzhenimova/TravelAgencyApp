@@ -1,4 +1,7 @@
-package org.travelagency.model.exportDTO;
+package org.travelagency.model.exportDTO.destination;
+
+import org.travelagency.model.exportDTO.embassy.EmbassyViewDTO;
+import org.travelagency.model.exportDTO.country.CountryViewDTO;
 
 public class DestinationViewInfo {
 

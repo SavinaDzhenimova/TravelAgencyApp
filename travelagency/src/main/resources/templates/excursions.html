@@ -16,14 +16,6 @@
 
         <p th:if="${warningMessage}" th:text="${warningMessage}"></p>
 
-        <div th:if="${successMessage}" class="alert alert-success" role="alert">
-            <p class="success" th:text="${successMessage}"></p>
-        </div>
-
-        <div th:if="${failureMessage}" class="alert alert-failure" role="alert">
-            <p th:text="${failureMessage}"></p>
-        </div>
-
         <div class="excursions">
             <a class="excursion-article"
                th:each="excursion : ${excursions}"

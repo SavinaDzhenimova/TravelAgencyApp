@@ -2,10 +2,14 @@ package org.travelagency.service.interfaces;
 
 import org.travelagency.model.entity.Destination;
 import org.travelagency.model.entity.Result;
-import org.travelagency.model.exportDTO.*;
+import org.travelagency.model.exportDTO.country.CountryViewDTO;
+import org.travelagency.model.exportDTO.destination.DestinationMenuInfo;
+import org.travelagency.model.exportDTO.destination.DestinationViewDTO;
+import org.travelagency.model.exportDTO.destination.DestinationViewInfo;
+import org.travelagency.model.exportDTO.destination.DestinationsExportListDTO;
+import org.travelagency.model.exportDTO.embassy.EmbassyViewDTO;
 import org.travelagency.model.importDTO.AddDestinationDTO;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface DestinationService {

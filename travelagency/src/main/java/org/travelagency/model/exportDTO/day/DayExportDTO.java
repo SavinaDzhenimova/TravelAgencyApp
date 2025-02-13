@@ -1,4 +1,4 @@
-package org.travelagency.model.exportDTO;
+package org.travelagency.model.exportDTO.day;
 
 public class DayExportDTO {
 

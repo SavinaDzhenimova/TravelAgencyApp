@@ -14,6 +14,14 @@
     <main>
         <h1>Форма за резервация на екскурзия</h1>
 
+        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+            <p class="success" th:text="${successMessage}"></p>
+        </div>
+
+        <div th:if="${failureMessage}" class="alert alert-failure" role="alert">
+            <p th:text="${failureMessage}"></p>
+        </div>
+
         <div class="reservation-form">
             <form th:method="POST"
                     th:action="@{/excursions/reserve}"

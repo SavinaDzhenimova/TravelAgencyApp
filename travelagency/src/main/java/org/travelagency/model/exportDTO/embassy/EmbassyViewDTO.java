@@ -1,4 +1,4 @@
-package org.travelagency.model.exportDTO;
+package org.travelagency.model.exportDTO.embassy;
 
 import jakarta.persistence.Column;
 

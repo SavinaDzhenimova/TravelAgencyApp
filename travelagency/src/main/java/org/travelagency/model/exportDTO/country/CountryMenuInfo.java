@@ -1,4 +1,4 @@
-package org.travelagency.model.exportDTO;
+package org.travelagency.model.exportDTO.country;
 
 import java.util.ArrayList;
 import java.util.List;

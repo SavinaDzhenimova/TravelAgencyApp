@@ -34,6 +34,9 @@
                 <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
                 <a href="https://www.tiktok.com" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
               </li>
+              <li sec:authorize="hasRole('MANAGER')">
+                <a class="button-profile" th:href="@{/employees/profile}">Профил</a>
+              </li>
               <li sec:authorize="isAnonymous()">
                 <a class="button-register" th:href="@{/register}">Кандидатствай</a>
                 <a class="button-login" th:href="@{/login}">Вход</a>
@@ -193,10 +196,7 @@
               <li sec:authorize="!isAuthenticated()"><a th:href="@{/contacts}">Контакти</a></li>
               <li sec:authorize="!isAuthenticated()"><a th:href="@{/faq}">FAQ</a></li>
 
-              <!-- Меню за логнати потребители -->
-              <li sec:authorize="isAuthenticated()"><a th:href="@{/employees/profile}">Профил</a></li>
-
-              <!-- Меню за МЕНИДЖЪРИ -->
+              <!-- Меню за MANAGER -->
               <li id="profile" sec:authorize="hasRole('MANAGER')">
                 <a href="">Добави</a>
                 <div class="hidden hidden-profile">
@@ -220,11 +220,16 @@
                 </div>
               </li>
 
-              <!-- Меню за СЛУЖИТЕЛИ -->
+              <!-- Меню за EMPLOYEE -->
+              <li sec:authorize="hasRole('EMPLOYEE')">
+                <a th:href="@{/employees/profile}">Профил</a>
+              </li>
               <li sec:authorize="hasRole('EMPLOYEE')">
                 <a th:href="@{/employees}">Колеги</a>
               </li>
-              <li sec:authorize="hasRole('EMPLOYEE')">
+
+              <!-- Меню за логнати потребители -->
+              <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/excursions/reservations}">Резервации</a>
               </li>
             </ul>

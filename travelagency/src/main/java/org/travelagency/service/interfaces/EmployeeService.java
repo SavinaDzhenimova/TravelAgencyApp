@@ -2,7 +2,7 @@ package org.travelagency.service.interfaces;
 
 import org.travelagency.model.entity.Employee;
 import org.travelagency.model.entity.Result;
-import org.travelagency.model.exportDTO.EmployeesViewInfo;
+import org.travelagency.model.exportDTO.employee.EmployeesViewInfo;
 import org.travelagency.model.user.EmployeeProfileDTO;
 
 public interface EmployeeService {

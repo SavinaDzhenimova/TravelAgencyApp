@@ -1,12 +1,10 @@
-package org.travelagency.model.exportDTO;
+package org.travelagency.model.exportDTO.employee;
 
-public class CandidateDTO {
+public class EmployeeDTO {
 
     private Long id;
 
-    private String firstName;
-
-    private String lastName;
+    private String fullName;
 
     private String email;
 
@@ -20,7 +18,9 @@ public class CandidateDTO {
 
     private String languages;
 
-    public CandidateDTO() {
+    private String role;
+
+    public EmployeeDTO() {
     }
 
     public Long getId() {
@@ -31,20 +31,12 @@ public class CandidateDTO {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
@@ -93,5 +85,13 @@ public class CandidateDTO {
 
     public void setLanguages(String languages) {
         this.languages = languages;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

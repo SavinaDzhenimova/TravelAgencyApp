@@ -1,5 +1,6 @@
 package org.travelagency.model.importDTO;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -30,7 +31,7 @@ public class AddReservationDTO {
     @NotNull(message = "Трябва да изберете метод на плащане!")
     private PaymentModel payment;
 
-    @NotNull(message = "Трябва да въведете три имена на поне един пътуващ турист!")
+    @NotBlank(message = "Трябва да въведете три имена на поне един пътуващ турист!")
     private String touristNames;
 
     private String comments;

@@ -26,6 +26,7 @@ main {
 }
 
 main .reservation-form form {
+    width: 750px;
     padding-top: 1em;
     display: flex;
     flex-direction: column;
@@ -41,9 +42,9 @@ main .reservation-form form .required::after {
 main .reservation-form form .field {
     padding: 0 0.3em;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 5em;
     position: relative;
 }
 
@@ -115,4 +116,11 @@ main .reservation-form form button {
     align-self: center;
     border-radius: 0.5em;
     cursor: pointer;
+}
+
+.text-danger {
+    flex-grow: 1;
+    flex-basis: 100%;
+    text-align: right;
+    display: block;
 }
