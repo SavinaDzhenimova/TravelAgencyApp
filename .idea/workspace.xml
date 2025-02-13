@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="737daafd-1dde-4737-8e86-b60ca1c6a9b0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/exportDTO/ReservationViewDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/exportDTO/ReservationViewDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ExcursionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ExcursionServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ReservationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ReservationServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ExcursionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ExcursionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/ReservationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/reservations-styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/reservations-styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/reservations.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/reservations.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

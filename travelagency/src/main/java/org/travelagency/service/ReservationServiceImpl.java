@@ -9,7 +9,6 @@ import org.travelagency.model.enums.PaymentModel;
 import org.travelagency.model.exportDTO.ReservationViewDTO;
 import org.travelagency.model.exportDTO.ReservationViewInfo;
 import org.travelagency.model.importDTO.AddReservationDTO;
-import org.travelagency.repository.ExcursionRepository;
 import org.travelagency.repository.ReservationRepository;
 import org.travelagency.service.interfaces.ExcursionService;
 import org.travelagency.service.interfaces.ReservationService;
@@ -60,9 +59,6 @@ public class ReservationServiceImpl implements ReservationService {
                     String payment = this.mapPaymentModelToString(reservation.getPaymentModel());
                     dto.setPayment(payment);
 
-                    String touristNames = this.mapTouristsListToString(reservation.getTouristNames());
-                    dto.setTouristNames(touristNames);
-
                     return dto;
                 })
                 .toList();
@@ -80,10 +76,6 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
         return "";
-    }
-
-    private String mapTouristsListToString(List<String> touristNames) {
-        return String.join(", ", touristNames);
     }
 
     @Override

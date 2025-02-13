@@ -44,7 +44,9 @@
                         <td th:text="${reservation.getPhoneNumber()}" class="phoneNumber">Телефон</td>
                         <td th:text="${reservation.getPayment()}" class="payment">Плащане</td>
                         <td th:text="${reservation.getTouristsCount()}" class="touristsCount">Брой туристи</td>
-                        <td th:text="${reservation.getTouristNames()}" class="touristNames">Туристи</td>
+                        <td class="touristNames">
+                            <p th:each="name : ${reservation.getTouristNames()}" th:text="${name}"></p>
+                        </td>
                         <td th:text="${reservation.getComments()}" class="comments">Коментари</td>
                     </tr>
                     </tbody>

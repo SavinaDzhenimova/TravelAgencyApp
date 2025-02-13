@@ -1,5 +1,7 @@
 package org.travelagency.model.exportDTO;
 
+import java.util.List;
+
 public class ReservationViewDTO {
 
     private String excursionName;
@@ -16,7 +18,7 @@ public class ReservationViewDTO {
 
     private String comments;
 
-    private String touristNames;
+    private List<String> touristNames;
 
     public ReservationViewDTO() {
     }
@@ -77,11 +79,11 @@ public class ReservationViewDTO {
         this.comments = comments;
     }
 
-    public String getTouristNames() {
+    public List<String> getTouristNames() {
         return touristNames;
     }
 
-    public void setTouristNames(String touristNames) {
+    public void setTouristNames(List<String> touristNames) {
         this.touristNames = touristNames;
     }
 }
