@@ -148,7 +148,7 @@ header nav .logo-container .navbar > .menu > li:hover > a::before {
 #profile .hidden,
 #team .hidden {
     display: none;
-    z-index: 1;
+    z-index: 1001;
     background-color: #fff;
     color: #000;
     width: 1200px;
