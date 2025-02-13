@@ -47,7 +47,7 @@
               </li>
             </ul>
 
-            <ul class="menu" sec:authorize="!isAuthenticated()">
+            <ul class="menu">
               <li><a th:href="@{/}">Начало</a></li>
               <li id="destinations">
                 <a href="">Дестинации</a>
@@ -189,34 +189,43 @@
                   </div>
                 </div>
               </li>
-              <li><a th:href="@{/about-us}">За нас</a></li>
-              <li><a th:href="@{/contacts}">Контакти</a></li>
-              <li><a th:href="@{/faq}">FAQ</a></li>
-            </ul>
+              <li sec:authorize="!isAuthenticated()"><a th:href="@{/about-us}">За нас</a></li>
+              <li sec:authorize="!isAuthenticated()"><a th:href="@{/contacts}">Контакти</a></li>
+              <li sec:authorize="!isAuthenticated()"><a th:href="@{/faq}">FAQ</a></li>
 
-            <ul class="menu" sec:authorize="isAuthenticated()">
-              <li><a th:href="@{/}">Начало</a></li>
-              <li><a th:href="@{/employees/profile}">Профил</a></li>
-              <li id="profile">
+              <!-- Меню за логнати потребители -->
+              <li sec:authorize="isAuthenticated()"><a th:href="@{/employees/profile}">Профил</a></li>
+
+              <!-- Меню за МЕНИДЖЪРИ -->
+              <li id="profile" sec:authorize="hasRole('MANAGER')">
                 <a href="">Добави</a>
                 <div class="hidden hidden-profile">
-                    <div class="hidden-section">
-                      <ul>
-                        <li><a th:href="@{/destinations/add-destination}">Дестинация</a></li>
-                        <li><a th:href="@{/excursions/add-excursion}">Екскурзия</a></li>
-                      </ul>
-                    </div>
+                  <div class="hidden-section">
+                    <ul>
+                      <li><a th:href="@{/destinations/add-destination}">Дестинация</a></li>
+                      <li><a th:href="@{/excursions/add-excursion}">Екскурзия</a></li>
+                    </ul>
+                  </div>
                 </div>
               </li>
-              <li><a th:href="@{/excursions}">Екскурзии</a></li>
-              <li sec:authorize="hasRole('MANAGER')">
-                <a th:href="@{/candidates}">Кандидати</a>
+              <li id="team" sec:authorize="hasRole('MANAGER')">
+                <a href="">Екип</a>
+                <div class="hidden hidden-team">
+                  <div class="hidden-section">
+                    <ul>
+                      <li><a th:href="@{/candidates}">Кандидати</a></li>
+                      <li><a th:href="@{/employees}">Служители</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Меню за СЛУЖИТЕЛИ -->
+              <li sec:authorize="hasRole('EMPLOYEE')">
+                <a th:href="@{/employees}">Колеги</a>
               </li>
               <li sec:authorize="hasRole('EMPLOYEE')">
-                <a th:href="@{/candidates}">Изход</a>
-              </li>
-              <li>
-                <a th:href="@{/employees}">Служители</a>
+                <a th:href="@{/employees}">Колеги</a>
               </li>
             </ul>
           </div>

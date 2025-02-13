@@ -145,7 +145,8 @@ header nav .logo-container .navbar > .menu > li:hover > a::before {
 
 #destinations .hidden,
 #excursions .hidden,
-#profile .hidden {
+#profile .hidden,
+#team .hidden {
     display: none;
     z-index: 1;
     background-color: #fff;
@@ -162,14 +163,16 @@ header nav .logo-container .navbar > .menu > li:hover > a::before {
     left: -30em;
 }
 
-#profile .hidden {
+#profile .hidden,
+#team .hidden {
     width: 300px;
     left: 0;
 }
 
 #destinations h4,
 #excursions h4,
-#profile h4 {
+#profile h4,
+#team h4 {
     border-bottom: 2px solid #0A67AA;
     font-size: 16px;
     text-align: left;
@@ -178,7 +181,8 @@ header nav .logo-container .navbar > .menu > li:hover > a::before {
 
 #destinations ul,
 #excursions ul,
-#profile ul {
+#profile ul,
+#team ul {
     display: flex;
     flex-wrap: wrap;
     word-break: break-all;
@@ -187,7 +191,8 @@ header nav .logo-container .navbar > .menu > li:hover > a::before {
 
 #destinations ul li,
 #excursions ul li,
-#profile ul li {
+#profile ul li,
+#team ul li {
     font-size: 15px;
     margin-right: 1.5em;
     text-align: left;
@@ -196,13 +201,15 @@ header nav .logo-container .navbar > .menu > li:hover > a::before {
 
 #destinations ul li:hover,
 #excursions ul li:hover,
-#profile ul li:hover {
+#profile ul li:hover,
+#team ul li:hover {
     color: #0A67AA;
 }
 
 #destinations ul li:hover a::after,
 #excursions ul li:hover a::after,
-#profile ul li:hover a::after {
+#profile ul li:hover a::after,
+#team ul li:hover a::after {
     display: block;
     content: '';
     background-color: #0A67AA;

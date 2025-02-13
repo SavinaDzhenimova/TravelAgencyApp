@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
 
 <head>
     <th:block th:replace="~{fragments/commons::head}"></th:block>
@@ -38,7 +40,8 @@
                         <li>Направени резервации до момента: <span th:text="${excursion.getReservations()}"></span></li>
                     </ul>
 
-                    <a th:href="@{/excursions/reserve/{excursionName}(excursionName=${excursion.name})}">Резервирай</a>
+                    <a sec:authorize="!isAuthenticated()"
+                            th:href="@{/excursions/reserve/{excursionName}(excursionName=${excursion.name})}">Резервирай</a>
                 </div>
             </div>
 
@@ -61,6 +64,7 @@
     <script src="\js\animation.js"></script>
     <script src="\js\show-menu.js"></script>
     <script src="\js\show-menu-profile.js"></script>
+    <script src="\js\show-menu-team.js"></script>
 
 </body>
 </html>
