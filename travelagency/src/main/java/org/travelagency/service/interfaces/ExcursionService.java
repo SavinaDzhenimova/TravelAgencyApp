@@ -6,6 +6,7 @@ import org.travelagency.model.exportDTO.ExcursionExportDTO;
 import org.travelagency.model.exportDTO.ExcursionViewInfo;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ExcursionService {
@@ -21,4 +22,6 @@ public interface ExcursionService {
     Optional<Excursion> findExcursionByExcursionName(String excursionName);
 
     void saveAndFlushExcursion(Excursion excursion);
+
+    List<String> getAllExcursionsNames();
 }

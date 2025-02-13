@@ -193,6 +193,11 @@ public class ExcursionServiceImpl implements ExcursionService {
         this.excursionRepository.saveAndFlush(excursion);
     }
 
+    @Override
+    public List<String> getAllExcursionsNames() {
+        return this.excursionRepository.findAll().stream().map(Excursion::getName).toList();
+    }
+
     private Program mapAddExcursionDTOToProgram(AddExcursionDTO addExcursionDTO) {
         Program program = new Program();
 

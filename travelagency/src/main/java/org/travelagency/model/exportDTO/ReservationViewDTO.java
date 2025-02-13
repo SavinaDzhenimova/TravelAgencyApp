@@ -19,7 +19,6 @@ public class ReservationViewDTO {
     private String touristNames;
 
     public ReservationViewDTO() {
-        this.comments = "-";
     }
 
     public String getExcursionName() {

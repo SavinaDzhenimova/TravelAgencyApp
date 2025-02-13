@@ -14,6 +14,8 @@ import org.travelagency.model.importDTO.AddReservationDTO;
 import org.travelagency.service.interfaces.ExcursionService;
 import org.travelagency.service.interfaces.ReservationService;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/excursions")
 public class ReservationController {
@@ -27,16 +29,17 @@ public class ReservationController {
     }
 
     @GetMapping("/reservations")
-    public ModelAndView getAllReservations(Model model) {
+    public ModelAndView viewAllReservations() {
+        Map<String, ReservationViewInfo> reservationsMap = this.reservationService
+                .getAllReservationsGroupedByExcursionsNames();
 
         ModelAndView modelAndView = new ModelAndView("reservations");
 
-        ReservationViewInfo reservationViewInfo = this.reservationService.getAllReservations();
-
-        modelAndView.addObject("reservations", reservationViewInfo.getReservations());
+        modelAndView.addObject("reservationsMap", reservationsMap);
 
         return modelAndView;
     }
+
 
     @GetMapping("/reserve/{excursionName}")
     public ModelAndView reserve(@PathVariable("excursionName") String excursionName, Model model) {

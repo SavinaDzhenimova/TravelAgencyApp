@@ -3,21 +3,18 @@ package org.travelagency.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.Excursion;
-import org.travelagency.model.entity.Language;
 import org.travelagency.model.entity.Reservation;
 import org.travelagency.model.entity.Result;
 import org.travelagency.model.enums.PaymentModel;
 import org.travelagency.model.exportDTO.ReservationViewDTO;
 import org.travelagency.model.exportDTO.ReservationViewInfo;
 import org.travelagency.model.importDTO.AddReservationDTO;
+import org.travelagency.repository.ExcursionRepository;
 import org.travelagency.repository.ReservationRepository;
 import org.travelagency.service.interfaces.ExcursionService;
 import org.travelagency.service.interfaces.ReservationService;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,16 +32,28 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public ReservationViewInfo getAllReservations() {
-        List<Reservation> reservations = this.reservationRepository.findAll();
+    public Map<String, ReservationViewInfo> getAllReservationsGroupedByExcursionsNames() {
+        List<String> excursionNames = this.getAllExcursionsNames();
 
-        if (reservations.isEmpty()) {
-            return null;
-        }
+        return excursionNames.stream()
+                .map(excursionName ->
+                        Map.entry(excursionName, this.getAllReservationsByExcursionName(excursionName)))
+                .filter(entry -> !entry.getValue().getReservations().isEmpty())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
 
-        List<ReservationViewDTO> reservationViewDTOList = reservations.stream()
+    private List<String> getAllExcursionsNames() {
+        return this.excursionService.getAllExcursionsNames();
+    }
+
+    private ReservationViewInfo getAllReservationsByExcursionName(String excursionName) {
+        List<ReservationViewDTO> reservationViewDTOList = this.reservationRepository.findAll().stream()
+                .filter(reservation -> reservation.getExcursion().getName().equals(excursionName))
                 .map(reservation -> {
                     ReservationViewDTO dto = this.modelMapper.map(reservation, ReservationViewDTO.class);
+
+                    if (reservation.getComments().length() > 0) dto.setComments(reservation.getComments());
+                    else dto.setComments("-");
 
                     dto.setExcursionName(reservation.getExcursion().getName());
 

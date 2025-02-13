@@ -4,9 +4,11 @@ import org.travelagency.model.entity.Result;
 import org.travelagency.model.exportDTO.ReservationViewInfo;
 import org.travelagency.model.importDTO.AddReservationDTO;
 
+import java.util.Map;
+
 public interface ReservationService {
 
     Result addReservation(AddReservationDTO addReservationDTO, String excursionName);
 
-    ReservationViewInfo getAllReservations();
+    Map<String, ReservationViewInfo> getAllReservationsGroupedByExcursionsNames();
 }

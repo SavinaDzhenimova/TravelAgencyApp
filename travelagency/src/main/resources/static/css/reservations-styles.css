@@ -28,6 +28,23 @@ main {
 main .reservations-info {
     width: 100%;
     margin: 2em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+main .reservations-info .reservation-info-excursion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+main .reservations-info .reservation-info-excursion h2 {
+    font-weight: 400;
+}
+
+main .reservations-info .reservation-info-excursion h2 span {
+    font-weight: 600;
 }
 
 main .reservations-info-table {
@@ -64,10 +81,9 @@ main .reservations-info-table tbody tr td {
     text-align: left;
 }
 
-main .reservations-info-table tbody tr .address,
-main .reservations-info-table tbody tr .languages,
-main .reservations-info-table tbody tr .eee {
-    width: 12%;
+main .reservations-info-table tbody tr .touristNames,
+main .reservations-info-table tbody tr .comments {
+    width: 17%;
 }
 
 main > p {

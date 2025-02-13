@@ -23,13 +23,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/uploads/**", "/", "/about-us", "/contacts", "/faq", "/privacy-policy",
-                                "/general-conditions").permitAll()
+                                "/general-conditions", "/excursions").permitAll()
                         .requestMatchers("/destinations/add-destination",
                                 "/excursions/add-excursion").hasRole("MANAGER")
                         .requestMatchers("/employees/login", "/register", "/excursions/reserve/**").anonymous()
                         .requestMatchers("/employees/profile", "/employees",
                                 "/excursions/reservations").authenticated()
-                        .requestMatchers("/destinations/**", "/excursions", "/excursions/**",
+                        .requestMatchers("/destinations/**", "/excursions/**",
                                 "/excursions/excursion-details/**").permitAll()
                         .requestMatchers("/candidates", "/candidates/add-employee", "/candidates/delete-candidate",
                                 "/employees/promote-employee", "/employees/delete-employee").hasRole("MANAGER")
