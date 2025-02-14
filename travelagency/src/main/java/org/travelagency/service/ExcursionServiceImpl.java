@@ -33,6 +33,19 @@ public class ExcursionServiceImpl implements ExcursionService {
     }
 
     @Override
+    public ExcursionViewInfo getExcursionsForIndexPage() {
+        List<Excursion> excursions = this.excursionRepository.findAll();
+
+        List<ExcursionViewDTO> excursionExportList = excursions.stream()
+                .sorted(Comparator.comparing(Excursion::getId).reversed())
+                .map(this::mapExcursionToExcursionViewDTO)
+                .limit(3)
+                .toList();
+
+        return new ExcursionViewInfo(excursionExportList);
+    }
+
+    @Override
     public ExcursionViewInfo getAllExcursions() {
         List<Excursion> excursions = this.excursionRepository.findAll();
 
@@ -74,27 +87,28 @@ public class ExcursionServiceImpl implements ExcursionService {
 
     private List<ExcursionViewDTO> mapExcursionsToExcursionViewDTOList(List<Excursion> excursions) {
         return excursions.stream()
-                .map(excursion -> {
-                    ExcursionViewDTO dto = new ExcursionViewDTO();
-
-                    dto.setName(excursion.getName());
-                    dto.setPrice(excursion.getPrice());
-                    dto.setDate(excursion.getDate());
-                    dto.setDestination(excursion.getDestination().getName());
-                    dto.setEndurance(excursion.getProgram().getEndurance());
-
-                    if (excursion.getImages().isEmpty()) {
-                        dto.setImageUrl("");
-                    } else {
-                        dto.setImageUrl(excursion.getImages().get(0).getImageUrl());
-                    }
-
-                    String transport = this.mapTransportTypeToString(excursion.getTransportType());
-                    dto.setTransport(transport);
-
-                    return dto;
-                })
+                .map(this::mapExcursionToExcursionViewDTO)
                 .toList();
+    }
+
+    private ExcursionViewDTO mapExcursionToExcursionViewDTO(Excursion excursion) {
+        ExcursionViewDTO excursionViewDTO = new ExcursionViewDTO();
+
+        excursionViewDTO.setName(excursion.getName());
+        excursionViewDTO.setPrice(excursion.getPrice());
+        excursionViewDTO.setDate(excursion.getDate());
+        excursionViewDTO.setDestination(excursion.getDestination().getName());
+        excursionViewDTO.setEndurance(excursion.getProgram().getEndurance());
+
+        if (excursion.getImages().isEmpty()) {
+            excursionViewDTO.setImageUrl("");
+        } else {
+            excursionViewDTO.setImageUrl(excursion.getImages().get(0).getImageUrl());
+        }
+
+        excursionViewDTO.setTransport(this.mapTransportTypeToString(excursion.getTransportType()));
+
+        return excursionViewDTO;
     }
 
     private String mapTransportTypeToString(TransportType transportType) {

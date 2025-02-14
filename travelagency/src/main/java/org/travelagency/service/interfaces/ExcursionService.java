@@ -13,6 +13,8 @@ public interface ExcursionService {
 
     Result addExcursion(AddExcursionDTO addExcursionDTO);
 
+    ExcursionViewInfo getExcursionsForIndexPage();
+
     ExcursionViewInfo getAllExcursions();
 
     ExcursionViewInfo getAllExcursionsByDestinationName(String destinationName);

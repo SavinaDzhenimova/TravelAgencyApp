@@ -4,15 +4,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.travelagency.model.exportDTO.destination.DestinationsExportListDTO;
+import org.travelagency.model.exportDTO.excursion.ExcursionViewInfo;
 import org.travelagency.service.interfaces.DestinationService;
+import org.travelagency.service.interfaces.ExcursionService;
 
 @Controller
 public class HomeController {
 
     private final DestinationService destinationService;
+    private final ExcursionService excursionService;
 
-    public HomeController(DestinationService destinationService) {
+    public HomeController(DestinationService destinationService, ExcursionService excursionService) {
         this.destinationService = destinationService;
+        this.excursionService = excursionService;
     }
 
     @GetMapping("/")
@@ -21,8 +25,10 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView("index");
 
         DestinationsExportListDTO destinationsExportListDTO = this.destinationService.getDestinationsForIndexPage();
+        ExcursionViewInfo excursionsForIndexPage = this.excursionService.getExcursionsForIndexPage();
 
-        modelAndView.addObject("destinations", destinationsExportListDTO);
+        modelAndView.addObject("destinations", destinationsExportListDTO.getDestinations());
+        modelAndView.addObject("excursions", excursionsForIndexPage.getExcursions());
 
         return modelAndView;
     }

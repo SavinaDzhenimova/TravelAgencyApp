@@ -72,7 +72,7 @@ button.prev:hover, button.next:hover {
 }
 
 main .statistics {
-    padding: 3em 8em 4em 8em;
+    padding: 3em 8em;
     display: flex;
     justify-content: space-between;
     gap: 1.5em;
@@ -106,7 +106,7 @@ main .excursions {
     width: 100%;
     padding: 3em 8em 4em 8em;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
     background-color: #0A67AA;
@@ -196,6 +196,14 @@ main .excursions h2::before {
     background-color: #0A67AA;
 }
 
+main .destinations .destinations-section,
+main .excursions .excursions-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 main .destinations .destination-article,
 main .excursions .excursion-article {
     background-color: #fff;
@@ -209,14 +217,19 @@ main .excursions .excursion-article {
     color: #fff;
 }
 
-main .destinations .destination-article .image-container,
-main .excursions .excursion-article .image-container {
+main .destinations .destination-article .image-container {
     max-width: 100%;
     height: 250px;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+main .excursions .excursion-article .image-container {
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
 }
 
 main .destinations .destination-article .image-container img,
@@ -228,9 +241,14 @@ main .excursions .excursion-article .image-container img {
     max-height: 100%;
 }
 
+main .excursions .excursion-article .image-container img {
+    width: 100%;
+    height: 100%;
+}
+
 main .destination-article .article-content,
 main .excursion-article .article-content {
-    padding: 0.5em 1.2em 1.2em 1.2em;
+    padding: 0.7em 1.2em 1.2em 1.2em;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -240,8 +258,27 @@ main .excursion-article .article-content {
 
 main .destination-article .article-content h3,
 main .excursion-article .article-content h3 {
+    width: 100%;
+    text-align: center;
     font-size: 18px;
     font-weight: 600;
+    position: relative;
+}
+
+main .destination-article .article-content h3:after,
+main .excursion-article .article-content h3:after {
+    width: 30%;
+    margin: 0.2em 0;
+    display: block;
+    content: '';
+    background-color: #0A67AA;
+    height: 1px;
+    position: absolute;
+    left: 35%;
+}
+
+main .excursion-article .article-content h3:after {
+    background-color: #fff;
 }
 
 main .destination-article .article-content .content,
@@ -252,6 +289,12 @@ main .excursion-article .article-content .content {
     flex-direction: column;
     gap: 0.5em;
     text-align: left;
+}
+
+main .destination-article .article-content .content span,
+main .excursion-article .article-content .content span {
+    font-weight: 500;
+    font-style: oblique;
 }
 
 main .destination-article .article-content > .button-see-more,
@@ -268,6 +311,18 @@ main .excursion-article .article-content > .button-see-more {
 main .excursion-article .article-content .button-see-more {
     background-color: #fff;
     color: #000;
+}
+
+main .excursions > .button-see-more {
+    width: 15%;
+    margin-top: 2em;
+    padding: 0.5em 1em;
+    background-color: #0A67AA;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 0.5em;
+    align-self: center;
 }
 
 main .faq {
