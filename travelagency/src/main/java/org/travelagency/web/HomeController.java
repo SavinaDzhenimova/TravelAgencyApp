@@ -1,10 +1,12 @@
 package org.travelagency.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.travelagency.model.exportDTO.destination.DestinationsExportListDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewInfo;
+import org.travelagency.model.importDTO.AddSubscriberDTO;
 import org.travelagency.service.interfaces.DestinationService;
 import org.travelagency.service.interfaces.ExcursionService;
 
@@ -20,7 +22,11 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public ModelAndView index() {
+    public ModelAndView index(Model model) {
+
+        if (!model.containsAttribute("addSubscriberDTO")) {
+            model.addAttribute("addSubscriberDTO", new AddSubscriberDTO());
+        }
 
         ModelAndView modelAndView = new ModelAndView("index");
 

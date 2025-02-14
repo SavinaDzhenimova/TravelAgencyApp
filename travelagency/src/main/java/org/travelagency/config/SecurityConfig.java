@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/uploads/**", "/", "/about-us", "/contacts", "/faq", "/privacy-policy",
-                                "/general-conditions", "/excursions").permitAll()
+                                "/general-conditions", "/excursions", "/subscribe").permitAll()
                         .requestMatchers("/destinations/add-destination",
                                 "/excursions/add-excursion").hasRole("MANAGER")
                         .requestMatchers("/employees/login", "/register", "/excursions/reserve/**").anonymous()

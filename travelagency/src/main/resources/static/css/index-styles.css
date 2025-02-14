@@ -407,7 +407,7 @@ main .subscribe {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2.5em;
+    gap: 2em;
 }
 
 main .subscribe h2 {
@@ -433,35 +433,43 @@ main .subscribe h2::before {
     right: 45%;
 }
 
-main .form-subscribe {
+main .subscribe .subscription-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main .subscribe .subscription-form .form-subscribe {
     width: 50%;
     display: flex;
     justify-content: center;
     gap: 1em;
 }
 
-main .subscribe input {
+main .subscribe .subscription-form .form-subscribe input {
     border: none;
     outline: none;
     border-radius: 0.5em;
     padding: 1em;
 }
 
-main .subscribe input[type="email"] {
+main .subscribe .subscription-form .form-subscribe input[type="email"] {
     background-color: #0A67AA;
     flex-basis: 65%;
     color: #fff;
 }
 
-main .subscribe input[type="email"]::placeholder {
+main .subscribe .subscription-form .form-subscribe input[type="email"]::placeholder {
     color: #fff;
     font-style: italic;
     font-size: 16px;
 }
 
-main .subscribe input[type="submit"] {
+main .subscribe .subscription-form .form-subscribe input[type="submit"] {
     flex-basis: 30%;
     font-size: 16px;
     background-color: #0A67AA;
     color: #fff;
+    cursor: pointer;
 }

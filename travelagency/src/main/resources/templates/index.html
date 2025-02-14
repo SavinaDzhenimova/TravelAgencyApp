@@ -176,15 +176,34 @@
             </div>
         </div>
 
-        <div class="subscribe">
+        <div class="subscribe" id="subscribe">
             <h2 class="section-title">Абонирай се за нашите оферти</h2>
 
             <p>Абонирай се, за да получаваш първи най-новите ни предложения за екскурзии!</p>
 
-            <form class="form-subscribe">
-                <input type="email" name="email" id="email" placeholder="Email...">
-                <input type="submit" value="Абонирай се">
-            </form>
+            <div th:if="${successMessage}" class="alert alert-success" role="alert">
+                <p class="success" th:text="${successMessage}"></p>
+            </div>
+
+            <div th:if="${failureMessage}" class="alert alert-failure" role="alert">
+                <p th:text="${failureMessage}"></p>
+            </div>
+
+            <div class="subscription-form">
+                <form class="form-subscribe"
+                      th:method="POST"
+                      th:action="@{/subscribe}"
+                      th:object="${addSubscriberDTO}">
+
+                    <input th:field="*{email}"
+                           th:errorclass="is-invalid"
+                           type="email" name="email" id="email" placeholder="Email...">
+                    <input type="submit" value="Абонирай се">
+                    <small th:if="${#fields.hasErrors('email')}"
+                           th:errors="*{email}"
+                           class="text-danger">Dish name error message</small>
+                </form>
+            </div>
         </div>
     </main>
 
