@@ -10,6 +10,8 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.travelagency.service.interfaces.EmailService;
 
+import java.util.Map;
+
 @Service
 public class EmailServiceImpl implements EmailService {
 
@@ -27,110 +29,67 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendHireEmployeeEmail(String fullName, String email, String phoneNumber, String address,
                                       String education, String specialty, String languages) {
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        Map<String, Object> variables = Map.of(
+                "fullName", fullName,
+                "email", email,
+                "phoneNumber", phoneNumber,
+                "address", address,
+                "education", education,
+                "specialty", specialty,
+                "languages", languages
+        );
 
-        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
-
-        try {
-            mimeMessageHelper.setTo(email);
-            mimeMessageHelper.setFrom(this.email);
-            mimeMessageHelper.setReplyTo(this.email);
-            mimeMessageHelper.setSubject("Добре дошли в екипа на Sunrise Travel Agency Bulgaria!");
-            mimeMessageHelper.setText(generateHireEmployeeEmail(fullName, email, phoneNumber, address, education,
-                    specialty, languages), true);
-
-            javaMailSender.send(mimeMessageHelper.getMimeMessage());
-
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    private String generateHireEmployeeEmail(String fullName, String email, String phoneNumber, String address,
-                                             String education, String specialty, String languages) {
-
-        Context context = new Context();
-
-        context.setVariable("fullName", fullName);
-        context.setVariable("email", email);
-        context.setVariable("phoneNumber", phoneNumber);
-        context.setVariable("address", address);
-        context.setVariable("education", education);
-        context.setVariable("specialty", specialty);
-        context.setVariable("languages", languages);
-
-        return templateEngine.process("/email/hire-email", context);
+        String content = generateEmailContent("/email/hire-email", variables);
+        sendEmail(email, "Добре дошли в екипа на Sunrise Travel Agency Bulgaria!", content);
     }
 
     @Override
     public void sendPromoteEmployeeEmail(String fullName, String email) {
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        Map<String, Object> variables = Map.of("fullName", fullName);
 
-        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
-
-        try {
-            mimeMessageHelper.setTo(email);
-            mimeMessageHelper.setFrom(this.email);
-            mimeMessageHelper.setReplyTo(this.email);
-            mimeMessageHelper.setSubject("Повишение в екипа на Sunrise Travel Agency Bulgaria!");
-            mimeMessageHelper.setText(generatePromoteEmployeeEmail(fullName), true);
-
-            javaMailSender.send(mimeMessageHelper.getMimeMessage());
-
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    private String generatePromoteEmployeeEmail(String fullName) {
-
-        Context context = new Context();
-
-        context.setVariable("fullName", fullName);
-
-        return templateEngine.process("/email/promote-email", context);
+        String content = generateEmailContent("/email/promote-email", variables);
+        sendEmail(email, "Повишение в екипа на Sunrise Travel Agency Bulgaria!", content);
     }
 
     @Override
     public void sendAddCandidateEmail(String firstName, String lastName, String email, String phoneNumber,
                                       String address, String education, String specialty, String languages) {
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        Map<String, Object> variables = Map.of(
+                "fullName", firstName + " " + lastName,
+                "firstName", firstName,
+                "lastName", lastName,
+                "email", email,
+                "phoneNumber", phoneNumber,
+                "address", address,
+                "education", education,
+                "specialty", specialty,
+                "languages", languages
+        );
 
-        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
-
-        try {
-            mimeMessageHelper.setTo(email);
-            mimeMessageHelper.setFrom(this.email);
-            mimeMessageHelper.setReplyTo(this.email);
-            mimeMessageHelper.setSubject("Успешно приета кандидатура в Sunrise Travel Agency Bulgaria!");
-            mimeMessageHelper.setText(generateHireEmployeeEmail(firstName, lastName, email, phoneNumber, address,
-                    education, specialty, languages), true);
-
-            javaMailSender.send(mimeMessageHelper.getMimeMessage());
-
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-
+        String content = generateEmailContent("/email/candidate-email", variables);
+        sendEmail(email, "Успешно приета кандидатура в Sunrise Travel Agency Bulgaria!", content);
     }
 
-    private String generateHireEmployeeEmail(String firstName, String lastName, String email, String phoneNumber,
-                                             String address, String education, String specialty, String languages) {
+    private void sendEmail(String to, String subject, String content) {
+        try {
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
 
+            mimeMessageHelper.setTo(to);
+            mimeMessageHelper.setFrom(this.email);
+            mimeMessageHelper.setReplyTo(this.email);
+            mimeMessageHelper.setSubject(subject);
+            mimeMessageHelper.setText(content, true);
+
+            javaMailSender.send(mimeMessage);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Грешка при изпращане на имейл: " + e.getMessage(), e);
+        }
+    }
+
+    private String generateEmailContent(String templatePath, Map<String, Object> variables) {
         Context context = new Context();
-
-        context.setVariable("fullName", firstName + " " + lastName);
-        context.setVariable("firstName", firstName);
-        context.setVariable("lastName", lastName);
-        context.setVariable("email", email);
-        context.setVariable("phoneNumber", phoneNumber);
-        context.setVariable("address", address);
-        context.setVariable("education", education);
-        context.setVariable("specialty", specialty);
-        context.setVariable("languages", languages);
-
-        return templateEngine.process("/email/candidate-email", context);
+        context.setVariables(variables);
+        return templateEngine.process(templatePath, context);
     }
 }
