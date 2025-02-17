@@ -25,7 +25,8 @@
         <div class="reservations-info">
 
             <div class="reservation-info-excursion" th:each="entry : ${reservationsMap}">
-                <h2>Резервации за <span th:text="${entry.key}">Име на екскурзията</span></h2>
+                <h2>Резервации за <span th:text="${entry.key}">Име на екскурзията</span>:
+                    <span th:text="${entry.value.totalTourists}"></span></h2>
 
                 <table class="reservations-info-table">
                     <tbody>

@@ -47,6 +47,18 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     private ReservationViewInfo getAllReservationsByExcursionName(String excursionName) {
+
+        Optional<Excursion> optionalExcursion = this.excursionService.findExcursionByExcursionName(excursionName);
+
+        if (optionalExcursion.isEmpty()) {
+            return null;
+        }
+
+        int totalTourists = Optional.ofNullable(optionalExcursion.get().getReservations())
+                .orElse(Collections.emptyList()).stream()
+                .mapToInt(Reservation::getTouristsCount)
+                .sum();
+
         List<ReservationViewDTO> reservationViewDTOList = this.reservationRepository.findAll().stream()
                 .filter(reservation -> reservation.getExcursion().getName().equals(excursionName))
                 .map(reservation -> {
@@ -64,7 +76,10 @@ public class ReservationServiceImpl implements ReservationService {
                 })
                 .toList();
 
-        return new ReservationViewInfo(reservationViewDTOList);
+        ReservationViewInfo reservationViewInfo = new ReservationViewInfo(reservationViewDTOList);
+        reservationViewInfo.setTotalTourists(totalTourists);
+
+        return reservationViewInfo;
     }
 
     private String mapPaymentModelToString(PaymentModel paymentModel) {
