@@ -123,6 +123,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeRepository.saveAndFlush(employee);
     }
 
+    @Override
+    public Optional<Employee> findEmployeeByEmail(String email) {
+        return this.employeeRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<Employee> findEmployeeByPhoneNumber(String phoneNumber) {
+        return this.employeeRepository.findByPhoneNumber(phoneNumber);
+    }
+
     private String mapLanguagesToStringFormat(Set<Language> languages) {
         return languages.stream()
                 .map(Language::getName)

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise Travel</title>
+    <link rel="stylesheet" href="/css/email-styles.css"/>
+    <link rel="stylesheet" href="/css/reset.css"/>
+</head>
+
+<body>
+    <div class="email-container">
+        <h1>Добре дошли в екипа на Sunrise Travel Agency Bulgaria!</h1>
+
+        <div class="content">
+            <p>Уважаеми <span th:text="${fullName}">[Име на новия служител]</span>,</p>
+
+            <p>С радост ви приветстваме в екипа на Sunrise Travel Agency Bulgaria! Честито за успешното ви наемане и благодарим,
+                че избрахте да се присъедините към нашата компания. Ние вярваме, че вашият принос ще бъде от голямо значение
+                за нашия екип и ще ни помогне да продължим да растем и развиваме нашето присъствие в туристическата индустрия.</p>
+
+            <p>Ето и кратка информация относно вашето наемане, която ще бъде използвана в нашата система:</p>
+
+            <ul>
+                <li>Имена: <span th:text="${fullName}">[Двете имена на служителя]</span></li>
+                <li>Телефон: <span th:text="${fullName}">[Телефонен номер]</span></li>
+                <li>Имейл: <span th:text="${email}">[Имейл адрес]</span></li>
+                <li>Адрес: <span th:text="${address}">[Адрес]</span></li>
+                <li>Степен на образование: <span th:text="${education}">[Висше/Средно образование]</span></li>
+                <li th:if="${specialty != null and not #strings.isEmpty(specialty)}">Специалност:
+                    <span th:text="${specialty}"></span>
+                </li>
+                <li>Говорими езици: <span th:text="${languages}">[Езици, които говори служителят]</span></li>
+            </ul>
+
+            <p>Надяваме се, че ще се чувствате комфортно в новата си роля и ще имате възможността да покажете своите умения
+                и потенциал. Вярваме, че ще се интегрирате бързо в нашия динамичен и позитивен екип и ще споделите с нас
+                своята енергия и ентусиазъм!</p>
+
+            <p>Ако имате въпроси или нужда от помощ по време на вашето адаптиране, не се колебайте да се свържете с нас.
+                Ние сме тук, за да ви подкрепим.</p>
+
+            <p>С най-добри пожелания,<br>Екипът на Sunrise Travel Agency Bulgaria</p>
+
+        </div>
+    </div>
+</body>
+</html>

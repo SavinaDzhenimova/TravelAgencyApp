@@ -35,7 +35,7 @@ public class CandidateController {
 
     @PostMapping("/candidates/add-employee/{id}")
     public ModelAndView addEmployee(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-        Result result = this.candidateService.getCandidateById(id);
+        Result result = this.candidateService.hireEmployee(id);
 
         if (result.isSuccess()) {
             redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
@@ -48,14 +48,12 @@ public class CandidateController {
 
     @DeleteMapping("/candidates/delete-candidate/{id}")
     public ModelAndView deleteCandidate(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-        boolean isCandidateDeleted = this.candidateService.deleteCandidateById(id);
+        Result result = this.candidateService.deleteCandidateById(id);
 
-        if (isCandidateDeleted) {
-            redirectAttributes.addFlashAttribute("successMessage",
-                    "Успешно отхвърлихте този кандидат!");
+        if (result.isSuccess()) {
+            redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
         } else {
-            redirectAttributes.addFlashAttribute("failureMessage",
-                    "Нещо се обърка! Кандидатът не беше отхвърлен!");
+            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
         }
 
         return new ModelAndView("redirect:/candidates");

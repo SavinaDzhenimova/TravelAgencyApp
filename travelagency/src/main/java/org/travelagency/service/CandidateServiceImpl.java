@@ -1,6 +1,7 @@
 package org.travelagency.service;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.*;
@@ -11,6 +12,7 @@ import org.travelagency.model.exportDTO.candidate.CandidatesViewInfo;
 import org.travelagency.model.importDTO.AddCandidateDTO;
 import org.travelagency.repository.CandidateRepository;
 import org.travelagency.repository.RoleRepository;
+import org.travelagency.service.events.HireEmployeeEvent;
 import org.travelagency.service.interfaces.CandidateService;
 import org.travelagency.service.interfaces.EmployeeService;
 import org.travelagency.service.interfaces.LanguageService;
@@ -27,16 +29,18 @@ public class CandidateServiceImpl implements CandidateService {
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     public CandidateServiceImpl(CandidateRepository candidateRepository, EmployeeService employeeService,
-                                LanguageService languageService, RoleRepository roleRepository,
-                                ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+                                LanguageService languageService, RoleRepository roleRepository, ModelMapper modelMapper,
+                                PasswordEncoder passwordEncoder, ApplicationEventPublisher applicationEventPublisher) {
         this.candidateRepository = candidateRepository;
         this.employeeService = employeeService;
         this.languageService = languageService;
         this.roleRepository = roleRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
     @Override
@@ -55,6 +59,18 @@ public class CandidateServiceImpl implements CandidateService {
 
         if (optionalByPhoneNumber.isPresent()) {
             return new Result(false, "Кандидат с този телефонен номер вече съществува!");
+        }
+
+        Optional<Employee> optionalEmployeeByEmail = this.employeeService.findEmployeeByEmail(addCandidateDTO.getEmail());
+        Optional<Employee> optionalEmployeeByPhoneNumber = this.employeeService
+                .findEmployeeByPhoneNumber(addCandidateDTO.getPhoneNumber());
+
+        if (optionalEmployeeByEmail.isPresent()) {
+            return new Result(false, "Служител с този имейл вече съществува!");
+        }
+
+        if (optionalEmployeeByPhoneNumber.isPresent()) {
+            return new Result(false, "Служител с този телефонен номер вече съществува!");
         }
 
         boolean isEducationLevelValid = this.isEducationLevelValid(addCandidateDTO.getEducation());
@@ -108,7 +124,7 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public Result getCandidateById(Long id) {
+    public Result hireEmployee(Long id) {
         Optional<Candidate> optionalCandidate = this.candidateRepository.findById(id);
 
         if (optionalCandidate.isEmpty()) {
@@ -123,23 +139,45 @@ public class CandidateServiceImpl implements CandidateService {
             return new Result(false, "Нещо се обърка! Този кандидат не беше успешно назначен на работа");
         }
 
-        boolean isCandidateDeleted = this.deleteCandidateById(id);
+        this.candidateRepository.deleteById(id);
 
-        if (!isCandidateDeleted) {
+        Optional<Candidate> optionalCandidateAfterDeletion = this.candidateRepository.findById(id);
+
+        if (optionalCandidateAfterDeletion.isPresent()) {
             return new Result(false, "Нещо се обърка! Кандидатът не беше успешно изтрит от базата данни.");
         }
 
         this.employeeService.saveAndFlushEmployee(employee);
+
+        this.applicationEventPublisher.publishEvent(
+                new HireEmployeeEvent(this, employee.getFullName(),
+                        employee.getEmail(),
+                        employee.getPhoneNumber(),
+                        employee.getAddress(),
+                        this.mapEducationLevel(employee.getEducation()),
+                        employee.getSpecialty(),
+                        this.mapLanguagesToStringFormat(employee.getLanguages())));
+
         return new Result(true, "Този кандидат беше успешно назначен на работа!");
     }
 
     @Override
-    public boolean deleteCandidateById(Long id) {
-        this.candidateRepository.deleteById(id);
-
+    public Result deleteCandidateById(Long id) {
         Optional<Candidate> optionalCandidate = this.candidateRepository.findById(id);
 
-        return optionalCandidate.isEmpty();
+        if (optionalCandidate.isEmpty()) {
+            return new Result(false, "Не е намерен кандидат с това id.");
+        }
+
+        this.candidateRepository.deleteById(id);
+
+        Optional<Candidate> optionalCandidateAfterDeletion = this.candidateRepository.findById(id);
+
+        if (optionalCandidateAfterDeletion.isPresent()) {
+            return new Result(false, "Нещо се обърка! Кандидатът не беше успешно изтрит от базата данни!");
+        }
+
+        return new Result(true, "Успешно отхвърлихте този кандидат!");
     }
 
     private Employee mapCandidateToEmployee(Candidate candidate) {

@@ -10,7 +10,7 @@ public interface CandidateService {
 
     CandidatesViewInfo getAllCandidates();
 
-    Result getCandidateById(Long id);
+    Result hireEmployee(Long id);
 
-    boolean deleteCandidateById(Long id);
+    Result deleteCandidateById(Long id);
 }
