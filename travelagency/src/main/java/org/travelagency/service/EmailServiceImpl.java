@@ -62,4 +62,34 @@ public class EmailServiceImpl implements EmailService {
 
         return templateEngine.process("/email/hire-email", context);
     }
+
+    @Override
+    public void promoteEmployeeEmail(String fullName, String email) {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+
+        try {
+            mimeMessageHelper.setTo(email);
+            mimeMessageHelper.setFrom(this.email);
+            mimeMessageHelper.setReplyTo(this.email);
+            mimeMessageHelper.setSubject("Повишение в екипа на Sunrise Travel Agency Bulgaria!");
+            mimeMessageHelper.setText(generatePromoteEmployeeEmail(fullName), true);
+
+            javaMailSender.send(mimeMessageHelper.getMimeMessage());
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private String generatePromoteEmployeeEmail(String fullName) {
+
+        Context context = new Context();
+
+        context.setVariable("fullName", fullName);
+
+        return templateEngine.process("/email/promote-email", context);
+    }
 }

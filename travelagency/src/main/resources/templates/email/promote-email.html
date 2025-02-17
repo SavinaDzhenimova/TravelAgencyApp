@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise Travel</title>
+    <link rel="stylesheet" href="/css/email-styles.css"/>
+    <link rel="stylesheet" href="/css/reset.css"/>
+</head>
+
+<body>
+    <div class="email-container">
+        <h1>Честито повишение в екипа на Sunrise Travel Agency Bulgaria!</h1>
+
+        <div class="content">
+            <p>Уважаеми <span th:text="${fullName}">[Име на новия служител]</span>,</p>
+
+            <p>С огромно удоволствие искаме да Ви поздравим за Вашето повишение в мениджърска позиция в Sunrise Travel
+              Agency Bulgaria! Вашата отдаденост, професионализъм и упорита работа не останаха незабелязани, и сме уверени,
+              че ще продължите да допринасяте за успеха на нашата компания.</p>
+
+            <p>Вашето лидерство и ангажираност са вдъхновение за екипа, и сме сигурни, че ще се справите блестящо с новите
+              предизвикателства. Очакваме с нетърпение да видим още по-големите Ви успехи в тази нова роля!</p>
+
+            <p>От името на целия екип, Ви желаем много успехи и удовлетворение в новата Ви роля!</p>
+
+            <p>С уважение,<br>Екипът на Sunrise Travel Agency Bulgaria</p>
+
+        </div>
+    </div>
+</body>
+</html>

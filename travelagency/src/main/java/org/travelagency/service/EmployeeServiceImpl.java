@@ -1,6 +1,7 @@
 package org.travelagency.service;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ import org.travelagency.model.exportDTO.employee.EmployeesViewInfo;
 import org.travelagency.model.user.EmployeeProfileDTO;
 import org.travelagency.repository.EmployeeRepository;
 import org.travelagency.repository.RoleRepository;
+import org.travelagency.service.events.HireEmployeeEvent;
+import org.travelagency.service.events.PromoteEmployeeEvent;
 import org.travelagency.service.interfaces.EmployeeService;
 
 import java.util.List;
@@ -28,12 +31,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     public EmployeeServiceImpl(EmployeeRepository employeeRepository, RoleRepository roleRepository,
-                               ModelMapper modelMapper) {
+                               ModelMapper modelMapper, ApplicationEventPublisher applicationEventPublisher) {
         this.employeeRepository = employeeRepository;
         this.roleRepository = roleRepository;
         this.modelMapper = modelMapper;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
     @Override
@@ -106,6 +111,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setRole(role);
 
         this.employeeRepository.saveAndFlush(employee);
+
+        this.applicationEventPublisher.publishEvent(
+                new PromoteEmployeeEvent(this, employee.getFullName(), employee.getEmail()));
+
         return new Result(true, "Успешно повишихте този служител! Той вече е мениджър!");
     }
 
