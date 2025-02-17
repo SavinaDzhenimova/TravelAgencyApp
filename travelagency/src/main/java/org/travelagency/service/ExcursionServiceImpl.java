@@ -1,5 +1,6 @@
 package org.travelagency.service;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.*;
 import org.travelagency.model.enums.TransportType;
@@ -9,6 +10,7 @@ import org.travelagency.model.exportDTO.excursion.ExcursionViewDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewInfo;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.repository.ExcursionRepository;
+import org.travelagency.service.events.AddExcursionEvent;
 import org.travelagency.service.interfaces.*;
 
 import java.io.IOException;
@@ -22,14 +24,19 @@ public class ExcursionServiceImpl implements ExcursionService {
     private final DayService dayService;
     private final DestinationService destinationService;
     private final ImageService imageService;
+    private final SubscriberService subscriberService;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
-    public ExcursionServiceImpl(ExcursionRepository excursionRepository, ProgramService programService,
-                                DayService dayService, DestinationService destinationService, ImageService imageService) {
+    public ExcursionServiceImpl(ExcursionRepository excursionRepository, ProgramService programService, DayService dayService,
+                                DestinationService destinationService, ImageService imageService,
+                                SubscriberService subscriberService, ApplicationEventPublisher applicationEventPublisher) {
         this.excursionRepository = excursionRepository;
         this.programService = programService;
         this.dayService = dayService;
         this.destinationService = destinationService;
         this.imageService = imageService;
+        this.subscriberService = subscriberService;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
     @Override
@@ -193,6 +200,12 @@ public class ExcursionServiceImpl implements ExcursionService {
         program.setDays(dayList);
         program.setExcursion(excursion);
         this.programService.saveAndFlushProgram(program);
+
+        this.subscriberService.getAllSubscribers().forEach(subscriber -> {
+            this.applicationEventPublisher.publishEvent(
+                    new AddExcursionEvent(this,
+                            Objects.requireNonNull(excursion).getName(), subscriber.getEmail()));
+        });
 
         return new Result(true, "Успешно добавихте нова екскурзия!");
     }

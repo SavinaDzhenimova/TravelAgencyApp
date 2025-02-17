@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise Travel</title>
+    <link rel="stylesheet" href="/css/email-styles.css"/>
+    <link rel="stylesheet" href="/css/reset.css"/>
+</head>
+
+<body>
+    <div class="email-container">
+        <h1>Нова екскурзия в Sunrise Travel Agency Bulgaria!</h1>
+
+        <div class="content">
+            <p>Здравейте,</p>
+
+            <p>Имаме страхотна новина за вас! Предлагаме нова екскурзия
+                <span th:text="${excursionName}"></span>, която може да ви заинтересува.</p>
+
+            <p>Повече информация за екскурзията ще намерите на <a th:href="${excursionUrl}" th:text="${excursionName}"></a>.</p>
+
+            <p>С най-добри пожелания,<br>Екипът на Sunrise Travel Agency Bulgaria</p>
+
+        </div>
+    </div>
+</body>
+</html>

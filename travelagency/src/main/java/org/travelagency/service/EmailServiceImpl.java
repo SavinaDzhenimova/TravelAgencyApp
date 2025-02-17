@@ -10,6 +10,8 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.travelagency.service.interfaces.EmailService;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @Service
@@ -68,6 +70,19 @@ public class EmailServiceImpl implements EmailService {
 
         String content = generateEmailContent("/email/candidate-email", variables);
         sendEmail(email, "Успешно приета кандидатура в Sunrise Travel Agency Bulgaria!", content);
+    }
+
+    @Override
+    public void sendAddExcursionEmail(String excursionName, String email) {
+        String excursionUrl = "http://localhost:8090/excursions/excursion-details/"
+                + URLEncoder.encode(excursionName, StandardCharsets.UTF_8);
+
+        Map<String, Object> variables = Map.of(
+                "excursionName", excursionName,
+                "excursionUrl", excursionUrl);
+
+        String content = generateEmailContent("/email/add-excursion-email", variables);
+        sendEmail(email, "Нова екскурзия в Sunrise Travel Agency Bulgaria!", content);
     }
 
     private void sendEmail(String to, String subject, String content) {

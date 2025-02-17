@@ -7,6 +7,7 @@ import org.travelagency.model.importDTO.AddSubscriberDTO;
 import org.travelagency.repository.SubscriberRepository;
 import org.travelagency.service.interfaces.SubscriberService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,5 +39,10 @@ public class SubscriberServiceImpl implements SubscriberService {
 
         return new Result(true, "Вие успешно се абонирахте за нашия бюлетин и " +
                 "ще получавате имейл при добавяне на нова екскурзия!");
+    }
+
+    @Override
+    public List<Subscriber> getAllSubscribers() {
+        return this.subscriberRepository.findAll();
     }
 }

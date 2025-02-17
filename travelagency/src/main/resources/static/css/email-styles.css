@@ -45,7 +45,11 @@ h1:after {
     list-style-type: disc;
 }
 
-span {
+span, a {
     font-weight: 600;
     font-style: oblique;
+}
+
+a {
+    color: #0A67AA;
 }

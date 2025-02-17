@@ -13,6 +13,9 @@ import org.travelagency.model.exportDTO.excursion.ExcursionViewInfo;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.service.interfaces.ExcursionService;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+
 @Controller
 @RequestMapping("/excursions")
 public class ExcursionController {
@@ -60,7 +63,9 @@ public class ExcursionController {
     @GetMapping("/excursion-details/{excursionName}")
     public ModelAndView getExcursionDetails(@PathVariable("excursionName") String excursionName) {
 
-        ExcursionExportDTO excursionExportDTO = this.excursionService.getExcursionDetailsByName(excursionName);
+        String decodedExcursionName = URLDecoder.decode(excursionName, StandardCharsets.UTF_8);
+
+        ExcursionExportDTO excursionExportDTO = this.excursionService.getExcursionDetailsByName(decodedExcursionName);
 
         ModelAndView modelAndView = new ModelAndView("excursion-details");
 

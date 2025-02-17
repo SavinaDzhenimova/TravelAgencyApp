@@ -9,4 +9,6 @@ public interface EmailService {
 
     void sendAddCandidateEmail(String firstName, String lastName, String email, String phoneNumber,
                                String address, String education, String specialty, String languages);
+
+    void sendAddExcursionEmail(String excursionName, String email);
 }
