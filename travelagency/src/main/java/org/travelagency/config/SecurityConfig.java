@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -19,7 +20,7 @@ public class SecurityConfig {
 
         return httpSecurity
                 .csrf(csrf -> csrf
-                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+                        .csrfTokenRepository(csrfTokenRepository()))
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/uploads/**", "/", "/about-us", "/contacts", "/faq", "/privacy-policy",
@@ -48,6 +49,11 @@ public class SecurityConfig {
                         .invalidateHttpSession(true)
                 )
                 .build();
+    }
+
+    @Bean
+    public CsrfTokenRepository csrfTokenRepository() {
+        return CookieCsrfTokenRepository.withHttpOnlyFalse();
     }
 
     @Bean

@@ -195,6 +195,8 @@
                       th:action="@{/subscribe}"
                       th:object="${addSubscriberDTO}">
 
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
                     <input th:field="*{email}"
                            th:errorclass="is-invalid"
                            type="email" name="email" id="email" placeholder="Email...">

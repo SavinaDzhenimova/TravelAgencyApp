@@ -1,8 +1,14 @@
 package org.travelagency.web;
 
+import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.travelagency.model.exportDTO.destination.DestinationsExportListDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewInfo;
@@ -16,13 +22,24 @@ public class HomeController {
     private final DestinationService destinationService;
     private final ExcursionService excursionService;
 
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
     public HomeController(DestinationService destinationService, ExcursionService excursionService) {
         this.destinationService = destinationService;
         this.excursionService = excursionService;
     }
 
     @GetMapping("/")
-    public ModelAndView index(Model model) {
+    public ModelAndView index(Model model, HttpServletRequest request) {
+
+        CsrfToken csrfToken = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+
+        if (csrfToken != null) {
+            model.addAttribute("_csrf", csrfToken);
+            System.out.println("CSRF Token при зареждане: " + csrfToken.getToken());
+        } else {
+            System.out.println("CSRF Token е null!");
+        }
 
         if (!model.containsAttribute("addSubscriberDTO")) {
             model.addAttribute("addSubscriberDTO", new AddSubscriberDTO());
