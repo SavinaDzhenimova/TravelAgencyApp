@@ -1,5 +1,7 @@
 package org.travelagency.model.exportDTO.reservation;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationViewDTO {
@@ -16,11 +18,14 @@ public class ReservationViewDTO {
 
     private String payment;
 
+    private LocalDate date;
+
     private String comments;
 
     private List<String> touristNames;
 
     public ReservationViewDTO() {
+        this.touristNames = new ArrayList<>();
     }
 
     public String getExcursionName() {
@@ -69,6 +74,14 @@ public class ReservationViewDTO {
 
     public void setPayment(String payment) {
         this.payment = payment;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public String getComments() {

@@ -13,6 +13,7 @@ import org.travelagency.repository.ReservationRepository;
 import org.travelagency.service.interfaces.ExcursionService;
 import org.travelagency.service.interfaces.ReservationService;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -100,6 +101,7 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setTouristsCount(addReservationDTO.getTouristsCount());
         reservation.setComments(addReservationDTO.getComments());
         reservation.setPaymentModel(addReservationDTO.getPayment());
+        reservation.setDate(LocalDate.now());
 
         List<String> tourists = this.getTouristsForReservation(addReservationDTO.getTouristNames());
 

@@ -3,6 +3,7 @@ package org.travelagency.model.entity;
 import jakarta.persistence.*;
 import org.travelagency.model.enums.PaymentModel;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,9 @@ public class Reservation extends BaseEntity {
 
     @Column(nullable = false, name = "payment_model")
     private PaymentModel paymentModel;
+
+    @Column(nullable = false)
+    private LocalDate date;
 
     @Column
     private String comments;
@@ -84,6 +88,14 @@ public class Reservation extends BaseEntity {
 
     public void setTouristNames(List<String> touristNames) {
         this.touristNames = touristNames;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public String getComments() {
