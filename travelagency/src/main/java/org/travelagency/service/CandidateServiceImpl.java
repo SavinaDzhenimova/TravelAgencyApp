@@ -12,6 +12,7 @@ import org.travelagency.model.exportDTO.candidate.CandidatesViewInfo;
 import org.travelagency.model.importDTO.AddCandidateDTO;
 import org.travelagency.repository.CandidateRepository;
 import org.travelagency.repository.RoleRepository;
+import org.travelagency.service.events.AddCandidateEvent;
 import org.travelagency.service.events.HireEmployeeEvent;
 import org.travelagency.service.interfaces.CandidateService;
 import org.travelagency.service.interfaces.EmployeeService;
@@ -97,6 +98,16 @@ public class CandidateServiceImpl implements CandidateService {
         candidate.setLanguages(languages);
 
         this.candidateRepository.saveAndFlush(candidate);
+
+        this.applicationEventPublisher.publishEvent(
+                new AddCandidateEvent(this, candidate.getFirstName(),
+                        candidate.getLastName(),
+                        candidate.getEmail(),
+                        candidate.getPhoneNumber(),
+                        candidate.getAddress(),
+                        this.mapEducationLevel(candidate.getEducation()),
+                        candidate.getSpecialty(),
+                        this.mapLanguagesToStringFormat(candidate.getLanguages())));
 
         return new Result(true, "Кандидатурата Ви беше изпратена успешно! " +
                 "Моля изчакайте търпеливо да бъде разгледана и наш служител ще се свърже с Вас!");

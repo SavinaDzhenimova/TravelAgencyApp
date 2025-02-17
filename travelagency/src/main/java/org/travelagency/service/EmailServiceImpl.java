@@ -64,7 +64,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void promoteEmployeeEmail(String fullName, String email) {
+    public void sendPromoteEmployeeEmail(String fullName, String email) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
@@ -91,5 +91,46 @@ public class EmailServiceImpl implements EmailService {
         context.setVariable("fullName", fullName);
 
         return templateEngine.process("/email/promote-email", context);
+    }
+
+    @Override
+    public void sendAddCandidateEmail(String firstName, String lastName, String email, String phoneNumber,
+                                      String address, String education, String specialty, String languages) {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+
+        try {
+            mimeMessageHelper.setTo(email);
+            mimeMessageHelper.setFrom(this.email);
+            mimeMessageHelper.setReplyTo(this.email);
+            mimeMessageHelper.setSubject("Успешно приета кандидатура в Sunrise Travel Agency Bulgaria!");
+            mimeMessageHelper.setText(generateHireEmployeeEmail(firstName, lastName, email, phoneNumber, address,
+                    education, specialty, languages), true);
+
+            javaMailSender.send(mimeMessageHelper.getMimeMessage());
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private String generateHireEmployeeEmail(String firstName, String lastName, String email, String phoneNumber,
+                                             String address, String education, String specialty, String languages) {
+
+        Context context = new Context();
+
+        context.setVariable("fullName", firstName + " " + lastName);
+        context.setVariable("firstName", firstName);
+        context.setVariable("lastName", lastName);
+        context.setVariable("email", email);
+        context.setVariable("phoneNumber", phoneNumber);
+        context.setVariable("address", address);
+        context.setVariable("education", education);
+        context.setVariable("specialty", specialty);
+        context.setVariable("languages", languages);
+
+        return templateEngine.process("/email/candidate-email", context);
     }
 }

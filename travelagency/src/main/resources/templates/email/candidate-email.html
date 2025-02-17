@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunrise Travel</title>
+  <link rel="stylesheet" href="/css/email-styles.css"/>
+  <link rel="stylesheet" href="/css/reset.css"/>
+</head>
+
+<body>
+    <div class="email-container">
+        <h1>Вашата кандидатура в Sunrise Travel Agency Bulgaria беше успешно приета!</h1>
+
+        <div class="content">
+            <p>Уважаеми/а <span th:text="${fullName}">[Име на кандидата]</span>,</p>
+
+            <p>Благодарим Ви, че кандидатствахте за позиция в Sunrise Travel Agency Bulgaria! С удоволствие Ви уведомяваме,
+              че Вашата кандидатура е успешно приета и е преминала първоначалния ни преглед.</p>
+
+            <p>Ето и кратка информация относно посочените от Вас данни, които ще бъдат използвани в нашата система:</p>
+
+            <ul>
+                <li>Име: <span th:text="${firstName}">[Двете имена на служителя]</span></li>
+                <li>Фамилия: <span th:text="${lastName}">[Двете имена на служителя]</span></li>
+                <li>Телефон: <span th:text="${phoneNumber}">[Телефонен номер]</span></li>
+                <li>Имейл: <span th:text="${email}">[Имейл адрес]</span></li>
+                <li>Адрес: <span th:text="${address}">[Адрес]</span></li>
+                <li>Степен на образование: <span th:text="${education}">[Висше/Средно образование]</span></li>
+                <li th:if="${specialty != null and not #strings.isEmpty(specialty)}">Специалност:
+                    <span th:text="${specialty}"></span>
+                </li>
+                <li>Говорими езици: <span th:text="${languages}">[Езици, които говори служителят]</span></li>
+            </ul>
+
+            <p>Нашият екип ще се свърже с Вас на посочения телефонен номер в най-кратък срок, за да Ви
+              предоставим повече информация относно следващите стъпки в процеса на подбор.</p>
+
+            <p>Ако междувременно имате въпроси, не се колебайте да се свържете с нас на този имейл, от който получавате това
+              електронно писмо, или ни се обадете на телефон +359 888 232 555.</p>
+
+            <p>Очакваме с нетърпение да се запознаем по-отблизо!</p>
+
+            <p>С най-добри пожелания,<br>Екипът на Sunrise Travel Agency Bulgaria</p>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -14,8 +14,8 @@ public class PromoteEmployeeEventListener {
     }
 
     @EventListener
-    public void handleMakeOrderEvent(PromoteEmployeeEvent promoteEmployeeEvent) {
+    public void handlePromoteEmployeeEvent(PromoteEmployeeEvent promoteEmployeeEvent) {
 
-        this.emailService.promoteEmployeeEmail(promoteEmployeeEvent.getFullName(), promoteEmployeeEvent.getEmail());
+        this.emailService.sendPromoteEmployeeEmail(promoteEmployeeEvent.getFullName(), promoteEmployeeEvent.getEmail());
     }
 }

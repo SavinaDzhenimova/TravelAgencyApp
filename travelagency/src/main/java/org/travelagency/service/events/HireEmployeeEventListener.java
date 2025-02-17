@@ -14,7 +14,7 @@ public class HireEmployeeEventListener {
     }
 
     @EventListener
-    public void handleMakeOrderEvent(HireEmployeeEvent hireEmployeeEvent) {
+    public void handleHireEmployeeEvent(HireEmployeeEvent hireEmployeeEvent) {
 
         this.emailService.sendHireEmployeeEmail(hireEmployeeEvent.getFullName(), hireEmployeeEvent.getEmail(),
                 hireEmployeeEvent.getPhoneNumber(), hireEmployeeEvent.getAddress(), hireEmployeeEvent.getEducation(),
