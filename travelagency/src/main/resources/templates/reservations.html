@@ -33,6 +33,7 @@
                     <tr>
                         <td class="fullName">Резервирал</td>
                         <td class="date">Дата</td>
+                        <td class="excursionDate">Дата на екскурзията</td>
                         <td class="email">E-mail</td>
                         <td class="phoneNumber">Телефон</td>
                         <td class="payment">Плащане</td>
@@ -43,6 +44,8 @@
                     <tr th:each="reservation : ${entry.value.reservations}">
                         <td th:text="${reservation.getFullName()}" class="fullName">Резервирал</td>
                         <td th:text="${#temporals.format(reservation.getDate(), 'dd.MM.yyyy г.')}" class="date">Дата</td>
+                        <td th:text="${#temporals.format(reservation.getExcursionDate(), 'dd.MM.yyyy г.')}" class="excursionDate">
+                            Дата на екскурзията</td>
                         <td th:text="${reservation.getEmail()}" class="email">E-mail</td>
                         <td th:text="${reservation.getPhoneNumber()}" class="phoneNumber">Телефон</td>
                         <td th:text="${reservation.getPayment()}" class="payment">Плащане</td>

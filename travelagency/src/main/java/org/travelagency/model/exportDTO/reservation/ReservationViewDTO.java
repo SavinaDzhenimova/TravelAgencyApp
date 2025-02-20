@@ -20,6 +20,8 @@ public class ReservationViewDTO {
 
     private LocalDate date;
 
+    private LocalDate excursionDate;
+
     private String comments;
 
     private List<String> touristNames;
@@ -82,6 +84,14 @@ public class ReservationViewDTO {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public LocalDate getExcursionDate() {
+        return excursionDate;
+    }
+
+    public void setExcursionDate(LocalDate excursionDate) {
+        this.excursionDate = excursionDate;
     }
 
     public String getComments() {
