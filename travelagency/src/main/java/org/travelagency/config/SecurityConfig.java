@@ -27,7 +27,8 @@ public class SecurityConfig {
                                 "/general-conditions", "/excursions", "/subscribe").permitAll()
                         .requestMatchers("/destinations/add-destination",
                                 "/excursions/add-excursion").hasRole("MANAGER")
-                        .requestMatchers("/employees/login", "/register", "/excursions/reserve/**").anonymous()
+                        .requestMatchers("/employees/login", "/register", "/excursions/reserve/**",
+                                "/excursions/send-inquiry").anonymous()
                         .requestMatchers("/employees/profile", "/employees",
                                 "/excursions/reservations").authenticated()
                         .requestMatchers("/destinations/**", "/excursions/**",

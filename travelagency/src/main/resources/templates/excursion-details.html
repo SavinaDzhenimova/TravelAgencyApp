@@ -6,6 +6,7 @@
 <head>
     <th:block th:replace="~{fragments/commons::head}"></th:block>
     <link rel="stylesheet" href="/css/excursion-details-styles.css">
+    <link rel="stylesheet" href="/css/modal-window-styles.css">
     <title>Sunrise Travel</title>
 </head>
 
@@ -15,6 +16,10 @@
 
     <main>
         <h1 th:text="${excursion.getName()}">Австрия</h1>
+
+        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+            <p class="success" th:text="${successMessage}"></p>
+        </div>
 
         <article>
             <div class="article-header">
@@ -42,6 +47,69 @@
 
                     <a sec:authorize="!isAuthenticated()"
                             th:href="@{/excursions/reserve/{excursionName}(excursionName=${excursion.name})}">Резервирай</a>
+
+                    <!-- Бутон за отваряне на модалния прозорец -->
+                    <button id="openModal" class="custom-btn">Бързо запитване</button>
+
+                    <!-- Модален прозорец -->
+                    <div id="quickInquiryModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title">Бързо запитване за екскурзия "<span th:text="${excursion.getName()}"></span>"</h2>
+                                <button id="closeModal" class="close-btn">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="quickInquiryForm"
+                                      th:method="POST"
+                                      th:action="@{'/excursions/excursion-details/' + ${excursion.getName()} + '/send-inquiry'}"
+                                      th:object="${addInquiryDTO}">
+
+                                    <div class="field">
+                                        <input th:field="*{name}"
+                                               th:errorclass="is-invalid"
+                                               type="text" id="name" name="name" placeholder="Име" required>
+                                        <label th:for="name">Име</label>
+                                        <small th:if="${#fields.hasErrors('name')}"
+                                               th:errors="*{name}"
+                                               class="text-danger">Dish name error message</small>
+                                    </div>
+
+                                    <div class="field">
+                                        <input th:field="*{email}"
+                                               th:errorclass="is-invalid"
+                                               type="email" id="email" name="email" placeholder="Имейл" required>
+                                        <label th:for="email">Имейл</label>
+                                        <small th:if="${#fields.hasErrors('email')}"
+                                               th:errors="*{email}"
+                                               class="text-danger">Dish name error message</small>
+                                    </div>
+
+                                    <div class="field">
+                                        <input th:field="*{phone}"
+                                               th:errorclass="is-invalid"
+                                               type="text" id="phone" name="phone" placeholder="Телефонен номер" required>
+                                        <label th:for="phone">Телефонен номер</label>
+                                        <small th:if="${#fields.hasErrors('phone')}"
+                                               th:errors="*{phone}"
+                                               class="text-danger">Dish name error message</small>
+                                    </div>
+
+                                    <div class="field" id="message-container">
+                                        <label th:for="message">Вашето запитване</label>
+                                        <textarea th:field="*{message}"
+                                                  th:errorclass="is-invalid"
+                                                  id="message" name="message" rows="4" required></textarea>
+                                        <small th:if="${#fields.hasErrors('message')}"
+                                               th:errors="*{message}"
+                                               class="text-danger">Dish name error message</small>
+                                    </div>
+
+                                    <input type="hidden" name="excursionName" th:value="${excursion.getName()}">
+                                    <button type="submit" class="custom-btn submit-btn">Изпрати запитване</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -65,6 +133,7 @@
     <script src="\js\show-menu.js"></script>
     <script src="\js\show-menu-profile.js"></script>
     <script src="\js\show-menu-team.js"></script>
+    <script src="\js\modal-window.js"></script>
 
 </body>
 </html>

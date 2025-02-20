@@ -9,6 +9,7 @@ import org.travelagency.model.exportDTO.excursion.ExcursionExportDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewInfo;
 import org.travelagency.model.importDTO.AddExcursionDTO;
+import org.travelagency.model.importDTO.AddInquiryDTO;
 import org.travelagency.repository.ExcursionRepository;
 import org.travelagency.service.events.AddExcursionEvent;
 import org.travelagency.service.interfaces.*;
@@ -25,18 +26,31 @@ public class ExcursionServiceImpl implements ExcursionService {
     private final DestinationService destinationService;
     private final ImageService imageService;
     private final SubscriberService subscriberService;
+    private final EmailService emailService;
     private final ApplicationEventPublisher applicationEventPublisher;
 
     public ExcursionServiceImpl(ExcursionRepository excursionRepository, ProgramService programService, DayService dayService,
                                 DestinationService destinationService, ImageService imageService,
-                                SubscriberService subscriberService, ApplicationEventPublisher applicationEventPublisher) {
+                                SubscriberService subscriberService, EmailService emailService,
+                                ApplicationEventPublisher applicationEventPublisher) {
         this.excursionRepository = excursionRepository;
         this.programService = programService;
         this.dayService = dayService;
         this.destinationService = destinationService;
         this.imageService = imageService;
         this.subscriberService = subscriberService;
+        this.emailService = emailService;
         this.applicationEventPublisher = applicationEventPublisher;
+    }
+
+    @Override
+    public void sendInquiryEmail(AddInquiryDTO addInquiryDTO, String excursionName) {
+        this.emailService.sendInquiryEmail(
+                addInquiryDTO.getName(),
+                addInquiryDTO.getEmail(),
+                addInquiryDTO.getPhone(),
+                addInquiryDTO.getMessage(),
+                excursionName);
     }
 
     @Override

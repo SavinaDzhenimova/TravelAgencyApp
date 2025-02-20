@@ -3,6 +3,7 @@ package org.travelagency.service;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,23 @@ public class EmailServiceImpl implements EmailService {
         this.templateEngine = templateEngine;
         this.javaMailSender = javaMailSender;
         this.email = email;
+    }
+
+    @Override
+    public void sendInquiryEmail(String name, String email, String phone, String message, String excursionName) {
+        String subject = "Ново запитване за екскурзия: " + excursionName;
+
+        Map<String, Object> variables = Map.of(
+                "name", name,
+                "email", email,
+                "phone", phone,
+                "excursionName", excursionName,
+                "message", message
+        );
+
+        String content = generateEmailContent("/email/inquiry-email", variables);
+
+        sendEmail("sunrisetravelagencybulgaria@gmail.com", subject, content);
     }
 
     @Override
