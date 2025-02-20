@@ -78,24 +78,6 @@ public class ExcursionController {
         return modelAndView;
     }
 
-//    @GetMapping("/{destinationName}")
-//    public ModelAndView getAllExcursionsByDestination(@PathVariable("destinationName") String destinationName) {
-//
-//        ExcursionViewInfo excursionViewInfo = this.excursionService.getAllExcursionsByDestinationName(destinationName);
-//
-//        ModelAndView modelAndView = new ModelAndView("excursions");
-//
-//        modelAndView.addObject("destinationName", destinationName);
-//
-//        if (excursionViewInfo == null || excursionViewInfo.getExcursions().isEmpty()) {
-//            modelAndView.addObject("warningMessage", "Все още няма добавени екскурзии за разглеждане!");
-//        } else {
-//            modelAndView.addObject("excursions", excursionViewInfo.getExcursions());
-//        }
-//
-//        return modelAndView;
-//    }
-
     @GetMapping("/excursion-details/{excursionName}")
     public ModelAndView getExcursionDetails(@PathVariable("excursionName") String excursionName, Model model) {
 

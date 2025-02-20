@@ -82,12 +82,6 @@ public class ExcursionServiceImpl implements ExcursionService {
         return excursionsPage.map(this::mapExcursionToExcursionViewDTO);
     }
 
-    private List<ExcursionViewDTO> mapExcursionsToExcursionViewDTOList(List<Excursion> excursions) {
-        return excursions.stream()
-                .map(this::mapExcursionToExcursionViewDTO)
-                .toList();
-    }
-
     private ExcursionViewDTO mapExcursionToExcursionViewDTO(Excursion excursion) {
         ExcursionViewDTO excursionViewDTO = new ExcursionViewDTO();
 
