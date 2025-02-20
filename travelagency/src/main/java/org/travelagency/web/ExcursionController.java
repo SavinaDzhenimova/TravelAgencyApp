@@ -1,6 +1,10 @@
 package org.travelagency.web;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.travelagency.model.entity.Result;
 import org.travelagency.model.exportDTO.excursion.ExcursionExportDTO;
+import org.travelagency.model.exportDTO.excursion.ExcursionViewDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewInfo;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.model.importDTO.AddInquiryDTO;
@@ -29,17 +34,22 @@ public class ExcursionController {
     }
 
     @GetMapping
-    public ModelAndView excursions() {
-
-        ExcursionViewInfo excursionViewInfo = this.excursionService.getAllExcursions();
+    public ModelAndView getAllExcursions(@RequestParam(defaultValue = "0") int page,
+                                      @RequestParam(defaultValue = "6") int size) {
 
         ModelAndView modelAndView = new ModelAndView("excursions");
 
-        if (excursionViewInfo == null || excursionViewInfo.getExcursions().isEmpty()) {
+        Page<ExcursionViewDTO> excursionsPage = this.excursionService.getAllExcursions(PageRequest.of(page, size));
+
+        if (excursionsPage.isEmpty()) {
             modelAndView.addObject("warningMessage", "Все още няма добавени екскурзии за разглеждане!");
         } else {
-            modelAndView.addObject("excursions", excursionViewInfo.getExcursions());
+            modelAndView.addObject("excursions", excursionsPage.getContent());
         }
+
+        modelAndView.addObject("currentPage", excursionsPage.getNumber());
+        modelAndView.addObject("totalPages", excursionsPage.getTotalPages());
+        modelAndView.addObject("size", size);
 
         return modelAndView;
     }

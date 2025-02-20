@@ -1,6 +1,8 @@
 package org.travelagency.service;
 
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.*;
 import org.travelagency.model.enums.TransportType;
@@ -68,22 +70,13 @@ public class ExcursionServiceImpl implements ExcursionService {
     }
 
     @Override
-    public ExcursionViewInfo getAllExcursions() {
-        List<Excursion> excursions = this.excursionRepository.findAll();
+    public Page<ExcursionViewDTO> getAllExcursions(Pageable pageable) {
+        Page<Excursion> excursionsPage = this.excursionRepository.findAll(pageable);
 
-        if (excursions.isEmpty()) {
-            return null;
-        }
-
-        List<Excursion> sortedExcursions = excursions.stream()
-                .sorted(Comparator.comparing(excursion -> excursion.getDates().stream()
-                        .min(Comparator.naturalOrder())
-                        .orElse(LocalDate.MAX)))
-                .toList();
-
-        List<ExcursionViewDTO> excursionViewDTOList = this.mapExcursionsToExcursionViewDTOList(sortedExcursions);
-
-        return new ExcursionViewInfo(excursionViewDTOList);
+        return excursionsPage.map(excursion -> {
+            ExcursionViewDTO dto = this.mapExcursionToExcursionViewDTO(excursion);
+            return dto;
+        });
     }
 
     @Override
@@ -122,7 +115,6 @@ public class ExcursionServiceImpl implements ExcursionService {
 
         excursionViewDTO.setName(excursion.getName());
         excursionViewDTO.setPrice(excursion.getPrice());
-        excursionViewDTO.setDate(excursion.getDates().stream().min(Comparator.naturalOrder()).orElse(null));
         excursionViewDTO.setDestination(excursion.getDestination().getName());
         excursionViewDTO.setEndurance(excursion.getProgram().getEndurance());
 

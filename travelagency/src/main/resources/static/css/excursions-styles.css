@@ -106,3 +106,32 @@ main .excursions .excursion-article .article-content p {
     position: absolute;
     bottom: 0.5em;
 }
+
+main .pagination {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding-top: 2em;
+}
+
+main .pagination p {
+    color: #0A67AA;
+}
+
+main .pagination p > span {
+    font-weight: 600;
+    font-style: oblique;
+}
+
+main .pagination a {
+    width: 20px;
+    height: 19px;
+    aspect-ratio: 1/1;
+    background-color: #0A67AA;
+    color: #fff;
+    border: 1px solid #0A67AA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

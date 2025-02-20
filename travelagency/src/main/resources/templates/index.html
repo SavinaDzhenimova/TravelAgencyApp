@@ -122,7 +122,6 @@
 
                         <div class="content">
                             <p>Дестинация: <span th:text="${excursion.getDestination()}"></span></p>
-                            <p>Дата: <span th:text="${#temporals.format(excursion.getDate(), 'dd.MM.yyyy г.')}"></span></p>
                             <p>Транспорт: <span th:text="${excursion.getTransport()}"></span></p>
                             <p>Продължителност: <span th:text="${excursion.getEndurance()} + ' дни'"></span></p>
                             <p>Цена: <span th:text="${excursion.getPrice()} + ' лв.'"></span></p>
