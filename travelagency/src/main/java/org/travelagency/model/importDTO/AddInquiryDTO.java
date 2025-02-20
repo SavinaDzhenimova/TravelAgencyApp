@@ -7,7 +7,7 @@ import org.travelagency.model.annotations.ValidEmail;
 public class AddInquiryDTO {
 
     @NotBlank(message = "Името е задължително.")
-    @Size(min = 2, max = 50, message = "Името трябва да бъде между 2 и 50 символа.")
+    @Size(min = 5, max = 50, message = "Името трябва да бъде между 5 и 50 символа.")
     private String name;
 
     @NotBlank(message = "Имейлът е задължителен.")
@@ -21,9 +21,6 @@ public class AddInquiryDTO {
     @NotBlank(message = "Запитването не може да бъде празно.")
     @Size(min = 5, message = "Запитването трябва да съдържа поне 5 символа.")
     private String message;
-
-    @NotBlank(message = "Името на екскурзията е задължително.")
-    private String excursionName;
 
     public AddInquiryDTO() {
     }
@@ -58,13 +55,5 @@ public class AddInquiryDTO {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public String getExcursionName() {
-        return excursionName;
-    }
-
-    public void setExcursionName(String excursionName) {
-        this.excursionName = excursionName;
     }
 }

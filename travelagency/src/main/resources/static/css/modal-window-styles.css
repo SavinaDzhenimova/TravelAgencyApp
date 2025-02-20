@@ -134,6 +134,10 @@
     font-weight: 600;
 }
 
+.field small {
+    text-align: left;
+}
+
 .custom-btn {
     background: #0A67AA;
     color: white;
