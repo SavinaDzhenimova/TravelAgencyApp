@@ -9,8 +9,6 @@ public class ExcursionViewDTO {
 
     private BigDecimal price;
 
-    private LocalDate date;
-
     private String transport;
 
     private String destination;
@@ -36,14 +34,6 @@ public class ExcursionViewDTO {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
     }
 
     public String getTransport() {

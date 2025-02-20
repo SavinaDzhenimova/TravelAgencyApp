@@ -36,9 +36,6 @@
                     <h3 th:text="${excursion.getName()}">Име на екскурзията</h3>
 
                     <ul>
-                        <li>Дата:
-                            <span th:text="${#temporals.format(excursion.getDate(), 'dd.MM.yyyy г.')}">22.10.2024</span>
-                        </li>
                         <li>Продължителност: <span th:text="${excursion.getEndurance()} + ' дни'"></span></li>
                         <li>Дестинация: <span th:text="${excursion.getDestination()}"></span></li>
                         <li>Транспорт: <span th:text="${excursion.getTransport()}"></span></li>
@@ -48,6 +45,19 @@
                 </div>
             </a>
         </div>
+
+        <div class="pagination" th:if="${totalPages > 1}">
+            <a th:if="${currentPage > 0}"
+               th:href="@{/excursions(page=${currentPage - 1}, size=${size})}">❮</a>
+
+            <p th:if="${currentPage != null and totalPages != null}">Страница
+                <span th:text="${currentPage + 1}"></span> от <span th:text="${totalPages}"></span>
+            </p>
+
+            <a th:if="${currentPage + 1 < totalPages}"
+               th:href="@{/excursions(page=${currentPage + 1}, size=${size})}">❯</a>
+        </div>
+
     </main>
 
     <footer th:replace="~{fragments/commons::footer}"></footer>

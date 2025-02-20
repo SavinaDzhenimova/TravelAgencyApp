@@ -1,6 +1,8 @@
 package org.travelagency.service;
 
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.*;
 import org.travelagency.model.enums.TransportType;
@@ -15,7 +17,6 @@ import org.travelagency.service.events.AddExcursionEvent;
 import org.travelagency.service.interfaces.*;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -68,47 +69,17 @@ public class ExcursionServiceImpl implements ExcursionService {
     }
 
     @Override
-    public ExcursionViewInfo getAllExcursions() {
-        List<Excursion> excursions = this.excursionRepository.findAll();
+    public Page<ExcursionViewDTO> getAllExcursions(Pageable pageable) {
+        Page<Excursion> excursionsPage = this.excursionRepository.findAll(pageable);
 
-        if (excursions.isEmpty()) {
-            return null;
-        }
-
-        List<Excursion> sortedExcursions = excursions.stream()
-                .sorted(Comparator.comparing(excursion -> excursion.getDates().stream()
-                        .min(Comparator.naturalOrder())
-                        .orElse(LocalDate.MAX)))
-                .toList();
-
-        List<ExcursionViewDTO> excursionViewDTOList = this.mapExcursionsToExcursionViewDTOList(sortedExcursions);
-
-        return new ExcursionViewInfo(excursionViewDTOList);
+        return excursionsPage.map(this::mapExcursionToExcursionViewDTO);
     }
 
     @Override
-    public ExcursionViewInfo getAllExcursionsByDestinationName(String destinationName) {
-        Optional<Destination> optionalDestination = this.destinationService.findDestinationByDestinationName(destinationName);
+    public Page<ExcursionViewDTO> getAllExcursionsByDestinationName(String destinationName, Pageable pageable) {
+        Page<Excursion> excursionsPage = this.excursionRepository.findByDestinationName(destinationName, pageable);
 
-        if (optionalDestination.isEmpty()) {
-            return null;
-        }
-
-        Destination destination = optionalDestination.get();
-
-        List<Excursion> excursions = destination.getExcursions().stream()
-                .sorted(Comparator.comparing(excursion -> excursion.getDates().stream()
-                        .min(Comparator.naturalOrder())
-                        .orElse(LocalDate.MAX)))
-                .toList();
-
-        if (excursions.isEmpty()) {
-            return null;
-        }
-
-        List<ExcursionViewDTO> excursionViewDTOList = this.mapExcursionsToExcursionViewDTOList(excursions);
-
-        return new ExcursionViewInfo(excursionViewDTOList);
+        return excursionsPage.map(this::mapExcursionToExcursionViewDTO);
     }
 
     private List<ExcursionViewDTO> mapExcursionsToExcursionViewDTOList(List<Excursion> excursions) {
@@ -122,7 +93,6 @@ public class ExcursionServiceImpl implements ExcursionService {
 
         excursionViewDTO.setName(excursion.getName());
         excursionViewDTO.setPrice(excursion.getPrice());
-        excursionViewDTO.setDate(excursion.getDates().stream().min(Comparator.naturalOrder()).orElse(null));
         excursionViewDTO.setDestination(excursion.getDestination().getName());
         excursionViewDTO.setEndurance(excursion.getProgram().getEndurance());
 
