@@ -17,7 +17,6 @@ import org.travelagency.service.events.AddExcursionEvent;
 import org.travelagency.service.interfaces.*;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -73,35 +72,14 @@ public class ExcursionServiceImpl implements ExcursionService {
     public Page<ExcursionViewDTO> getAllExcursions(Pageable pageable) {
         Page<Excursion> excursionsPage = this.excursionRepository.findAll(pageable);
 
-        return excursionsPage.map(excursion -> {
-            ExcursionViewDTO dto = this.mapExcursionToExcursionViewDTO(excursion);
-            return dto;
-        });
+        return excursionsPage.map(this::mapExcursionToExcursionViewDTO);
     }
 
     @Override
-    public ExcursionViewInfo getAllExcursionsByDestinationName(String destinationName) {
-        Optional<Destination> optionalDestination = this.destinationService.findDestinationByDestinationName(destinationName);
+    public Page<ExcursionViewDTO> getAllExcursionsByDestinationName(String destinationName, Pageable pageable) {
+        Page<Excursion> excursionsPage = this.excursionRepository.findByDestinationName(destinationName, pageable);
 
-        if (optionalDestination.isEmpty()) {
-            return null;
-        }
-
-        Destination destination = optionalDestination.get();
-
-        List<Excursion> excursions = destination.getExcursions().stream()
-                .sorted(Comparator.comparing(excursion -> excursion.getDates().stream()
-                        .min(Comparator.naturalOrder())
-                        .orElse(LocalDate.MAX)))
-                .toList();
-
-        if (excursions.isEmpty()) {
-            return null;
-        }
-
-        List<ExcursionViewDTO> excursionViewDTOList = this.mapExcursionsToExcursionViewDTOList(excursions);
-
-        return new ExcursionViewInfo(excursionViewDTOList);
+        return excursionsPage.map(this::mapExcursionToExcursionViewDTO);
     }
 
     private List<ExcursionViewDTO> mapExcursionsToExcursionViewDTOList(List<Excursion> excursions) {

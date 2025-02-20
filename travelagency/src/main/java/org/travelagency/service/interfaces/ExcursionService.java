@@ -23,7 +23,7 @@ public interface ExcursionService {
 
     Page<ExcursionViewDTO> getAllExcursions(Pageable pageable);
 
-    ExcursionViewInfo getAllExcursionsByDestinationName(String destinationName);
+    Page<ExcursionViewDTO> getAllExcursionsByDestinationName(String destinationName, Pageable pageable);
 
     ExcursionExportDTO getExcursionDetailsByName(String excursionName);
 
