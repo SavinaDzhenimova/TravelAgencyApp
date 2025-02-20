@@ -3,6 +3,7 @@ package org.travelagency.web;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import org.travelagency.service.interfaces.ReservationService;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.Map;
 
 @Controller
@@ -46,8 +48,10 @@ public class ReservationController {
         return modelAndView;
     }
 
-    @GetMapping("/reserve/{excursionName}")
-    public ModelAndView reserve(@PathVariable("excursionName") String excursionName, Model model) {
+    @GetMapping("/excursion-details/{excursionName}/reserve/{date}")
+    public ModelAndView reserve(@PathVariable("excursionName") String excursionName,
+                                @PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
+                                Model model) {
 
         String decodedExcursionName = URLDecoder.decode(excursionName, StandardCharsets.UTF_8);
 
@@ -57,7 +61,7 @@ public class ReservationController {
 
         modelAndView.addObject("excursionName", excursionExportDTO.getName());
         modelAndView.addObject("excursionDestination", excursionExportDTO.getDestination());
-        modelAndView.addObject("excursionDate", excursionExportDTO.getDate());
+        modelAndView.addObject("excursionDate", date);
         modelAndView.addObject("excursionEndurance", excursionExportDTO.getEndurance());
         modelAndView.addObject("excursionTransport", excursionExportDTO.getTransport());
 
@@ -80,7 +84,8 @@ public class ReservationController {
                             bindingResult);
 
             String encodedName = URLEncoder.encode(addReservationDTO.getExcursionName(), StandardCharsets.UTF_8);
-            return new ModelAndView("redirect:/excursions/reserve/" + encodedName);
+            return new ModelAndView("redirect:/excursions/excursion-details/" + encodedName +
+                    "/reserve/" + addReservationDTO.getExcursionDate());
         }
 
         Result result = this.reservationService.addReservation(addReservationDTO, decodedExcursionName);
@@ -92,6 +97,7 @@ public class ReservationController {
         }
 
         String encodedName = URLEncoder.encode(addReservationDTO.getExcursionName(), StandardCharsets.UTF_8);
-        return new ModelAndView("redirect:/excursions/reserve/" + encodedName);
+        return new ModelAndView("redirect:/excursions/excursion-details/" + encodedName +
+                "/reserve/" + addReservationDTO.getExcursionDate());
     }
 }

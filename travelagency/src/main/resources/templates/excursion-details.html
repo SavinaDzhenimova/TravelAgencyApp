@@ -37,16 +37,12 @@
                     <h3>Обща информация за екскурзията</h3>
 
                     <ul>
-                        <li>Дата: <span th:text="${#temporals.format(excursion.getDate(), 'dd.MM.yyyy г.')}"></span></li>
-                        <li>Цена: <span th:text="${excursion.getPrice()} + ' лв.'"></span></li>
                         <li>Продължителност: <span th:text="${excursion.getEndurance()} + ' дни'"></span></li>
                         <li>Транспорт: <span th:text="${excursion.getTransport()}"></span></li>
                         <li>Дестинация: <span th:text="${excursion.getDestination()}"></span></li>
+                        <li>Цена: <span th:text="${excursion.getPrice()} + ' лв.'"></span></li>
                         <li>Направени резервации до момента: <span th:text="${excursion.getReservations()}"></span></li>
                     </ul>
-
-                    <a sec:authorize="!isAuthenticated()"
-                            th:href="@{/excursions/reserve/{excursionName}(excursionName=${excursion.name})}">Резервирай</a>
 
                     <!-- Бутон за отваряне на модалния прозорец -->
                     <button id="openModal" class="custom-btn">Бързо запитване</button>
@@ -111,6 +107,25 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="article-main">
+                <h3>Обявени дати за екскурзията</h3>
+
+                <table>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Резервирай</th>
+                    </tr>
+                    <tr th:each="date: ${dates}">
+                        <td th:text="${#temporals.format(date, 'dd.MM.yyyy г.')}"></td>
+                        <td>
+                            <a sec:authorize="!isAuthenticated()"
+                               th:href="@{/excursions/excursion-details/{excursionName}/reserve/{date}
+                               (excursionName=${excursion.name}, date=${date})}">Резервирай</a>
+                        </td>
+                    </tr>
+                </table>
             </div>
 
             <div class="article-main">

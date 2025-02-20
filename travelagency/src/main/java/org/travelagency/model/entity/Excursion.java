@@ -21,8 +21,10 @@ public class Excursion extends BaseEntity {
     @Positive
     private BigDecimal price;
 
-    @Column(nullable = false)
-    private LocalDate date;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "excursion_dates", joinColumns = @JoinColumn(name = "excursion_id"))
+    @Column(name = "date")
+    private List<LocalDate> dates;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -45,6 +47,7 @@ public class Excursion extends BaseEntity {
     public Excursion() {
         this.images = new ArrayList<>();
         this.reservations = new ArrayList<>();
+        this.dates = new ArrayList<>();
     }
 
     public String getName() {
@@ -63,12 +66,12 @@ public class Excursion extends BaseEntity {
         this.price = price;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public List<LocalDate> getDates() {
+        return dates;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDates(List<LocalDate> dates) {
+        this.dates = dates;
     }
 
     public TransportType getTransportType() {

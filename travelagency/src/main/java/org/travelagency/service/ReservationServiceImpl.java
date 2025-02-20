@@ -117,6 +117,7 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setComments(addReservationDTO.getComments());
         reservation.setPaymentModel(addReservationDTO.getPayment());
         reservation.setDate(LocalDate.now());
+        reservation.setExcursionDate(addReservationDTO.getExcursionDate());
 
         List<String> tourists = this.getTouristsForReservation(addReservationDTO.getTouristNames());
 

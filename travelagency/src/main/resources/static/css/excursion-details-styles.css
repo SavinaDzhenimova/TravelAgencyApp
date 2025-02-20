@@ -113,13 +113,33 @@ main article .article-header .info-container ul {
     gap: 1em;
 }
 
-main article .article-header .info-container > a {
+main article .article-main table {
+    border-collapse: collapse;
+}
+
+main article .article-main table tr th {
+    width: 50%;
+    background-color: #0A67AA;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 0.5em;
+}
+
+main article .article-main table tr td {
+    padding: 0.5em;
+    width: 50%;
+    text-align: center;
+    border-bottom: 1px solid #aaa;
+}
+
+main article .article-main table tr td > a {
     padding: 0.5em 2em;
     background-color: #0A67AA;
     color: #fff;
     font-weight: 500;
     border-radius: 0.5em;
     text-align: center;
+    margin: 0 auto;
 }
 
 main article .article-main {

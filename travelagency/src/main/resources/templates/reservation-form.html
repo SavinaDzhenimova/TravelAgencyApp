@@ -42,6 +42,7 @@
 
                 <div class="field">
                     <label for="date">Дата на отпътуване: </label>
+                    <input type="hidden" name="excursionDate" th:value="${excursionDate}">
                     <input th:value="${excursionDate}"
                             type="date" id="date" name="date" disabled>
                 </div>

@@ -27,9 +27,12 @@ public class AddExcursionDTO {
     @NotNull(message = "Изберете дестинация!")
     private String destination;
 
-    @NotNull(message = "Посочете дата на тръгване!")
-    @FutureOrPresent(message = "Датата трябва да бъде в бъдеще!")
-    private LocalDate date;
+    @NotNull(message = "Посочете рой дати за екскурзията!")
+    @Positive(message = "Датите за екскурзията не може да бъдат по-малко от една!")
+    private int datesCount;
+
+    @NotEmpty(message = "Трябва да добавите поне една дата за екскурзията!")
+    private List<@FutureOrPresent LocalDate> dates;
 
     @NotNull(message = "Посочете продължителност на екскурзията!")
     @Positive(message = "Продължителността на екскурзията не може да бъде по-малко от 1 ден!")
@@ -43,8 +46,10 @@ public class AddExcursionDTO {
 
     public AddExcursionDTO() {
         this.endurance = 1;
+        this.datesCount = 1;
         this.days = new ArrayList<>();
         this.images = new ArrayList<>();
+        this.dates = new ArrayList<>();
     }
 
     public String getName() {
@@ -79,12 +84,20 @@ public class AddExcursionDTO {
         this.destination = destination;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public int getDatesCount() {
+        return datesCount;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDatesCount(int datesCount) {
+        this.datesCount = datesCount;
+    }
+
+    public List<LocalDate> getDates() {
+        return dates;
+    }
+
+    public void setDates(List<LocalDate> dates) {
+        this.dates = dates;
     }
 
     public int getEndurance() {

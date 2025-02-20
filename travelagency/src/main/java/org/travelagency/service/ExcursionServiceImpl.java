@@ -15,6 +15,7 @@ import org.travelagency.service.events.AddExcursionEvent;
 import org.travelagency.service.interfaces.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -74,11 +75,13 @@ public class ExcursionServiceImpl implements ExcursionService {
             return null;
         }
 
-        List<Excursion> sortedExcursionsByDate = excursions.stream()
-                .sorted(Comparator.comparing(Excursion::getDate))
+        List<Excursion> sortedExcursions = excursions.stream()
+                .sorted(Comparator.comparing(excursion -> excursion.getDates().stream()
+                        .min(Comparator.naturalOrder())
+                        .orElse(LocalDate.MAX)))
                 .toList();
 
-        List<ExcursionViewDTO> excursionViewDTOList = this.mapExcursionsToExcursionViewDTOList(sortedExcursionsByDate);
+        List<ExcursionViewDTO> excursionViewDTOList = this.mapExcursionsToExcursionViewDTOList(sortedExcursions);
 
         return new ExcursionViewInfo(excursionViewDTOList);
     }
@@ -94,7 +97,9 @@ public class ExcursionServiceImpl implements ExcursionService {
         Destination destination = optionalDestination.get();
 
         List<Excursion> excursions = destination.getExcursions().stream()
-                .sorted(Comparator.comparing(Excursion::getDate))
+                .sorted(Comparator.comparing(excursion -> excursion.getDates().stream()
+                        .min(Comparator.naturalOrder())
+                        .orElse(LocalDate.MAX)))
                 .toList();
 
         if (excursions.isEmpty()) {
@@ -117,7 +122,7 @@ public class ExcursionServiceImpl implements ExcursionService {
 
         excursionViewDTO.setName(excursion.getName());
         excursionViewDTO.setPrice(excursion.getPrice());
-        excursionViewDTO.setDate(excursion.getDate());
+        excursionViewDTO.setDate(excursion.getDates().stream().min(Comparator.naturalOrder()).orElse(null));
         excursionViewDTO.setDestination(excursion.getDestination().getName());
         excursionViewDTO.setEndurance(excursion.getProgram().getEndurance());
 
@@ -159,7 +164,7 @@ public class ExcursionServiceImpl implements ExcursionService {
 
         excursionExportDTO.setName(excursion.getName());
         excursionExportDTO.setPrice(excursion.getPrice());
-        excursionExportDTO.setDate(excursion.getDate());
+        excursionExportDTO.setDates(excursion.getDates());
         excursionExportDTO.setDestination(excursion.getDestination().getName());
         excursionExportDTO.setEndurance(excursion.getProgram().getEndurance());
 
@@ -254,7 +259,7 @@ public class ExcursionServiceImpl implements ExcursionService {
         Excursion excursion = new Excursion();
 
         excursion.setName(addExcursionDTO.getName());
-        excursion.setDate(addExcursionDTO.getDate());
+        excursion.setDates(addExcursionDTO.getDates());
         excursion.setPrice(addExcursionDTO.getPrice());
         excursion.setTransportType(addExcursionDTO.getTransportType());
         excursion.setDestination(destination);

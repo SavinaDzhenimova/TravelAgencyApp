@@ -156,7 +156,9 @@ fieldset {
 .add-excursion-form .field label[for="date"],
 .add-excursion-form .field label[for="images"],
 .add-excursion-form #daysContainer label,
-.add-excursion-form #daysContainer textarea {
+.add-excursion-form #daysContainer textarea,
+.add-excursion-form #datesContainer label,
+.add-excursion-form #datesContainer input {
     position: static;
 }
 
@@ -186,7 +188,16 @@ fieldset {
     gap: 0.3em;
 }
 
-.add-excursion-form #daysContainer label {
+.add-excursion-form .datesCount {
+    margin-top: 1em;
+}
+
+.add-excursion-form #datesContainer {
+    padding-top: 0;
+}
+
+.add-excursion-form #daysContainer label,
+.add-excursion-form #datesContainer label {
     font-weight: 400;
 }
 
@@ -202,7 +213,8 @@ fieldset {
     outline: none;
 }
 
-.add-excursion-form #daysContainer:focus-within label {
+.add-excursion-form #daysContainer:focus-within label,
+.add-excursion-form #datesContainer:focus-within label {
     font-weight: 600;
 }
 

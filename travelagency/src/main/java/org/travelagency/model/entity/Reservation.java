@@ -1,6 +1,7 @@
 package org.travelagency.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
 import org.travelagency.model.enums.PaymentModel;
 
 import java.time.LocalDate;
@@ -28,6 +29,10 @@ public class Reservation extends BaseEntity {
 
     @Column(nullable = false)
     private LocalDate date;
+
+    @Column(nullable = false, name = "excursion_date")
+    @FutureOrPresent
+    private LocalDate excursionDate;
 
     @Column
     private String comments;
@@ -96,6 +101,14 @@ public class Reservation extends BaseEntity {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public LocalDate getExcursionDate() {
+        return excursionDate;
+    }
+
+    public void setExcursionDate(LocalDate excursionDate) {
+        this.excursionDate = excursionDate;
     }
 
     public String getComments() {

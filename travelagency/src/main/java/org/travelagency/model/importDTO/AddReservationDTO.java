@@ -1,16 +1,19 @@
 package org.travelagency.model.importDTO;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import org.travelagency.model.annotations.ValidEmail;
 import org.travelagency.model.enums.PaymentModel;
+
+import java.time.LocalDate;
 
 public class AddReservationDTO {
 
     @NotNull
     private String excursionName;
+
+    @NotNull
+    @FutureOrPresent
+    private LocalDate excursionDate;
 
     @NotNull
     @Positive(message = "Броят на туристите, които ще пътуват не може да бъде по-малък от 1!")
@@ -46,6 +49,14 @@ public class AddReservationDTO {
 
     public void setExcursionName(String excursionName) {
         this.excursionName = excursionName;
+    }
+
+    public LocalDate getExcursionDate() {
+        return excursionDate;
+    }
+
+    public void setExcursionDate(LocalDate excursionDate) {
+        this.excursionDate = excursionDate;
     }
 
     public int getTouristsCount() {

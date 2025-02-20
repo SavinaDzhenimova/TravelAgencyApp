@@ -55,13 +55,24 @@
                            class="text-danger">Dish name error message</small>
                 </div>
 
-                <div class="field">
-                    <label th:for="date">Начална дата</label>
-                    <input th:field="*{date}"
+                <div class="field datesCount">
+                    <input th:field="*{datesCount}"
                            th:errorclass="is-invalid"
-                           type="date" id="date" name="date" placeholder="Начална дата" required>
-                    <small th:if="${#fields.hasErrors('date')}"
-                           th:errors="*{date}"
+                           type="number" name="datesCount" id="datesCount"
+                           placeholder="Брой дати" required>
+                    <label th:for="datesCount">Брой дати</label>
+                    <small th:if="${#fields.hasErrors('datesCount')}"
+                           th:errors="*{datesCount}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div id="datesContainer" class="field">
+                    <label th:for="dates">Дата</label>
+                    <input th:field="*{dates}"
+                           th:errorclass="is-invalid"
+                           type="date" id="dates" name="dates" required>
+                    <small th:if="${#fields.hasErrors('dates')}"
+                           th:errors="*{dates}"
                            class="text-danger">Dish name error message</small>
                 </div>
 
@@ -114,7 +125,7 @@
                            th:errorclass="is-invalid"
                            type="number" name="endurance" id="endurance"
                            placeholder="Продължителност" required>
-                    <label th:for="price">Продължителност</label>
+                    <label th:for="endurance">Продължителност</label>
                     <small th:if="${#fields.hasErrors('endurance')}"
                            th:errors="*{endurance}"
                            class="text-danger">Dish name error message</small>
@@ -145,6 +156,7 @@
     <script src="\js\show-menu-profile.js"></script>
     <script src="\js\show-menu-team.js"></script>
     <script src="\js\endurance-input-fields.js"></script>
+    <script src="\js\dates-input-fields.js"></script>
 
 </body>
 </html>

@@ -13,7 +13,7 @@ public class ExcursionExportDTO {
 
     private BigDecimal price;
 
-    private LocalDate date;
+    private List<LocalDate> dates;
 
     private String transport;
 
@@ -28,6 +28,7 @@ public class ExcursionExportDTO {
     private List<DayExportDTO> days;
 
     public ExcursionExportDTO() {
+        this.dates = new ArrayList<>();
         this.days = new ArrayList<>();
     }
 
@@ -47,12 +48,12 @@ public class ExcursionExportDTO {
         this.price = price;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public List<LocalDate> getDates() {
+        return dates;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDates(List<LocalDate> dates) {
+        this.dates = dates;
     }
 
     public String getTransport() {
