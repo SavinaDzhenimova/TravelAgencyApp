@@ -45,23 +45,93 @@
     cursor: pointer;
 }
 
-.form-group {
-    margin: 15px 0;
-    text-align: left;
+.modal-body #quickInquiryForm {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    margin-top: 1.5em;
+    border-radius: 0.3em;
 }
 
-.form-group label {
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    color: #0A67AA;
+    opacity: 0.7;
+    padding-top: 1em;
+    position: relative;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.field label {
+    order: -1;
+    position: absolute;
+    top: 1.5em;
+    left: 0;
+    line-height: 1em;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.field input {
     display: block;
-    margin-bottom: 5px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #0A67AA;
+    opacity: 0.7;
+    padding: 0.5em 0;
 }
 
-.form-group input,
-.form-group textarea {
+.field input::placeholder {
+    color: transparent;
+}
+
+.field input:focus {
+    border-color: #0A67AA;
+}
+
+.field input:focus ~ label,
+.field input:not(:placeholder-shown) ~ label {
+    transform: translateY(-2em);
+    opacity: 1;
+}
+
+.field input:focus ~ label {
+    color: #0A67AA;
+    font-weight: 600;
+}
+
+.field input:required ~ label::after,
+.field label::after {
+    display: inline-block;
+    content: '*';
+    color: #C00;
+    padding-left: 0.3em;
+}
+
+#message-container label {
+    text-align: left;
+    font-weight: 400;
+    position: static;
+}
+
+#message-container textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+    height: 70px;
+    padding: 0.3em 0.5em;
+    border: 1px solid #0A67AA;
+    border-radius: 0.3em;
+    position: static;
+}
+
+#message-container textarea:focus {
+    outline: none;
+}
+
+#message-container:focus-within label {
+    font-weight: 600;
 }
 
 .custom-btn {

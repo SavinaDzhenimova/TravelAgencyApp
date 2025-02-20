@@ -64,35 +64,38 @@
                                       th:action="@{'/excursions/excursion-details/' + ${excursion.getName()} + '/send-inquiry'}"
                                       th:object="${addInquiryDTO}">
 
-                                    <div class="form-group">
-                                        <label for="name">Име</label>
+                                    <div class="field">
                                         <input th:field="*{name}"
                                                th:errorclass="is-invalid"
-                                               type="text" id="name" name="name" required>
+                                               type="text" id="name" name="name" placeholder="Име" required>
+                                        <label th:for="name">Име</label>
                                         <small th:if="${#fields.hasErrors('name')}"
                                                th:errors="*{name}"
                                                class="text-danger">Dish name error message</small>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="email">Имейл</label>
+
+                                    <div class="field">
                                         <input th:field="*{email}"
                                                th:errorclass="is-invalid"
-                                               type="email" id="email" name="email" required>
+                                               type="email" id="email" name="email" placeholder="Имейл" required>
+                                        <label th:for="email">Имейл</label>
                                         <small th:if="${#fields.hasErrors('email')}"
                                                th:errors="*{email}"
                                                class="text-danger">Dish name error message</small>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="phone">Телефонен номер</label>
+
+                                    <div class="field">
                                         <input th:field="*{phone}"
                                                th:errorclass="is-invalid"
-                                               type="text" id="phone" name="phone" required>
+                                               type="text" id="phone" name="phone" placeholder="Телефонен номер" required>
+                                        <label th:for="phone">Телефонен номер</label>
                                         <small th:if="${#fields.hasErrors('phone')}"
                                                th:errors="*{phone}"
                                                class="text-danger">Dish name error message</small>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="message">Вашето запитване</label>
+
+                                    <div class="field" id="message-container">
+                                        <label th:for="message">Вашето запитване</label>
                                         <textarea th:field="*{message}"
                                                   th:errorclass="is-invalid"
                                                   id="message" name="message" rows="4" required></textarea>
@@ -100,6 +103,7 @@
                                                th:errors="*{message}"
                                                class="text-danger">Dish name error message</small>
                                     </div>
+
                                     <input type="hidden" name="excursionName" th:value="${excursion.getName()}">
                                     <button type="submit" class="custom-btn submit-btn">Изпрати запитване</button>
                                 </form>
