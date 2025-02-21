@@ -202,8 +202,8 @@ public class ExcursionServiceImpl implements ExcursionService {
     }
 
     @Override
-    public List<String> getAllExcursionsNames() {
-        return this.excursionRepository.findAllExcursionsNames();
+    public Page<String> getAllExcursionsNames(Pageable pageable) {
+        return this.excursionRepository.findAllExcursionsNames(pageable);
     }
 
     private Program mapAddExcursionDTOToProgram(AddExcursionDTO addExcursionDTO) {

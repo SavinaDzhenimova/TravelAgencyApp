@@ -31,5 +31,5 @@ public interface ExcursionService {
 
     void saveAndFlushExcursion(Excursion excursion);
 
-    List<String> getAllExcursionsNames();
+    Page<String> getAllExcursionsNames(Pageable pageable);
 }

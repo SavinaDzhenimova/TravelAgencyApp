@@ -8,14 +8,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.travelagency.model.entity.Excursion;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface ExcursionRepository extends JpaRepository<Excursion, Long> {
 
     @Query("SELECT e.name FROM Excursion e")
-    List<String> findAllExcursionsNames();
+    Page<String> findAllExcursionsNames(Pageable pageable);
 
     Optional<Excursion> findByName(String excursionName);
 

@@ -26,9 +26,9 @@
 
         <div class="reservations-info">
 
-            <div class="reservation-info-excursion" th:each="entry : ${reservationsMap}">
-                <h2>Резервации за <span th:text="${entry.key}">Име на екскурзията</span>:
-                    <span th:text="${entry.value.totalTourists}"></span></h2>
+            <div class="reservation-info-excursion" th:each="excursion : ${excursions}">
+                <h2>Резервации за <span th:text="${excursion.getExcursionName()}">Име на екскурзията</span>:
+                    <span th:text="${excursion.getTotalTourists()}"></span></h2>
 
                 <table class="reservations-info-table">
                     <tbody>
@@ -43,7 +43,7 @@
                         <td class="touristNames">Туристи</td>
                         <td class="comments">Коментари</td>
                     </tr>
-                    <tr th:each="reservation : ${entry.value.reservations}">
+                    <tr th:each="reservation : ${excursion.getReservations()}">
                         <td th:text="${reservation.getFullName()}" class="fullName">Резервирал</td>
                         <td th:text="${#temporals.format(reservation.getDate(), 'dd.MM.yyyy г.')}" class="date">Дата</td>
                         <td th:text="${#temporals.format(reservation.getExcursionDate(), 'dd.MM.yyyy г.')}" class="excursionDate">
@@ -53,15 +53,29 @@
                         <td th:text="${reservation.getPayment()}" class="payment">Плащане</td>
                         <td th:text="${reservation.getTouristsCount()}" class="touristsCount">Брой туристи</td>
                         <td class="touristNames">
-                            <p th:each="name : ${reservation.getTouristNames()}" th:text="${name}"></p>
+                            <ol>
+                                <li th:each="name : ${reservation.getTouristNames()}" th:text="${name}"></li>
+                            </ol>
                         </td>
                         <td th:text="${reservation.getComments()}" class="comments">Коментари</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-        </div>
 
+            <div class="pagination" th:if="${totalPages > 1}">
+                <a th:if="${currentPage > 0}"
+                   th:href="@{/excursions/reservations(page=${currentPage - 1}, size=${size})}">❮</a>
+
+                <p th:if="${currentPage != null and totalPages != null}">Страница
+                    <span th:text="${currentPage + 1}"></span> от <span th:text="${totalPages}"></span>
+                </p>
+
+                <a th:if="${currentPage + 1 < totalPages}"
+                   th:href="@{/excursions/reservations(page=${currentPage + 1}, size=${size})}">❯</a>
+            </div>
+
+        </div>
     </main>
 
     <footer th:replace="~{fragments/commons::footer}"></footer>

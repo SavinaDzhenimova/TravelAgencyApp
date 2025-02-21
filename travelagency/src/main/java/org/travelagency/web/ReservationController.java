@@ -3,6 +3,8 @@ package org.travelagency.web;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,6 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/excursions")
@@ -37,17 +38,22 @@ public class ReservationController {
     }
 
     @GetMapping("/reservations")
-    public ModelAndView viewAllReservations() {
-        Map<String, ReservationViewInfo> reservationsMap = this.reservationService
-                .getAllReservationsGroupedByExcursionsNames();
-
+    public ModelAndView viewAllReservations(@RequestParam(defaultValue = "0") int page,
+                                            @RequestParam(defaultValue = "6") int size) {
         ModelAndView modelAndView = new ModelAndView("reservations");
 
-        if (reservationsMap.isEmpty()) {
+        Page<ReservationViewInfo> reservationPage = this.reservationService
+                .getAllReservationsGroupedByExcursionsNames(PageRequest.of(page, size));
+
+        if (reservationPage.isEmpty()) {
             modelAndView.addObject("warningMessage", "Все още няма направени резервации");
         } else {
-            modelAndView.addObject("reservationsMap", reservationsMap);
+            modelAndView.addObject("excursions", reservationPage.getContent());
         }
+
+        modelAndView.addObject("currentPage", reservationPage.getNumber());
+        modelAndView.addObject("totalPages", reservationPage.getTotalPages());
+        modelAndView.addObject("size", size);
 
         return modelAndView;
     }

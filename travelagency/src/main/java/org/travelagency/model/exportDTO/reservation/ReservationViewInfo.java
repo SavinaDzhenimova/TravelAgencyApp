@@ -8,6 +8,8 @@ public class ReservationViewInfo {
 
     private int totalTourists;
 
+    private String excursionName;
+
     public ReservationViewInfo(List<ReservationViewDTO> reservations) {
         this.reservations = reservations;
         this.totalTourists = 0;
@@ -27,5 +29,13 @@ public class ReservationViewInfo {
 
     public void setTotalTourists(int totalTourists) {
         this.totalTourists = totalTourists;
+    }
+
+    public String getExcursionName() {
+        return excursionName;
+    }
+
+    public void setExcursionName(String excursionName) {
+        this.excursionName = excursionName;
     }
 }
