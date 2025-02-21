@@ -43,7 +43,11 @@ public class ReservationController {
 
         ModelAndView modelAndView = new ModelAndView("reservations");
 
-        modelAndView.addObject("reservationsMap", reservationsMap);
+        if (reservationsMap.isEmpty()) {
+            modelAndView.addObject("warningMessage", "Все още няма направени резервации");
+        } else {
+            modelAndView.addObject("reservationsMap", reservationsMap);
+        }
 
         return modelAndView;
     }

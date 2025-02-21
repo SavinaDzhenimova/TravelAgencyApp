@@ -1,6 +1,8 @@
 package org.travelagency.service;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.Excursion;
 import org.travelagency.model.entity.Reservation;
@@ -33,25 +35,21 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Map<String, ReservationViewInfo> getAllReservationsGroupedByExcursionsNames() {
-        List<String> excursionNames = this.getAllExcursionsNames();
+        List<String> excursionNames = Optional.ofNullable(this.excursionService.getAllExcursionsNames())
+                .orElse(Collections.emptyList());
 
         return excursionNames.stream()
-                .map(excursionName ->
-                        Map.entry(excursionName, this.getAllReservationsByExcursionName(excursionName)))
+                .map(excursionName -> Map.entry(excursionName, this.mapReservationToReservationViewInfo(excursionName)))
                 .filter(entry -> !entry.getValue().getReservations().isEmpty())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    private List<String> getAllExcursionsNames() {
-        return this.excursionService.getAllExcursionsNames();
-    }
-
-    private ReservationViewInfo getAllReservationsByExcursionName(String excursionName) {
+    private ReservationViewInfo mapReservationToReservationViewInfo(String excursionName) {
 
         Optional<Excursion> optionalExcursion = this.excursionService.findExcursionByExcursionName(excursionName);
 
         if (optionalExcursion.isEmpty()) {
-            return null;
+            return new ReservationViewInfo(Collections.emptyList());
         }
 
         int totalTourists = Optional.ofNullable(optionalExcursion.get().getReservations())
@@ -59,13 +57,13 @@ public class ReservationServiceImpl implements ReservationService {
                 .mapToInt(Reservation::getTouristsCount)
                 .sum();
 
-        List<ReservationViewDTO> reservationViewDTOList = this.reservationRepository.findAll().stream()
-                .filter(reservation -> reservation.getExcursion().getName().equals(excursionName))
+        List<Reservation> reservations = this.reservationRepository.findReservationByExcursionName(excursionName);
+
+        List<ReservationViewDTO> reservationViewDTOList = reservations.stream()
                 .map(reservation -> {
                     ReservationViewDTO dto = this.modelMapper.map(reservation, ReservationViewDTO.class);
 
-                    if (reservation.getComments().length() > 0) dto.setComments(reservation.getComments());
-                    else dto.setComments("-");
+                    dto.setComments(Objects.requireNonNullElse(reservation.getComments(), "-"));
 
                     dto.setExcursionName(reservation.getExcursion().getName());
 

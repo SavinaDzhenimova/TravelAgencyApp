@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="737daafd-1dde-4737-8e86-b60ca1c6a9b0" name="Changes" comment="" />
+    <list default="true" id="737daafd-1dde-4737-8e86-b60ca1c6a9b0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/repository/ExcursionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/repository/ExcursionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/repository/ReservationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/repository/ReservationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ExcursionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ExcursionServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ReservationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ReservationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/ReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/reservations-styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/reservations-styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/reservations.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/reservations.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -95,19 +105,6 @@
     <servers />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/ReservationController.java</url>
-          <line>75</line>
-          <properties class="org.travelagency.web.ReservationController" method="reserve">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.travelagency.model.entity.Excursion" memberName="images" />

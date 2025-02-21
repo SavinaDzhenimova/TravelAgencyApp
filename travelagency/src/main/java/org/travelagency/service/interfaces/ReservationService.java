@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface ReservationService {
 
-    Result addReservation(AddReservationDTO addReservationDTO, String excursionName);
-
     Map<String, ReservationViewInfo> getAllReservationsGroupedByExcursionsNames();
+
+    Result addReservation(AddReservationDTO addReservationDTO, String excursionName);
 }

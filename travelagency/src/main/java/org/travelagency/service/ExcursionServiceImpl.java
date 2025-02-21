@@ -77,7 +77,7 @@ public class ExcursionServiceImpl implements ExcursionService {
 
     @Override
     public Page<ExcursionViewDTO> getAllExcursionsByDestinationName(String destinationName, Pageable pageable) {
-        Page<Excursion> excursionsPage = this.excursionRepository.findByDestinationName(destinationName, pageable);
+        Page<Excursion> excursionsPage = this.excursionRepository.findExcursionByDestinationName(destinationName, pageable);
 
         return excursionsPage.map(this::mapExcursionToExcursionViewDTO);
     }
@@ -184,11 +184,9 @@ public class ExcursionServiceImpl implements ExcursionService {
         program.setExcursion(excursion);
         this.programService.saveAndFlushProgram(program);
 
-        this.subscriberService.getAllSubscribers().forEach(subscriber -> {
-            this.applicationEventPublisher.publishEvent(
-                    new AddExcursionEvent(this,
-                            Objects.requireNonNull(excursion).getName(), subscriber.getEmail()));
-        });
+        this.subscriberService.getAllSubscribers().forEach(subscriber ->
+                this.applicationEventPublisher.publishEvent(new AddExcursionEvent(this,
+                        Objects.requireNonNull(excursion).getName(), subscriber.getEmail())));
 
         return new Result(true, "Успешно добавихте нова екскурзия!");
     }
@@ -205,7 +203,7 @@ public class ExcursionServiceImpl implements ExcursionService {
 
     @Override
     public List<String> getAllExcursionsNames() {
-        return this.excursionRepository.findAll().stream().map(Excursion::getName).toList();
+        return this.excursionRepository.findAllExcursionsNames();
     }
 
     private Program mapAddExcursionDTOToProgram(AddExcursionDTO addExcursionDTO) {

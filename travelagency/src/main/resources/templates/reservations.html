@@ -14,6 +14,8 @@
     <main>
         <h1>Резервации</h1>
 
+        <p th:if="${warningMessage}" th:text="${warningMessage}"></p>
+
         <div th:if="${successMessage}" class="alert alert-success" role="alert">
             <p class="success" th:text="${successMessage}"></p>
         </div>
@@ -60,7 +62,6 @@
             </div>
         </div>
 
-        <p th:if="${#maps.isEmpty(reservationsMap)}">Все още няма направени резервации!</p>
     </main>
 
     <footer th:replace="~{fragments/commons::footer}"></footer>
