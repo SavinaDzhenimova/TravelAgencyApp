@@ -16,18 +16,118 @@
 
         <p th:text="'Добре дошли, ' + ${employee.getFullName()} + '!'"></p>
 
+        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+            <p class="success" th:text="${successMessage}"></p>
+        </div>
+
+        <div th:if="${failureMessage}" class="alert alert-failure" role="alert">
+            <p th:text="${failureMessage}"></p>
+        </div>
+
         <section class="profile-info">
             <ul>
-                <li><span>Потребителско име: </span><span th:text="${employee.getUsername()}"></span></li>
-                <li><span>E-mail: </span><span th:text="${employee.getEmail()}"></span></li>
-                <li><span>Телефонен номер: </span><span th:text="${employee.getPhoneNumber()}"></span></li>
-                <li><span>Адрес: </span><span th:text="${employee.getAddress()}"></span></li>
-                <li><span>Степен на образование: </span><span th:text="${employee.getEducation()}"></span></li>
-                <li th:if="${employee.specialty != null && employee.specialty != ''}">
-                    <span>Специалност: </span><span th:text="${employee.getSpecialty()}"></span>
+                <li>
+                    <div>
+                        <span>Потребителско име: </span>
+                        <span th:text="${employee.getUsername()}"></span>
+                    </div>
                 </li>
-                <li><span>Работна квалификация: </span><span th:text="${employee.getRole()}"></span></li>
-                <li><span>Говорими езици: </span><span th:text="${employee.getLanguages()}"></span></li>
+                <li>
+                    <div>
+                        <span>E-mail: </span>
+                        <span th:text="${employee.getEmail()}"></span>
+                    </div>
+                    <div class="buttons">
+                        <button class="edit-btn">Редактирай</button>
+                        <form th:method="PUT"
+                              th:action="@{/employees/profile/update/{info}(info='email')}"
+                              style="display: none;">
+                            <input type="text" name="updatedInfo" style="display: none;">
+                            <button class="save-btn" type="submit">Запази</button>
+                        </form>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <span>Телефонен номер: </span>
+                        <span th:text="${employee.getPhoneNumber()}"></span>
+                    </div>
+                    <div class="buttons">
+                        <button class="edit-btn">Редактирай</button>
+                        <form th:method="PUT"
+                              th:action="@{/employees/profile/update/{info}(info='phoneNumber')}"
+                              style="display: none;">
+                            <input type="text" name="updatedInfo" style="display: none;">
+                            <button class="save-btn" type="submit">Запази</button>
+                        </form>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <span>Адрес: </span>
+                        <span th:text="${employee.getAddress()}"></span>
+                    </div>
+                    <div class="buttons">
+                        <button class="edit-btn">Редактирай</button>
+                        <form th:method="PUT"
+                              th:action="@{/employees/profile/update/{info}(info='address')}"
+                              style="display: none;">
+                            <input type="text" name="updatedInfo" style="display: none;">
+                            <button class="save-btn" type="submit">Запази</button>
+                        </form>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <span>Степен на образование: </span>
+                        <span th:text="${employee.getEducation()}"></span>
+                    </div>
+                    <div class="buttons">
+                        <button class="edit-btn" th:if="${employee.getEducation() != 'Висше'}">Редактирай</button>
+                        <form th:method="PUT"
+                              th:action="@{/employees/profile/update/{info}(info='education')}"
+                              style="display: none;">
+                            <input type="text" name="updatedInfo" style="display: none;">
+                            <button class="save-btn" type="submit">Запази</button>
+                        </form>
+                    </div>
+                </li>
+                <li th:if="${employee.specialty != null && employee.specialty != ''}">
+                    <div>
+                        <span>Специалност: </span>
+                        <span th:text="${employee.getSpecialty()}"></span>
+                    </div>
+                    <div class="buttons">
+                        <button class="edit-btn">Редактирай</button>
+                        <form th:method="PUT"
+                              th:action="@{/employees/profile/update/{info}(info='specialty')}"
+                              style="display: none;">
+                            <input type="text" name="updatedInfo" style="display: none;">
+                            <button class="save-btn" type="submit">Запази</button>
+                        </form>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <span>Работна квалификация: </span>
+                        <span th:text="${employee.getRole()}"></span>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <span>Говорими езици: </span>
+                        <span th:text="${employee.getLanguages()}"></span>
+                    </div>
+                    <div class="buttons">
+                        <button class="edit-btn">Редактирай</button>
+                        <form th:method="PUT"
+                              th:action="@{/employees/profile/update/{info}(info='languages')}"
+                              style="display: none;">
+                            <input type="text" name="updatedInfo" style="display: none;">
+                            <button class="save-btn" type="submit">Запази</button>
+                        </form>
+                    </div>
+                </li>
             </ul>
         </section>
     </main>
@@ -37,6 +137,7 @@
     <script src="\js\show-menu.js"></script>
     <script src="\js\show-menu-profile.js"></script>
     <script src="\js\show-menu-team.js"></script>
+    <script src="\js\edit-field.js"></script>
 
 </body>
 

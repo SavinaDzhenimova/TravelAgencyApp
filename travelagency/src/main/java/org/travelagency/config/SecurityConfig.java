@@ -30,7 +30,7 @@ public class SecurityConfig {
                         .requestMatchers("/employees/login", "/register", "/excursions/reserve/**",
                                 "/excursions/send-inquiry").anonymous()
                         .requestMatchers("/employees/profile", "/employees",
-                                "/excursions/reservations").authenticated()
+                                "/excursions/reservations", "/employees/profile/update/**").authenticated()
                         .requestMatchers("/destinations/**", "/excursions/**",
                                 "/excursions/excursion-details/**").permitAll()
                         .requestMatchers("/candidates", "/candidates/add-employee", "/candidates/delete-candidate",

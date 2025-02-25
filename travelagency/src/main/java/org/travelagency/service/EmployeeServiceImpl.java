@@ -88,6 +88,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public boolean updateEmployeeInfo(Long id, String updatedInfo) {
+        return false;
+    }
+
+    @Override
     public Result promoteEmployee(Long id) {
         Optional<Employee> optionalEmployee = this.employeeRepository.findById(id);
 

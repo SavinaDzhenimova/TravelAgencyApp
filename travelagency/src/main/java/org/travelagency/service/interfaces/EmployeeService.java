@@ -24,4 +24,6 @@ public interface EmployeeService {
     Optional<Employee> findEmployeeByPhoneNumber(String phoneNumber);
 
     Long getLoggedEmployeeId();
+
+    boolean updateEmployeeInfo(Long id, String updatedInfo);
 }

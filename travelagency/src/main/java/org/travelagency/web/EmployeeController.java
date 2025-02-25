@@ -12,6 +12,10 @@ import org.travelagency.model.user.EmployeeProfileDTO;
 import org.travelagency.model.user.UserDetailsDTO;
 import org.travelagency.service.interfaces.EmployeeService;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 @Controller
 public class EmployeeController {
 
@@ -44,9 +48,31 @@ public class EmployeeController {
             EmployeeProfileDTO employeeProfileDTO = this.employeeService.getEmployeeInfo(UserDetailsDTO.getId());
 
             modelAndView.addObject("employee", employeeProfileDTO);
+            modelAndView.addObject("employeeId", UserDetailsDTO.getId());
         }
 
         return modelAndView;
+    }
+
+    @PutMapping("/employees/profile/update/{info}")
+    public ModelAndView updateProfile(@PathVariable("info") String info,
+                                      @AuthenticationPrincipal UserDetails userDetails,
+                                      @RequestParam("updatedInfo") String updatedInfo,
+                                      RedirectAttributes redirectAttributes) {
+
+        ModelAndView modelAndView = new ModelAndView("profile");
+
+        if (userDetails instanceof UserDetailsDTO userDetailsDTO) {
+            boolean isInfoUpdated = this.employeeService.updateEmployeeInfo(UserDetailsDTO.getId(), info);
+
+            if (isInfoUpdated) {
+                redirectAttributes.addFlashAttribute("successMessage", "Успешно променихте данните си!");
+            } else {
+                redirectAttributes.addFlashAttribute("failureMessage", "Нещо се обърка!");
+            }
+        }
+
+        return new ModelAndView("redirect:/employees/profile");
     }
 
     @PutMapping("/employees/promote-employee/{id}")
