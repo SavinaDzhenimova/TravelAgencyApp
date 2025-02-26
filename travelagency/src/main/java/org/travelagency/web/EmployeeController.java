@@ -1,20 +1,21 @@
 package org.travelagency.web;
 
+import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.travelagency.model.entity.Result;
 import org.travelagency.model.exportDTO.employee.EmployeesViewInfo;
+import org.travelagency.model.importDTO.AddCandidateDTO;
+import org.travelagency.model.importDTO.UpdatePasswordDTO;
 import org.travelagency.model.user.EmployeeProfileDTO;
 import org.travelagency.model.user.UserDetailsDTO;
 import org.travelagency.service.interfaces.EmployeeService;
-
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 @Controller
 public class EmployeeController {
@@ -40,7 +41,11 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/profile")
-    public ModelAndView profile(@AuthenticationPrincipal UserDetails userDetails) {
+    public ModelAndView profile(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+
+        if (!model.containsAttribute("updatePasswordDTO")) {
+            model.addAttribute("updatePasswordDTO", new UpdatePasswordDTO());
+        }
 
         ModelAndView modelAndView = new ModelAndView("profile");
 
@@ -64,6 +69,33 @@ public class EmployeeController {
 
         if (userDetails instanceof UserDetailsDTO userDetailsDTO) {
             Result result = this.employeeService.updateEmployeeInfo(UserDetailsDTO.getId(), infoToUpdate, updatedInfo);
+
+            if (result.isSuccess()) {
+                redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
+            } else {
+                redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
+            }
+        }
+
+        return new ModelAndView("redirect:/employees/profile");
+    }
+
+    @PutMapping("/employees/profile/update/password")
+    public ModelAndView updatePassword(@AuthenticationPrincipal UserDetails userDetails,
+                                       @Valid @ModelAttribute UpdatePasswordDTO updatePasswordDTO,
+                                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("updatePasswordDTO", updatePasswordDTO)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.updatePasswordDTO",
+                            bindingResult);
+
+            return new ModelAndView("redirect:/employees/profile");
+        }
+
+        if (userDetails instanceof UserDetailsDTO userDetailsDTO) {
+            Result result = this.employeeService
+                    .updateEmployeePassword(UserDetailsDTO.getId(), updatePasswordDTO);
 
             if (result.isSuccess()) {
                 redirectAttributes.addFlashAttribute("successMessage", result.getMessage());

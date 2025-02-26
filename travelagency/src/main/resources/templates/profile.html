@@ -130,6 +130,51 @@
                 </li>
             </ul>
         </section>
+
+        <div class="edit-buttons">
+            <button class="edit-password-btn">Редактирай паролата си</button>
+
+            <form th:method="PUT"
+                  th:action="@{/employees/profile/update/password}"
+                  th:object="${updatePasswordDTO}"
+                  style="display: none;">
+
+                <div class="field">
+                    <label>Стара парола: </label>
+                    <input type="password" name="oldPassword"
+                           th:field="*{oldPassword}"
+                           th:errorclass="is-invalid"
+                           style="display: none;">
+                    <small th:if="${#fields.hasErrors('oldPassword')}"
+                           th:errors="*{oldPassword}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <label>Нова парола: </label>
+                    <input type="password" name="newPassword"
+                           th:field="*{newPassword}"
+                           th:errorclass="is-invalid"
+                           style="display: none;">
+                    <small th:if="${#fields.hasErrors('newPassword')}"
+                           th:errors="*{newPassword}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <label>Повторете новата си парола: </label>
+                    <input type="password" name="confirmNewPassword"
+                           th:field="*{confirmNewPassword}"
+                           th:errorclass="is-invalid"
+                           style="display: none;">
+                    <small th:if="${#fields.hasErrors('confirmNewPassword')}"
+                           th:errors="*{confirmNewPassword}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <button class="save-password-btn" type="submit">Запази</button>
+            </form>
+        </div>
     </main>
 
     <footer th:replace="~{fragments/commons::footer}"></footer>
@@ -138,6 +183,7 @@
     <script src="\js\show-menu-profile.js"></script>
     <script src="\js\show-menu-team.js"></script>
     <script src="\js\edit-field.js"></script>
+    <script src="\js\edit-password.js"></script>
 
 </body>
 

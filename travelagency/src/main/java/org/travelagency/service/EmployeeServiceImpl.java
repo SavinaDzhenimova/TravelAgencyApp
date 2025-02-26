@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.Employee;
 import org.travelagency.model.entity.Language;
@@ -13,6 +14,7 @@ import org.travelagency.model.enums.EducationLevel;
 import org.travelagency.model.enums.RoleName;
 import org.travelagency.model.exportDTO.employee.EmployeeDTO;
 import org.travelagency.model.exportDTO.employee.EmployeesViewInfo;
+import org.travelagency.model.importDTO.UpdatePasswordDTO;
 import org.travelagency.model.user.EmployeeProfileDTO;
 import org.travelagency.repository.EmployeeRepository;
 import org.travelagency.repository.RoleRepository;
@@ -33,15 +35,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final LanguageService languageService;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
     private final ApplicationEventPublisher applicationEventPublisher;
 
     public EmployeeServiceImpl(EmployeeRepository employeeRepository, LanguageService languageService,
-                               RoleRepository roleRepository, ModelMapper modelMapper,
+                               RoleRepository roleRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper,
                                ApplicationEventPublisher applicationEventPublisher) {
         this.employeeRepository = employeeRepository;
         this.languageService = languageService;
         this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
         this.applicationEventPublisher = applicationEventPublisher;
     }
@@ -104,8 +108,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = optionalEmployee.get();
 
         switch (infoToUpdate) {
-            case "email":
-
+            case "email" -> {
                 Optional<Employee> optionalEmployeeByEmail = this.employeeRepository.findByEmail(updatedInfo);
 
                 if (optionalEmployeeByEmail.isPresent()) {
@@ -117,9 +120,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 }
 
                 employee.setEmail(updatedInfo);
-                break;
-            case "phoneNumber":
-
+            }
+            case "phoneNumber" -> {
                 Optional<Employee> optionalEmployeeByPhoneNumber = this.employeeRepository.findByPhoneNumber(updatedInfo);
 
                 if (optionalEmployeeByPhoneNumber.isPresent()) {
@@ -132,8 +134,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 }
 
                 employee.setPhoneNumber(updatedInfo);
-                break;
-            case "address":
+            }
+            case "address" -> {
 
                 if (updatedInfo.length() < 3 || updatedInfo.length() > 70) {
                     return new Result(false,
@@ -141,9 +143,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 }
 
                 employee.setAddress(updatedInfo);
-                break;
-            case "education":
-
+            }
+            case "education" -> {
                 String educationLevel = this.mapEducationLevel(employee.getEducation());
 
                 if (educationLevel.equalsIgnoreCase(updatedInfo)) {
@@ -156,10 +157,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                     employee.setEducation(EducationLevel.UNIVERSITY_DEGREE);
                     employee.setSpecialty("Моля въведете своята специалност!");
                 }
-
-                break;
-            case "specialty":
-
+            }
+            case "specialty" -> {
                 if (employee.getSpecialty().equalsIgnoreCase(updatedInfo)) {
                     return new Result(false, "Не сте въвели нова специалност!");
                 }
@@ -175,10 +174,10 @@ public class EmployeeServiceImpl implements EmployeeService {
                 }
 
                 employee.setSpecialty(updatedInfo);
-                break;
-            case "languages":
-
+            }
+            case "languages" -> {
                 Set<Language> employeeLanguages = employee.getLanguages();
+
                 String employeeLanguagesToString = this.mapLanguagesToStringFormat(employeeLanguages);
 
                 if (employeeLanguagesToString.equalsIgnoreCase(updatedInfo)) {
@@ -188,12 +187,39 @@ public class EmployeeServiceImpl implements EmployeeService {
                 Set<Language> newLanguages = this.languageService.processLanguages(updatedInfo);
 
                 employee.setLanguages(newLanguages);
-                break;
+            }
         }
 
         this.employeeRepository.saveAndFlush(employee);
 
         return new Result(true, "Вие успешно актуализирахте своите лични данни!");
+    }
+
+    @Override
+    public Result updateEmployeePassword(Long id, UpdatePasswordDTO updatePasswordDTO) {
+
+        Optional<Employee> optionalEmployee = this.employeeRepository.findById(id);
+
+        if (optionalEmployee.isEmpty()) {
+            return new Result(false, "Този потребител не съществува!");
+        }
+
+        Employee employee = optionalEmployee.get();
+
+        boolean matches = this.passwordEncoder.matches(updatePasswordDTO.getOldPassword(), employee.getPassword());
+
+        if (!matches) {
+            return new Result(false, "Старата Ви парола е грешна!");
+        }
+
+        if (!updatePasswordDTO.getNewPassword().equals(updatePasswordDTO.getConfirmNewPassword())) {
+            return new Result(false, "Новата Ви парола не съвпада с потвърждението!");
+        }
+
+        employee.setPassword(this.passwordEncoder.encode(updatePasswordDTO.getNewPassword()));
+        this.employeeRepository.saveAndFlush(employee);
+
+        return new Result(true, "Вие успешно променихте своята парола!");
     }
 
     private boolean isValidEmail(String email) {

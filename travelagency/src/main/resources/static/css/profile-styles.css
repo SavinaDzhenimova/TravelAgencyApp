@@ -71,7 +71,8 @@ main .profile-info ul li input {
     border-bottom: 1px solid #0A67AA;
 }
 
-main .profile-info ul li input:focus {
+main .profile-info ul li input:focus,
+main .edit-buttons form .field input {
     outline: none;
 }
 
@@ -80,7 +81,8 @@ main .profile-info ul li .buttons {
     text-align: right;
 }
 
-main .profile-info ul li .buttons .edit-btn {
+main .profile-info ul li .buttons .edit-btn,
+main .edit-buttons .edit-password-btn {
     background-color: #fff;
     border: none;
     color: #0A67AA;
@@ -90,6 +92,10 @@ main .profile-info ul li .buttons .edit-btn {
     cursor: pointer;
 }
 
+main .edit-buttons .edit-password-btn {
+    font-size: 16px;
+}
+
 main .profile-info ul li .buttons form {
     display: flex;
     justify-content: space-between;
@@ -97,7 +103,8 @@ main .profile-info ul li .buttons form {
     width: 100%;
 }
 
-main .profile-info ul li .buttons form .save-btn {
+main .profile-info ul li .buttons form .save-btn,
+main .edit-buttons form .save-password-btn {
     background-color: #0A67AA;
     color: #fff;
     border: none;
@@ -106,7 +113,42 @@ main .profile-info ul li .buttons form .save-btn {
     cursor: pointer;
 }
 
-main .profile-info ul li .buttons form .save-btn:disabled {
+main .profile-info ul li .buttons form .save-btn:disabled,
+main .edit-buttons form .save-password-btn:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+}
+
+main .edit-buttons form {
+    width: 650px;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+main .edit-buttons form .field {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5em;
+}
+
+main .edit-buttons form .field label {
+    font-style: oblique;
+}
+
+main .edit-buttons form .field input {
+    padding: 0.3em;
+    width: 60%;
+    border: 1px solid #0A67AA;
+    border-radius: 0.5em;
+}
+
+main .edit-buttons form .field small {
+    flex-grow: 1;
+    text-align: right;
+}
+
+main .edit-buttons form .save-password-btn {
+    width: 50%;
+    align-self: center;
 }
