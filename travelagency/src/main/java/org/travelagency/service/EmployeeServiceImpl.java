@@ -147,16 +147,34 @@ public class EmployeeServiceImpl implements EmployeeService {
             case "education" -> {
                 String educationLevel = this.mapEducationLevel(employee.getEducation());
 
+                if (!updatedInfo.equalsIgnoreCase("Основно") &&
+                        !updatedInfo.equalsIgnoreCase("Средно") &&
+                        !updatedInfo.equalsIgnoreCase("Висше")) {
+                    return new Result(false,
+                            "Новата степен на образование, която сте посочили, не е разпозната!");
+                }
+
                 if (educationLevel.equalsIgnoreCase(updatedInfo)) {
                     return new Result(false, "Вашето образование вече е " + educationLevel);
                 }
 
                 if (educationLevel.equals("Основно") && updatedInfo.equalsIgnoreCase("Средно")) {
                     employee.setEducation(EducationLevel.SECONDARY);
+
+                    this.employeeRepository.saveAndFlush(employee);
+
+                    return new Result(true, "Успешно променихте образованието си от Основно на Средно!");
                 } else if (educationLevel.equals("Средно") && updatedInfo.equalsIgnoreCase("Висше")) {
                     employee.setEducation(EducationLevel.UNIVERSITY_DEGREE);
                     employee.setSpecialty("Моля въведете своята специалност!");
+
+                    this.employeeRepository.saveAndFlush(employee);
+
+                    return new Result(true, "Успешно променихте образованието си от Средно на Висше! " +
+                            "Моля посочете и специалността, която сте завършили!");
                 }
+
+                return new Result(false, "Не можете да преминете към по-ниска степен на образование от настоящата!");
             }
             case "specialty" -> {
                 if (employee.getSpecialty().equalsIgnoreCase(updatedInfo)) {
