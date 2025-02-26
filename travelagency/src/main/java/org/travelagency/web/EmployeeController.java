@@ -55,7 +55,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/employees/profile/update/{info}")
-    public ModelAndView updateProfile(@PathVariable("info") String info,
+    public ModelAndView updateProfile(@PathVariable("info") String infoToUpdate,
                                       @AuthenticationPrincipal UserDetails userDetails,
                                       @RequestParam("updatedInfo") String updatedInfo,
                                       RedirectAttributes redirectAttributes) {
@@ -63,12 +63,12 @@ public class EmployeeController {
         ModelAndView modelAndView = new ModelAndView("profile");
 
         if (userDetails instanceof UserDetailsDTO userDetailsDTO) {
-            boolean isInfoUpdated = this.employeeService.updateEmployeeInfo(UserDetailsDTO.getId(), info);
+            Result result = this.employeeService.updateEmployeeInfo(UserDetailsDTO.getId(), infoToUpdate, updatedInfo);
 
-            if (isInfoUpdated) {
-                redirectAttributes.addFlashAttribute("successMessage", "Успешно променихте данните си!");
+            if (result.isSuccess()) {
+                redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
             } else {
-                redirectAttributes.addFlashAttribute("failureMessage", "Нещо се обърка!");
+                redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
             }
         }
 

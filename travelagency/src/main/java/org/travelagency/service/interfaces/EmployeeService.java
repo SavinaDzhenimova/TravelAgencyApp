@@ -25,5 +25,5 @@ public interface EmployeeService {
 
     Long getLoggedEmployeeId();
 
-    boolean updateEmployeeInfo(Long id, String updatedInfo);
+    Result updateEmployeeInfo(Long id, String infoToUpdate, String updatedInfo);
 }

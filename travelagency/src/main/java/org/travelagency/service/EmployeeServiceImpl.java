@@ -16,26 +16,31 @@ import org.travelagency.model.exportDTO.employee.EmployeesViewInfo;
 import org.travelagency.model.user.EmployeeProfileDTO;
 import org.travelagency.repository.EmployeeRepository;
 import org.travelagency.repository.RoleRepository;
-import org.travelagency.service.events.HireEmployeeEvent;
 import org.travelagency.service.events.PromoteEmployeeEvent;
 import org.travelagency.service.interfaces.EmployeeService;
+import org.travelagency.service.interfaces.LanguageService;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final LanguageService languageService;
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, RoleRepository roleRepository,
-                               ModelMapper modelMapper, ApplicationEventPublisher applicationEventPublisher) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, LanguageService languageService,
+                               RoleRepository roleRepository, ModelMapper modelMapper,
+                               ApplicationEventPublisher applicationEventPublisher) {
         this.employeeRepository = employeeRepository;
+        this.languageService = languageService;
         this.roleRepository = roleRepository;
         this.modelMapper = modelMapper;
         this.applicationEventPublisher = applicationEventPublisher;
@@ -88,8 +93,116 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public boolean updateEmployeeInfo(Long id, String updatedInfo) {
-        return false;
+    public Result updateEmployeeInfo(Long id, String infoToUpdate, String updatedInfo) {
+
+        Optional<Employee> optionalEmployee = this.employeeRepository.findById(id);
+
+        if (optionalEmployee.isEmpty()) {
+            return new Result(false, "Този потребител не съществува!");
+        }
+
+        Employee employee = optionalEmployee.get();
+
+        switch (infoToUpdate) {
+            case "email":
+
+                Optional<Employee> optionalEmployeeByEmail = this.employeeRepository.findByEmail(updatedInfo);
+
+                if (optionalEmployeeByEmail.isPresent()) {
+                    return new Result(false, "Този имейл вече съществува в базата данни!");
+                }
+
+                if (!this.isValidEmail(updatedInfo)) {
+                    return new Result(false, "Въведеният от вас имейл не е във валиден формат!");
+                }
+
+                employee.setEmail(updatedInfo);
+                break;
+            case "phoneNumber":
+
+                Optional<Employee> optionalEmployeeByPhoneNumber = this.employeeRepository.findByPhoneNumber(updatedInfo);
+
+                if (optionalEmployeeByPhoneNumber.isPresent()) {
+                    return new Result(false, "Този телефонен номер вече съществува в базата данни!");
+                }
+
+                if (updatedInfo.length() < 7 || updatedInfo.length() > 15) {
+                    return new Result(false,
+                            "Въведеният от вас телефонен номер трябва да съдържа между 7 и 15 символа!");
+                }
+
+                employee.setPhoneNumber(updatedInfo);
+                break;
+            case "address":
+
+                if (updatedInfo.length() < 3 || updatedInfo.length() > 70) {
+                    return new Result(false,
+                            "Въведеният от вас адрес трябва да съдържа между 3 и 70 символа!");
+                }
+
+                employee.setAddress(updatedInfo);
+                break;
+            case "education":
+
+                String educationLevel = this.mapEducationLevel(employee.getEducation());
+
+                if (educationLevel.equalsIgnoreCase(updatedInfo)) {
+                    return new Result(false, "Вашето образование вече е " + educationLevel);
+                }
+
+                if (educationLevel.equals("Основно") && updatedInfo.equalsIgnoreCase("Средно")) {
+                    employee.setEducation(EducationLevel.SECONDARY);
+                } else if (educationLevel.equals("Средно") && updatedInfo.equalsIgnoreCase("Висше")) {
+                    employee.setEducation(EducationLevel.UNIVERSITY_DEGREE);
+                    employee.setSpecialty("Моля въведете своята специалност!");
+                }
+
+                break;
+            case "specialty":
+
+                if (employee.getSpecialty().equalsIgnoreCase(updatedInfo)) {
+                    return new Result(false, "Не сте въвели нова специалност!");
+                }
+
+                if (!employee.getEducation().equals(EducationLevel.UNIVERSITY_DEGREE)) {
+                    return new Result(false,
+                            "Не може да редактирате специалността понеже образованието ви не е Висше!");
+                }
+
+                if (updatedInfo.length() < 10 || updatedInfo.length() > 80) {
+                    return new Result(false,
+                            "Въведената от вас специалност трябва да съдържа между 10 и 80 символа!");
+                }
+
+                employee.setSpecialty(updatedInfo);
+                break;
+            case "languages":
+
+                Set<Language> employeeLanguages = employee.getLanguages();
+                String employeeLanguagesToString = this.mapLanguagesToStringFormat(employeeLanguages);
+
+                if (employeeLanguagesToString.equalsIgnoreCase(updatedInfo)) {
+                    return new Result(false, "Не сте въвели нов говорим език!");
+                }
+
+                Set<Language> newLanguages = this.languageService.processLanguages(updatedInfo);
+
+                employee.setLanguages(newLanguages);
+                break;
+        }
+
+        this.employeeRepository.saveAndFlush(employee);
+
+        return new Result(true, "Вие успешно актуализирахте своите лични данни!");
+    }
+
+    private boolean isValidEmail(String email) {
+        String regex = "^[a-zA-Z0-9]+[_.]?[a-zA-Z0-9]+@[a-zA-Z]+.+[a-zA-Z]+$";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+
+        return matcher.matches();
     }
 
     @Override
