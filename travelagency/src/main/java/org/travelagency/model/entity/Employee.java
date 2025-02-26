@@ -14,10 +14,6 @@ public class Employee extends BaseInfo {
     @Size(min = 5, max = 50)
     private String fullName;
 
-    @Column(nullable = false, unique = true)
-    @Size(min = 3, max = 30)
-    private String username;
-
     @Column(nullable = false)
     @Size(min = 8)
     private String password;
@@ -42,14 +38,6 @@ public class Employee extends BaseInfo {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {

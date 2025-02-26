@@ -39,7 +39,7 @@ public class SecurityConfig {
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/employees/login")
-                        .usernameParameter("username")
+                        .usernameParameter("email")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/employees/profile", true)
                         .failureUrl("/employees/login-error")

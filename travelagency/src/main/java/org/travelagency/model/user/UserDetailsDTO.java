@@ -10,11 +10,9 @@ import java.util.Set;
 
 public class UserDetailsDTO extends User {
 
-    private static Long id;
+    private Long id;
 
     private String fullName;
-
-    private String email;
 
     private String address;
 
@@ -26,21 +24,19 @@ public class UserDetailsDTO extends User {
 
     private Set<Language> languages;
 
-    public UserDetailsDTO(String username,
+    public UserDetailsDTO(String email,
                           String password,
                           Collection<? extends GrantedAuthority> authorities,
                           Long id,
                           String fullName,
-                          String email,
                           String address,
                           String phoneNumber,
                           EducationLevel education,
                           String specialty,
                           Set<Language> languages) {
-        super(username, password, authorities);
+        super(email, password, authorities);
         this.id = id;
         this.fullName = fullName;
-        this.email = email;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.education = education;
@@ -48,7 +44,7 @@ public class UserDetailsDTO extends User {
         this.languages = languages;
     }
 
-    public static Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -62,14 +58,6 @@ public class UserDetailsDTO extends User {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getAddress() {

@@ -50,10 +50,10 @@ public class EmployeeController {
         ModelAndView modelAndView = new ModelAndView("profile");
 
         if (userDetails instanceof UserDetailsDTO userDetailsDTO) {
-            EmployeeProfileDTO employeeProfileDTO = this.employeeService.getEmployeeInfo(UserDetailsDTO.getId());
+            EmployeeProfileDTO employeeProfileDTO = this.employeeService.getEmployeeInfo(userDetailsDTO.getId());
 
             modelAndView.addObject("employee", employeeProfileDTO);
-            modelAndView.addObject("employeeId", UserDetailsDTO.getId());
+            modelAndView.addObject("employeeId", userDetailsDTO.getId());
         }
 
         return modelAndView;
@@ -68,7 +68,7 @@ public class EmployeeController {
         ModelAndView modelAndView = new ModelAndView("profile");
 
         if (userDetails instanceof UserDetailsDTO userDetailsDTO) {
-            Result result = this.employeeService.updateEmployeeInfo(UserDetailsDTO.getId(), infoToUpdate, updatedInfo);
+            Result result = this.employeeService.updateEmployeeInfo(userDetailsDTO.getId(), infoToUpdate, updatedInfo);
 
             if (result.isSuccess()) {
                 redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
@@ -95,7 +95,7 @@ public class EmployeeController {
 
         if (userDetails instanceof UserDetailsDTO userDetailsDTO) {
             Result result = this.employeeService
-                    .updateEmployeePassword(UserDetailsDTO.getId(), updatePasswordDTO);
+                    .updateEmployeePassword(userDetailsDTO.getId(), updatePasswordDTO);
 
             if (result.isSuccess()) {
                 redirectAttributes.addFlashAttribute("successMessage", result.getMessage());

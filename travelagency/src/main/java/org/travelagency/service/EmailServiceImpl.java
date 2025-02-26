@@ -47,8 +47,8 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void sendHireEmployeeEmail(String fullName, String email, String phoneNumber, String address, String education,
-                                      String specialty, String languages, String username, String password) {
+    public void sendHireEmployeeEmail(String fullName, String email, String phoneNumber, String address,
+                                      String education, String specialty, String languages, String password) {
         Map<String, Object> variables = Map.of(
                 "fullName", fullName,
                 "email", email,
@@ -57,7 +57,6 @@ public class EmailServiceImpl implements EmailService {
                 "education", education,
                 "specialty", specialty,
                 "languages", languages,
-                "username", username,
                 "password", password
         );
 

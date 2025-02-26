@@ -23,25 +23,23 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.employeeRepository = employeeRepository;
     }
 
-
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         return this.employeeRepository
-                .findByUsername(username)
+                .findByEmail(email)
                 .map(UserDetailsServiceImpl::map)
-                .orElseThrow(() -> new UsernameNotFoundException("Username " + username + " not found!"));
+                .orElseThrow(() -> new UsernameNotFoundException("Няма такъв потребител: " + email));
     }
 
     private static UserDetails map(Employee employee) {
 
         return new UserDetailsDTO(
-                employee.getUsername(),
+                employee.getEmail(),
                 employee.getPassword(),
                 mapAuthorities(employee.getRole()),
                 employee.getId(),
                 employee.getFullName(),
-                employee.getEmail(),
                 employee.getAddress(),
                 employee.getPhoneNumber(),
                 employee.getEducation(),

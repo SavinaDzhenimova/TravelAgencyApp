@@ -18,6 +18,7 @@ import org.travelagency.service.interfaces.CandidateService;
 import org.travelagency.service.interfaces.EmployeeService;
 import org.travelagency.service.interfaces.LanguageService;
 
+import java.security.SecureRandom;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,7 @@ public class CandidateServiceImpl implements CandidateService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final ApplicationEventPublisher applicationEventPublisher;
+    private String rawPassword;
 
     public CandidateServiceImpl(CandidateRepository candidateRepository, EmployeeService employeeService,
                                 LanguageService languageService, RoleRepository roleRepository, ModelMapper modelMapper,
@@ -168,8 +170,7 @@ public class CandidateServiceImpl implements CandidateService {
                         this.mapEducationLevel(employee.getEducation()),
                         employee.getSpecialty(),
                         this.mapLanguagesToStringFormat(employee.getLanguages()),
-                        employee.getUsername(),
-                        employee.getUsername() + employee.getPhoneNumber()));
+                        this.rawPassword));
 
         return new Result(true, "Този кандидат беше успешно назначен на работа!");
     }
@@ -203,16 +204,14 @@ public class CandidateServiceImpl implements CandidateService {
         }
 
         String fullName = candidate.getFirstName() + " " + candidate.getLastName();
-        String username = this.cyrillicToLatinUsername(fullName);
-        String password = username + candidate.getPhoneNumber();
+        this.rawPassword = this.generatePassword();
 
         employee.setFullName(fullName);
         employee.setRole(optionalRole.get());
-        employee.setUsername(username);
         employee.setEmail(candidate.getEmail());
         employee.setPhoneNumber(candidate.getPhoneNumber());
         employee.setAddress(candidate.getAddress());
-        employee.setPassword(this.passwordEncoder.encode(password));
+        employee.setPassword(this.passwordEncoder.encode(this.rawPassword));
         employee.setEducation(candidate.getEducation());
         employee.setSpecialty(candidate.getSpecialty());
         employee.setLanguages(candidate.getLanguages());
@@ -242,87 +241,39 @@ public class CandidateServiceImpl implements CandidateService {
         return Arrays.asList(EducationLevel.values()).contains(educationLevel);
     }
 
-    private String cyrillicToLatinUsername(String input) {
-        Map<Character, String> cyrillicToLatin = new HashMap<>();
+    public String generatePassword() {
+        String lowercase = "abcdefghijklmnopqrstuvwxyz";
+        String uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String digits = "0123456789";
+        String allChars = lowercase + uppercase + digits;
 
-        cyrillicToLatin.put('А', "A");
-        cyrillicToLatin.put('Б', "B");
-        cyrillicToLatin.put('В', "V");
-        cyrillicToLatin.put('Г', "G");
-        cyrillicToLatin.put('Д', "D");
-        cyrillicToLatin.put('Е', "E");
-        cyrillicToLatin.put('Ж', "Zh");
-        cyrillicToLatin.put('З', "Z");
-        cyrillicToLatin.put('И', "I");
-        cyrillicToLatin.put('Й', "Y");
-        cyrillicToLatin.put('К', "K");
-        cyrillicToLatin.put('Л', "L");
-        cyrillicToLatin.put('М', "M");
-        cyrillicToLatin.put('Н', "N");
-        cyrillicToLatin.put('О', "O");
-        cyrillicToLatin.put('П', "P");
-        cyrillicToLatin.put('Р', "R");
-        cyrillicToLatin.put('С', "S");
-        cyrillicToLatin.put('Т', "T");
-        cyrillicToLatin.put('У', "U");
-        cyrillicToLatin.put('Ф', "F");
-        cyrillicToLatin.put('Х', "Kh");
-        cyrillicToLatin.put('Ц', "Ts");
-        cyrillicToLatin.put('Ч', "Ch");
-        cyrillicToLatin.put('Ш', "Sh");
-        cyrillicToLatin.put('Щ', "Sht");
-        cyrillicToLatin.put('Ъ', "A");
-        cyrillicToLatin.put('Ь', "Y");
-        cyrillicToLatin.put('Ю', "Yu");
-        cyrillicToLatin.put('Я', "Ya");
+        SecureRandom random = new SecureRandom();
 
-        cyrillicToLatin.put('а', "a");
-        cyrillicToLatin.put('б', "b");
-        cyrillicToLatin.put('в', "v");
-        cyrillicToLatin.put('г', "g");
-        cyrillicToLatin.put('д', "d");
-        cyrillicToLatin.put('е', "e");
-        cyrillicToLatin.put('ж', "zh");
-        cyrillicToLatin.put('з', "z");
-        cyrillicToLatin.put('и', "i");
-        cyrillicToLatin.put('й', "y");
-        cyrillicToLatin.put('к', "k");
-        cyrillicToLatin.put('л', "l");
-        cyrillicToLatin.put('м', "m");
-        cyrillicToLatin.put('н', "n");
-        cyrillicToLatin.put('о', "o");
-        cyrillicToLatin.put('п', "p");
-        cyrillicToLatin.put('р', "r");
-        cyrillicToLatin.put('с', "s");
-        cyrillicToLatin.put('т', "t");
-        cyrillicToLatin.put('у', "u");
-        cyrillicToLatin.put('ф', "f");
-        cyrillicToLatin.put('х', "kh");
-        cyrillicToLatin.put('ц', "ts");
-        cyrillicToLatin.put('ч', "ch");
-        cyrillicToLatin.put('ш', "sh");
-        cyrillicToLatin.put('щ', "sht");
-        cyrillicToLatin.put('ъ', "a");
-        cyrillicToLatin.put('ь', "y");
-        cyrillicToLatin.put('ю', "yu");
-        cyrillicToLatin.put('я', "ya");
+        int length = 8 + random.nextInt(13);
+        StringBuilder password = new StringBuilder();
 
-        if (input == null || input.isEmpty()) {
-            return input;
+        password.append(uppercase.charAt(random.nextInt(uppercase.length())));
+        password.append(digits.charAt(random.nextInt(digits.length())));
+
+        for (int i = 2; i < length; i++) {
+            password.append(allChars.charAt(random.nextInt(allChars.length())));
         }
 
-        StringBuilder result = new StringBuilder();
+        return shuffleString(password.toString());
+    }
 
-        for (char letter : input.toCharArray()) {
-            if (cyrillicToLatin.containsKey(letter)) {
-                result.append(cyrillicToLatin.get(letter));
-            } else if (letter == ' ') {
-                result.append('_');
-            } else {
-                result.append(letter);
-            }
+    private String shuffleString(String input) {
+        char[] characters = input.toCharArray();
+
+        SecureRandom random = new SecureRandom();
+
+        for (int i = characters.length - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            char temp = characters[i];
+            characters[i] = characters[j];
+            characters[j] = temp;
         }
 
-        return result.toString();
+        return new String(characters);
     }
 }

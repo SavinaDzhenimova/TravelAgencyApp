@@ -296,9 +296,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Long getLoggedEmployeeId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        String username = authentication.getName();
+        String email = authentication.getName();
 
-        Optional<Employee> optionalEmployee = this.employeeRepository.findByUsername(username);
+        Optional<Employee> optionalEmployee = this.employeeRepository.findByEmail(email);
 
         if (optionalEmployee.isEmpty()) {
             return 0L;

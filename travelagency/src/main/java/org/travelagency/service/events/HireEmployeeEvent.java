@@ -18,12 +18,10 @@ public class HireEmployeeEvent extends ApplicationEvent {
 
     private String languages;
 
-    private String username;
-
     private String password;
 
     public HireEmployeeEvent(Object source, String fullName, String email, String phoneNumber, String address,
-                             String education, String specialty, String languages, String username, String password) {
+                             String education, String specialty, String languages, String password) {
         super(source);
         this.fullName = fullName;
         this.email = email;
@@ -32,7 +30,6 @@ public class HireEmployeeEvent extends ApplicationEvent {
         this.education = education;
         this.specialty = specialty;
         this.languages = languages;
-        this.username = username;
         this.password = password;
     }
 
@@ -90,14 +87,6 @@ public class HireEmployeeEvent extends ApplicationEvent {
 
     public void setLanguages(String languages) {
         this.languages = languages;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {

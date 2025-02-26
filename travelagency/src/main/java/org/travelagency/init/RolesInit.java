@@ -67,7 +67,6 @@ public class RolesInit implements CommandLineRunner {
             optionalRole.ifPresent(employee::setRole);
             optionalLanguage.ifPresent(language -> employee.getLanguages().add(language));
 
-            employee.setUsername("Sunrise_Travel_Manager");
             employee.setFullName("Sunrise Travel Мениджър");
             employee.setPhoneNumber("0888232555");
             employee.setEmail("sunrisetravelagencybulgaria@gmail.com");
