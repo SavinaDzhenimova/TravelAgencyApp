@@ -28,6 +28,21 @@
             <ul>
                 <li>
                     <div>
+                        <span>Име и фамилия: </span>
+                        <span th:text="${employee.getFullName()}"></span>
+                    </div>
+                    <div class="buttons">
+                        <button class="edit-btn">Редактирай</button>
+                        <form th:method="PUT"
+                              th:action="@{/employees/profile/update/{info}(info='fullName')}"
+                              style="display: none;">
+                            <input type="text" name="updatedInfo" style="display: none;">
+                            <button class="save-btn" type="submit">Запази</button>
+                        </form>
+                    </div>
+                </li>
+                <li>
+                    <div>
                         <span>E-mail: </span>
                         <span th:text="${employee.getEmail()}"></span>
                     </div>

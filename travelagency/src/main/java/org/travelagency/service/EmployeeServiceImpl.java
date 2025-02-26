@@ -108,6 +108,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = optionalEmployee.get();
 
         switch (infoToUpdate) {
+            case "fullName" -> {
+
+                if (updatedInfo.length() < 5 || updatedInfo.length() > 50) {
+                    return new Result(false, "Името и фамилията трябва да бъдат между 5 и 50 символа!");
+                }
+
+                employee.setFullName(updatedInfo);
+            }
             case "email" -> {
                 Optional<Employee> optionalEmployeeByEmail = this.employeeRepository.findByEmail(updatedInfo);
 

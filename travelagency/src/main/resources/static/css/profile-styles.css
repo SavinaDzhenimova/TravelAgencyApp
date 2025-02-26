@@ -151,4 +151,5 @@ main .edit-buttons form .field small {
 main .edit-buttons form .save-password-btn {
     width: 50%;
     align-self: center;
+    margin-top: 1em;
 }
