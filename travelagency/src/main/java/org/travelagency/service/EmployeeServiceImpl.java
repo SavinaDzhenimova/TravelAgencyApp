@@ -18,13 +18,14 @@ import org.travelagency.model.importDTO.UpdatePasswordDTO;
 import org.travelagency.model.user.EmployeeProfileDTO;
 import org.travelagency.repository.EmployeeRepository;
 import org.travelagency.repository.RoleRepository;
+import org.travelagency.service.events.ForgotPasswordEvent;
+import org.travelagency.service.events.HireEmployeeEvent;
 import org.travelagency.service.events.PromoteEmployeeEvent;
 import org.travelagency.service.interfaces.EmployeeService;
 import org.travelagency.service.interfaces.LanguageService;
+import org.travelagency.service.utils.PasswordGenerator;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -37,16 +38,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
+    private final PasswordGenerator passwordGenerator;
     private final ApplicationEventPublisher applicationEventPublisher;
 
     public EmployeeServiceImpl(EmployeeRepository employeeRepository, LanguageService languageService,
                                RoleRepository roleRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper,
-                               ApplicationEventPublisher applicationEventPublisher) {
+                               PasswordGenerator passwordGenerator, ApplicationEventPublisher applicationEventPublisher) {
         this.employeeRepository = employeeRepository;
         this.languageService = languageService;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
+        this.passwordGenerator = passwordGenerator;
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
@@ -246,6 +249,60 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeRepository.saveAndFlush(employee);
 
         return new Result(true, "Вие успешно променихте своята парола!");
+    }
+
+    @Override
+    public Result sendEmailForForgottenPassword(String emailOrPhoneNumber) {
+
+        Map<String, String> checkInput = this.checkInput(emailOrPhoneNumber);
+        Employee employee = new Employee();
+
+        if (checkInput.containsKey("email")) {
+            Optional<Employee> optionalEmployeeByEmail = this.employeeRepository.findByEmail(checkInput.get("email"));
+
+            if (optionalEmployeeByEmail.isEmpty()) {
+                return new Result(false, "Не съществува служител с имейла, който сте посочили!");
+            }
+
+            employee = optionalEmployeeByEmail.get();
+        } else if (checkInput.containsKey("phoneNumber")) {
+            Optional<Employee> optionalEmployeeByPhoneNumber = this.employeeRepository
+                    .findByPhoneNumber(checkInput.get("phoneNumber"));
+
+            if (optionalEmployeeByPhoneNumber.isEmpty()) {
+                return new Result(false, "Не съществува служител с телефонния номер, който сте посочили!");
+            }
+
+            employee = optionalEmployeeByPhoneNumber.get();
+        } else if (checkInput.containsKey("nothing")) {
+
+            return new Result(false, "Посочените от вас данни са в невалиден формат!");
+        }
+
+        String newPassword = this.passwordGenerator.generatePassword();
+
+        employee.setPassword(this.passwordEncoder.encode(newPassword));
+        this.employeeRepository.saveAndFlush(employee);
+
+        this.applicationEventPublisher.publishEvent(
+                new ForgotPasswordEvent(this, employee.getFullName(), employee.getEmail(), newPassword));
+
+        return new Result(true, "Моля проверете пощата си за имейл с временна парола!");
+    }
+
+    private Map<String, String> checkInput(String emailOrPhoneNumber) {
+        Map<String, String> inputMap = new HashMap<>();
+
+        if (emailOrPhoneNumber.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            inputMap.put("email", emailOrPhoneNumber);
+        }
+        else if (emailOrPhoneNumber.matches("^(\\+\\d{1,3})?\\d{10}$")) {
+            inputMap.put("phoneNumber", emailOrPhoneNumber);
+        } else {
+            inputMap.put("nothing", "");
+        }
+
+        return inputMap;
     }
 
     private boolean isValidEmail(String email) {

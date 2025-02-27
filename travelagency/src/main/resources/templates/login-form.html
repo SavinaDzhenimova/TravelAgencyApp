@@ -17,6 +17,10 @@
             <p>Все още не си част от екипа ни? <a th:href="@{/register}">Кандидатствай</a> тук.</p>
         </div>
 
+        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+            <p class="success" th:text="${successMessage}"></p>
+        </div>
+
         <div th:if="${failureMessage}" class="alert alert-failure" role="alert">
             <p th:text="${failureMessage}"></p>
         </div>
@@ -45,6 +49,8 @@
             <span>Тези полета са задължителни</span>
     
             <input type="submit" value="Вход">
+
+            <a th:href="@{/employees/login/forgot-password}" id="forgotPasswordLink">Забравена парола?</a>
         </form>
     </main>
 

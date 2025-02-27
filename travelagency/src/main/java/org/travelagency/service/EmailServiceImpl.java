@@ -3,7 +3,6 @@ package org.travelagency.service;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -44,6 +43,18 @@ public class EmailServiceImpl implements EmailService {
         String content = generateEmailContent("/email/inquiry-email", variables);
 
         sendEmail("sunrisetravelagencybulgaria@gmail.com", subject, content);
+    }
+
+    @Override
+    public void sendForgotPasswordEmail(String fullName, String email, String password) {
+        Map<String, Object> variables = Map.of(
+                "fullName", fullName,
+                "email", email,
+                "password", password
+        );
+
+        String content = generateEmailContent("/email/forgot-password-email", variables);
+        sendEmail(email, "Временна парола за достъп до профила ви", content);
     }
 
     @Override

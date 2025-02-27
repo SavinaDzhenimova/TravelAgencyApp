@@ -17,8 +17,8 @@ import org.travelagency.service.events.HireEmployeeEvent;
 import org.travelagency.service.interfaces.CandidateService;
 import org.travelagency.service.interfaces.EmployeeService;
 import org.travelagency.service.interfaces.LanguageService;
+import org.travelagency.service.utils.PasswordGenerator;
 
-import java.security.SecureRandom;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -32,11 +32,13 @@ public class CandidateServiceImpl implements CandidateService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final ApplicationEventPublisher applicationEventPublisher;
+    private final PasswordGenerator passwordGenerator;
     private String rawPassword;
 
     public CandidateServiceImpl(CandidateRepository candidateRepository, EmployeeService employeeService,
                                 LanguageService languageService, RoleRepository roleRepository, ModelMapper modelMapper,
-                                PasswordEncoder passwordEncoder, ApplicationEventPublisher applicationEventPublisher) {
+                                PasswordEncoder passwordEncoder, ApplicationEventPublisher applicationEventPublisher,
+                                PasswordGenerator passwordGenerator) {
         this.candidateRepository = candidateRepository;
         this.employeeService = employeeService;
         this.languageService = languageService;
@@ -44,6 +46,7 @@ public class CandidateServiceImpl implements CandidateService {
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.applicationEventPublisher = applicationEventPublisher;
+        this.passwordGenerator = passwordGenerator;
     }
 
     @Override
@@ -204,7 +207,7 @@ public class CandidateServiceImpl implements CandidateService {
         }
 
         String fullName = candidate.getFirstName() + " " + candidate.getLastName();
-        this.rawPassword = this.generatePassword();
+        this.rawPassword = this.passwordGenerator.generatePassword();
 
         employee.setFullName(fullName);
         employee.setRole(optionalRole.get());
@@ -239,41 +242,5 @@ public class CandidateServiceImpl implements CandidateService {
 
     private boolean isEducationLevelValid(EducationLevel educationLevel) {
         return Arrays.asList(EducationLevel.values()).contains(educationLevel);
-    }
-
-    public String generatePassword() {
-        String lowercase = "abcdefghijklmnopqrstuvwxyz";
-        String uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String digits = "0123456789";
-        String allChars = lowercase + uppercase + digits;
-
-        SecureRandom random = new SecureRandom();
-
-        int length = 8 + random.nextInt(13);
-        StringBuilder password = new StringBuilder();
-
-        password.append(uppercase.charAt(random.nextInt(uppercase.length())));
-        password.append(digits.charAt(random.nextInt(digits.length())));
-
-        for (int i = 2; i < length; i++) {
-            password.append(allChars.charAt(random.nextInt(allChars.length())));
-        }
-
-        return shuffleString(password.toString());
-    }
-
-    private String shuffleString(String input) {
-        char[] characters = input.toCharArray();
-
-        SecureRandom random = new SecureRandom();
-
-        for (int i = characters.length - 1; i > 0; i--) {
-            int j = random.nextInt(i + 1);
-            char temp = characters[i];
-            characters[i] = characters[j];
-            characters[j] = temp;
-        }
-
-        return new String(characters);
     }
 }

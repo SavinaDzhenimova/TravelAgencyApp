@@ -34,8 +34,11 @@ main .introduction {
 
 main .introduction a {
     color: #0A67AA;
-    text-decoration: underline;
     font-style: oblique;
+}
+
+main .introduction a:hover {
+    text-decoration: underline;
 }
 
 .login-form {
@@ -136,14 +139,26 @@ span::before {
 }
 
 .login-form input[type="submit"] {
-    width: 50%;
+    width: 45%;
     background-color: #0A67AA;
     color: #fff;
     font-size: 16px;
-    padding: 1em 0;
+    padding: 0.7em 0;
     border: none;
     align-self: center;
     font-weight: 600;
     border-radius: 0.3em;
+    cursor: pointer;
+}
+
+main .login-form > #forgotPasswordLink {
+    color: #0A67AA;
+    font-size: 15px;
+    font-style: oblique;
+    align-self: center;
+}
+
+main .login-form > #forgotPasswordLink:hover {
+    text-decoration: underline;
     cursor: pointer;
 }

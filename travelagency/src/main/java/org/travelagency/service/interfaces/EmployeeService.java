@@ -29,4 +29,6 @@ public interface EmployeeService {
     Long getLoggedEmployeeId();
 
     Result updateEmployeeInfo(Long id, String infoToUpdate, String updatedInfo);
+
+    Result sendEmailForForgottenPassword(String emailOtPhoneNumber);
 }
