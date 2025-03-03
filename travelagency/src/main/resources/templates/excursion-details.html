@@ -115,13 +115,12 @@
                 <table>
                     <tr>
                         <th>Дата</th>
-                        <th>Резервирай</th>
+                        <th sec:authorize="!isAuthenticated()">Резервирай</th>
                     </tr>
                     <tr th:each="date: ${dates}">
                         <td th:text="${#temporals.format(date, 'dd.MM.yyyy г.')}"></td>
-                        <td>
-                            <a sec:authorize="!isAuthenticated()"
-                               th:href="@{/excursions/excursion-details/{excursionName}/reserve/{date}
+                        <td sec:authorize="!isAuthenticated()">
+                            <a th:href="@{/excursions/excursion-details/{excursionName}/reserve/{date}
                                (excursionName=${excursion.name}, date=${date})}">Резервирай</a>
                         </td>
                     </tr>
