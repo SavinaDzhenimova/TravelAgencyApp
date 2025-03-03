@@ -3,6 +3,7 @@ package org.travelagency.web;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,7 +37,8 @@ public class ExcursionController {
 
         ModelAndView modelAndView = new ModelAndView("excursions");
 
-        Page<ExcursionViewDTO> excursionsPage = this.excursionService.getAllExcursions(PageRequest.of(page, size));
+        Page<ExcursionViewDTO> excursionsPage = this.excursionService
+                .getAllExcursions(PageRequest.of(page, size, Sort.by(Sort.Order.desc("id"))));
 
         if (excursionsPage.isEmpty()) {
             modelAndView.addObject("warningMessage", "Все още няма добавени екскурзии за разглеждане!");
@@ -59,7 +61,8 @@ public class ExcursionController {
         ModelAndView modelAndView = new ModelAndView("excursions");
 
         Page<ExcursionViewDTO> excursionsPage = this.excursionService
-                .getAllExcursionsByDestinationName(destinationName, PageRequest.of(page, size));
+                .getAllExcursionsByDestinationName(destinationName,
+                        PageRequest.of(page, size, Sort.by(Sort.Order.desc("id"))));
 
         if (excursionsPage.isEmpty()) {
             modelAndView.addObject("warningMessage", "Все още няма добавени екскурзии за разглеждане!");
