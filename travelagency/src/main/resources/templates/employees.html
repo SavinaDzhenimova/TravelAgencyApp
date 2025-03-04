@@ -40,7 +40,13 @@
           <tr th:each="employee : ${employees.getEmployees()}">
             <td th:text="${employee.getFullName()}" class="fullName">Име</td>
             <td th:text="${employee.getRole()}" class="role">Роля</td>
-            <td th:text="${employee.getEmail()}" class="email">E-mail</td>
+            <td class="email">
+              <a th:if="${loggedEmployeeId} != ${employee.id}"
+                 th:href="'mailto:' + ${employee.getEmail()} + '?subject=Кандидатура&body=Здравейте, ' + ${employee.getFullName()} + '!'"
+                 th:text="${employee.getEmail()}">
+              </a>
+              <p th:if="${loggedEmployeeId} == ${employee.id}" th:text="${employee.getEmail()}">Email</p>
+            </td>
             <td th:text="${employee.getPhoneNumber()}" class="phoneNumber">Телефон</td>
             <td th:text="${employee.getAddress()}" class="address">Адрес</td>
             <td th:text="${employee.getEducation()}" class="education">Степен на образование</td>

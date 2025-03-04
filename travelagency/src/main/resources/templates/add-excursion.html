@@ -49,7 +49,7 @@
                            th:errorclass="is-invalid"
                            type="number" name="price" id="price"
                            placeholder="Цена (за 1 човек)" required>
-                    <label th:for="price">Цена (за 1 човек)</label>
+                    <label th:for="price">Цена (за 1 човек) в лева</label>
                     <small th:if="${#fields.hasErrors('price')}"
                            th:errors="*{price}"
                            class="text-danger">Dish name error message</small>

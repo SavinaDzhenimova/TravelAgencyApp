@@ -74,6 +74,15 @@ main .employees-info-table tbody tr .fullName {
     width: 12%;
 }
 
+main .employees-info-table tbody tr .email > a {
+    color: #0A67AA;
+    text-decoration: underline;
+}
+
+main .employees-info-table tbody tr .email > a:hover {
+    font-weight: 500;
+}
+
 main > p {
     text-align: center;
     font-style: oblique;
