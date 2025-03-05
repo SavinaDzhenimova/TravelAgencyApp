@@ -44,8 +44,15 @@
                         <li>Направени резервации до момента: <span th:text="${excursion.getReservations()}"></span></li>
                     </ul>
 
+                    <form sec:authorize="hasRole('MANAGER')"
+                          th:method="DELETE"
+                          th:action="@{/excursions/delete-excursion/{id}(id=${excursion.getId()})}"
+                          class="delete-excursion-form">
+                        <button type="submit">Изтрий екскурзията</button>
+                    </form>
+
                     <!-- Бутон за отваряне на модалния прозорец -->
-                    <button id="openModal" class="custom-btn">Бързо запитване</button>
+                    <button sec:authorize="!isAuthenticated()" id="openModal" class="custom-btn">Бързо запитване</button>
 
                     <!-- Модален прозорец -->
                     <div id="quickInquiryModal" class="modal">

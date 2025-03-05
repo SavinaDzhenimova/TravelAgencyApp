@@ -1,5 +1,6 @@
 package org.travelagency.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -126,6 +127,7 @@ public class ExcursionServiceImpl implements ExcursionService {
 
         ExcursionExportDTO excursionExportDTO = new ExcursionExportDTO();
 
+        excursionExportDTO.setId(excursion.getId());
         excursionExportDTO.setName(excursion.getName());
         excursionExportDTO.setPrice(excursion.getPrice());
         excursionExportDTO.setDates(excursion.getDates());
@@ -192,8 +194,19 @@ public class ExcursionServiceImpl implements ExcursionService {
     }
 
     @Override
+    @Transactional
+    public void deleteExcursionById(Long id) {
+        this.excursionRepository.deleteExcursionById(id);
+    }
+
+    @Override
     public Optional<Excursion> findExcursionByExcursionName(String excursionName) {
         return this.excursionRepository.findByName(excursionName);
+    }
+
+    @Override
+    public Optional<Excursion> findExcursionById(Long id) {
+        return this.excursionRepository.findById(id);
     }
 
     @Override

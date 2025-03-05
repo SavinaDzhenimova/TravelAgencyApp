@@ -21,9 +21,7 @@ public class Excursion extends BaseEntity {
     @Positive
     private BigDecimal price;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "excursion_dates", joinColumns = @JoinColumn(name = "excursion_id"))
-    @Column(name = "date")
+    @Column(name = "dates")
     private List<LocalDate> dates;
 
     @Column(nullable = false)
@@ -41,7 +39,7 @@ public class Excursion extends BaseEntity {
     @JoinColumn(name = "program_id", referencedColumnName = "id")
     private Program program;
 
-    @OneToMany(mappedBy = "excursion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "excursion", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Reservation> reservations;
 
     public Excursion() {

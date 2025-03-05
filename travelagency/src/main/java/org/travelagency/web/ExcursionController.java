@@ -16,7 +16,9 @@ import org.travelagency.model.exportDTO.excursion.ExcursionViewDTO;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.model.importDTO.AddInquiryDTO;
 import org.travelagency.service.interfaces.ExcursionService;
+import org.travelagency.service.utils.ExcursionDeletionManager;
 
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -26,9 +28,11 @@ import java.nio.charset.StandardCharsets;
 public class ExcursionController {
 
     private final ExcursionService excursionService;
+    private final ExcursionDeletionManager excursionDeletionManager;
 
-    public ExcursionController(ExcursionService excursionService) {
+    public ExcursionController(ExcursionService excursionService, ExcursionDeletionManager excursionDeletionManager) {
         this.excursionService = excursionService;
+        this.excursionDeletionManager = excursionDeletionManager;
     }
 
     @GetMapping
@@ -128,6 +132,21 @@ public class ExcursionController {
 
         redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
         return new ModelAndView("redirect:/excursions/add-excursion");
+    }
+
+    @DeleteMapping("/delete-excursion/{id}")
+    public ModelAndView deleteExcursion(@PathVariable("id") Long excursionId,
+                                        RedirectAttributes redirectAttributes) throws IOException {
+
+        Result result = this.excursionDeletionManager.deleteExcursion(excursionId);
+
+        if (result.isSuccess()) {
+            redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
+        } else {
+            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
+        }
+
+        return new ModelAndView("redirect:/excursions");
     }
 
     @PostMapping("/excursion-details/{excursionName}/send-inquiry")

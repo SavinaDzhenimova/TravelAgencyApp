@@ -10,6 +10,7 @@ import org.travelagency.model.exportDTO.excursion.ExcursionViewInfo;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.model.importDTO.AddInquiryDTO;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,11 @@ public interface ExcursionService {
 
     ExcursionExportDTO getExcursionDetailsByName(String excursionName);
 
+    void deleteExcursionById(Long id);
+
     Optional<Excursion> findExcursionByExcursionName(String excursionName);
+
+    Optional<Excursion> findExcursionById(Long id);
 
     void saveAndFlushExcursion(Excursion excursion);
 
