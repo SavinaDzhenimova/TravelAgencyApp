@@ -5,6 +5,7 @@ import org.travelagency.model.annotations.ValidEmail;
 import org.travelagency.model.enums.PaymentModel;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class AddReservationDTO {
 
@@ -34,8 +35,8 @@ public class AddReservationDTO {
     @NotNull(message = "Трябва да изберете метод на плащане!")
     private PaymentModel payment;
 
-    @NotBlank(message = "Трябва да въведете три имена на поне един пътуващ турист!")
-    private String touristNames;
+    @NotEmpty(message = "Трябва да въведете три имена на всички туристи, които ще пътуват!")
+    private List<@NotNull String> touristNames;
 
     private String comments;
 
@@ -99,11 +100,11 @@ public class AddReservationDTO {
         this.payment = payment;
     }
 
-    public String getTouristNames() {
+    public List<String> getTouristNames() {
         return touristNames;
     }
 
-    public void setTouristNames(String touristNames) {
+    public void setTouristNames(List<String> touristNames) {
         this.touristNames = touristNames;
     }
 

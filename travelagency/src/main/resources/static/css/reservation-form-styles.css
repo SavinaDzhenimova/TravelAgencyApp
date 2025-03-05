@@ -39,7 +39,12 @@ main .reservation-form form .required::after {
     color: red;
 }
 
-main .reservation-form form .field {
+main .reservation-form form > #touristsContainer .field .required::after {
+    padding-left: 0.2em;
+}
+
+main .reservation-form form > .field,
+main .reservation-form form > #touristsContainer {
     padding: 0 0.3em;
     display: flex;
     flex-wrap: wrap;
@@ -48,7 +53,38 @@ main .reservation-form form .field {
     position: relative;
 }
 
-main .reservation-form form .field:not(:last-of-type)::after {
+main .reservation-form form > #touristsContainer::after {
+    display: block;
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: #0A67AA;
+    position: absolute;
+    left: 0;
+    bottom: -0.5em;
+}
+
+main .reservation-form form > #touristsContainer > .field {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+main .reservation-form form > #touristsContainer > .field:not(:last-of-type) {
+    padding-bottom: 0.5em;
+}
+
+main .reservation-form form > #touristsContainer > .field input {
+    width: 300px;
+    padding: 0.3em 0.5em;
+    border: 1px solid #aaa;
+    border-radius: 0.3em;
+}
+
+main .reservation-form form > .field:not(:last-of-type)::after {
     display: block;
     content: '';
     width: 100%;
@@ -72,6 +108,7 @@ main .reservation-form form .field input:disabled {
 }
 
 main .reservation-form form .field input,
+main .reservation-form form > #touristsContainer > input,
 main .reservation-form form .field select,
 main .reservation-form form .field textarea {
     padding: 0 0.3em;

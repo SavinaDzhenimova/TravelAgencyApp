@@ -6,28 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="737daafd-1dde-4737-8e86-b60ca1c6a9b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Excursion.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Excursion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/entity/Reservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/exportDTO/excursion/ExcursionExportDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/exportDTO/excursion/ExcursionExportDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/repository/DayRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/repository/DayRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/repository/ExcursionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/repository/ExcursionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/repository/ImageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/repository/ImageRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/repository/ProgramRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/repository/ProgramRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/repository/ReservationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/repository/ReservationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/DayServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/DayServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ExcursionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ExcursionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ImageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ImageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ProgramServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ProgramServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/importDTO/AddReservationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/model/importDTO/AddReservationDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ReservationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ReservationServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/DayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/DayService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ExcursionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ExcursionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ImageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ProgramService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ProgramService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/ExcursionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/ExcursionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/excursion-details-styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/excursion-details-styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/excursion-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/excursion-details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/reservation-form-styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/reservation-form-styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/reservation-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/reservation-form.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,10 +22,10 @@
         <option value="AnnotationType" />
         <option value="Enum" />
         <option value="Interface" />
-        <option value="JavaScript File" />
         <option value="HTML File" />
         <option value="CSS File" />
         <option value="Class" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>

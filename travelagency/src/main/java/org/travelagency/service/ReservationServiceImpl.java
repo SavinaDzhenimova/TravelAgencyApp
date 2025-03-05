@@ -108,13 +108,7 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setDate(LocalDate.now());
         reservation.setExcursionDate(addReservationDTO.getExcursionDate());
 
-        List<String> tourists = this.getTouristsForReservation(addReservationDTO.getTouristNames());
-
-        if (tourists.size() != addReservationDTO.getTouristsCount()) {
-            return new Result(false, "Не сте посочили съвместим брой туристи и имена!");
-        }
-
-        reservation.setTouristNames(tourists);
+        reservation.setTouristNames(addReservationDTO.getTouristNames());
         reservation.setExcursion(excursion);
 
         this.reservationRepository.saveAndFlush(reservation);
@@ -136,15 +130,5 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<Reservation> findAllReservationsByExcursionId(Long excursionId) {
         return this.reservationRepository.findAllByExcursionId(excursionId);
-    }
-
-    private List<String> getTouristsForReservation(String touristNames) {
-        if (touristNames == null || touristNames.trim().isEmpty()) {
-            return Collections.emptyList();
-        }
-
-        return Arrays.stream(touristNames.split("\\s*,\\s*"))
-                .filter(name -> !name.isBlank())
-                .collect(Collectors.toList());
     }
 }

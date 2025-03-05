@@ -114,15 +114,12 @@
                            class="text-danger">Dish name error message</small>
                 </div>
 
-                <div class="field textarea">
-                    <label for="touristNames" class="required">Списък на всички туристи, които ще пътуват: </label>
-                    <textarea th:field="*{touristNames}"
-                              th:errorclass="is-invalid"
-                            type="text" id="touristNames" name="touristNames">
-                        Напр. Иван Иванов Иванов, Алексия Стоянова Трифонова</textarea>
-                    <small th:if="${#fields.hasErrors('touristNames')}"
-                           th:errors="*{touristNames}"
-                           class="text-danger">Dish name error message</small>
+                <div id="touristsContainer">
+                    <div class="field">
+                        <label for="touristName1" class="required">Три имена по паспорт/лична карта на турист 1:</label>
+                        <input type="text" id="touristName1" name="touristNames" required>
+                        <small class="text-danger"></small>
+                    </div>
                 </div>
 
                 <div class="field textarea">
@@ -144,8 +141,9 @@
 
     <footer th:replace="~{fragments/commons::footer}"></footer>
 
-    <script src="\static\js\show-menu.js"></script>
-    <script src="\static\js\show-menu-profile.js"></script>
+    <script src="\js\show-menu.js"></script>
+    <script src="\js\show-menu-profile.js"></script>
+    <script src="\js\tourist-names-input-fields.js"></script>
 
 </body>
 </html>
