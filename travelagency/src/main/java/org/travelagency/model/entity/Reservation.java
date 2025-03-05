@@ -6,7 +6,9 @@ import org.travelagency.model.enums.PaymentModel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "reservations")
@@ -42,10 +44,10 @@ public class Reservation extends BaseEntity {
     private Excursion excursion;
 
     @Column(name = "tourist_names")
-    private List<String> touristNames;
+    private Set<String> touristNames;
 
     public Reservation() {
-        this.touristNames = new ArrayList<>();
+        this.touristNames = new HashSet<>();
     }
 
     public int getTouristsCount() {
@@ -88,11 +90,11 @@ public class Reservation extends BaseEntity {
         this.paymentModel = paymentModel;
     }
 
-    public List<String> getTouristNames() {
+    public Set<String> getTouristNames() {
         return touristNames;
     }
 
-    public void setTouristNames(List<String> touristNames) {
+    public void setTouristNames(Set<String> touristNames) {
         this.touristNames = touristNames;
     }
 

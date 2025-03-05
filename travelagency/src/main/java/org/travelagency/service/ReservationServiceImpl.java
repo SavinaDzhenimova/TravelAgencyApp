@@ -19,6 +19,7 @@ import org.travelagency.service.interfaces.ReservationService;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -108,6 +109,16 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setDate(LocalDate.now());
         reservation.setExcursionDate(addReservationDTO.getExcursionDate());
 
+        boolean areNamesValid = this.validateNames(addReservationDTO.getTouristNames());
+
+        if (addReservationDTO.getTouristsCount() != addReservationDTO.getTouristNames().size()) {
+            return new Result(false, "Имената на туристите трябва да са уникални!");
+        }
+
+        if (!areNamesValid) {
+            return new Result(false, "Имената на туристите не са във валиден формат!");
+        }
+
         reservation.setTouristNames(addReservationDTO.getTouristNames());
         reservation.setExcursion(excursion);
 
@@ -119,6 +130,22 @@ public class ReservationServiceImpl implements ReservationService {
         return new Result(true, "Успешно направихте своята резервация за " +
                 addReservationDTO.getTouristsCount() + " човека! " +
                 "Очаквайте обаждане от наш служител за потвърждение на резервацията!");
+    }
+
+    private boolean validateNames(Set<String> touristNames) {
+        String regex = "^([А-Я][а-я]{1,15})\s([А-Я][а-я]{1,15})\s([А-Я][а-я]{1,15})$";
+        Pattern pattern = Pattern.compile(regex);
+
+        if (touristNames == null || touristNames.isEmpty()) {
+            return false;
+        }
+
+        for (String name : touristNames) {
+            if (name == null || !pattern.matcher(name.trim()).matches()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

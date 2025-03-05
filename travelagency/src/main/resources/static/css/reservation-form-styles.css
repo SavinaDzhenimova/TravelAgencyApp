@@ -39,10 +39,6 @@ main .reservation-form form .required::after {
     color: red;
 }
 
-main .reservation-form form > #touristsContainer .field .required::after {
-    padding-left: 0.2em;
-}
-
 main .reservation-form form > .field,
 main .reservation-form form > #touristsContainer {
     padding: 0 0.3em;

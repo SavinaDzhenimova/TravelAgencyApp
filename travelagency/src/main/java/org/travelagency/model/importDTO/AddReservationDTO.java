@@ -1,11 +1,13 @@
 package org.travelagency.model.importDTO;
 
 import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.travelagency.model.annotations.ValidEmail;
 import org.travelagency.model.enums.PaymentModel;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 public class AddReservationDTO {
 
@@ -36,7 +38,7 @@ public class AddReservationDTO {
     private PaymentModel payment;
 
     @NotEmpty(message = "Трябва да въведете три имена на всички туристи, които ще пътуват!")
-    private List<@NotNull String> touristNames;
+    private Set<@NotEmpty(message = "Трябва да въведете три имена на всички туристи!") String> touristNames;
 
     private String comments;
 
@@ -100,11 +102,11 @@ public class AddReservationDTO {
         this.payment = payment;
     }
 
-    public List<String> getTouristNames() {
+    public Set<String> getTouristNames() {
         return touristNames;
     }
 
-    public void setTouristNames(List<String> touristNames) {
+    public void setTouristNames(Set<String> touristNames) {
         this.touristNames = touristNames;
     }
 
