@@ -1,5 +1,6 @@
 package org.travelagency.service;
 
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -124,6 +125,17 @@ public class ReservationServiceImpl implements ReservationService {
         return new Result(true, "Успешно направихте своята резервация за " +
                 addReservationDTO.getTouristsCount() + " човека! " +
                 "Очаквайте обаждане от наш служител за потвърждение на резервацията!");
+    }
+
+    @Override
+    @Transactional
+    public void deleteAllReservationsByExcursionId(Long excursionId) {
+        this.reservationRepository.deleteAllByExcursionId(excursionId);
+    }
+
+    @Override
+    public List<Reservation> findAllReservationsByExcursionId(Long excursionId) {
+        return this.reservationRepository.findAllByExcursionId(excursionId);
     }
 
     private List<String> getTouristsForReservation(String touristNames) {

@@ -113,6 +113,18 @@ main article .article-header .info-container ul {
     gap: 1em;
 }
 
+main article .article-header .info-container .delete-excursion-form button {
+    border: none;
+    background-color: #e74c3c;
+    color: #fff;
+    width: 100%;
+    padding: 1em;
+    border-radius: 0.5em;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+}
+
 main article .article-main table {
     border-collapse: collapse;
 }

@@ -9,6 +9,8 @@ import java.util.List;
 
 public class ExcursionExportDTO {
 
+    private Long id;
+
     private String name;
 
     private BigDecimal price;
@@ -30,6 +32,14 @@ public class ExcursionExportDTO {
     public ExcursionExportDTO() {
         this.dates = new ArrayList<>();
         this.days = new ArrayList<>();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

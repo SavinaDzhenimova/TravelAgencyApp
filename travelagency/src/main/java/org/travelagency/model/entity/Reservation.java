@@ -41,6 +41,7 @@ public class Reservation extends BaseEntity {
     @JoinColumn(name = "excursion_id", referencedColumnName = "id")
     private Excursion excursion;
 
+    @Column(name = "tourist_names")
     private List<String> touristNames;
 
     public Reservation() {
