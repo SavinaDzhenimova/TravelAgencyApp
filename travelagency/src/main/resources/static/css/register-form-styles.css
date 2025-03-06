@@ -34,8 +34,11 @@ main .introduction {
 
 main .introduction a {
     color: #0A67AA;
-    text-decoration: underline;
     font-style: oblique;
+}
+
+main .introduction a:hover {
+    text-decoration: underline;
 }
 
 .register-form {

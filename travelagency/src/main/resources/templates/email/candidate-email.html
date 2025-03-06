@@ -25,6 +25,9 @@
             <ul>
                 <li>Име: <span th:text="${firstName}">[Двете имена на служителя]</span></li>
                 <li>Фамилия: <span th:text="${lastName}">[Двете имена на служителя]</span></li>
+                <li>Дата на кандидатстване:
+                    <span th:text="${#temporals.format(date, 'dd.MM.yyyy г.')}">[Дата на кандидатстване]</span>
+                </li>
                 <li>Телефон: <span th:text="${phoneNumber}">[Телефонен номер]</span></li>
                 <li>Имейл: <span th:text="${email}">[Имейл адрес]</span></li>
                 <li>Адрес: <span th:text="${address}">[Адрес]</span></li>

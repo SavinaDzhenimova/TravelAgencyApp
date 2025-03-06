@@ -12,6 +12,7 @@ import org.travelagency.service.interfaces.EmailService;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.Map;
 
 @Service
@@ -84,8 +85,8 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void sendAddCandidateEmail(String firstName, String lastName, String email, String phoneNumber,
-                                      String address, String education, String specialty, String languages) {
+    public void sendAddCandidateEmail(String firstName, String lastName, String email, String phoneNumber, String address,
+                                      String education, String specialty, String languages, LocalDate date) {
         Map<String, Object> variables = Map.of(
                 "fullName", firstName + " " + lastName,
                 "firstName", firstName,
@@ -95,7 +96,8 @@ public class EmailServiceImpl implements EmailService {
                 "address", address,
                 "education", education,
                 "specialty", specialty,
-                "languages", languages
+                "languages", languages,
+                "date", date
         );
 
         String content = generateEmailContent("/email/candidate-email", variables);

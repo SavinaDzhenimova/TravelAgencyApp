@@ -1,5 +1,7 @@
 package org.travelagency.service.interfaces;
 
+import java.time.LocalDate;
+
 public interface EmailService {
 
     void sendInquiryEmail(String name, String email, String phone, String message, String excursionName);
@@ -11,8 +13,8 @@ public interface EmailService {
 
     void sendPromoteEmployeeEmail(String fullName, String email);
 
-    void sendAddCandidateEmail(String firstName, String lastName, String email, String phoneNumber,
-                               String address, String education, String specialty, String languages);
+    void sendAddCandidateEmail(String firstName, String lastName, String email, String phoneNumber, String address,
+                               String education, String specialty, String languages, LocalDate date);
 
     void sendAddExcursionEmail(String excursionName, String email);
 }

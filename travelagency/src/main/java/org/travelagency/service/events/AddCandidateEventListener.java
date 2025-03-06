@@ -18,6 +18,7 @@ public class AddCandidateEventListener {
 
         this.emailService.sendAddCandidateEmail(addCandidateEvent.getFirstName(), addCandidateEvent.getLastName(),
                 addCandidateEvent.getEmail(), addCandidateEvent.getPhoneNumber(), addCandidateEvent.getAddress(),
-                addCandidateEvent.getEducation(), addCandidateEvent.getSpecialty(), addCandidateEvent.getLanguages());
+                addCandidateEvent.getEducation(), addCandidateEvent.getSpecialty(), addCandidateEvent.getLanguages(),
+                addCandidateEvent.getDate());
     }
 }

@@ -114,7 +114,8 @@ public class CandidateServiceImpl implements CandidateService {
                         candidate.getAddress(),
                         this.mapEducationLevel(candidate.getEducation()),
                         candidate.getSpecialty(),
-                        this.mapLanguagesToStringFormat(candidate.getLanguages())));
+                        this.mapLanguagesToStringFormat(candidate.getLanguages()),
+                        candidate.getDate()));
 
         return new Result(true, "Кандидатурата Ви беше изпратена успешно! " +
                 "Моля изчакайте търпеливо да бъде разгледана и наш служител ще се свърже с Вас!");
