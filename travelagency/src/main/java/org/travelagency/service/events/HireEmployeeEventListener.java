@@ -18,6 +18,7 @@ public class HireEmployeeEventListener {
 
         this.emailService.sendHireEmployeeEmail(hireEmployeeEvent.getFullName(), hireEmployeeEvent.getEmail(),
                 hireEmployeeEvent.getPhoneNumber(), hireEmployeeEvent.getAddress(), hireEmployeeEvent.getEducation(),
-                hireEmployeeEvent.getSpecialty(), hireEmployeeEvent.getLanguages(), hireEmployeeEvent.getPassword());
+                hireEmployeeEvent.getSpecialty(), hireEmployeeEvent.getLanguages(), hireEmployeeEvent.getPassword(),
+                hireEmployeeEvent.getHiredOn());
     }
 }

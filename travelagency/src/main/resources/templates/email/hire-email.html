@@ -28,6 +28,9 @@
                 <li>Телефон: <span th:text="${phoneNumber}">[Телефонен номер]</span></li>
                 <li>Имейл: <span th:text="${email}">[Имейл адрес]</span></li>
                 <li>Адрес: <span th:text="${address}">[Адрес]</span></li>
+                <li>Дата на назначаване:
+                    <span th:text="${#temporals.format(hiredOn, 'dd.MM.yyyy г.')}">[Дата на назначаване]</span>
+                </li>
                 <li>Степен на образование: <span th:text="${education}">[Висше/Средно образование]</span></li>
                 <li th:if="${specialty != null and not #strings.isEmpty(specialty)}">Специалност:
                     <span th:text="${specialty}"></span>

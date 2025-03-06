@@ -176,7 +176,8 @@ public class CandidateServiceImpl implements CandidateService {
                         this.mapEducationLevel(employee.getEducation()),
                         employee.getSpecialty(),
                         this.mapLanguagesToStringFormat(employee.getLanguages()),
-                        this.rawPassword));
+                        this.rawPassword,
+                        employee.getHiredOn()));
 
         return new Result(true, "Този кандидат беше успешно назначен на работа!");
     }

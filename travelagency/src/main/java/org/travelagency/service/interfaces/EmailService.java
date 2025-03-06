@@ -9,7 +9,7 @@ public interface EmailService {
     void sendForgotPasswordEmail(String fullName, String email, String password);
 
     void sendHireEmployeeEmail(String fullName, String email, String phoneNumber, String address, String education,
-                               String specialty, String languages, String password);
+                               String specialty, String languages, String password, LocalDate hiredOn);
 
     void sendPromoteEmployeeEmail(String fullName, String email);
 

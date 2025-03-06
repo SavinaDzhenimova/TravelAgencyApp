@@ -2,6 +2,8 @@ package org.travelagency.service.events;
 
 import org.springframework.context.ApplicationEvent;
 
+import java.time.LocalDate;
+
 public class HireEmployeeEvent extends ApplicationEvent {
 
     private String fullName;
@@ -20,8 +22,10 @@ public class HireEmployeeEvent extends ApplicationEvent {
 
     private String password;
 
+    private LocalDate hiredOn;
+
     public HireEmployeeEvent(Object source, String fullName, String email, String phoneNumber, String address,
-                             String education, String specialty, String languages, String password) {
+                             String education, String specialty, String languages, String password, LocalDate hiredOn) {
         super(source);
         this.fullName = fullName;
         this.email = email;
@@ -31,6 +35,7 @@ public class HireEmployeeEvent extends ApplicationEvent {
         this.specialty = specialty;
         this.languages = languages;
         this.password = password;
+        this.hiredOn = hiredOn;
     }
 
     public String getFullName() {
@@ -95,5 +100,13 @@ public class HireEmployeeEvent extends ApplicationEvent {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public LocalDate getHiredOn() {
+        return hiredOn;
+    }
+
+    public void setHiredOn(LocalDate hiredOn) {
+        this.hiredOn = hiredOn;
     }
 }
