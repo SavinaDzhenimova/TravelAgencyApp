@@ -3,6 +3,7 @@ package org.travelagency.model.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -24,6 +25,9 @@ public class Candidate extends BaseInfo {
             joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "language_id", referencedColumnName = "id"))
     private Set<Language> languages;
+
+    @Column(nullable = false)
+    private LocalDate date;
 
     public Candidate() {
         this.languages = new HashSet<>();
@@ -51,5 +55,13 @@ public class Candidate extends BaseInfo {
 
     public void setLanguages(Set<Language> languages) {
         this.languages = languages;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

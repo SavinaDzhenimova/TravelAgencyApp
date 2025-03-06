@@ -27,24 +27,27 @@
                     <tr>
                         <td class="firstName">Име</td>
                         <td class="lastName">Фамилия</td>
+                        <td class="date">Дата на кандидатстване</td>
                         <td class="email">E-mail</td>
                         <td class="phoneNumber">Телефон</td>
                         <td class="address">Адрес</td>
                         <td class="education">Образование</td>
                         <td class="specialty">Специалност</td>
-                        <td class="languages">Говорими езици</td>
+                        <td class="languages">Езици</td>
                         <td class="add-employee">Наеми</td>
                         <td class="delete-candidate">Отхвърли</td>
                     </tr>
                     <tr th:each="candidate : ${candidates.getCandidates()}">
                         <td th:text="${candidate.getFirstName()}" class="firstName">Име</td>
                         <td th:text="${candidate.getLastName()}" class="lastName">Фамилия</td>
+                        <td th:text="${#temporals.format(candidate.getDate(), 'dd.MM.yyyy г.')}"
+                            class="date">Дата на кандидатстване</td>
                         <td th:text="${candidate.getEmail()}" class="email">E-mail</td>
                         <td th:text="${candidate.getPhoneNumber()}" class="phoneNumber">Телефон</td>
                         <td th:text="${candidate.getAddress()}" class="address">Адрес</td>
                         <td th:text="${candidate.getEducation()}" class="education">Степен на образование</td>
                         <td th:text="${candidate.getSpecialty()}" class="specialty">Специалност</td>
-                        <td th:text="${candidate.getLanguages()}" class="languages">Говорими езици</td>
+                        <td th:text="${candidate.getLanguages()}" class="languages">Езици</td>
                         <td class="add-employee">
                             <form th:action="@{/candidates/add-employee/{id}(id=${candidate.id})}" th:method="POST">
                                 <!-- CSRF токен -->

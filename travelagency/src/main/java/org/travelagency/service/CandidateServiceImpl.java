@@ -19,6 +19,7 @@ import org.travelagency.service.interfaces.EmployeeService;
 import org.travelagency.service.interfaces.LanguageService;
 import org.travelagency.service.utils.PasswordGenerator;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -86,6 +87,7 @@ public class CandidateServiceImpl implements CandidateService {
         }
 
         Candidate candidate = this.modelMapper.map(addCandidateDTO, Candidate.class);
+        candidate.setDate(LocalDate.now());
 
         if (candidate.getEducation().equals(EducationLevel.UNIVERSITY_DEGREE)) {
             if (addCandidateDTO.getSpecialty().isBlank()) {

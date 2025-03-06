@@ -1,5 +1,7 @@
 package org.travelagency.model.exportDTO.candidate;
 
+import java.time.LocalDate;
+
 public class CandidateDTO {
 
     private Long id;
@@ -19,6 +21,8 @@ public class CandidateDTO {
     private String specialty;
 
     private String languages;
+
+    private LocalDate date;
 
     public CandidateDTO() {
     }
@@ -93,5 +97,13 @@ public class CandidateDTO {
 
     public void setLanguages(String languages) {
         this.languages = languages;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }
