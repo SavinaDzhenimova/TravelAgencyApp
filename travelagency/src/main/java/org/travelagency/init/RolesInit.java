@@ -13,6 +13,7 @@ import org.travelagency.repository.EmployeeRepository;
 import org.travelagency.repository.LanguageRepository;
 import org.travelagency.repository.RoleRepository;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Component
@@ -69,8 +70,9 @@ public class RolesInit implements CommandLineRunner {
 
             employee.setFullName("Sunrise Travel Мениджър");
             employee.setPhoneNumber("0888232555");
-            employee.setEmail("sunrisetravelagencybulgaria@gmail.com");
+            employee.setEmail("sunrise.ta.bg@gmail.com");
             employee.setAddress("бул.Съединение №83, 4600 Велинград, България");
+            employee.setHiredOn(LocalDate.now());
             employee.setPassword(this.passwordEncoder.encode("Admin1234"));
             employee.setEducation(EducationLevel.UNIVERSITY_DEGREE);
             employee.setSpecialty("Хардуерни и софтуерни системи");

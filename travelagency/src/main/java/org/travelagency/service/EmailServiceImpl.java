@@ -43,7 +43,7 @@ public class EmailServiceImpl implements EmailService {
 
         String content = generateEmailContent("/email/inquiry-email", variables);
 
-        sendEmail("sunrisetravelagencybulgaria@gmail.com", subject, content);
+        sendEmail("sunrise.ta.bg@gmail.com", subject, content);
     }
 
     @Override

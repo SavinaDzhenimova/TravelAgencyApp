@@ -28,18 +28,20 @@
           <tr>
             <td class="fullName">Име</td>
             <td class="role">Роля</td>
+            <td class="hiredOn">Назначен на</td>
             <td class="email">E-mail</td>
             <td class="phoneNumber">Телефон</td>
             <td class="address">Адрес</td>
             <td class="education">Образование</td>
             <td class="specialty">Специалност</td>
-            <td class="languages">Говорими езици</td>
+            <td class="languages">Езици</td>
             <td class="add-employee" sec:authorize="hasRole('MANAGER')">Повиши</td>
             <td class="delete-employee" sec:authorize="hasRole('MANAGER')">Уволни</td>
           </tr>
           <tr th:each="employee : ${employees.getEmployees()}">
             <td th:text="${employee.getFullName()}" class="fullName">Име</td>
             <td th:text="${employee.getRole()}" class="role">Роля</td>
+            <td th:text="${#temporals.format(employee.getHiredOn(), 'dd.MM.yyyy г.')}" class="hiredOn">Назначен на</td>
             <td class="email">
               <a th:if="${loggedEmployeeId} != ${employee.id}"
                  th:href="'mailto:' + ${employee.getEmail()} + '?subject=Кандидатура&body=Здравейте, ' + ${employee.getFullName()} + '!'"
@@ -51,7 +53,7 @@
             <td th:text="${employee.getAddress()}" class="address">Адрес</td>
             <td th:text="${employee.getEducation()}" class="education">Степен на образование</td>
             <td th:text="${employee.getSpecialty()}" class="specialty">Специалност</td>
-            <td th:text="${employee.getLanguages()}" class="languages">Говорими езици</td>
+            <td th:text="${employee.getLanguages()}" class="languages">Езици</td>
             <td class="add-employee" sec:authorize="hasRole('MANAGER')">
               <form th:if="${loggedEmployeeId} != ${employee.id}"
                       th:action="@{/employees/promote-employee/{id}(id=${employee.id})}" th:method="PUT">

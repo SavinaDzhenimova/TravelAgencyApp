@@ -13,7 +13,6 @@ import org.travelagency.model.entity.Role;
 import org.travelagency.model.enums.EducationLevel;
 import org.travelagency.model.enums.RoleName;
 import org.travelagency.model.exportDTO.employee.EmployeeDTO;
-import org.travelagency.model.exportDTO.employee.EmployeesMenuInfo;
 import org.travelagency.model.exportDTO.employee.EmployeesViewInfo;
 import org.travelagency.model.importDTO.UpdatePasswordDTO;
 import org.travelagency.model.user.EmployeeProfileDTO;
@@ -54,7 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeesMenuInfo getAllEmployeesForSelectMenu() {
+    public EmployeesViewInfo getAllEmployeesForSelectMenu() {
         List<Employee> employees = this.employeeRepository.findAll();
 
         List<EmployeeDTO> employeeDTOList = employees.stream()
@@ -62,7 +61,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .map(employee -> this.modelMapper.map(employee, EmployeeDTO.class))
                 .toList();
 
-        return new EmployeesMenuInfo(employeeDTOList);
+        return new EmployeesViewInfo(employeeDTOList);
     }
 
     @Override

@@ -221,6 +221,7 @@ public class CandidateServiceImpl implements CandidateService {
         employee.setEducation(candidate.getEducation());
         employee.setSpecialty(candidate.getSpecialty());
         employee.setLanguages(candidate.getLanguages());
+        employee.setHiredOn(LocalDate.now());
 
         return employee;
     }

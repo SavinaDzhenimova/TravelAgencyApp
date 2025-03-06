@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.travelagency.model.exportDTO.country.CountryMenuInfo;
 import org.travelagency.model.exportDTO.destination.DestinationMenuInfo;
-import org.travelagency.model.exportDTO.employee.EmployeesMenuInfo;
+import org.travelagency.model.exportDTO.employee.EmployeesViewInfo;
 import org.travelagency.service.interfaces.CountryService;
 import org.travelagency.service.interfaces.DestinationService;
 import org.travelagency.service.interfaces.EmployeeService;
@@ -35,7 +35,7 @@ public class GlobalController {
     }
 
     @ModelAttribute("employees")
-    public EmployeesMenuInfo getEmployeesForMenu() {
+    public EmployeesViewInfo getEmployeesForMenu() {
         return this.employeeService.getAllEmployeesForSelectMenu();
     }
 

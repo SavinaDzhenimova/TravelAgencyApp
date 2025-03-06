@@ -1,5 +1,7 @@
 package org.travelagency.model.user;
 
+import java.time.LocalDate;
+
 public class EmployeeProfileDTO {
 
     private String fullName;
@@ -17,6 +19,8 @@ public class EmployeeProfileDTO {
     private String languages;
 
     private String role;
+
+    private LocalDate hiredOn;
 
     public EmployeeProfileDTO() {
     }
@@ -83,5 +87,13 @@ public class EmployeeProfileDTO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public LocalDate getHiredOn() {
+        return hiredOn;
+    }
+
+    public void setHiredOn(LocalDate hiredOn) {
+        this.hiredOn = hiredOn;
     }
 }

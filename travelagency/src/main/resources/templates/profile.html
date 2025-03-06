@@ -73,6 +73,12 @@
                 </li>
                 <li>
                     <div>
+                        <span>Назначен на: </span>
+                        <span th:text="${#temporals.format(employee.getHiredOn(), 'dd.MM.yyyy г.')}"></span>
+                    </div>
+                </li>
+                <li>
+                    <div>
                         <span>Адрес: </span>
                         <span th:text="${employee.getAddress()}"></span>
                     </div>

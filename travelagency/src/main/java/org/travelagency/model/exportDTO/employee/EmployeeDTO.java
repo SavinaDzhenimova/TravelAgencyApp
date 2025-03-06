@@ -1,5 +1,7 @@
 package org.travelagency.model.exportDTO.employee;
 
+import java.time.LocalDate;
+
 public class EmployeeDTO {
 
     private Long id;
@@ -19,6 +21,8 @@ public class EmployeeDTO {
     private String languages;
 
     private String role;
+
+    private LocalDate hiredOn;
 
     public EmployeeDTO() {
     }
@@ -93,5 +97,13 @@ public class EmployeeDTO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public LocalDate getHiredOn() {
+        return hiredOn;
+    }
+
+    public void setHiredOn(LocalDate hiredOn) {
+        this.hiredOn = hiredOn;
     }
 }

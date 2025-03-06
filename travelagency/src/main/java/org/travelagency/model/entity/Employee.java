@@ -3,6 +3,7 @@ package org.travelagency.model.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +18,9 @@ public class Employee extends BaseInfo {
     @Column(nullable = false)
     @Size(min = 8)
     private String password;
+
+    @Column(nullable = false, name = "hired_on")
+    private LocalDate hiredOn;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "employees_languages",
@@ -50,6 +54,14 @@ public class Employee extends BaseInfo {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public LocalDate getHiredOn() {
+        return hiredOn;
+    }
+
+    public void setHiredOn(LocalDate hiredOn) {
+        this.hiredOn = hiredOn;
     }
 
     public Set<Language> getLanguages() {
