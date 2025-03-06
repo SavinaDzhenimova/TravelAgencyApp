@@ -11,8 +11,9 @@
     <header th:replace="~{fragments/commons::header}"></header>
 
     <main>
+        <h1 th:if="${destinationName == null and guideName == null}" th:text="'Всички екскурзии'">Всички екскурзии</h1>
         <h1 th:if="${destinationName != null}" th:text="'Екскурзии до ' + ${destinationName}">Екскурзии до Австрия</h1>
-        <h1 th:unless="${destinationName != null}" th:text="'Всички екскурзии'">Всички екскурзии</h1>
+        <h1 th:if="${guideName != null}" th:text="'Екскурзиите на ' + ${guideName}">Екскурзиите на ...</h1>
 
         <p th:if="${warningMessage}" th:text="${warningMessage}"></p>
 

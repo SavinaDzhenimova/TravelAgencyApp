@@ -2,6 +2,7 @@ package org.travelagency.service.interfaces;
 
 import org.travelagency.model.entity.Employee;
 import org.travelagency.model.entity.Result;
+import org.travelagency.model.exportDTO.employee.EmployeesMenuInfo;
 import org.travelagency.model.exportDTO.employee.EmployeesViewInfo;
 import org.travelagency.model.importDTO.UpdatePasswordDTO;
 import org.travelagency.model.user.EmployeeProfileDTO;
@@ -9,6 +10,8 @@ import org.travelagency.model.user.EmployeeProfileDTO;
 import java.util.Optional;
 
 public interface EmployeeService {
+
+    EmployeesMenuInfo getAllEmployeesForSelectMenu();
 
     EmployeesViewInfo getAllEmployees();
 
@@ -25,6 +28,8 @@ public interface EmployeeService {
     Optional<Employee> findEmployeeByEmail(String email);
 
     Optional<Employee> findEmployeeByPhoneNumber(String phoneNumber);
+
+    Optional<Employee> findEmployeeById(Long employeeId);
 
     Long getLoggedEmployeeId();
 

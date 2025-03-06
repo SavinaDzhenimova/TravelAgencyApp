@@ -106,6 +106,21 @@
                            class="text-danger">Dish name error message</small>
                 </div>
 
+                <div class="field field-guide">
+                    <label th:for="guideId">Ръководител</label>
+                    <select th:field="*{guideId}"
+                            th:errorclass="is-invalid"
+                            name="guideId" id="guideId" required>
+                        <option value="">-- Изберете ръководител --</option>
+                        <option th:each="employee : ${employees.getEmployees()}"
+                                th:value="${employee.getId()}"
+                                th:text="${employee.getFullName()}"></option>
+                    </select>
+                    <small th:if="${#fields.hasErrors('guideId')}"
+                           th:errors="*{guideId}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
                 <div class="field">
                     <label for="images">Качи снимки</label>
                     <input th:field="*{images}"

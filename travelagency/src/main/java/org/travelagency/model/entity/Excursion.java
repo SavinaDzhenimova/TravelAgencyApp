@@ -42,6 +42,10 @@ public class Excursion extends BaseEntity {
     @OneToMany(mappedBy = "excursion", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Reservation> reservations;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "guide_id", referencedColumnName = "id")
+    private Employee guide;
+
     public Excursion() {
         this.images = new ArrayList<>();
         this.reservations = new ArrayList<>();
@@ -110,5 +114,13 @@ public class Excursion extends BaseEntity {
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
+    }
+
+    public Employee getGuide() {
+        return guide;
+    }
+
+    public void setGuide(Employee guide) {
+        this.guide = guide;
     }
 }

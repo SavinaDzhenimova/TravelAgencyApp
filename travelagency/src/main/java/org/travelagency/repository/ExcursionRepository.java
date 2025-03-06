@@ -25,4 +25,7 @@ public interface ExcursionRepository extends JpaRepository<Excursion, Long> {
 
     @Query("SELECT e FROM Excursion e JOIN e.destination d WHERE d.name = :destinationName")
     Page<Excursion> findExcursionByDestinationName(@Param("destinationName") String destinationName, Pageable pageable);
+
+    @Query("SELECT e FROM Excursion e JOIN e.guide g WHERE g.id = :guideId")
+    Page<Excursion> findAllByGuideId(@Param("guideId") Long guideId, Pageable pageable);
 }

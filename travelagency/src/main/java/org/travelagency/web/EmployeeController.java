@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.travelagency.model.entity.Result;
 import org.travelagency.model.exportDTO.employee.EmployeesViewInfo;
-import org.travelagency.model.importDTO.AddCandidateDTO;
 import org.travelagency.model.importDTO.UpdatePasswordDTO;
 import org.travelagency.model.user.EmployeeProfileDTO;
 import org.travelagency.model.user.UserDetailsDTO;

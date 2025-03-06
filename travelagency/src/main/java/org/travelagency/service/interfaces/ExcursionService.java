@@ -1,6 +1,7 @@
 package org.travelagency.service.interfaces;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.travelagency.model.entity.Excursion;
 import org.travelagency.model.entity.Result;
@@ -23,6 +24,8 @@ public interface ExcursionService {
     ExcursionViewInfo getExcursionsForIndexPage();
 
     Page<ExcursionViewDTO> getAllExcursions(Pageable pageable);
+
+    Page<ExcursionViewDTO> getAllExcursionsForLoggedEmployee(Pageable pageable);
 
     Page<ExcursionViewDTO> getAllExcursionsByDestinationName(String destinationName, Pageable pageable);
 

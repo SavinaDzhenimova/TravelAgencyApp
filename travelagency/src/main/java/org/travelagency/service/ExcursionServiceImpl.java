@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.*;
+import org.travelagency.model.enums.RoleName;
 import org.travelagency.model.enums.TransportType;
 import org.travelagency.model.exportDTO.day.DayExportDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionExportDTO;
@@ -30,12 +31,13 @@ public class ExcursionServiceImpl implements ExcursionService {
     private final ImageService imageService;
     private final SubscriberService subscriberService;
     private final EmailService emailService;
+    private final EmployeeService employeeService;
     private final ApplicationEventPublisher applicationEventPublisher;
 
     public ExcursionServiceImpl(ExcursionRepository excursionRepository, ProgramService programService, DayService dayService,
                                 DestinationService destinationService, ImageService imageService,
                                 SubscriberService subscriberService, EmailService emailService,
-                                ApplicationEventPublisher applicationEventPublisher) {
+                                EmployeeService employeeService, ApplicationEventPublisher applicationEventPublisher) {
         this.excursionRepository = excursionRepository;
         this.programService = programService;
         this.dayService = dayService;
@@ -43,6 +45,7 @@ public class ExcursionServiceImpl implements ExcursionService {
         this.imageService = imageService;
         this.subscriberService = subscriberService;
         this.emailService = emailService;
+        this.employeeService = employeeService;
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
@@ -72,6 +75,16 @@ public class ExcursionServiceImpl implements ExcursionService {
     @Override
     public Page<ExcursionViewDTO> getAllExcursions(Pageable pageable) {
         Page<Excursion> excursionsPage = this.excursionRepository.findAll(pageable);
+
+        return excursionsPage.map(this::mapExcursionToExcursionViewDTO);
+    }
+
+    @Override
+    public Page<ExcursionViewDTO> getAllExcursionsForLoggedEmployee(Pageable pageable) {
+
+        Long loggedEmployeeId = this.employeeService.getLoggedEmployeeId();
+
+        Page<Excursion> excursionsPage = this.excursionRepository.findAllByGuideId(loggedEmployeeId, pageable);
 
         return excursionsPage.map(this::mapExcursionToExcursionViewDTO);
     }
@@ -133,6 +146,7 @@ public class ExcursionServiceImpl implements ExcursionService {
         excursionExportDTO.setDates(excursion.getDates());
         excursionExportDTO.setDestination(excursion.getDestination().getName());
         excursionExportDTO.setEndurance(excursion.getProgram().getEndurance());
+        excursionExportDTO.setGuideName(excursion.getGuide().getFullName());
 
         int reservationsCount = Optional.ofNullable(excursion.getReservations())
                 .orElse(Collections.emptyList()).stream()
@@ -240,6 +254,20 @@ public class ExcursionServiceImpl implements ExcursionService {
         excursion.setDestination(destination);
         excursion.setProgram(program);
         excursion.setReservations(new ArrayList<>());
+
+        Optional<Employee> optionalEmployee = this.employeeService.findEmployeeById(addExcursionDTO.getGuideId());
+
+        if (optionalEmployee.isEmpty()) {
+            return null;
+        }
+
+        Employee employee = optionalEmployee.get();
+
+        if (employee.getRole().getRoleName().equals(RoleName.MANAGER)) {
+            return null;
+        }
+
+        excursion.setGuide(employee);
 
         try {
             List<String> imageUrls = this.imageService.saveImages(addExcursionDTO.getImages());

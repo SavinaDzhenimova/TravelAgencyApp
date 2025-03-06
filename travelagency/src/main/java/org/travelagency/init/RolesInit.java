@@ -74,6 +74,7 @@ public class RolesInit implements CommandLineRunner {
             employee.setPassword(this.passwordEncoder.encode("Admin1234"));
             employee.setEducation(EducationLevel.UNIVERSITY_DEGREE);
             employee.setSpecialty("Хардуерни и софтуерни системи");
+            employee.setExcursions(new HashSet<>());
 
             this.employeeRepository.saveAndFlush(employee);
         }

@@ -28,8 +28,12 @@ public class Employee extends BaseInfo {
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
 
+    @OneToMany(mappedBy = "guide", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Excursion> excursions;
+
     public Employee() {
         this.languages = new HashSet<>();
+        this.excursions = new HashSet<>();
     }
 
     public String getFullName() {
@@ -62,5 +66,13 @@ public class Employee extends BaseInfo {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Set<Excursion> getExcursions() {
+        return excursions;
+    }
+
+    public void setExcursions(Set<Excursion> excursions) {
+        this.excursions = excursions;
     }
 }

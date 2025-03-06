@@ -44,6 +44,10 @@ public class AddExcursionDTO {
     @NotEmpty(message = "Трябва да добавите поне една снимка свързана с екскурзията!")
     private List<MultipartFile> images;
 
+    @NotNull(message = "Трябва да посочите ръководител на екскурзията!")
+    @Positive(message = "Id на ръководителя не може да бъде по-малко от 1!")
+    private Long guideId;
+
     public AddExcursionDTO() {
         this.endurance = 1;
         this.datesCount = 1;
@@ -122,5 +126,13 @@ public class AddExcursionDTO {
 
     public void setImages(List<MultipartFile> images) {
         this.images = images;
+    }
+
+    public Long getGuideId() {
+        return guideId;
+    }
+
+    public void setGuideId(Long guideId) {
+        this.guideId = guideId;
     }
 }

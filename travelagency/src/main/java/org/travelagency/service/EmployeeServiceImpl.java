@@ -13,13 +13,13 @@ import org.travelagency.model.entity.Role;
 import org.travelagency.model.enums.EducationLevel;
 import org.travelagency.model.enums.RoleName;
 import org.travelagency.model.exportDTO.employee.EmployeeDTO;
+import org.travelagency.model.exportDTO.employee.EmployeesMenuInfo;
 import org.travelagency.model.exportDTO.employee.EmployeesViewInfo;
 import org.travelagency.model.importDTO.UpdatePasswordDTO;
 import org.travelagency.model.user.EmployeeProfileDTO;
 import org.travelagency.repository.EmployeeRepository;
 import org.travelagency.repository.RoleRepository;
 import org.travelagency.service.events.ForgotPasswordEvent;
-import org.travelagency.service.events.HireEmployeeEvent;
 import org.travelagency.service.events.PromoteEmployeeEvent;
 import org.travelagency.service.interfaces.EmployeeService;
 import org.travelagency.service.interfaces.LanguageService;
@@ -51,6 +51,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.modelMapper = modelMapper;
         this.passwordGenerator = passwordGenerator;
         this.applicationEventPublisher = applicationEventPublisher;
+    }
+
+    @Override
+    public EmployeesMenuInfo getAllEmployeesForSelectMenu() {
+        List<Employee> employees = this.employeeRepository.findAll();
+
+        List<EmployeeDTO> employeeDTOList = employees.stream()
+                .filter(employee -> !employee.getRole().getRoleName().equals(RoleName.MANAGER))
+                .map(employee -> this.modelMapper.map(employee, EmployeeDTO.class))
+                .toList();
+
+        return new EmployeesMenuInfo(employeeDTOList);
     }
 
     @Override
@@ -367,6 +379,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Optional<Employee> findEmployeeByPhoneNumber(String phoneNumber) {
         return this.employeeRepository.findByPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public Optional<Employee> findEmployeeById(Long employeeId) {
+        return this.employeeRepository.findById(employeeId);
     }
 
     private String mapLanguagesToStringFormat(Set<Language> languages) {

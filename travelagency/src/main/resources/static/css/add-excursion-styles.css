@@ -145,7 +145,8 @@ fieldset {
 }
 
 .add-excursion-form .field-transport-type,
-.add-excursion-form .field-destination {
+.add-excursion-form .field-destination,
+.add-excursion-form .field-guide {
     gap: 0.3em;
 }
 
@@ -153,6 +154,8 @@ fieldset {
 .add-excursion-form .field-transport-type select,
 .add-excursion-form .field-destination label,
 .add-excursion-form .field-destination select,
+.add-excursion-form .field-guide label,
+.add-excursion-form .field-guide select,
 .add-excursion-form .field label[for="date"],
 .add-excursion-form .field label[for="images"],
 .add-excursion-form #daysContainer label,
@@ -163,7 +166,8 @@ fieldset {
 }
 
 .add-excursion-form .field #transportType,
-.add-excursion-form .field #destination {
+.add-excursion-form .field #destination,
+.add-excursion-form .field #guideId {
     padding: 0 0.3em;
     color: #0A67AA;
     height: 30px;
@@ -172,14 +176,16 @@ fieldset {
 }
 
 .add-excursion-form .field #transportType:focus,
-.add-excursion-form .field #destination:focus {
+.add-excursion-form .field #destination:focus,
+.add-excursion-form .field #guideId:focus, {
     border-color: #0A67AA;
     outline: none;
     font-weight: 600;
 }
 
 .add-excursion-form .field #transportType option,
-.add-excursion-form .field #destination option {
+.add-excursion-form .field #destination option,
+.add-excursion-form .field #guideId option {
     color: #0A67AA;
     opacity: 0.8;
 }

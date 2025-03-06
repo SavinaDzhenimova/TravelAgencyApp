@@ -29,6 +29,8 @@ public class ExcursionExportDTO {
 
     private List<DayExportDTO> days;
 
+    private String guideName;
+
     public ExcursionExportDTO() {
         this.dates = new ArrayList<>();
         this.days = new ArrayList<>();
@@ -112,5 +114,13 @@ public class ExcursionExportDTO {
 
     public void setDays(List<DayExportDTO> days) {
         this.days = days;
+    }
+
+    public String getGuideName() {
+        return guideName;
+    }
+
+    public void setGuideName(String guideName) {
+        this.guideName = guideName;
     }
 }

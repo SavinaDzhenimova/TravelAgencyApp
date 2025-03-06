@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +17,8 @@ import org.travelagency.model.exportDTO.excursion.ExcursionExportDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewDTO;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.model.importDTO.AddInquiryDTO;
+import org.travelagency.model.user.EmployeeProfileDTO;
+import org.travelagency.model.user.UserDetailsDTO;
 import org.travelagency.service.interfaces.ExcursionService;
 import org.travelagency.service.utils.ExcursionDeletionManager;
 
@@ -57,10 +61,38 @@ public class ExcursionController {
         return modelAndView;
     }
 
+    @GetMapping("/my-excursions")
+    public ModelAndView getAllExcursionsForLoggedEmployee(@RequestParam(defaultValue = "0") int page,
+                                                          @RequestParam(defaultValue = "6") int size,
+                                                          @AuthenticationPrincipal UserDetails userDetails) {
+
+        ModelAndView modelAndView = new ModelAndView("excursions");
+
+        if (userDetails instanceof UserDetailsDTO userDetailsDTO) {
+            modelAndView.addObject("guideName", userDetailsDTO.getFullName());
+        }
+
+        Page<ExcursionViewDTO> excursionsPage = this.excursionService
+                .getAllExcursionsForLoggedEmployee(PageRequest.of(page, size, Sort.by(Sort.Order.desc("id"))));
+
+        if (excursionsPage.isEmpty()) {
+            modelAndView.addObject("warningMessage",
+                    "Все още не сте назначен/а за ръководител на нито една екскурзия!");
+        } else {
+            modelAndView.addObject("excursions", excursionsPage.getContent());
+        }
+
+        modelAndView.addObject("currentPage", excursionsPage.getNumber());
+        modelAndView.addObject("totalPages", excursionsPage.getTotalPages());
+        modelAndView.addObject("size", size);
+
+        return modelAndView;
+    }
+
     @GetMapping("/{destinationName}")
     public ModelAndView getExcursionsByDestination(@PathVariable("destinationName") String destinationName,
-                                             @RequestParam(defaultValue = "0") int page,
-                                             @RequestParam(defaultValue = "6") int size) {
+                                                   @RequestParam(defaultValue = "0") int page,
+                                                   @RequestParam(defaultValue = "6") int size) {
 
         ModelAndView modelAndView = new ModelAndView("excursions");
 
@@ -113,7 +145,7 @@ public class ExcursionController {
 
     @PostMapping("/add-excursion")
     public ModelAndView addExcursion(@Valid @ModelAttribute("addExcursionDTO") AddExcursionDTO addExcursionDTO,
-                                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+                                     BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addExcursionDTO", addExcursionDTO)
@@ -151,8 +183,8 @@ public class ExcursionController {
 
     @PostMapping("/excursion-details/{excursionName}/send-inquiry")
     public ModelAndView sendInquiry(@PathVariable("excursionName") String excursionName,
-                                @Valid @ModelAttribute AddInquiryDTO addInquiryDTO,
-                                BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+                                    @Valid @ModelAttribute AddInquiryDTO addInquiryDTO,
+                                    BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         String encodedName = URLEncoder.encode(excursionName, StandardCharsets.UTF_8);
 
