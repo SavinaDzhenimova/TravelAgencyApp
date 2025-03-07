@@ -47,7 +47,7 @@ header nav .logo-container .navbar .contacts li {
     font-weight: 500;
     color: #0A67AA;
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: 0.5em;
 }
 
