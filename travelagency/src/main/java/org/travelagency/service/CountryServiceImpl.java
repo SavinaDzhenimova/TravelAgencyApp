@@ -1,5 +1,6 @@
 package org.travelagency.service;
 
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.Country;
@@ -71,5 +72,11 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Optional<Country> findCountryByName(String name) {
         return this.countryRepository.findByName(name);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCountryByName(String destinationName) {
+        this.countryRepository.deleteByName(destinationName);
     }
 }

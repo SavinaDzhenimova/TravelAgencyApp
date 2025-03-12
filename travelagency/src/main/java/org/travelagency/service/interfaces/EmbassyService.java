@@ -8,4 +8,6 @@ public interface EmbassyService {
     void saveAndFlushEmbassy(Embassy embassy);
 
     Optional<Embassy> findEmbassyByName(String name);
+
+    void deleteEmbassyByCountryName(String destinationName);
 }

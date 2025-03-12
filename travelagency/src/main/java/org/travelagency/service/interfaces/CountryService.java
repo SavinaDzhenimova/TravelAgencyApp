@@ -16,4 +16,6 @@ public interface CountryService {
     void saveAndFlushCountry(Country country);
 
     Optional<Country> findCountryByName(String name);
+
+    void deleteCountryByName(String destinationName);
 }

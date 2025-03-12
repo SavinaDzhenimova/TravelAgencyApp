@@ -65,4 +65,19 @@ public class DestinationController {
 
         return new ModelAndView("redirect:/destinations/add-destination");
     }
+
+    @DeleteMapping("/delete-destination/{destinationName}")
+    public ModelAndView deleteDestination(@PathVariable("destinationName") String destinationName,
+                                          RedirectAttributes redirectAttributes) {
+
+        Result result = this.destinationService.deleteDestination(destinationName);
+
+        if (result.isSuccess()) {
+            redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
+        } else {
+            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
+        }
+
+        return new ModelAndView("redirect:/employees/profile");
+    }
 }

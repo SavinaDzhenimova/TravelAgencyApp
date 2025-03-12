@@ -66,6 +66,22 @@ main article .article-main .article-main-section ul {
     font-style: oblique;
 }
 
+main article .delete-destination-form {
+    display: flex;
+    justify-content: center;
+}
+
+main article .delete-destination-form button {
+    border: none;
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 1em 2em;
+    border-radius: 0.5em;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+}
+
 ul li > span:first-of-type {
     font-weight: 700;
     font-style: oblique;

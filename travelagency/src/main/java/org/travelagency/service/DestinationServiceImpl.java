@@ -1,5 +1,6 @@
 package org.travelagency.service;
 
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.*;
@@ -210,6 +211,25 @@ public class DestinationServiceImpl implements DestinationService {
                 .toList();
 
         return new DestinationMenuInfo(destinationMenuList);
+    }
+
+    @Transactional
+    @Override
+    public Result deleteDestination(String destinationName) {
+
+        this.destinationRepository.deleteByName(destinationName);
+        this.embassyService.deleteEmbassyByCountryName(destinationName);
+        this.countryService.deleteCountryByName(destinationName);
+
+        Optional<Destination> optionalDestination = this.destinationRepository.findByName(destinationName);
+        Optional<Embassy> optionalEmbassy = this.embassyService.findEmbassyByName(destinationName);
+        Optional<Country> optionalCountry = this.countryService.findCountryByName(destinationName);
+
+        if (optionalDestination.isPresent() || optionalEmbassy.isPresent() || optionalCountry.isPresent()) {
+            return new Result(false, "Нещо се обърка! Дестинация " + destinationName + " не можа да бъде изтрита!");
+        }
+
+        return new Result(true, "Успешно изтрихте дестинация " + destinationName);
     }
 
     @Override

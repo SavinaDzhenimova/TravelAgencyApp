@@ -29,4 +29,6 @@ public interface DestinationService {
     DestinationMenuInfo getAllDestinations();
 
     Optional<Destination> findDestinationByDestinationName(String destinationName);
+
+    Result deleteDestination(String destinationName);
 }

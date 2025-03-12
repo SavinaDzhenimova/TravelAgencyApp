@@ -1,5 +1,6 @@
 package org.travelagency.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.Embassy;
 import org.travelagency.repository.EmbassyRepository;
@@ -24,5 +25,11 @@ public class EmbassyServiceImpl implements EmbassyService {
     @Override
     public Optional<Embassy> findEmbassyByName(String name) {
         return this.embassyRepository.findByName(name);
+    }
+
+    @Override
+    @Transactional
+    public void deleteEmbassyByCountryName(String destinationName) {
+        this.embassyRepository.deleteByName(destinationName);
     }
 }
