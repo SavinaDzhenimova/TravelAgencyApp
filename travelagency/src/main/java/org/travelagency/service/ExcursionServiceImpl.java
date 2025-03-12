@@ -349,6 +349,11 @@ public class ExcursionServiceImpl implements ExcursionService {
         return this.excursionRepository.findAllExcursionsNames(pageable);
     }
 
+    @Override
+    public List<Excursion> findAllExcursionsByDestinationId(Long destinationId) {
+        return this.excursionRepository.findAllByDestinationId(destinationId);
+    }
+
     private List<String> formatDates(List<LocalDate> dates) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 

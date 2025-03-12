@@ -30,5 +30,5 @@ public interface DestinationService {
 
     Optional<Destination> findDestinationByDestinationName(String destinationName);
 
-    Result deleteDestination(String destinationName);
+    void deleteDestinationByDestinationName(String destinationName);
 }

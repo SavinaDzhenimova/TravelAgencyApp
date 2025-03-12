@@ -11,15 +11,18 @@ import org.travelagency.model.entity.Result;
 import org.travelagency.model.exportDTO.destination.DestinationViewInfo;
 import org.travelagency.model.importDTO.AddDestinationDTO;
 import org.travelagency.service.interfaces.DestinationService;
+import org.travelagency.service.utils.DestinationDeletionManager;
 
 @Controller
 @RequestMapping("/destinations")
 public class DestinationController {
 
     private final DestinationService destinationService;
+    private final DestinationDeletionManager destinationDeletionManager;
 
-    public DestinationController(DestinationService destinationService) {
+    public DestinationController(DestinationService destinationService, DestinationDeletionManager destinationDeletionManager) {
         this.destinationService = destinationService;
+        this.destinationDeletionManager = destinationDeletionManager;
     }
 
     @GetMapping("/{countryName}")
@@ -70,7 +73,7 @@ public class DestinationController {
     public ModelAndView deleteDestination(@PathVariable("destinationName") String destinationName,
                                           RedirectAttributes redirectAttributes) {
 
-        Result result = this.destinationService.deleteDestination(destinationName);
+        Result result = this.destinationDeletionManager.deleteDestination(destinationName);
 
         if (result.isSuccess()) {
             redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
