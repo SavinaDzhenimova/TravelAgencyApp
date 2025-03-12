@@ -27,7 +27,7 @@ h3::after {
     content: '';
     background-color: #0A67AA;
     width: 100%;
-    height: 1px;
+    height: 0.5px;
 }
 
 main {
@@ -111,6 +111,16 @@ main article .article-header .info-container ul {
     display: flex;
     flex-direction: column;
     gap: 1em;
+}
+
+main article .article-header .info-container > a {
+    background-color: #0A67AA;
+    color: #fff;
+    padding: 0.5em;
+    text-align: center;
+    border: none;
+    border-radius: 0.5em;
+    font-weight: 600;
 }
 
 main article .article-header .info-container .delete-excursion-form button {

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{fragments/commons::head}"></th:block>
+    <link rel="stylesheet" href="/css/update-excursion-styles.css">
+    <title>Sunrise Travel</title>
+</head>
+
+<body>
+
+    <header th:replace="~{fragments/commons::header}"></header>
+
+    <main>
+        <h1 th:text="${excursionName}">Австрия</h1>
+
+        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+          <p class="success" th:text="${successMessage}"></p>
+        </div>
+
+        <div class="update-excursion-form">
+            <form th:method="PUT"
+                  th:action="@{/excursions/update/{excursionName}(excursionName=${excursionName})}"
+                  th:object="${updateExcursionDTO}">
+
+                <div class="field">
+                    <label for="excursionName">Екскурзия: </label>
+                    <input th:field="*{excursionName}" type="text" id="excursionName">
+                    <small th:if="${#fields.hasErrors('excursionName')}"
+                           th:errors="*{excursionName}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <label for="price">Цена (в лева): </label>
+                    <input th:field="*{price}" type="number" id="price">
+                    <small th:if="${#fields.hasErrors('price')}"
+                           th:errors="*{price}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <label for="guideId">Ръководител: </label>
+                    <input type="hidden" name="guideName" id="guideName" th:field="*{guideName}">
+                    <select name="guideId" id="guideId" required>
+                        <option th:each="employee : ${employees.getEmployees()}"
+                                th:value="${employee.getId()}"
+                                th:text="${employee.getFullName()}"
+                                th:selected="${employee.getFullName().equals(guideName)}">
+                        </option>
+                    </select>
+                    <small th:if="${#fields.hasErrors('guideId')}"
+                           th:errors="*{guideId}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <label for="destination">Дестинация: </label>
+                    <select th:field="*{destination}" name="destination" id="destination" required>
+                        <option th:each="dest : ${destinations.getDestinations()}"
+                                th:value="${dest.getName()}"
+                                th:text="${dest.getName()}"
+                                th:selected="${dest.getName().equals(destination)}">
+                        </option>
+                    </select>
+                    <small th:if="${#fields.hasErrors('destination')}"
+                           th:errors="*{destination}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <label for="endurance">Продължителност: </label>
+                    <input th:field="*{endurance}" type="number" step="1" id="endurance" name="endurance">
+                    <small th:if="${#fields.hasErrors('endurance')}"
+                           th:errors="*{endurance}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field">
+                    <label for="transport">Вид транспорт: </label>
+                    <select th:field="*{transport}" name="transport" id="transport">
+                        <option th:value="BUS" th:selected="${transport.equals('BUS')}">Автобус</option>
+                        <option th:value="PLANE" th:selected="${transport.equals('PLANE')}">Самолет</option>
+                        <option th:value="CRUISE" th:selected="${transport.equals('CRUISE')}">Круиз</option>
+                    </select>
+                    <small th:if="${#fields.hasErrors('transport')}"
+                           th:errors="*{transport}"
+                           class="text-danger">Dish name error message</small>
+                </div>
+
+                <div class="field field-dates">
+                    <ul>
+                        <li th:each="date, iter : *{dates}">
+                            <h4>Дата <span th:text="${iter.index + 1}"></span></h4>
+                            <input type="date"
+                                   th:id="'date_' + ${iter.index}"
+                                   th:field="*{dates[__${iter.index}__]}">
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="field">
+                    <ul>
+                        <li th:each="day, iter : *{days}">
+                            <h4>Програма за ден <span th:text="${day.dayNumber}"></span></h4>
+                            <textarea th:field="*{days[__${iter.index}__].description}"></textarea>
+                            <input type="hidden" th:field="*{days[__${iter.index}__].dayNumber}" th:value="${day.dayNumber}" />
+                        </li>
+                    </ul>
+                </div>
+
+                <button type="submit">Запази промените</button>
+            </form>
+        </div>
+    </main>
+
+    <footer th:replace="~{fragments/commons::footer}"></footer>
+
+    <script src="\js\animation.js"></script>
+    <script src="\js\show-menu.js"></script>
+    <script src="\js\show-menu-profile.js"></script>
+    <script src="\js\show-menu-team.js"></script>
+
+</body>
+</html>

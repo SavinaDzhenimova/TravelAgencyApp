@@ -21,6 +21,10 @@
             <p class="success" th:text="${successMessage}"></p>
         </div>
 
+        <div th:if="${failureMessage}" class="alert alert-failure" role="alert">
+            <p th:text="${failureMessage}"></p>
+        </div>
+
         <article>
             <div class="article-header">
                 <div class="carousel">
@@ -44,6 +48,9 @@
                         <li>Цена: <span th:text="${excursion.getPrice()} + ' лв.'"></span></li>
                         <li>Направени резервации до момента: <span th:text="${excursion.getReservations()}"></span></li>
                     </ul>
+
+                    <a sec:authorize="hasRole('MANAGER')"
+                       th:href="@{/excursions/update/{excursionName}(excursionName=${excursion.name})}">Редактирай</a>
 
                     <form sec:authorize="hasRole('MANAGER')"
                           th:method="DELETE"

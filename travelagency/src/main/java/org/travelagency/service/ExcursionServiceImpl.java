@@ -14,12 +14,16 @@ import org.travelagency.model.exportDTO.excursion.ExcursionViewDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewInfo;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.model.importDTO.AddInquiryDTO;
+import org.travelagency.model.importDTO.UpdateExcursionDTO;
 import org.travelagency.repository.ExcursionRepository;
 import org.travelagency.service.events.AddExcursionEvent;
 import org.travelagency.service.interfaces.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ExcursionServiceImpl implements ExcursionService {
@@ -157,20 +161,39 @@ public class ExcursionServiceImpl implements ExcursionService {
         excursionExportDTO.setTransport(this.mapTransportTypeToString(excursion.getTransportType()));
         excursionExportDTO.setImages(excursion.getImages().stream().map(Image::getImageUrl).toList());
 
-        List<DayExportDTO> dayExportDTOList = excursion.getProgram().getDays().stream()
-                .map(day -> {
-                    DayExportDTO dayExportDTO = new DayExportDTO();
-
-                    dayExportDTO.setDayNumber(day.getDayNumber());
-                    dayExportDTO.setDescription(day.getDescription());
-
-                    return dayExportDTO;
-                })
-                .toList();
+        List<DayExportDTO> dayExportDTOList = this.mapDaysListToDayExportDTO(excursion.getProgram().getDays());
 
         excursionExportDTO.setDays(dayExportDTOList);
 
         return excursionExportDTO;
+    }
+
+    @Override
+    public UpdateExcursionDTO getExcursionDetailsForUpdate(String excursionName) {
+        UpdateExcursionDTO updateExcursionDTO = new UpdateExcursionDTO();
+
+        Optional<Excursion> optionalExcursion = this.excursionRepository.findByName(excursionName);
+
+        if (optionalExcursion.isEmpty()) {
+            return null;
+        }
+
+        Excursion excursion = optionalExcursion.get();
+
+        updateExcursionDTO.setExcursionName(excursion.getName());
+        updateExcursionDTO.setPrice(excursion.getPrice());
+        updateExcursionDTO.setDestination(excursion.getDestination().getName());
+        updateExcursionDTO.setEndurance(excursion.getProgram().getEndurance());
+        updateExcursionDTO.setGuideName(excursion.getGuide().getFullName());
+        updateExcursionDTO.setGuideId(excursion.getGuide().getId());
+        updateExcursionDTO.setTransport(excursion.getTransportType());
+        updateExcursionDTO.setDates(this.formatDates(excursion.getDates()));
+
+        List<DayExportDTO> dayExportDTOList = this.mapDaysListToDayExportDTO(excursion.getProgram().getDays());
+
+        updateExcursionDTO.setDays(dayExportDTOList);
+
+        return updateExcursionDTO;
     }
 
     @Override
@@ -208,6 +231,87 @@ public class ExcursionServiceImpl implements ExcursionService {
     }
 
     @Override
+    public Result updateExcursion(UpdateExcursionDTO updateExcursionDTO, String decodedExcursionName) {
+
+        Optional<Excursion> optionalExcursion = this.excursionRepository.findByName(decodedExcursionName);
+
+        if (optionalExcursion.isEmpty()) {
+            return new Result(false, "Екскурзията, която се опитвате да редактирате, не съществува!");
+        }
+
+        Excursion excursion = optionalExcursion.get();
+
+        if (!excursion.getName().equals(updateExcursionDTO.getExcursionName())) {
+            excursion.setName(updateExcursionDTO.getExcursionName());
+        }
+
+        if (!excursion.getPrice().equals(updateExcursionDTO.getPrice())) {
+            excursion.setPrice(updateExcursionDTO.getPrice());
+        }
+
+        if (!excursion.getTransportType().equals(updateExcursionDTO.getTransport())) {
+            excursion.setTransportType(updateExcursionDTO.getTransport());
+        }
+
+        if (!excursion.getDestination().getName().equals(updateExcursionDTO.getDestination())) {
+            String destinationName = updateExcursionDTO.getDestination();
+
+            Optional<Destination> optionalDestination = this.destinationService.findDestinationByDestinationName(destinationName);
+
+            if (optionalDestination.isEmpty()) {
+                return new Result(false,
+                        "Дестинацията, която се опитвате да назначите на тази екскурзия, не съществува!");
+            }
+
+            excursion.setDestination(optionalDestination.get());
+        }
+
+        if (!excursion.getGuide().getId().equals(updateExcursionDTO.getGuideId())) {
+            Long guideId = updateExcursionDTO.getGuideId();
+
+            Optional<Employee> optionalEmployee = this.employeeService.findEmployeeById(guideId);
+
+            if (optionalEmployee.isEmpty()) {
+                return new Result(false,
+                        "Ръководителят, който се опитвате да назначите на тази екскурзия, не съществува!");
+            }
+
+            excursion.setGuide(optionalEmployee.get());
+        }
+
+        Program program = excursion.getProgram();
+        this.updateProgram(program, updateExcursionDTO);
+
+        excursion.setProgram(program);
+        this.excursionRepository.saveAndFlush(excursion);
+
+        return new Result(true, "Успешно редактирахте избраната от вас екскурзия!");
+    }
+
+    private void updateProgram(Program program, UpdateExcursionDTO updateExcursionDTO) {
+
+        program.setEndurance(updateExcursionDTO.getEndurance());
+
+        this.dayService.deleteAllDaysByProgramId(program.getId());
+
+        List<Day> newDays = updateExcursionDTO.getDays().stream()
+                .map(dayExportDTO -> {
+                    Day day = new Day();
+
+                    day.setDayNumber(dayExportDTO.getDayNumber());
+                    day.setDescription(dayExportDTO.getDescription());
+                    day.setProgram(program);
+
+                    this.dayService.saveAndFlushDay(day);
+
+                    return day;
+                }).toList();
+
+        program.setDays(newDays);
+        this.programService.saveAndFlushProgram(program);
+    }
+
+    @Override
     @Transactional
     public void deleteExcursionById(Long id) {
         this.excursionRepository.deleteExcursionById(id);
@@ -231,6 +335,27 @@ public class ExcursionServiceImpl implements ExcursionService {
     @Override
     public Page<String> getAllExcursionsNames(Pageable pageable) {
         return this.excursionRepository.findAllExcursionsNames(pageable);
+    }
+
+    private List<String> formatDates(List<LocalDate> dates) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        return dates.stream()
+                .map(date -> date.format(formatter))
+                .collect(Collectors.toList());
+    }
+
+    private List<DayExportDTO> mapDaysListToDayExportDTO(List<Day> days) {
+        return days.stream()
+                .map(day -> {
+                    DayExportDTO dayExportDTO = new DayExportDTO();
+
+                    dayExportDTO.setDayNumber(day.getDayNumber());
+                    dayExportDTO.setDescription(day.getDescription());
+
+                    return dayExportDTO;
+                })
+                .toList();
     }
 
     private Program mapAddExcursionDTOToProgram(AddExcursionDTO addExcursionDTO) {

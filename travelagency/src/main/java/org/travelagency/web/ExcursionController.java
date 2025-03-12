@@ -17,7 +17,8 @@ import org.travelagency.model.exportDTO.excursion.ExcursionExportDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewDTO;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.model.importDTO.AddInquiryDTO;
-import org.travelagency.model.user.EmployeeProfileDTO;
+import org.travelagency.model.importDTO.AddReservationDTO;
+import org.travelagency.model.importDTO.UpdateExcursionDTO;
 import org.travelagency.model.user.UserDetailsDTO;
 import org.travelagency.service.interfaces.ExcursionService;
 import org.travelagency.service.utils.ExcursionDeletionManager;
@@ -201,6 +202,60 @@ public class ExcursionController {
         redirectAttributes.addFlashAttribute("successMessage",
                 "Вашето запитване беше изпратено успешно!");
 
+        return new ModelAndView("redirect:/excursions/excursion-details/" + encodedName);
+    }
+
+    @GetMapping("/update/{excursionName}")
+    public ModelAndView updateExcursion(@PathVariable("excursionName") String excursionName, Model model) {
+
+        if (!model.containsAttribute("updateExcursionDTO")) {
+            model.addAttribute("updateExcursionDTO", new UpdateExcursionDTO());
+        }
+
+        String decodedExcursionName = URLDecoder.decode(excursionName, StandardCharsets.UTF_8);
+
+        UpdateExcursionDTO updateExcursionDTO = this.excursionService.getExcursionDetailsForUpdate(decodedExcursionName);
+
+        ModelAndView modelAndView = new ModelAndView("update-excursion");
+
+        modelAndView.addObject("updateExcursionDTO", updateExcursionDTO);
+        modelAndView.addObject("excursionName", updateExcursionDTO.getExcursionName());
+        modelAndView.addObject("price", updateExcursionDTO.getPrice());
+        modelAndView.addObject("guideName", updateExcursionDTO.getGuideName());
+        modelAndView.addObject("destination", updateExcursionDTO.getDestination());
+        modelAndView.addObject("endurance", updateExcursionDTO.getEndurance());
+        modelAndView.addObject("transport", updateExcursionDTO.getTransport());
+        modelAndView.addObject("dates", updateExcursionDTO.getDates());
+        modelAndView.addObject("days", updateExcursionDTO.getDays());
+
+        return modelAndView;
+    }
+
+    @PutMapping("/update/{excursionName}")
+    public ModelAndView updateExcursion(@PathVariable("excursionName") String excursionName,
+                                        @Valid @ModelAttribute("updateExcursionDTO") UpdateExcursionDTO updateExcursionDTO,
+                                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        String decodedExcursionName = URLDecoder.decode(excursionName, StandardCharsets.UTF_8);
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("updateExcursionDTO", updateExcursionDTO)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.updateExcursionDTO",
+                            bindingResult);
+
+            String encodedName = URLEncoder.encode(excursionName, StandardCharsets.UTF_8);
+            return new ModelAndView("redirect:/excursions/update/" + encodedName);
+        }
+
+        Result result = this.excursionService.updateExcursion(updateExcursionDTO, decodedExcursionName);
+
+        if (result.isSuccess()) {
+            redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
+        } else {
+            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
+        }
+
+        String encodedName = URLEncoder.encode(excursionName, StandardCharsets.UTF_8);
         return new ModelAndView("redirect:/excursions/excursion-details/" + encodedName);
     }
 }

@@ -10,12 +10,15 @@ import org.travelagency.model.exportDTO.excursion.ExcursionViewDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewInfo;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.model.importDTO.AddInquiryDTO;
+import org.travelagency.model.importDTO.UpdateExcursionDTO;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 public interface ExcursionService {
+
+    UpdateExcursionDTO getExcursionDetailsForUpdate(String excursionName);
 
     Result addExcursion(AddExcursionDTO addExcursionDTO);
 
@@ -40,4 +43,6 @@ public interface ExcursionService {
     void saveAndFlushExcursion(Excursion excursion);
 
     Page<String> getAllExcursionsNames(Pageable pageable);
+
+    Result updateExcursion(UpdateExcursionDTO updateExcursionDTO, String decodedExcursionName);
 }
