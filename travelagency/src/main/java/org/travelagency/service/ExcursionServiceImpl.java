@@ -279,6 +279,18 @@ public class ExcursionServiceImpl implements ExcursionService {
             excursion.setGuide(optionalEmployee.get());
         }
 
+        List<LocalDate> newLocalDates = updateExcursionDTO.getDates().stream()
+                .map(date -> LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+                .toList();
+
+        for (LocalDate localDate : newLocalDates) {
+            if (localDate.isBefore(LocalDate.now())) {
+                return new Result(false, "Датите, които въвеждате, трябва да бъдат в бъдещето!");
+            }
+        }
+
+        excursion.setDates(newLocalDates);
+
         Program program = excursion.getProgram();
         this.updateProgram(program, updateExcursionDTO);
 

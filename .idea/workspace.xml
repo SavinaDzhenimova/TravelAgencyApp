@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="737daafd-1dde-4737-8e86-b60ca1c6a9b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ExcursionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ExcursionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ExcursionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/interfaces/ExcursionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/ExcursionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/ExcursionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/excursion-details-styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/static/css/excursion-details-styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/templates/excursion-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/templates/excursion-details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/excursions/1741275035727_BIG_kapadokiya-prikazka-bezkray-1.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +105,16 @@
           <url>file://$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/LoginController.java</url>
           <line>47</line>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/web/ExcursionController.java</url>
+          <line>249</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/service/ExcursionServiceImpl.java</url>
+          <line>235</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
