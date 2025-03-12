@@ -91,12 +91,17 @@
                 </div>
             </div>
 
-            <form sec:authorize="hasRole('MANAGER')"
-                  th:method="DELETE"
-                  th:action="@{/destinations/delete-destination/{destinationName}(destinationName=${destination.getDestination().getName()})}"
-                  class="delete-destination-form">
-                <button type="submit">Изтрий дестинацията</button>
-            </form>
+            <div class="article-buttons">
+                <form sec:authorize="hasRole('MANAGER')"
+                      th:method="DELETE"
+                      th:action="@{/destinations/delete-destination/{destinationName}(destinationName=${destination.getDestination().getName()})}"
+                      class="delete-destination-form">
+                    <button type="submit">Изтрий дестинацията</button>
+                </form>
+
+                <a th:href="@{/excursions/{destinationName}(destinationName=${destination.getDestination().getName()})}">
+                    Разгледай екскурзии</a>
+            </div>
         </article>
     </main>
 

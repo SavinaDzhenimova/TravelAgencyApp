@@ -66,12 +66,14 @@ main article .article-main .article-main-section ul {
     font-style: oblique;
 }
 
-main article .delete-destination-form {
+main article .article-buttons {
     display: flex;
     justify-content: center;
+    gap: 2em;
 }
 
-main article .delete-destination-form button {
+main article .article-buttons .delete-destination-form button,
+main article .article-buttons a {
     border: none;
     background-color: #e74c3c;
     color: #fff;
@@ -80,6 +82,11 @@ main article .delete-destination-form button {
     font-weight: 600;
     font-size: 14px;
     cursor: pointer;
+}
+
+main article .article-buttons a {
+    background-color: #0A67AA;
+    padding: 0.5em 2em;
 }
 
 ul li > span:first-of-type {
