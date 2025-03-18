@@ -1,6 +1,5 @@
 package org.travelagency.service;
 
-import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.travelagency.model.entity.*;
@@ -8,6 +7,7 @@ import org.travelagency.model.exportDTO.country.CountryViewDTO;
 import org.travelagency.model.exportDTO.destination.*;
 import org.travelagency.model.exportDTO.embassy.EmbassyViewDTO;
 import org.travelagency.model.importDTO.AddDestinationDTO;
+import org.travelagency.model.importDTO.UpdateDestinationDTO;
 import org.travelagency.repository.DestinationRepository;
 import org.travelagency.service.interfaces.ContinentService;
 import org.travelagency.service.interfaces.CountryService;
@@ -211,6 +211,129 @@ public class DestinationServiceImpl implements DestinationService {
                 .toList();
 
         return new DestinationMenuInfo(destinationMenuList);
+    }
+
+    @Override
+    public UpdateDestinationDTO getDestinationDetailsForUpdate(String destinationName) {
+
+        UpdateDestinationDTO updateDestinationDTO = new UpdateDestinationDTO();
+
+        Optional<Destination> optionalDestination = this.destinationRepository.findByName(destinationName);
+
+        if (optionalDestination.isEmpty()) {
+            return null;
+        }
+
+        Destination destination = optionalDestination.get();
+
+        updateDestinationDTO.setDestinationName(destination.getName());
+        updateDestinationDTO.setCapital(destination.getCountry().getCapital());
+        updateDestinationDTO.setCurrency(destination.getCountry().getCurrency());
+        updateDestinationDTO.setTimeDifference(destination.getCountry().getTimeDifference());
+        updateDestinationDTO.setDescription(destination.getDescription());
+        updateDestinationDTO.setTimeToVisit(destination.getTimeToVisit());
+        updateDestinationDTO.setVisaRequirements(destination.getVisaRequirements());
+        updateDestinationDTO.setGoodToKnow(destination.getGoodToKnow());
+        updateDestinationDTO.setContinentName(destination.getCountry().getContinent().getName());
+        updateDestinationDTO.setAddress(destination.getCountry().getEmbassy().getAddress());
+        updateDestinationDTO.setPhoneNumber(destination.getCountry().getEmbassy().getPhoneNumber());
+        updateDestinationDTO.setFax(destination.getCountry().getEmbassy().getFax());
+        updateDestinationDTO.setDutyPhone(destination.getCountry().getEmbassy().getDutyPhone());
+        updateDestinationDTO.setEmail(destination.getCountry().getEmbassy().getEmail());
+        updateDestinationDTO.setWebpage(destination.getCountry().getEmbassy().getWebpage());
+
+        return updateDestinationDTO;
+    }
+
+    @Override
+    public Result updateDestination(UpdateDestinationDTO updateDestinationDTO, String destinationName) {
+
+        Optional<Destination> optionalDestination = this.destinationRepository.findByName(destinationName);
+
+        if (optionalDestination.isEmpty()) {
+            return new Result(false, "Дестинацията, която се опитвате да редактирате, не съществува!");
+        }
+
+        Destination destination = optionalDestination.get();
+        Country country = destination.getCountry();
+        Embassy embassy = destination.getCountry().getEmbassy();
+        Continent continent = destination.getCountry().getContinent();
+
+        if (!destination.getName().equals(updateDestinationDTO.getDestinationName())) {
+            destination.setName(updateDestinationDTO.getDestinationName());
+            country.setName(updateDestinationDTO.getDestinationName());
+            embassy.setName(updateDestinationDTO.getDestinationName());
+        }
+
+        if (!continent.getName().equals(updateDestinationDTO.getContinentName())) {
+            Optional<Continent> optionalContinent = this.continentService.findContinentByName(updateDestinationDTO.getContinentName());
+
+            if (optionalContinent.isEmpty()) {
+                return new Result(false, "Новият континент, който се опитвате да изберете, не съществува!");
+            }
+
+            Continent newContinent = optionalContinent.get();
+
+            country.setContinent(newContinent);
+        }
+
+        if (!country.getCapital().equals(updateDestinationDTO.getCapital())) {
+            country.setCapital(updateDestinationDTO.getCapital());
+        }
+
+        if (!country.getCurrency().equals(updateDestinationDTO.getCurrency())) {
+            country.setCurrency(updateDestinationDTO.getCurrency());
+        }
+
+        if (!country.getTimeDifference().equals(updateDestinationDTO.getTimeDifference())) {
+            country.setTimeDifference(updateDestinationDTO.getTimeDifference());
+        }
+
+        if (!embassy.getAddress().equals(updateDestinationDTO.getAddress())) {
+            embassy.setAddress(updateDestinationDTO.getAddress());
+        }
+
+        if (!embassy.getPhoneNumber().equals(updateDestinationDTO.getPhoneNumber())) {
+            embassy.setPhoneNumber(updateDestinationDTO.getPhoneNumber());
+        }
+
+        if (!embassy.getFax().equals(updateDestinationDTO.getFax())) {
+            embassy.setFax(updateDestinationDTO.getFax());
+        }
+
+        if (!embassy.getDutyPhone().equals(updateDestinationDTO.getDutyPhone())) {
+            embassy.setDutyPhone(updateDestinationDTO.getDutyPhone());
+        }
+
+        if (!embassy.getEmail().equals(updateDestinationDTO.getEmail())) {
+            embassy.setEmail(updateDestinationDTO.getEmail());
+        }
+
+        if (!embassy.getWebpage().equals(updateDestinationDTO.getWebpage())) {
+            embassy.setWebpage(updateDestinationDTO.getWebpage());
+        }
+
+        if (!destination.getDescription().equals(updateDestinationDTO.getDescription())) {
+            destination.setDescription(updateDestinationDTO.getDescription());
+        }
+
+        if (!destination.getVisaRequirements().equals(updateDestinationDTO.getVisaRequirements())) {
+            destination.setVisaRequirements(updateDestinationDTO.getVisaRequirements());
+        }
+
+        if (!destination.getGoodToKnow().equals(updateDestinationDTO.getGoodToKnow())) {
+            destination.setGoodToKnow(updateDestinationDTO.getGoodToKnow());
+        }
+
+        if (!destination.getTimeToVisit().equals(updateDestinationDTO.getTimeToVisit())) {
+            destination.setTimeToVisit(updateDestinationDTO.getTimeToVisit());
+        }
+
+        this.countryService.saveAndFlushCountry(country);
+        this.embassyService.saveAndFlushEmbassy(embassy);
+        this.destinationRepository.saveAndFlush(destination);
+
+        return new Result(true, "Успешно редактирахте избраната от вас дестинация!");
     }
 
     @Override
