@@ -9,6 +9,7 @@ import org.travelagency.model.exportDTO.destination.DestinationViewInfo;
 import org.travelagency.model.exportDTO.destination.DestinationsExportListDTO;
 import org.travelagency.model.exportDTO.embassy.EmbassyViewDTO;
 import org.travelagency.model.importDTO.AddDestinationDTO;
+import org.travelagency.model.importDTO.UpdateDestinationDTO;
 
 import java.util.Optional;
 
@@ -28,7 +29,11 @@ public interface DestinationService {
 
     DestinationMenuInfo getAllDestinations();
 
+    Result updateDestination(UpdateDestinationDTO updateDestinationDTO, String destinationName);
+
     Optional<Destination> findDestinationByDestinationName(String destinationName);
 
     void deleteDestinationByDestinationName(String destinationName);
+
+    UpdateDestinationDTO getDestinationDetailsForUpdate(String destinationName);
 }

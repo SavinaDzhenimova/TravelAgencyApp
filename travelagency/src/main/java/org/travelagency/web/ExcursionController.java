@@ -17,7 +17,6 @@ import org.travelagency.model.exportDTO.excursion.ExcursionExportDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewDTO;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.model.importDTO.AddInquiryDTO;
-import org.travelagency.model.importDTO.AddReservationDTO;
 import org.travelagency.model.importDTO.UpdateExcursionDTO;
 import org.travelagency.model.user.UserDetailsDTO;
 import org.travelagency.service.interfaces.ExcursionService;
@@ -255,7 +254,8 @@ public class ExcursionController {
             redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
         }
 
-        String encodedName = URLEncoder.encode(excursionName, StandardCharsets.UTF_8);
+        String encodedName = URLEncoder.encode(updateExcursionDTO.getExcursionName(), StandardCharsets.UTF_8)
+                .replace("+", "%20");
         return new ModelAndView("redirect:/excursions/excursion-details/" + encodedName);
     }
 }

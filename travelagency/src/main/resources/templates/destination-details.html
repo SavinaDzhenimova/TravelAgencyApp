@@ -16,6 +16,14 @@
     <main>
         <h1 th:text="${destination.getDestination().getName()}">Австрия</h1>
 
+        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+            <p class="success" th:text="${successMessage}"></p>
+        </div>
+
+        <div th:if="${failureMessage}" class="alert alert-failure" role="alert">
+            <p th:text="${failureMessage}"></p>
+        </div>
+
         <article>
             <div class="article-header">
                 <div class="image-container">
@@ -98,6 +106,9 @@
                       class="delete-destination-form">
                     <button type="submit">Изтрий дестинацията</button>
                 </form>
+
+                <a sec:authorize="hasRole('MANAGER')"
+                   th:href="@{/destinations/update/{destinationName}(destinationName=${destination.getDestination().getName()})}">Редактирай</a>
 
                 <a th:href="@{/excursions/{destinationName}(destinationName=${destination.getDestination().getName()})}">
                     Разгледай екскурзии</a>

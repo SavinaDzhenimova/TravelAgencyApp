@@ -169,34 +169,6 @@ public class ExcursionServiceImpl implements ExcursionService {
     }
 
     @Override
-    public UpdateExcursionDTO getExcursionDetailsForUpdate(String excursionName) {
-        UpdateExcursionDTO updateExcursionDTO = new UpdateExcursionDTO();
-
-        Optional<Excursion> optionalExcursion = this.excursionRepository.findByName(excursionName);
-
-        if (optionalExcursion.isEmpty()) {
-            return null;
-        }
-
-        Excursion excursion = optionalExcursion.get();
-
-        updateExcursionDTO.setExcursionName(excursion.getName());
-        updateExcursionDTO.setPrice(excursion.getPrice());
-        updateExcursionDTO.setDestination(excursion.getDestination().getName());
-        updateExcursionDTO.setEndurance(excursion.getProgram().getEndurance());
-        updateExcursionDTO.setGuideName(excursion.getGuide().getFullName());
-        updateExcursionDTO.setGuideId(excursion.getGuide().getId());
-        updateExcursionDTO.setTransport(excursion.getTransportType());
-        updateExcursionDTO.setDates(this.formatDates(excursion.getDates()));
-
-        List<DayExportDTO> dayExportDTOList = this.mapDaysListToDayExportDTO(excursion.getProgram().getDays());
-
-        updateExcursionDTO.setDays(dayExportDTOList);
-
-        return updateExcursionDTO;
-    }
-
-    @Override
     public Result addExcursion(AddExcursionDTO addExcursionDTO) {
         if (addExcursionDTO == null) {
             return new Result(false, "Екскурзията не съществува!");
@@ -228,6 +200,34 @@ public class ExcursionServiceImpl implements ExcursionService {
                         Objects.requireNonNull(excursion).getName(), subscriber.getEmail())));
 
         return new Result(true, "Успешно добавихте нова екскурзия!");
+    }
+
+    @Override
+    public UpdateExcursionDTO getExcursionDetailsForUpdate(String excursionName) {
+        UpdateExcursionDTO updateExcursionDTO = new UpdateExcursionDTO();
+
+        Optional<Excursion> optionalExcursion = this.excursionRepository.findByName(excursionName);
+
+        if (optionalExcursion.isEmpty()) {
+            return null;
+        }
+
+        Excursion excursion = optionalExcursion.get();
+
+        updateExcursionDTO.setExcursionName(excursion.getName());
+        updateExcursionDTO.setPrice(excursion.getPrice());
+        updateExcursionDTO.setDestination(excursion.getDestination().getName());
+        updateExcursionDTO.setEndurance(excursion.getProgram().getEndurance());
+        updateExcursionDTO.setGuideName(excursion.getGuide().getFullName());
+        updateExcursionDTO.setGuideId(excursion.getGuide().getId());
+        updateExcursionDTO.setTransport(excursion.getTransportType());
+        updateExcursionDTO.setDates(this.formatDates(excursion.getDates()));
+
+        List<DayExportDTO> dayExportDTOList = this.mapDaysListToDayExportDTO(excursion.getProgram().getDays());
+
+        updateExcursionDTO.setDays(dayExportDTOList);
+
+        return updateExcursionDTO;
     }
 
     @Override

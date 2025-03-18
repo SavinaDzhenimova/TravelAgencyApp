@@ -25,7 +25,7 @@ main {
     font-size: 16px;
 }
 
-main .update-excursion-form form {
+main .update-destination-form form {
     width: 750px;
     padding-top: 1em;
     display: flex;
@@ -33,13 +33,35 @@ main .update-excursion-form form {
     gap: 1em;
 }
 
-main .update-excursion-form .required::after {
+main .update-destination-form .required::after {
     display: inline-block;
     content: '*';
     color: red;
 }
 
-main .update-excursion-form form > .field {
+main .update-destination-form form .more-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+main .update-destination-form form .more-info h3 {
+    font-weight: 500;
+    text-align: center;
+    position: relative;
+}
+
+main .update-destination-form form .more-info h3::after {
+    display: block;
+    content: '';
+    background-color: #ccc;
+    width: 40%;
+    height: 1.5px;
+    position: absolute;
+    left: 30%;
+}
+
+main .update-destination-form form .more-info .field {
     padding: 0 0.3em;
     display: flex;
     justify-content: space-between;
@@ -47,27 +69,26 @@ main .update-excursion-form form > .field {
     position: relative;
 }
 
-main .update-excursion-form form > .field:not(:last-of-type)::after {
+main .update-destination-form form .more-info .field-textarea {
+    width: 100%;
+    position: relative;
+}
+
+main .update-destination-form form .more-info .field:not(:last-of-type)::after,
+main .update-destination-form form .more-info .field-textarea:not(:last-of-type)::after {
     display: block;
     content: '';
     width: 100%;
-    height: 1px;
+    height: 0.5px;
     background-color: #0A67AA;
     position: absolute;
     left: 0;
     bottom: -0.5em;
 }
 
-main .update-excursion-form form .textarea {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5em;
-}
-
-main .update-excursion-form form .field input,
-main .update-excursion-form form .field select,
-main .update-excursion-form form .field textarea {
+main .update-destination-form form .more-info .field input,
+main .update-destination-form form .more-info .field select,
+main .update-destination-form form .more-info .field-textarea textarea {
     padding: 0 0.3em;
     height: 30px;
     width: 400px;
@@ -75,51 +96,32 @@ main .update-excursion-form form .field textarea {
     border-radius: 0.3em;
 }
 
-main .update-excursion-form form .field ul {
+main .update-destination-form form .more-info .field-textarea textarea {
     width: 100%;
-}
-
-main .update-excursion-form form .field-dates ul {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-}
-
-main .update-excursion-form form .field-dates ul li {
-    display: flex;
-    justify-content: space-between;
-}
-
-main .update-excursion-form form .field-dates ul li h4 {
-    font-weight: 400;
-}
-
-main .update-excursion-form form .field ul li textarea {
-    width: 100%;
-    height: 70px;
+    height: 120px;
     padding: 0.3em 0.5em;
 }
 
-main .update-excursion-form form .field input:focus,
-main .update-excursion-form form .field textarea:focus {
+main .update-destination-form form .more-info .field input:focus,
+main .update-destination-form form .more-info .field-textarea textarea:focus {
     padding: 0.3em 0.5em;
     outline: none;
     border: 2px solid #0A67AA;
 }
 
-main .update-excursion-form form p {
+main .update-destination-form form p {
     font-style: italic;
     font-size: 14px;
 }
 
-main .update-excursion-form form p::before {
+main .update-destination-form form p::before {
     display: inline-block;
     content: '*';
     color: red;
     padding-right: 0.2em;
 }
 
-main .update-excursion-form form button {
+main .update-destination-form form button {
     padding: 0.3em;
     font: inherit;
     background-color: #0A67AA;
