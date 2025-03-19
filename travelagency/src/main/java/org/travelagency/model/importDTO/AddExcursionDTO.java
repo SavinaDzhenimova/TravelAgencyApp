@@ -10,7 +10,9 @@ import org.travelagency.model.enums.TransportType;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class AddExcursionDTO {
 
@@ -27,12 +29,12 @@ public class AddExcursionDTO {
     @NotNull(message = "Изберете дестинация!")
     private String destination;
 
-    @NotNull(message = "Посочете рой дати за екскурзията!")
+    @NotNull(message = "Посочете брой дати за екскурзията!")
     @Positive(message = "Датите за екскурзията не може да бъдат по-малко от една!")
     private int datesCount;
 
     @NotEmpty(message = "Трябва да добавите поне една дата за екскурзията!")
-    private List<@FutureOrPresent LocalDate> dates;
+    private Set<@FutureOrPresent LocalDate> dates;
 
     @NotNull(message = "Посочете продължителност на екскурзията!")
     @Positive(message = "Продължителността на екскурзията не може да бъде по-малко от 1 ден!")
@@ -53,7 +55,7 @@ public class AddExcursionDTO {
         this.datesCount = 1;
         this.days = new ArrayList<>();
         this.images = new ArrayList<>();
-        this.dates = new ArrayList<>();
+        this.dates = new HashSet<>();
     }
 
     public String getName() {
@@ -96,11 +98,11 @@ public class AddExcursionDTO {
         this.datesCount = datesCount;
     }
 
-    public List<LocalDate> getDates() {
+    public Set<LocalDate> getDates() {
         return dates;
     }
 
-    public void setDates(List<LocalDate> dates) {
+    public void setDates(Set<LocalDate> dates) {
         this.dates = dates;
     }
 

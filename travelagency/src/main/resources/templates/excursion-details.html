@@ -140,6 +140,11 @@
                         </td>
                     </tr>
                 </table>
+
+                <div>
+                    <a sec:authorize="hasRole('MANAGER')"
+                       th:href="@{/excursions/update/dates/{excursionName}(excursionName=${excursion.name})}">Добави дати</a>
+                </div>
             </div>
 
             <div class="article-main">

@@ -9,6 +9,7 @@ import org.travelagency.model.exportDTO.day.DayExportDTO;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 public class UpdateExcursionDTO {
 

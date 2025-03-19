@@ -13,6 +13,7 @@ import org.travelagency.service.utils.ExcursionDeletionManager;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -36,10 +37,10 @@ public class CronScheduler {
         LocalDate currentDate = LocalDate.now();
 
         for (Excursion excursion : excursions) {
-            List<LocalDate> futureDates = excursion.getDates()
+            Set<LocalDate> futureDates = excursion.getDates()
                     .stream()
                     .filter(date -> !date.isBefore(currentDate))
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toSet());
 
             if (excursion.getDates().size() != futureDates.size()) {
                 if (futureDates.isEmpty()) {

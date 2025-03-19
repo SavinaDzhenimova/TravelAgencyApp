@@ -8,7 +8,9 @@ import org.w3c.dom.stylesheets.LinkStyle;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "excursions")
@@ -22,7 +24,7 @@ public class Excursion extends BaseEntity {
     private BigDecimal price;
 
     @Column(name = "dates")
-    private List<LocalDate> dates;
+    private Set<LocalDate> dates;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -49,7 +51,7 @@ public class Excursion extends BaseEntity {
     public Excursion() {
         this.images = new ArrayList<>();
         this.reservations = new ArrayList<>();
-        this.dates = new ArrayList<>();
+        this.dates = new HashSet<>();
     }
 
     public String getName() {
@@ -68,11 +70,11 @@ public class Excursion extends BaseEntity {
         this.price = price;
     }
 
-    public List<LocalDate> getDates() {
+    public Set<LocalDate> getDates() {
         return dates;
     }
 
-    public void setDates(List<LocalDate> dates) {
+    public void setDates(Set<LocalDate> dates) {
         this.dates = dates;
     }
 

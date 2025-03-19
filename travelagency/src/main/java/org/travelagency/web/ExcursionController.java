@@ -18,6 +18,7 @@ import org.travelagency.model.exportDTO.excursion.ExcursionViewDTO;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.model.importDTO.AddInquiryDTO;
 import org.travelagency.model.importDTO.UpdateExcursionDTO;
+import org.travelagency.model.importDTO.UpdateExcursionDatesDTO;
 import org.travelagency.model.user.UserDetailsDTO;
 import org.travelagency.service.interfaces.ExcursionService;
 import org.travelagency.service.utils.ExcursionDeletionManager;
@@ -255,6 +256,52 @@ public class ExcursionController {
         }
 
         String encodedName = URLEncoder.encode(updateExcursionDTO.getExcursionName(), StandardCharsets.UTF_8)
+                .replace("+", "%20");
+        return new ModelAndView("redirect:/excursions/excursion-details/" + encodedName);
+    }
+
+    @GetMapping("/update/dates/{excursionName}")
+    public ModelAndView updateExcursionDates(@PathVariable("excursionName") String excursionName, Model model) {
+
+        if (!model.containsAttribute("updateExcursionDatesDTO")) {
+            model.addAttribute("updateExcursionDatesDTO", new UpdateExcursionDatesDTO());
+        }
+
+        String decodedExcursionName = URLDecoder.decode(excursionName, StandardCharsets.UTF_8);
+
+        ModelAndView modelAndView = new ModelAndView("update-excursion-dates");
+
+        modelAndView.addObject("excursionName", decodedExcursionName);
+
+        return modelAndView;
+    }
+
+    @PutMapping("/update/dates/{excursionName}")
+    public ModelAndView updateExcursionDates(@PathVariable("excursionName") String excursionName,
+                                             @Valid @ModelAttribute("updateExcursionDTO")
+                                             UpdateExcursionDatesDTO updateExcursionDatesDTO,
+                                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        String decodedExcursionName = URLDecoder.decode(excursionName, StandardCharsets.UTF_8);
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("updateExcursionDatesDTO", updateExcursionDatesDTO)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.updateExcursionDatesDTO",
+                            bindingResult);
+
+            String encodedName = URLEncoder.encode(excursionName, StandardCharsets.UTF_8);
+            return new ModelAndView("redirect:/excursions/update/dates/" + encodedName);
+        }
+
+        Result result = this.excursionService.updateExcursionDates(updateExcursionDatesDTO, decodedExcursionName);
+
+        if (result.isSuccess()) {
+            redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
+        } else {
+            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
+        }
+
+        String encodedName = URLEncoder.encode(excursionName, StandardCharsets.UTF_8)
                 .replace("+", "%20");
         return new ModelAndView("redirect:/excursions/excursion-details/" + encodedName);
     }

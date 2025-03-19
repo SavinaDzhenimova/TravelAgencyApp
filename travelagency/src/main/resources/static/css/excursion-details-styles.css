@@ -164,6 +164,16 @@ main article .article-main table tr td > a {
     margin: 0 auto;
 }
 
+main article .article-main div a {
+    text-decoration: underline;
+    font-style: oblique;
+    color: #0A67AA;
+}
+
+main article .article-main div a:hover {
+    font-weight: 600;
+}
+
 main article .article-main {
     display: flex;
     flex-direction: column;

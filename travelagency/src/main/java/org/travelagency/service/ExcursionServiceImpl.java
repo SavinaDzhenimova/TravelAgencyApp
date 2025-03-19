@@ -15,6 +15,7 @@ import org.travelagency.model.exportDTO.excursion.ExcursionViewInfo;
 import org.travelagency.model.importDTO.AddExcursionDTO;
 import org.travelagency.model.importDTO.AddInquiryDTO;
 import org.travelagency.model.importDTO.UpdateExcursionDTO;
+import org.travelagency.model.importDTO.UpdateExcursionDatesDTO;
 import org.travelagency.repository.ExcursionRepository;
 import org.travelagency.service.events.AddExcursionEvent;
 import org.travelagency.service.interfaces.*;
@@ -147,7 +148,7 @@ public class ExcursionServiceImpl implements ExcursionService {
         excursionExportDTO.setId(excursion.getId());
         excursionExportDTO.setName(excursion.getName());
         excursionExportDTO.setPrice(excursion.getPrice());
-        excursionExportDTO.setDates(excursion.getDates());
+        excursionExportDTO.setDates(excursion.getDates().stream().sorted().collect(Collectors.toList()));
         excursionExportDTO.setDestination(excursion.getDestination().getName());
         excursionExportDTO.setEndurance(excursion.getProgram().getEndurance());
         excursionExportDTO.setGuideName(excursion.getGuide().getFullName());
@@ -279,9 +280,9 @@ public class ExcursionServiceImpl implements ExcursionService {
             excursion.setGuide(optionalEmployee.get());
         }
 
-        List<LocalDate> newLocalDates = updateExcursionDTO.getDates().stream()
+        Set<LocalDate> newLocalDates = updateExcursionDTO.getDates().stream()
                 .map(date -> LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")))
-                .toList();
+                .collect(Collectors.toSet());
 
         for (LocalDate localDate : newLocalDates) {
             if (localDate.isBefore(LocalDate.now())) {
@@ -324,6 +325,24 @@ public class ExcursionServiceImpl implements ExcursionService {
     }
 
     @Override
+    public Result updateExcursionDates(UpdateExcursionDatesDTO updateExcursionDatesDTO, String decodedExcursionName) {
+
+        Optional<Excursion> optionalExcursion = this.excursionRepository.findByName(decodedExcursionName);
+
+        if (optionalExcursion.isEmpty()) {
+            return new Result(false, "Екскурзията, която се опитвате да редактирате, не съществува!");
+        }
+
+        Excursion excursion = optionalExcursion.get();
+
+        updateExcursionDatesDTO.getDates().forEach(localDate -> excursion.getDates().add(localDate));
+
+        this.excursionRepository.saveAndFlush(excursion);
+
+        return new Result(true, "Успешно добавихте нови дати към тази екскурзия!");
+    }
+
+    @Override
     @Transactional
     public void deleteExcursionById(Long id) {
         this.excursionRepository.deleteExcursionById(id);
@@ -354,7 +373,7 @@ public class ExcursionServiceImpl implements ExcursionService {
         return this.excursionRepository.findAllByDestinationId(destinationId);
     }
 
-    private List<String> formatDates(List<LocalDate> dates) {
+    private List<String> formatDates(Set<LocalDate> dates) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         return dates.stream()

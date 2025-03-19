@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{fragments/commons::head}"></th:block>
+    <link rel="stylesheet" href="/css/update-excursion-dates-styles.css">
+    <title>Sunrise Travel</title>
+</head>
+
+<body>
+
+    <header th:replace="~{fragments/commons::header}"></header>
+
+    <main>
+        <h1 th:text="${excursionName}">Австрия</h1>
+
+        <form class="update-excursion-form"
+              th:method="PUT"
+              th:action="@{/excursions/update/dates/{excursionName}(excursionName=${excursionName})}"
+              enctype="multipart/form-data"
+              th:object="${updateExcursionDatesDTO}">
+
+            <div class="field">
+                <label for="excursionName">Екскурзия: </label>
+                <input th:value="${excursionName}" type="text" id="excursionName" disabled>
+            </div>
+
+            <div class="field">
+                <label th:for="datesCount">Брой дати</label>
+                <input th:field="*{datesCount}"
+                       th:errorclass="is-invalid"
+                       type="number" name="datesCount" id="datesCount"
+                       placeholder="Брой дати" required>
+                <small th:if="${#fields.hasErrors('datesCount')}"
+                       th:errors="*{datesCount}"
+                       class="text-danger">Dish name error message</small>
+            </div>
+
+            <div id="datesContainer" class="field">
+                <label th:for="dates">Дата</label>
+                <input th:field="*{dates}"
+                       th:errorclass="is-invalid"
+                       type="date" id="dates" name="dates" required>
+                <small th:if="${#fields.hasErrors('dates')}"
+                       th:errors="*{dates}"
+                       class="text-danger">Dish name error message</small>
+            </div>
+
+            <button>Запази промените</button>
+        </form>
+    </main>
+
+    <footer th:replace="~{fragments/commons::footer}"></footer>
+
+    <script src="\js\animation.js"></script>
+    <script src="\js\show-menu.js"></script>
+    <script src="\js\show-menu-profile.js"></script>
+    <script src="\js\show-menu-team.js"></script>
+    <script src="\js\dates-input-fields.js"></script>
+
+</body>
+</html>
