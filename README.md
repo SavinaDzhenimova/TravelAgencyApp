@@ -13,7 +13,7 @@ Travel Agency App - Travel Management System
 🛠️ Технологии
 - Backend: Java Spring Boot, Hibernate
 - Frontend: Thymeleaf, HTML/CSS, Bootstrap, JavaScript
-- База данни: MySQL
+- Database: MySQL
 
 📂 Структура на проекта
 - src/main/java - основен код на приложението
