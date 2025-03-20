@@ -1,12 +1,15 @@
 package org.travelagency.service.utils;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 import org.travelagency.model.entity.*;
 import org.travelagency.service.interfaces.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class ExcursionDeletionManager {
@@ -61,5 +64,37 @@ public class ExcursionDeletionManager {
         }
 
         return new Result(true, "Успешно изтрихте екскурзия " + excursionName + "!");
+    }
+
+    @Transactional
+    public Result deleteExcursionReservationsByDate(Long id, LocalDate dateToDelete) {
+        Optional<Excursion> optionalExcursion = this.excursionService.findExcursionById(id);
+
+        if (optionalExcursion.isEmpty()) {
+            return new Result(false, "Екскурзията, която се опитвате да редактирате, не съществува!");
+        }
+
+        Excursion excursion = optionalExcursion.get();
+
+        this.reservationService.deleteAllReservationsByExcursionDate(dateToDelete);
+
+        List<Reservation> deletedReservations = this.reservationService.findAllReservationsByExcursionDate(dateToDelete);
+
+        if (!deletedReservations.isEmpty()) {
+            return new Result(false, "Резервациите за тази дата на екскурзията не можаха да бъдат изтрити!");
+        }
+
+        if (excursion.getDates().size() == 1) {
+            return new Result(false, "Тази дата е единствена за екскурзията и не можете да я изтриете!");
+        }
+
+        if (!excursion.getDates().contains(dateToDelete) ) {
+            return new Result(false, "Датата не съществува за тази екскурзия!");
+        }
+
+        excursion.getDates().remove(dateToDelete);
+        this.excursionService.saveAndFlushExcursion(excursion);
+
+        return new Result(true, "Датата за тази екскурзия беше успешно изтрита!");
     }
 }

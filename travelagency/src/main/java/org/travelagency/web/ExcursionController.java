@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Controller
@@ -349,6 +350,27 @@ public class ExcursionController {
         }
 
         String encodedName = URLEncoder.encode(excursionName, StandardCharsets.UTF_8)
+                .replace("+", "%20");
+        return new ModelAndView("redirect:/excursions/excursion-details/" + encodedName);
+    }
+
+    @DeleteMapping("/delete-excursion-date/{id}/{date}")
+    public ModelAndView deleteExcursionDate(@PathVariable("id") Long id,
+                                      @PathVariable("date") String date, RedirectAttributes redirectAttributes) {
+
+        LocalDate parsedDate = LocalDate.parse(date);
+
+        Optional<Excursion> optionalExcursion = this.excursionService.findExcursionById(id);
+
+        Result result = this.excursionDeletionManager.deleteExcursionReservationsByDate(id, parsedDate);
+
+        if (result.isSuccess()) {
+            redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
+        } else {
+            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
+        }
+
+        String encodedName = URLEncoder.encode(optionalExcursion.get().getName(), StandardCharsets.UTF_8)
                 .replace("+", "%20");
         return new ModelAndView("redirect:/excursions/excursion-details/" + encodedName);
     }

@@ -41,6 +41,7 @@ public class ReservationServiceImpl implements ReservationService {
         Page<String> excursionNames = this.excursionService.getAllExcursionsNames(pageable);
 
         List<ReservationViewInfo> reservationViewInfoList = excursionNames.getContent().stream()
+                .filter(excursionName -> !this.reservationRepository.findByExcursionName(excursionName).isEmpty())
                 .map(this::mapReservationToReservationViewInfo)
                 .collect(Collectors.toList());
 
@@ -48,7 +49,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     private ReservationViewInfo mapReservationToReservationViewInfo(String excursionName) {
-        List<Reservation> reservations = this.reservationRepository.findReservationByExcursionName(excursionName);
+        List<Reservation> reservations = this.reservationRepository.findByExcursionName(excursionName);
 
         List<ReservationViewDTO> reservationViewDTOList = reservations.stream()
                 .map(reservation -> {
@@ -155,7 +156,18 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    @Transactional
+    public void deleteAllReservationsByExcursionDate(LocalDate date) {
+        this.reservationRepository.deleteAllByExcursionDate(date);
+    }
+
+    @Override
     public List<Reservation> findAllReservationsByExcursionId(Long excursionId) {
         return this.reservationRepository.findAllByExcursionId(excursionId);
+    }
+
+    @Override
+    public List<Reservation> findAllReservationsByExcursionDate(LocalDate date) {
+        return this.reservationRepository.findAllByExcursionDate(date);
     }
 }
