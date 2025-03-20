@@ -30,10 +30,6 @@ public class UpdateExcursionDTO {
     @NotNull(message = "Изберете дестинация!")
     private String destination;
 
-    @NotNull(message = "Посочете продължителност на екскурзията!")
-    @Positive(message = "Продължителността на екскурзията не може да бъде по-малко от 1 ден!")
-    private int endurance;
-
     @NotNull(message = "Изберете тип транспорт!")
     private TransportType transport;
 
@@ -84,14 +80,6 @@ public class UpdateExcursionDTO {
 
     public void setDestination(String destination) {
         this.destination = destination;
-    }
-
-    public int getEndurance() {
-        return endurance;
-    }
-
-    public void setEndurance(int endurance) {
-        this.endurance = endurance;
     }
 
     public TransportType getTransport() {

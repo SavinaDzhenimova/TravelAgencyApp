@@ -70,14 +70,6 @@
                 </div>
 
                 <div class="field">
-                    <label for="endurance">Продължителност: </label>
-                    <input th:field="*{endurance}" type="number" step="1" id="endurance" name="endurance">
-                    <small th:if="${#fields.hasErrors('endurance')}"
-                           th:errors="*{endurance}"
-                           class="text-danger">Dish name error message</small>
-                </div>
-
-                <div class="field">
                     <label for="transport">Вид транспорт: </label>
                     <select th:field="*{transport}" name="transport" id="transport">
                         <option th:value="BUS" th:selected="${transport.equals('BUS')}">Автобус</option>

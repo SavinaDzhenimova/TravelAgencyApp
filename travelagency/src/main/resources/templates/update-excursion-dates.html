@@ -18,7 +18,6 @@
         <form class="update-excursion-form"
               th:method="PUT"
               th:action="@{/excursions/update/dates/{excursionName}(excursionName=${excursionName})}"
-              enctype="multipart/form-data"
               th:object="${updateExcursionDatesDTO}">
 
             <div class="field">

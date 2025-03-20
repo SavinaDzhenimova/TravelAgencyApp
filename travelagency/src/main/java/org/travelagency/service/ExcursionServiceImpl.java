@@ -12,10 +12,7 @@ import org.travelagency.model.exportDTO.day.DayExportDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionExportDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewInfo;
-import org.travelagency.model.importDTO.AddExcursionDTO;
-import org.travelagency.model.importDTO.AddInquiryDTO;
-import org.travelagency.model.importDTO.UpdateExcursionDTO;
-import org.travelagency.model.importDTO.UpdateExcursionDatesDTO;
+import org.travelagency.model.importDTO.*;
 import org.travelagency.repository.ExcursionRepository;
 import org.travelagency.service.events.AddExcursionEvent;
 import org.travelagency.service.interfaces.*;
@@ -218,7 +215,6 @@ public class ExcursionServiceImpl implements ExcursionService {
         updateExcursionDTO.setExcursionName(excursion.getName());
         updateExcursionDTO.setPrice(excursion.getPrice());
         updateExcursionDTO.setDestination(excursion.getDestination().getName());
-        updateExcursionDTO.setEndurance(excursion.getProgram().getEndurance());
         updateExcursionDTO.setGuideName(excursion.getGuide().getFullName());
         updateExcursionDTO.setGuideId(excursion.getGuide().getId());
         updateExcursionDTO.setTransport(excursion.getTransportType());
@@ -303,11 +299,9 @@ public class ExcursionServiceImpl implements ExcursionService {
 
     private void updateProgram(Program program, UpdateExcursionDTO updateExcursionDTO) {
 
-        program.setEndurance(updateExcursionDTO.getEndurance());
-
         this.dayService.deleteAllDaysByProgramId(program.getId());
 
-        List<Day> newDays = updateExcursionDTO.getDays().stream()
+        List<Day> updatedDays = updateExcursionDTO.getDays().stream()
                 .map(dayExportDTO -> {
                     Day day = new Day();
 
@@ -320,7 +314,7 @@ public class ExcursionServiceImpl implements ExcursionService {
                     return day;
                 }).toList();
 
-        program.setDays(newDays);
+        program.setDays(updatedDays);
         this.programService.saveAndFlushProgram(program);
     }
 
@@ -340,6 +334,27 @@ public class ExcursionServiceImpl implements ExcursionService {
         this.excursionRepository.saveAndFlush(excursion);
 
         return new Result(true, "Успешно добавихте нови дати към тази екскурзия!");
+    }
+
+    @Override
+    public Result updateExcursionProgram(UpdateExcursionProgramDTO updateExcursionProgramDTO, String decodedExcursionName) {
+
+        Optional<Excursion> optionalExcursion = this.excursionRepository.findByName(decodedExcursionName);
+
+        if (optionalExcursion.isEmpty()) {
+            return new Result(false, "Екскурзията, която се опитвате да редактирате, не съществува!");
+        }
+
+        Excursion excursion = optionalExcursion.get();
+        Program program = excursion.getProgram();
+
+        int newEndurance = updateExcursionProgramDTO.getDaysCount() + excursion.getProgram().getEndurance();
+        this.addDaysToProgram(updateExcursionProgramDTO.getDays(), newEndurance, program);
+
+        excursion.setProgram(program);
+        this.excursionRepository.saveAndFlush(excursion);
+
+        return new Result(true, "Успешно добавихте нови дни към програмата на тази екскурзия!");
     }
 
     @Override
@@ -379,6 +394,28 @@ public class ExcursionServiceImpl implements ExcursionService {
         return dates.stream()
                 .map(date -> date.format(formatter))
                 .collect(Collectors.toList());
+    }
+
+    private void addDaysToProgram(List<String> days, int newEndurance, Program program) {
+        int endurance = program.getEndurance();
+
+        List<Day> daysToAddList = new ArrayList<>();
+
+        for (int i = 0; i < days.size(); i++) {
+            Day day = new Day();
+
+            day.setDayNumber(endurance + 1 + i);
+            day.setDescription(days.get(i));
+            day.setProgram(program);
+
+            this.dayService.saveAndFlushDay(day);
+            daysToAddList.add(day);
+        }
+
+        program.setEndurance(newEndurance);
+        program.getDays().addAll(daysToAddList);
+
+        this.programService.saveAndFlushProgram(program);
     }
 
     private List<DayExportDTO> mapDaysListToDayExportDTO(List<Day> days) {

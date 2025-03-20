@@ -12,13 +12,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.travelagency.model.entity.Excursion;
 import org.travelagency.model.entity.Result;
 import org.travelagency.model.exportDTO.excursion.ExcursionExportDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewDTO;
-import org.travelagency.model.importDTO.AddExcursionDTO;
-import org.travelagency.model.importDTO.AddInquiryDTO;
-import org.travelagency.model.importDTO.UpdateExcursionDTO;
-import org.travelagency.model.importDTO.UpdateExcursionDatesDTO;
+import org.travelagency.model.importDTO.*;
 import org.travelagency.model.user.UserDetailsDTO;
 import org.travelagency.service.interfaces.ExcursionService;
 import org.travelagency.service.utils.ExcursionDeletionManager;
@@ -27,6 +25,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/excursions")
@@ -223,7 +222,6 @@ public class ExcursionController {
         modelAndView.addObject("price", updateExcursionDTO.getPrice());
         modelAndView.addObject("guideName", updateExcursionDTO.getGuideName());
         modelAndView.addObject("destination", updateExcursionDTO.getDestination());
-        modelAndView.addObject("endurance", updateExcursionDTO.getEndurance());
         modelAndView.addObject("transport", updateExcursionDTO.getTransport());
         modelAndView.addObject("dates", updateExcursionDTO.getDates());
         modelAndView.addObject("days", updateExcursionDTO.getDays());
@@ -278,7 +276,7 @@ public class ExcursionController {
 
     @PutMapping("/update/dates/{excursionName}")
     public ModelAndView updateExcursionDates(@PathVariable("excursionName") String excursionName,
-                                             @Valid @ModelAttribute("updateExcursionDTO")
+                                             @Valid @ModelAttribute("updateExcursionDatesDTO")
                                              UpdateExcursionDatesDTO updateExcursionDatesDTO,
                                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
@@ -294,6 +292,55 @@ public class ExcursionController {
         }
 
         Result result = this.excursionService.updateExcursionDates(updateExcursionDatesDTO, decodedExcursionName);
+
+        if (result.isSuccess()) {
+            redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
+        } else {
+            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
+        }
+
+        String encodedName = URLEncoder.encode(excursionName, StandardCharsets.UTF_8)
+                .replace("+", "%20");
+        return new ModelAndView("redirect:/excursions/excursion-details/" + encodedName);
+    }
+
+    @GetMapping("/update/program/{excursionName}")
+    public ModelAndView updateExcursionProgram(@PathVariable("excursionName") String excursionName, Model model) {
+
+        if (!model.containsAttribute("updateExcursionProgramDTO")) {
+            model.addAttribute("updateExcursionProgramDTO", new UpdateExcursionProgramDTO());
+        }
+
+        String decodedExcursionName = URLDecoder.decode(excursionName, StandardCharsets.UTF_8);
+
+        ModelAndView modelAndView = new ModelAndView("update-excursion-program");
+
+        Optional<Excursion> optionalExcursion = this.excursionService.findExcursionByExcursionName(decodedExcursionName);
+
+        modelAndView.addObject("excursionName", decodedExcursionName);
+        modelAndView.addObject("excursionEndurance", optionalExcursion.get().getProgram().getEndurance());
+
+        return modelAndView;
+    }
+
+    @PutMapping("/update/program/{excursionName}")
+    public ModelAndView updateExcursionProgram(@PathVariable("excursionName") String excursionName,
+                                             @Valid @ModelAttribute("updateExcursionProgramDTO")
+                                             UpdateExcursionProgramDTO updateExcursionProgramDTO,
+                                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        String decodedExcursionName = URLDecoder.decode(excursionName, StandardCharsets.UTF_8);
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("updateExcursionProgramDTO", updateExcursionProgramDTO)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.updateExcursionProgramDTO",
+                            bindingResult);
+
+            String encodedName = URLEncoder.encode(excursionName, StandardCharsets.UTF_8);
+            return new ModelAndView("redirect:/excursions/update/program/" + encodedName);
+        }
+
+        Result result = this.excursionService.updateExcursionProgram(updateExcursionProgramDTO, decodedExcursionName);
 
         if (result.isSuccess()) {
             redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
