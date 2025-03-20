@@ -131,12 +131,20 @@
                     <tr>
                         <th>Дата</th>
                         <th sec:authorize="!isAuthenticated()">Резервирай</th>
+                        <th sec:authorize="hasRole('MANAGER')">Изтрий дата</th>
                     </tr>
                     <tr th:each="date: ${dates}">
                         <td th:text="${#temporals.format(date, 'dd.MM.yyyy г.')}"></td>
                         <td sec:authorize="!isAuthenticated()">
                             <a th:href="@{/excursions/excursion-details/{excursionName}/reserve/{date}
                                (excursionName=${excursion.name}, date=${date})}">Резервирай</a>
+                        </td>
+                        <td sec:authorize="hasRole('MANAGER')">
+                            <form th:method="DELETE"
+                                  th:action="@{/excursions/delete-excursion-date/{id}/{date}(id=${excursion.getId()}, date=${#temporals.format(date, 'yyyy-MM-dd')})}"
+                                  class="delete-excursion-date-form">
+                                <button type="submit">Изтрий дата</button>
+                            </form>
                         </td>
                     </tr>
                 </table>
