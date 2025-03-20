@@ -41,7 +41,7 @@ public class AddExcursionDTO {
     private int endurance;
 
     @NotEmpty(message = "Трябва да добавите поне един ден от програмата!")
-    private List<@NotNull String> days;
+    private List<@NotEmpty String> days;
 
     @NotEmpty(message = "Трябва да добавите поне една снимка свързана с екскурзията!")
     private List<MultipartFile> images;

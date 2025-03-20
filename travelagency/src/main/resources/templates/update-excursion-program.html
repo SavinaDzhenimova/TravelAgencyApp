@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{fragments/commons::head}"></th:block>
+    <link rel="stylesheet" href="/css/update-excursion-program-styles.css">
+    <title>Sunrise Travel</title>
+</head>
+
+<body>
+
+    <header th:replace="~{fragments/commons::header}"></header>
+
+    <main>
+          <h1 th:text="${excursionName}">Австрия</h1>
+
+          <form class="update-excursion-form"
+                th:method="PUT"
+                th:action="@{/excursions/update/program/{excursionName}(excursionName=${excursionName})}"
+                th:object="${updateExcursionProgramDTO}">
+
+              <div class="field">
+                  <label for="excursionName">Екскурзия: </label>
+                  <input th:value="${excursionName}" type="text" id="excursionName" disabled>
+              </div>
+
+              <div class="field">
+                  <label for="excursionEndurance">Продължителност: </label>
+                  <input th:value="${excursionEndurance}" type="number" id="excursionEndurance" disabled>
+              </div>
+
+              <div class="field">
+                  <label for="endurance">Брой добавени дни към програмата: </label>
+                  <input th:field="*{daysCount}" type="number" step="1" id="endurance" name="daysCount">
+                  <small th:if="${#fields.hasErrors('daysCount')}"
+                         th:errors="*{daysCount}"
+                         class="text-danger">Dish name error message</small>
+              </div>
+
+              <div id="daysContainer" class="field">
+                  <label for="day1">Програма за ден 1</label>
+                  <textarea id="day1" name="days" required></textarea>
+                  <small class="text-danger"></small>
+              </div>
+
+              <button>Запази промените</button>
+          </form>
+    </main>
+
+    <footer th:replace="~{fragments/commons::footer}"></footer>
+
+    <script src="\js\animation.js"></script>
+    <script src="\js\show-menu.js"></script>
+    <script src="\js\show-menu-profile.js"></script>
+    <script src="\js\show-menu-team.js"></script>
+    <script src="\js\endurance-input-fields.js"></script>
+
+</body>
+</html>

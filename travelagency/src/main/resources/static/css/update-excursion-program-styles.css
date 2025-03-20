@@ -1,0 +1,72 @@
+h1 {
+    width: 100%;
+    padding-bottom: 0.5em;
+    font-family: 'Lobster';
+    font-weight: 300;
+    font-size: 30px;
+    text-align: center;
+}
+
+main h1::after {
+    display: block;
+    content: '';
+    background-color: #0A67AA;
+    width: 15%;
+    height: 2px;
+    position: absolute;
+    left: 42.5%;
+}
+
+main {
+    padding: 1.5em 8em 2em 8em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+.update-excursion-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.update-excursion-form .field {
+    display: flex;
+    flex-direction: column;
+    opacity: 0.7;
+    position: relative;
+}
+
+.update-excursion-form .field input,
+.update-excursion-form .field textarea {
+    padding: 0 0.3em;
+    height: 30px;
+    width: 600px;
+    outline: none;
+    border: 1px solid #0A67AA;
+    border-radius: 0.3em;
+}
+
+.update-excursion-form .field textarea {
+    height: 100px;
+}
+
+.update-excursion-form #daysContainer:focus-within label {
+    font-weight: 600;
+}
+
+.update-excursion-form button {
+    width: 35%;
+    background-color: #0A67AA;
+    color: #fff;
+    padding: 0.7em 0;
+    align-self: center;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 0.3em;
+    cursor: pointer;
+}

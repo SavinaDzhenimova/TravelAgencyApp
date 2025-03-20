@@ -156,6 +156,12 @@
                         <p th:text="${day.getDescription()}">Описание</p>
                     </li>
                 </ul>
+
+                <div>
+                    <a sec:authorize="hasRole('MANAGER')"
+                       th:href="@{/excursions/update/program/{excursionName}(excursionName=${excursion.name})}">
+                        Добави дни към програмата</a>
+                </div>
             </div>
         </article>
     </main>

@@ -7,10 +7,7 @@ import org.travelagency.model.entity.Result;
 import org.travelagency.model.exportDTO.excursion.ExcursionExportDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewDTO;
 import org.travelagency.model.exportDTO.excursion.ExcursionViewInfo;
-import org.travelagency.model.importDTO.AddExcursionDTO;
-import org.travelagency.model.importDTO.AddInquiryDTO;
-import org.travelagency.model.importDTO.UpdateExcursionDTO;
-import org.travelagency.model.importDTO.UpdateExcursionDatesDTO;
+import org.travelagency.model.importDTO.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,4 +45,6 @@ public interface ExcursionService {
     List<Excursion> findAllExcursionsByDestinationId(Long destinationId);
 
     Result updateExcursionDates(UpdateExcursionDatesDTO updateExcursionDatesDTO, String decodedExcursionName);
+
+    Result updateExcursionProgram(UpdateExcursionProgramDTO updateExcursionProgramDTO, String decodedExcursionName);
 }
