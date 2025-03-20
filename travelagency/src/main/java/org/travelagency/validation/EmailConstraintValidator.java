@@ -19,7 +19,7 @@ public class EmailConstraintValidator implements ConstraintValidator<ValidEmail,
 
         if (email != null && !email.isBlank()) {
 
-            String regex = "^[a-zA-Z0-9]+[_.]?[a-zA-Z0-9]+@[a-zA-Z]+.+[a-zA-Z]+$";
+            String regex = "^[a-zA-Z0-9]+[_.]?[a-zA-Z0-9]+[_.]?[a-zA-Z0-9]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z]{2,}$";
 
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(email);
