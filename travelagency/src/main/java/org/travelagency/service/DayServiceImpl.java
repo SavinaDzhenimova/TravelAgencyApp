@@ -7,6 +7,7 @@ import org.travelagency.repository.DayRepository;
 import org.travelagency.service.interfaces.DayService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DayServiceImpl implements DayService {
@@ -20,6 +21,17 @@ public class DayServiceImpl implements DayService {
     @Override
     public void saveAndFlushDay(Day day) {
         this.dayRepository.saveAndFlush(day);
+    }
+
+    @Override
+    public Optional<Day> findDayById(Long id) {
+        return this.dayRepository.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteDayById(Long id) {
+        this.dayRepository.deleteById(id);
     }
 
     @Override

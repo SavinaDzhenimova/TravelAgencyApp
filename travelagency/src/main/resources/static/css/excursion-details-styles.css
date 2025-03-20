@@ -203,6 +203,20 @@ main article .article-main ul {
     font-size: 14px;
 }
 
+main article .article-main ul li button {
+    background-color: #fff;
+    color: #e74c3c;
+    text-decoration: underline;
+    font-style: oblique;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+main article .article-main ul li button:hover {
+    font-weight: 600;
+}
+
 ul li > span:first-of-type {
     font-weight: 700;
     font-style: oblique;

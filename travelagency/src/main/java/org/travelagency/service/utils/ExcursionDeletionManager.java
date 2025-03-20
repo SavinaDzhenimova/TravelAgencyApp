@@ -97,4 +97,38 @@ public class ExcursionDeletionManager {
 
         return new Result(true, "Датата за тази екскурзия беше успешно изтрита!");
     }
+
+    public Result deleteExcursionDayById(Long dayId, Long excursionId) {
+
+        Optional<Day> optionalDay = this.dayService.findDayById(dayId);
+        Optional<Excursion> optionalExcursion = this.excursionService.findExcursionById(excursionId);
+
+        if (optionalDay.isEmpty()) {
+            return new Result(false, "Денят от тази екскурзия, който се опитвате да изтриете, не съществува!");
+        }
+
+        if (optionalExcursion.isEmpty()) {
+            return new Result(false, "Екскурзията, която се опитвате да редактирате, не съществува!");
+        }
+
+        Excursion excursion = optionalExcursion.get();
+        Program program = excursion.getProgram();
+
+        if (program.getDays().size() == 1) {
+            return new Result(false, "Този ден е единствен от програмата на екскурзията и не можете да го изтриете!");
+        }
+
+        this.dayService.deleteDayById(dayId);
+
+        Optional<Day> optionalDayAfterDeletion = this.dayService.findDayById(dayId);
+
+        if (optionalDayAfterDeletion.isPresent()) {
+            return new Result(false, "Денят от програмата за тази екскурзия не беше изтрит!");
+        }
+
+        program.setEndurance(program.getEndurance() - 1);
+        this.programService.saveAndFlushProgram(program);
+
+        return new Result(true, "Ден от програмата за тази екскурзия беше успешно изтрит!");
+    }
 }

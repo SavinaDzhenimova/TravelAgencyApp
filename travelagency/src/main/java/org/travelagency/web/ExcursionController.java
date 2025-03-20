@@ -354,7 +354,7 @@ public class ExcursionController {
         return new ModelAndView("redirect:/excursions/excursion-details/" + encodedName);
     }
 
-    @DeleteMapping("/delete-excursion-date/{id}/{date}")
+    @DeleteMapping("/delete-excursion/date/{id}/{date}")
     public ModelAndView deleteExcursionDate(@PathVariable("id") Long id,
                                       @PathVariable("date") String date, RedirectAttributes redirectAttributes) {
 
@@ -363,6 +363,25 @@ public class ExcursionController {
         Optional<Excursion> optionalExcursion = this.excursionService.findExcursionById(id);
 
         Result result = this.excursionDeletionManager.deleteExcursionReservationsByDate(id, parsedDate);
+
+        if (result.isSuccess()) {
+            redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
+        } else {
+            redirectAttributes.addFlashAttribute("failureMessage", result.getMessage());
+        }
+
+        String encodedName = URLEncoder.encode(optionalExcursion.get().getName(), StandardCharsets.UTF_8)
+                .replace("+", "%20");
+        return new ModelAndView("redirect:/excursions/excursion-details/" + encodedName);
+    }
+
+    @DeleteMapping("/delete-excursion/day/{excursionId}/{dayId}")
+    public ModelAndView deleteExcursionDate(@PathVariable("excursionId") Long excursionId,
+                                            @PathVariable("dayId") Long dayId, RedirectAttributes redirectAttributes) {
+
+        Optional<Excursion> optionalExcursion = this.excursionService.findExcursionById(excursionId);
+
+        Result result = this.excursionDeletionManager.deleteExcursionDayById(dayId, excursionId);
 
         if (result.isSuccess()) {
             redirectAttributes.addFlashAttribute("successMessage", result.getMessage());

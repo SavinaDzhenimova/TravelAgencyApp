@@ -423,6 +423,7 @@ public class ExcursionServiceImpl implements ExcursionService {
                 .map(day -> {
                     DayExportDTO dayExportDTO = new DayExportDTO();
 
+                    dayExportDTO.setId(day.getId());
                     dayExportDTO.setDayNumber(day.getDayNumber());
                     dayExportDTO.setDescription(day.getDescription());
 

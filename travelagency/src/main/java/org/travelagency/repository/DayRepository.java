@@ -18,5 +18,10 @@ public interface DayRepository extends JpaRepository<Day, Long> {
     @Query("DELETE FROM Day d WHERE d.program.id = :programId")
     void deleteAllByProgramId(@Param("programId") Long programId);
 
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Day d WHERE d.id = :id")
+    void deleteById(@Param("id") Long id);
+
     List<Day> findAllByProgramId(Long programId);
 }

@@ -141,7 +141,7 @@
                         </td>
                         <td sec:authorize="hasRole('MANAGER')">
                             <form th:method="DELETE"
-                                  th:action="@{/excursions/delete-excursion-date/{id}/{date}(id=${excursion.getId()}, date=${#temporals.format(date, 'yyyy-MM-dd')})}"
+                                  th:action="@{/excursions/delete-excursion/date/{id}/{date}(id=${excursion.getId()}, date=${#temporals.format(date, 'yyyy-MM-dd')})}"
                                   class="delete-excursion-date-form">
                                 <button type="submit">Изтрий дата</button>
                             </form>
@@ -159,9 +159,16 @@
                 <h3>Програма за екскурзията по дни</h3>
 
                 <ul>
-                    <li th:each="day : ${days}">
-                        <h4>Ден <span th:text="${day.getDayNumber()}"></span></h4>
+                    <li th:each="day, iterStat : ${days}">
+                        <h4>Ден <span th:text="${iterStat.index + 1}"></span></h4>
                         <p th:text="${day.getDescription()}">Описание</p>
+
+                        <form sec:authorize="hasRole('MANAGER')"
+                              th:method="DELETE"
+                              th:action="@{/excursions/delete-excursion/day/{excursionId}/{dayId}(excursionId=${excursion.getId()}, dayId=${day.getId()})}"
+                              class="delete-excursion-day-form">
+                            <button type="submit">Изтрий ден</button>
+                        </form>
                     </li>
                 </ul>
 
