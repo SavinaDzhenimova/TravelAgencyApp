@@ -246,7 +246,7 @@ public class ExcursionController {
             return new ModelAndView("redirect:/excursions/update/" + encodedName);
         }
 
-        Result result = this.excursionService.updateExcursion(updateExcursionDTO, decodedExcursionName);
+        Result result = this.excursionDeletionManager.updateExcursion(updateExcursionDTO, decodedExcursionName);
 
         if (result.isSuccess()) {
             redirectAttributes.addFlashAttribute("successMessage", result.getMessage());
@@ -376,7 +376,7 @@ public class ExcursionController {
     }
 
     @DeleteMapping("/delete-excursion/day/{excursionId}/{dayId}")
-    public ModelAndView deleteExcursionDate(@PathVariable("excursionId") Long excursionId,
+    public ModelAndView deleteExcursionDay(@PathVariable("excursionId") Long excursionId,
                                             @PathVariable("dayId") Long dayId, RedirectAttributes redirectAttributes) {
 
         Optional<Excursion> optionalExcursion = this.excursionService.findExcursionById(excursionId);

@@ -41,8 +41,6 @@ public interface ExcursionService {
 
     Page<String> getAllExcursionsNames(Pageable pageable);
 
-    Result updateExcursion(UpdateExcursionDTO updateExcursionDTO, String decodedExcursionName);
-
     List<Excursion> findAllExcursionsByDestinationId(Long destinationId);
 
     Result updateExcursionDates(UpdateExcursionDatesDTO updateExcursionDatesDTO, String decodedExcursionName);

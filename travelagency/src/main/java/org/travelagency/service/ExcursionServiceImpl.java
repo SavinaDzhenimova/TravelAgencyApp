@@ -228,97 +228,6 @@ public class ExcursionServiceImpl implements ExcursionService {
     }
 
     @Override
-    public Result updateExcursion(UpdateExcursionDTO updateExcursionDTO, String decodedExcursionName) {
-
-        Optional<Excursion> optionalExcursion = this.excursionRepository.findByName(decodedExcursionName);
-
-        if (optionalExcursion.isEmpty()) {
-            return new Result(false, "Екскурзията, която се опитвате да редактирате, не съществува!");
-        }
-
-        Excursion excursion = optionalExcursion.get();
-
-        if (!excursion.getName().equals(updateExcursionDTO.getExcursionName())) {
-            excursion.setName(updateExcursionDTO.getExcursionName());
-        }
-
-        if (!excursion.getPrice().equals(updateExcursionDTO.getPrice())) {
-            excursion.setPrice(updateExcursionDTO.getPrice());
-        }
-
-        if (!excursion.getTransportType().equals(updateExcursionDTO.getTransport())) {
-            excursion.setTransportType(updateExcursionDTO.getTransport());
-        }
-
-        if (!excursion.getDestination().getName().equals(updateExcursionDTO.getDestination())) {
-            String destinationName = updateExcursionDTO.getDestination();
-
-            Optional<Destination> optionalDestination = this.destinationService.findDestinationByDestinationName(destinationName);
-
-            if (optionalDestination.isEmpty()) {
-                return new Result(false,
-                        "Дестинацията, която се опитвате да назначите на тази екскурзия, не съществува!");
-            }
-
-            excursion.setDestination(optionalDestination.get());
-        }
-
-        if (!excursion.getGuide().getId().equals(updateExcursionDTO.getGuideId())) {
-            Long guideId = updateExcursionDTO.getGuideId();
-
-            Optional<Employee> optionalEmployee = this.employeeService.findEmployeeById(guideId);
-
-            if (optionalEmployee.isEmpty()) {
-                return new Result(false,
-                        "Ръководителят, който се опитвате да назначите на тази екскурзия, не съществува!");
-            }
-
-            excursion.setGuide(optionalEmployee.get());
-        }
-
-        Set<LocalDate> newLocalDates = updateExcursionDTO.getDates().stream()
-                .map(date -> LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")))
-                .collect(Collectors.toSet());
-
-        for (LocalDate localDate : newLocalDates) {
-            if (localDate.isBefore(LocalDate.now())) {
-                return new Result(false, "Датите, които въвеждате, трябва да бъдат в бъдещето!");
-            }
-        }
-
-        excursion.setDates(newLocalDates);
-
-        Program program = excursion.getProgram();
-        this.updateProgram(program, updateExcursionDTO);
-
-        excursion.setProgram(program);
-        this.excursionRepository.saveAndFlush(excursion);
-
-        return new Result(true, "Успешно редактирахте избраната от вас екскурзия!");
-    }
-
-    private void updateProgram(Program program, UpdateExcursionDTO updateExcursionDTO) {
-
-        this.dayService.deleteAllDaysByProgramId(program.getId());
-
-        List<Day> updatedDays = updateExcursionDTO.getDays().stream()
-                .map(dayExportDTO -> {
-                    Day day = new Day();
-
-                    day.setDayNumber(dayExportDTO.getDayNumber());
-                    day.setDescription(dayExportDTO.getDescription());
-                    day.setProgram(program);
-
-                    this.dayService.saveAndFlushDay(day);
-
-                    return day;
-                }).toList();
-
-        program.setDays(updatedDays);
-        this.programService.saveAndFlushProgram(program);
-    }
-
-    @Override
     public Result updateExcursionDates(UpdateExcursionDatesDTO updateExcursionDatesDTO, String decodedExcursionName) {
 
         Optional<Excursion> optionalExcursion = this.excursionRepository.findByName(decodedExcursionName);
@@ -349,7 +258,11 @@ public class ExcursionServiceImpl implements ExcursionService {
         Program program = excursion.getProgram();
 
         int newEndurance = updateExcursionProgramDTO.getDaysCount() + excursion.getProgram().getEndurance();
-        this.addDaysToProgram(updateExcursionProgramDTO.getDays(), newEndurance, program);
+        List<Day> daysToAdd = this.mapStringListToDayList(updateExcursionProgramDTO.getDays(), program);
+
+        program.setEndurance(newEndurance);
+        program.getDays().addAll(daysToAdd);
+        this.programService.saveAndFlushProgram(program);
 
         excursion.setProgram(program);
         this.excursionRepository.saveAndFlush(excursion);
@@ -396,35 +309,12 @@ public class ExcursionServiceImpl implements ExcursionService {
                 .collect(Collectors.toList());
     }
 
-    private void addDaysToProgram(List<String> days, int newEndurance, Program program) {
-        int endurance = program.getEndurance();
-
-        List<Day> daysToAddList = new ArrayList<>();
-
-        for (int i = 0; i < days.size(); i++) {
-            Day day = new Day();
-
-            day.setDayNumber(endurance + 1 + i);
-            day.setDescription(days.get(i));
-            day.setProgram(program);
-
-            this.dayService.saveAndFlushDay(day);
-            daysToAddList.add(day);
-        }
-
-        program.setEndurance(newEndurance);
-        program.getDays().addAll(daysToAddList);
-
-        this.programService.saveAndFlushProgram(program);
-    }
-
     private List<DayExportDTO> mapDaysListToDayExportDTO(List<Day> days) {
         return days.stream()
                 .map(day -> {
                     DayExportDTO dayExportDTO = new DayExportDTO();
 
                     dayExportDTO.setId(day.getId());
-                    dayExportDTO.setDayNumber(day.getDayNumber());
                     dayExportDTO.setDescription(day.getDescription());
 
                     return dayExportDTO;
@@ -491,11 +381,10 @@ public class ExcursionServiceImpl implements ExcursionService {
     private List<Day> mapStringListToDayList(List<String> days, Program program) {
         List<Day> daysList = new ArrayList<>();
 
-        for (int i = 0; i < days.size(); i++) {
+        for (String description : days) {
             Day day = new Day();
 
-            day.setDayNumber(i + 1);
-            day.setDescription(days.get(i));
+            day.setDescription(description);
             day.setProgram(program);
 
             this.dayService.saveAndFlushDay(day);
