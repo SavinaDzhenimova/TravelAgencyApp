@@ -6,8 +6,65 @@
   <component name="ChangeListManager">
     <list default="true" id="737daafd-1dde-4737-8e86-b60ca1c6a9b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/validation/EmailConstraintValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/java/org/travelagency/validation/EmailConstraintValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travelagency/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/travelagency/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739296161662_BIG_ekskurziya-v-irlandiya-dablin-legendi-i-savremie-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739296161692_BIG_ekskurziya-v-irlandiya-dablin-legendi-i-savremie-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739296161716_BIG_ekskurziya-v-irlandiya-dablin-legendi-i-savremie-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739296161736_BIG_ekskurziya-v-irlandiya-dablin-legendi-i-savremie-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739296161759_BIG_ekskurziya-v-irlandiya-dablin-legendi-i-savremie-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739296922663_BIG_parva-prolet-v-nitsa-sas-samolet-i-obsluzhvane-na-balga-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739296922677_BIG_parva-prolet-v-nitsa-sas-samolet-i-obsluzhvane-na-balga-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739296922691_BIG_parva-prolet-v-nitsa-sas-samolet-i-obsluzhvane-na-balga-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739296922706_BIG_parva-prolet-v-nitsa-sas-samolet-i-obsluzhvane-na-balga-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739296922724_BIG_parva-prolet-v-nitsa-sas-samolet-i-obsluzhvane-na-balga-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739350474529_BIG_ekskurziya-italianski-ezera-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739350474562_BIG_ekskurziya-italianski-ezera-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739350474580_BIG_ekskurziya-italianski-ezera-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739350474598_BIG_ekskurziya-italianski-ezera-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739350474620_BIG_ekskurziya-italianski-ezera-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739350474640_BIG_ekskurziya-italianski-ezera-6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739351585048_BIG_valshebniyat-svyat-na-sitsiliya-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739351585068_BIG_valshebniyat-svyat-na-sitsiliya-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739351585082_BIG_valshebniyat-svyat-na-sitsiliya-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739351585099_BIG_valshebniyat-svyat-na-sitsiliya-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739351585113_BIG_valshebniyat-svyat-na-sitsiliya-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739352563145_BIG_uikend-v-belgrad-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739352563188_BIG_uikend-v-belgrad-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739352563214_BIG_uikend-v-belgrad-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739352563239_BIG_uikend-v-belgrad-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739352563269_BIG_uikend-v-belgrad-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739352563286_BIG_uikend-v-belgrad-6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739812439297_BIG_stranata-na-drakula-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739812439319_BIG_stranata-na-drakula-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739812439330_BIG_stranata-na-drakula-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739812439339_BIG_stranata-na-drakula-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739812439351_BIG_stranata-na-drakula-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739812439365_BIG_stranata-na-drakula-6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739813055572_BIG_ohrid-makedonska_prikazka-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739813055591_BIG_ohrid-makedonska_prikazka-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739813055606_BIG_ohrid-makedonska_prikazka-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739813055619_BIG_ohrid-makedonska_prikazka-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739813055632_BIG_ohrid-makedonska_prikazka-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739813876038_BIG_na_pazar-v_odrin-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1739813876071_BIG_na_pazar-v_odrin-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1740057938422_BIG_solun-meteora-prirodni-chudesa-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1740057938492_BIG_solun-meteora-prirodni-chudesa-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1740057938507_BIG_solun-meteora-prirodni-chudesa-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1740057938525_BIG_solun-meteora-prirodni-chudesa-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1740057938551_BIG_solun-meteora-prirodni-chudesa-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1740139756028_BIG_ekskurziya-do-harvatiya-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1740139756081_BIG_ekskurziya-do-harvatiya-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1740139756105_BIG_ekskurziya-do-harvatiya-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1740139756126_BIG_ekskurziya-do-harvatiya-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1740139756148_BIG_ekskurziya-do-harvatiya-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1741016288853_BIG_zagadkite-na-drevna-likiya-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1741018463595_BIG_zagadkite-na-drevna-likiya-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1741023918956_BIG_zagadkite-na-drevna-likiya-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1741023918985_BIG_zagadkite-na-drevna-likiya-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1741023919000_BIG_zagadkite-na-drevna-likiya-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1741023919016_BIG_zagadkite-na-drevna-likiya-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1741164307198_BIG_kapadokiya-prikazka-bezkray-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1741190478040_BIG_kapadokiya-prikazka-bezkray-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/excursions/1742472531074_BIG_kapadokiya-prikazka-bezkray-1.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
